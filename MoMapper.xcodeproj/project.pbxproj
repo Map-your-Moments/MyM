@@ -18,6 +18,7 @@
 		66466FD416C30C0D00C0F60A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66466FD316C30C0D00C0F60A /* Default-568h@2x.png */; };
 		66466FD716C30C0D00C0F60A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66466FD516C30C0D00C0F60A /* MainStoryboard.storyboard */; };
 		66466FDA16C30C0D00C0F60A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66466FD916C30C0D00C0F60A /* ViewController.m */; };
+		66466FE116C30C3200C0F60A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66466FE016C30C3200C0F60A /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		66466FD616C30C0D00C0F60A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		66466FD816C30C0D00C0F60A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		66466FD916C30C0D00C0F60A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		66466FE016C30C3200C0F60A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66466FE116C30C3200C0F60A /* MapKit.framework in Frameworks */,
 				66466FBE16C30C0D00C0F60A /* UIKit.framework in Frameworks */,
 				66466FC016C30C0D00C0F60A /* Foundation.framework in Frameworks */,
 				66466FC216C30C0D00C0F60A /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +76,7 @@
 		66466FBC16C30C0D00C0F60A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				66466FE016C30C3200C0F60A /* MapKit.framework */,
 				66466FBD16C30C0D00C0F60A /* UIKit.framework */,
 				66466FBF16C30C0D00C0F60A /* Foundation.framework */,
 				66466FC116C30C0D00C0F60A /* CoreGraphics.framework */,
