@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55C7BCF016C9DC100049C657 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C7BCEF16C9DC100049C657 /* AWSiOSSDK.framework */; };
 		66466FBE16C30C0D00C0F60A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66466FBD16C30C0D00C0F60A /* UIKit.framework */; };
 		66466FC016C30C0D00C0F60A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66466FBF16C30C0D00C0F60A /* Foundation.framework */; };
 		66466FC216C30C0D00C0F60A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66466FC116C30C0D00C0F60A /* CoreGraphics.framework */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55C7BCEF16C9DC100049C657 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
 		66466FBA16C30C0D00C0F60A /* MoMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66466FBD16C30C0D00C0F60A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		66466FBF16C30C0D00C0F60A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,6 +52,7 @@
 				66466FBE16C30C0D00C0F60A /* UIKit.framework in Frameworks */,
 				66466FC016C30C0D00C0F60A /* Foundation.framework in Frameworks */,
 				66466FC216C30C0D00C0F60A /* CoreGraphics.framework in Frameworks */,
+				55C7BCF016C9DC100049C657 /* AWSiOSSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +79,7 @@
 		66466FBC16C30C0D00C0F60A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55C7BCEF16C9DC100049C657 /* AWSiOSSDK.framework */,
 				66466FE016C30C3200C0F60A /* MapKit.framework */,
 				66466FBD16C30C0D00C0F60A /* UIKit.framework */,
 				66466FBF16C30C0D00C0F60A /* Foundation.framework */,
@@ -264,6 +268,10 @@
 		66466FDE16C30C0D00C0F60A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MoMapper/MoMapper-Prefix.pch";
 				INFOPLIST_FILE = "MoMapper/MoMapper-Info.plist";
@@ -275,6 +283,10 @@
 		66466FDF16C30C0D00C0F60A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MoMapper/MoMapper-Prefix.pch";
 				INFOPLIST_FILE = "MoMapper/MoMapper-Info.plist";
@@ -302,6 +314,7 @@
 				66466FDF16C30C0D00C0F60A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
