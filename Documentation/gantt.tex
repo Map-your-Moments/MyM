@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{pslatex}
+\usepackage{lscape}
+\usepackage{pgfgantt}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+	\begin{landscape}
+		\begin{ganttchart}[x unit=1.50cm, y unit chart=0.75cm, vgrid, hgrid]{12}
+			\gantttitle{MyM (iOS app) -- CSC470 (Cloud Computing) Spring 2013 (14/Feb/13 -- 25/Feb/13)}{12}\\
+			\gantttitlelist{1,...,12}{1}\\
+
+			\ganttgroup{Stage II: 14/Feb - 17/Feb}{1}{4}\\
+			\ganttbar{Use-case diagram}{2}{2}\\
+			\ganttbar{Use-case descriptions}{2}{2}\\
+			\ganttbar{Mock-ups}{2}{2}\\
+			\ganttbar{Legal strategy}{3}{3}\\
+			\ganttbar{Possible applications}{3}{3}\\
+			\ganttbar{Update wiki}{3}{3}\\
+			\ganttbar{Update repo}{3}{3}\\
+			\ganttbar{Update roadmap}{3}{3}\\
+			\ganttmilestone{Stage II -- 17/Feb/13}{4}\\
+
+			\ganttgroup{Stage III: 17/Feb - 25/Feb}{4}{12}\\
+			\ganttbar{Class diagrams}{4}{6}\\
+			\ganttbar{Sequence diagrams}{5}{8}\\
+			\ganttbar{State charts}{5}{9}\\
+			\ganttbar{UI design}{5}{11}\\
+			\ganttbar{Update wiki}{11}{11}\\
+			\ganttbar{Update repo}{11}{11}\\
+			\ganttbar{Update roadmap}{11}{11}\\
+			\ganttmilestone{Stage III -- 25/Feb/13}{12}\\
+
+		\end{ganttchart}
+	\end{landscape}
+
+	\pagebreak
+
+	\begin{landscape}
+		\begin{ganttchart}[x unit=0.55cm, y unit chart=0.75cm, vgrid, hgrid]{32}
+			\gantttitle{MyM (iOS app) -- CSC470 (Cloud Computing) Spring 2013 (26/Feb/13 -- 29/Mar/13)}{32}\\
+			\gantttitlelist{1,...,32}{1}\\
+
+			\ganttgroup{Stage IVa: 26/Feb - 29/Mar}{1}{32}\\
+			\ganttbar{Design class skeletons}{1}{2}\\
+			\ganttbar{Implement class skeletons}{3}{6}\\
+			\ganttbar{Build UI}{7}{13}\\
+			\ganttbar{Build backend}{7}{27}\\
+			\ganttbar{Build text editor}{14}{20}\\
+			\ganttbar{Build capture mechanism}{14}{27}\\
+			\ganttbar{Take screenshots}{28}{28}\\
+			\ganttbar{Distribute to testers}{28}{30}\\
+			\ganttbar{Update documentation}{28}{30}\\
+			\ganttbar{Update repo}{30}{31}\\
+			\ganttbar{Update wiki}{31}{31}\\
+			\ganttbar{Update roadmap}{31}{31}\\
+			\ganttmilestone{Stage IVa -- 29/Mar/13}{32}\\
+
+		\end{ganttchart}
+	\end{landscape}
+
+	\pagebreak
+
+	\begin{landscape}
+		\begin{ganttchart}[x unit=0.55cm, y unit chart=0.75cm, vgrid, hgrid]{28}
+			\gantttitle{MyM (iOS app) -- CSC470 (Cloud Computing) Spring 2013 (30/Mar/13 -- 26/Apr/13)}{28}\\
+			\gantttitlelist{1,...,28}{1}\\
+
+			\ganttgroup{Stage IVb: 30/Mar - 26/April}{1}{28}\\
+			\ganttbar{Build authentication system}{1}{7}\\
+			\ganttbar{Build object-map}{1}{14}\\
+			\ganttbar{Build social connections}{8}{21}\\
+			\ganttbar{Build comment system}{15}{21}\\
+			\ganttbar{Take screenshots}{22}{22}\\
+			\ganttbar{Update documentation}{22}{24}\\
+			\ganttbar{Update repo}{22}{26}\\
+			\ganttbar{Distribute to testers}{23}{26}\\
+			\ganttbar{Update wiki}{26}{27}\\
+			\ganttbar{Update roadmap}{27}{27}\\
+			\ganttmilestone{Stage IVb -- 26/Apr/13}{28}\\
+
+		\end{ganttchart}
+	\end{landscape}
+
+	\pagebreak
+
+	\begin{landscape}
+		\begin{ganttchart}[x unit=1.50cm, y unit chart=0.75cm, vgrid, hgrid]{12}
+			\gantttitle{MyM (iOS app) -- CSC470 (Cloud Computing) Spring 2013 (20/Apr/13 -- 1/May/13)}{12}\\
+			\gantttitlelist{1,...,12}{1}\\
+
+			\ganttgroup{Stage V: 20/Apr - 01/May}{1}{12}\\
+			\ganttbar{Prepare talking points}{1}{7}\\
+			\ganttbar{Prepare presentation visuals}{2}{6}\\
+			\ganttbar{Practice presentation}{7}{10}\\
+			\ganttbar{Update repo}{11}{11}\\
+			\ganttbar{Update wiki}{11}{11}\\
+			\ganttmilestone{Stage V}{12}\\
+
+			\ganttgroup{Stage VI: 20/Apr - 01/May}{1}{12}\\
+			\ganttbar{Prepare final report}{1}{10}\\
+			\ganttbar{Update repo}{1}{11}\\
+			\ganttbar{Update wiki}{1}{11}\\
+			\ganttbar{Update roadmap}{9}{11}\\
+			\ganttmilestone{Stage VI}{12}
+
+		\end{ganttchart}
+	\end{landscape}
+
+\end{document}
