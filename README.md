@@ -1,1 +1,1 @@
-MoMapper picture mapping app
+MyM picture mapping app -- Map your Moments
