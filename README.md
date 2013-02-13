@@ -1,1 +1,3 @@
-MyM picture mapping app -- Map your Moments
+MyM - Map your Moments.
+
+A digital travelogue.
