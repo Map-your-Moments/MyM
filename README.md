@@ -1,1 +1,4 @@
-MoMapper picture mapping app
+MyM - Map your Moments.
+---
+
+A digital travelogue.
