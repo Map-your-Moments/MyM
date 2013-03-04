@@ -88,6 +88,8 @@
 		55A0F65016C9E6DB00A364E3 /* MyM */ = {
 			isa = PBXGroup;
 			children = (
+				55A0F65916C9E6DB00A364E3 /* AppDelegate.h */,
+				55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */,
 				55A0F65116C9E6DB00A364E3 /* Supporting Files */,
 			);
 			path = MyM;
@@ -96,8 +98,6 @@
 		55A0F65116C9E6DB00A364E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55A0F65916C9E6DB00A364E3 /* AppDelegate.h */,
-				55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */,
 				55A0F66216C9E6DB00A364E3 /* MyM.xcdatamodeld */,
 				55A0F65216C9E6DB00A364E3 /* MyM-Info.plist */,
 				55A0F65316C9E6DB00A364E3 /* InfoPlist.strings */,
@@ -300,6 +300,7 @@
 				55A0F66916C9E6DB00A364E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
