@@ -8,10 +8,13 @@
 
 #import "SignInViewController.h"
 
+@interface SignInViewController()
+@property (strong, nonatomic) IBOutlet UIImageView *icon_mym;
+@property (strong, nonatomic) IBOutlet UITextField *txtUsername;
+@property (strong, nonatomic) IBOutlet UITextField *txtPassword;
+@end
+
 @implementation SignInViewController
-@synthesize icon_mym;
-@synthesize txtUsername;
-@synthesize txtPassword;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,12 +40,6 @@
 - (IBAction)registerButton:(id)sender
 {
     NSLog(@"Register");
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

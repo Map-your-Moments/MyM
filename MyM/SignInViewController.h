@@ -10,10 +10,7 @@
 
 @interface SignInViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIImageView *icon_mym;
-@property (strong, nonatomic) IBOutlet UITextField *txtUsername;
-@property (strong, nonatomic) IBOutlet UITextField *txtPassword;
-
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
+
 @end
