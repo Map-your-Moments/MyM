@@ -19,6 +19,8 @@
 		55A0F66116C9E6DB00A364E3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A0F66016C9E6DB00A364E3 /* Default-568h@2x.png */; };
 		55A0F66416C9E6DB00A364E3 /* MyM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55A0F66216C9E6DB00A364E3 /* MyM.xcdatamodeld */; };
 		55A0F66B16C9E76F00A364E3 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */; };
+		69502F7716E47B4200E4B936 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69502F7616E47B4200E4B936 /* SignInViewController.m */; };
+		69502F7916E47B5500E4B936 /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69502F7816E47B5500E4B936 /* SignInView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,9 @@
 		55A0F66016C9E6DB00A364E3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		55A0F66316C9E6DB00A364E3 /* MyM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyM.xcdatamodel; sourceTree = "<group>"; };
 		55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
+		69502F7516E47B4200E4B936 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		69502F7616E47B4200E4B936 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		69502F7816E47B5500E4B936 /* SignInView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +93,11 @@
 		55A0F65016C9E6DB00A364E3 /* MyM */ = {
 			isa = PBXGroup;
 			children = (
+				55A0F65916C9E6DB00A364E3 /* AppDelegate.h */,
+				55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */,
+				69502F7516E47B4200E4B936 /* SignInViewController.h */,
+				69502F7616E47B4200E4B936 /* SignInViewController.m */,
+				69502F7816E47B5500E4B936 /* SignInView.xib */,
 				55A0F65116C9E6DB00A364E3 /* Supporting Files */,
 			);
 			path = MyM;
@@ -96,8 +106,6 @@
 		55A0F65116C9E6DB00A364E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55A0F65916C9E6DB00A364E3 /* AppDelegate.h */,
-				55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */,
 				55A0F66216C9E6DB00A364E3 /* MyM.xcdatamodeld */,
 				55A0F65216C9E6DB00A364E3 /* MyM-Info.plist */,
 				55A0F65316C9E6DB00A364E3 /* InfoPlist.strings */,
@@ -165,6 +173,7 @@
 				55A0F65D16C9E6DB00A364E3 /* Default.png in Resources */,
 				55A0F65F16C9E6DB00A364E3 /* Default@2x.png in Resources */,
 				55A0F66116C9E6DB00A364E3 /* Default-568h@2x.png in Resources */,
+				69502F7916E47B5500E4B936 /* SignInView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +187,7 @@
 				55A0F65716C9E6DB00A364E3 /* main.m in Sources */,
 				55A0F65B16C9E6DB00A364E3 /* AppDelegate.m in Sources */,
 				55A0F66416C9E6DB00A364E3 /* MyM.xcdatamodeld in Sources */,
+				69502F7716E47B4200E4B936 /* SignInViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +310,7 @@
 				55A0F66916C9E6DB00A364E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
