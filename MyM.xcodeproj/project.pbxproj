@@ -19,6 +19,12 @@
 		55A0F66116C9E6DB00A364E3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A0F66016C9E6DB00A364E3 /* Default-568h@2x.png */; };
 		55A0F66416C9E6DB00A364E3 /* MyM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55A0F66216C9E6DB00A364E3 /* MyM.xcdatamodeld */; };
 		55A0F66B16C9E76F00A364E3 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */; };
+		665A932C16E7CEF600D22E11 /* Moment.m in Sources */ = {isa = PBXBuildFile; fileRef = 665A932B16E7CEF600D22E11 /* Moment.m */; };
+		665A933016E7D87000D22E11 /* MomentDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 665A932F16E7D86F00D22E11 /* MomentDataController.m */; };
+		665A933316E80F1700D22E11 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 665A933216E80F1700D22E11 /* User.m */; };
+		665A933616E80F3600D22E11 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 665A933516E80F3600D22E11 /* Content.m */; };
+		665A933816E80FB400D22E11 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665A933716E80FB400D22E11 /* CoreLocation.framework */; };
+		665A933B16E812C700D22E11 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 665A933A16E812C700D22E11 /* UserSettings.m */; };
 		69502F7716E47B4200E4B936 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69502F7616E47B4200E4B936 /* SignInViewController.m */; };
 		69502F7916E47B5500E4B936 /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69502F7816E47B5500E4B936 /* SignInView.xib */; };
 /* End PBXBuildFile section */
@@ -40,6 +46,17 @@
 		55A0F66016C9E6DB00A364E3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		55A0F66316C9E6DB00A364E3 /* MyM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyM.xcdatamodel; sourceTree = "<group>"; };
 		55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
+		665A932A16E7CEF600D22E11 /* Moment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Moment.h; sourceTree = "<group>"; };
+		665A932B16E7CEF600D22E11 /* Moment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Moment.m; sourceTree = "<group>"; };
+		665A932E16E7D86F00D22E11 /* MomentDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentDataController.h; sourceTree = "<group>"; };
+		665A932F16E7D86F00D22E11 /* MomentDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentDataController.m; sourceTree = "<group>"; };
+		665A933116E80F1700D22E11 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		665A933216E80F1700D22E11 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		665A933416E80F3600D22E11 /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
+		665A933516E80F3600D22E11 /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Content.m; sourceTree = "<group>"; };
+		665A933716E80FB400D22E11 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		665A933916E812C700D22E11 /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
+		665A933A16E812C700D22E11 /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
 		69502F7516E47B4200E4B936 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		69502F7616E47B4200E4B936 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		69502F7816E47B5500E4B936 /* SignInView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInView.xib; sourceTree = "<group>"; };
@@ -50,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				665A933816E80FB400D22E11 /* CoreLocation.framework in Frameworks */,
 				55A0F64916C9E6DB00A364E3 /* UIKit.framework in Frameworks */,
 				55A0F64B16C9E6DB00A364E3 /* Foundation.framework in Frameworks */,
 				55A0F64D16C9E6DB00A364E3 /* CoreGraphics.framework in Frameworks */,
@@ -81,6 +99,7 @@
 		55A0F64716C9E6DB00A364E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				665A933716E80FB400D22E11 /* CoreLocation.framework */,
 				55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */,
 				55A0F64816C9E6DB00A364E3 /* UIKit.framework */,
 				55A0F64A16C9E6DB00A364E3 /* Foundation.framework */,
@@ -95,9 +114,8 @@
 			children = (
 				55A0F65916C9E6DB00A364E3 /* AppDelegate.h */,
 				55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */,
-				69502F7516E47B4200E4B936 /* SignInViewController.h */,
-				69502F7616E47B4200E4B936 /* SignInViewController.m */,
-				69502F7816E47B5500E4B936 /* SignInView.xib */,
+				665A932D16E7CEFC00D22E11 /* Data */,
+				665A932916E7CDF900D22E11 /* View Controllers */,
 				55A0F65116C9E6DB00A364E3 /* Supporting Files */,
 			);
 			path = MyM;
@@ -116,6 +134,33 @@
 				55A0F66016C9E6DB00A364E3 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		665A932916E7CDF900D22E11 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				69502F7516E47B4200E4B936 /* SignInViewController.h */,
+				69502F7616E47B4200E4B936 /* SignInViewController.m */,
+				69502F7816E47B5500E4B936 /* SignInView.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		665A932D16E7CEFC00D22E11 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				665A932E16E7D86F00D22E11 /* MomentDataController.h */,
+				665A932F16E7D86F00D22E11 /* MomentDataController.m */,
+				665A932A16E7CEF600D22E11 /* Moment.h */,
+				665A932B16E7CEF600D22E11 /* Moment.m */,
+				665A933116E80F1700D22E11 /* User.h */,
+				665A933216E80F1700D22E11 /* User.m */,
+				665A933916E812C700D22E11 /* UserSettings.h */,
+				665A933A16E812C700D22E11 /* UserSettings.m */,
+				665A933416E80F3600D22E11 /* Content.h */,
+				665A933516E80F3600D22E11 /* Content.m */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +233,11 @@
 				55A0F65B16C9E6DB00A364E3 /* AppDelegate.m in Sources */,
 				55A0F66416C9E6DB00A364E3 /* MyM.xcdatamodeld in Sources */,
 				69502F7716E47B4200E4B936 /* SignInViewController.m in Sources */,
+				665A932C16E7CEF600D22E11 /* Moment.m in Sources */,
+				665A933016E7D87000D22E11 /* MomentDataController.m in Sources */,
+				665A933316E80F1700D22E11 /* User.m in Sources */,
+				665A933616E80F3600D22E11 /* Content.m in Sources */,
+				665A933B16E812C700D22E11 /* UserSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
