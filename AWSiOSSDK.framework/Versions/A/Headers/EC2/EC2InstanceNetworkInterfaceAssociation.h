@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@
 
 {
     NSString *publicIp;
+    NSString *publicDnsName;
     NSString *ipOwnerId;
 }
 
@@ -40,6 +41,11 @@
  * The value of the PublicIp property for this object.
  */
 @property (nonatomic, retain) NSString *publicIp;
+
+/**
+ * The value of the PublicDnsName property for this object.
+ */
+@property (nonatomic, retain) NSString *publicDnsName;
 
 /**
  * The value of the IpOwnerId property for this object.

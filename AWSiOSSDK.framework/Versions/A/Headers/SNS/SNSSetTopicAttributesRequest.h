@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -39,7 +39,8 @@
 
 /**
  * The name of the attribute you want to set. Only a subset of the
- * topic's attributes are mutable. <p>Valid values: Policy | DisplayName
+ * topic's attributes are mutable. <p>Valid values: <code>Policy</code> |
+ * <code>DisplayName</code> | <code>DeliveryPolicy</code>
  */
 @property (nonatomic, retain) NSString *attributeName;
 
@@ -62,7 +63,8 @@
  * @param theTopicArn The ARN of the topic to modify.
  * @param theAttributeName The name of the attribute you want to set.
  * Only a subset of the topic's attributes are mutable. <p>Valid values:
- * Policy | DisplayName
+ * <code>Policy</code> | <code>DisplayName</code> |
+ * <code>DeliveryPolicy</code>
  * @param theAttributeValue The new value for the attribute.
  */
 -(id)initWithTopicArn:(NSString *)theTopicArn andAttributeName:(NSString *)theAttributeName andAttributeValue:(NSString *)theAttributeValue;

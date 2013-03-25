@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -13,20 +13,6 @@
  * permissions and limitations under the License.
  */
 
-#import "AmazonSDKUtil.h"
-#import "AmazonAuthUtils.h"
-#import "AmazonClientException.h"
-#import "AmazonLogger.h"
-#import "AmazonServiceException.h"
-#import "AmazonSignatureException.h"
-#import "AmazonUnmarshallerXMLParserDelegate.h"
-#import "AmazonServiceRequest.h"
-#import "AmazonServiceRequestConfig.h"
-#import "AmazonServiceResponse.h"
-#import "AmazonServiceResponseUnmarshaller.h"
-#import "AmazonURLRequest.h"
-#import "AmazonCredentials.h"
-#import "AmazonRequestDelegate.h"
 #import "AmazonAbstractWebServiceClient.h"
 
 @interface AmazonWebServiceClient:AmazonAbstractWebServiceClient

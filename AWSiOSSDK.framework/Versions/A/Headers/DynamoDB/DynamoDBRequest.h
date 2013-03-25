@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -29,11 +29,6 @@
 @property (nonatomic, retain) NSString *content;
 
 
--(NSArray *)headersToSign;
 -(void)addValue:(NSString *)theValue forHeader:(NSString *)theHeader;
--(NSString *)generateAuthorization3;
--(NSString *)generateSignature;
--(NSString *)generateStringToSign;
--(NSArray *)headersToSign;
 
 @end

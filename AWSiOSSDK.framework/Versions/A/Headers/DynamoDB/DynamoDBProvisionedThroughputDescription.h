@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@
 {
     NSDate   *lastIncreaseDateTime;
     NSDate   *lastDecreaseDateTime;
+    NSNumber *numberOfDecreasesToday;
     NSNumber *readCapacityUnits;
     NSNumber *writeCapacityUnits;
 }
@@ -47,6 +48,14 @@
  * The value of the LastDecreaseDateTime property for this object.
  */
 @property (nonatomic, retain) NSDate *lastDecreaseDateTime;
+
+/**
+ * The value of the NumberOfDecreasesToday property for this object.
+ * <p>
+ * <b>Constraints:</b><br/>
+ * <b>Range: </b>1 - <br/>
+ */
+@property (nonatomic, retain) NSNumber *numberOfDecreasesToday;
 
 /**
  * The value of the ReadCapacityUnits property for this object.

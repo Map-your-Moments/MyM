@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 
 
 #import "SNSResponse.h"
-#import "../AmazonServiceExceptionUnmarshaller.h"
 
 #import "SNSNotFoundException.h"
 #import "SNSAuthorizationErrorException.h"
@@ -45,7 +44,8 @@
 -(id)init;
 
 /**
- * Unique identifier assigned to the published message.
+ * Unique identifier assigned to the published message. <p>Length
+ * Constraint: Maximum 100 characters
  */
 @property (nonatomic, retain) NSString *messageId;
 

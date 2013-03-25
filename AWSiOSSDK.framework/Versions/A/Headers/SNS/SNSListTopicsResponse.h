@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2010-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 #import "SNSTopic.h"
 
 #import "SNSResponse.h"
-#import "../AmazonServiceExceptionUnmarshaller.h"
 
 #import "SNSAuthorizationErrorException.h"
 #import "SNSInternalErrorException.h"
@@ -51,8 +50,8 @@
 @property (nonatomic, retain) NSMutableArray *topics;
 
 /**
- * Token to pass along to the next ListTopics request. This element is
- * returned if there are additional topics to retrieve.
+ * Token to pass along to the next <code>ListTopics</code> request. This
+ * element is returned if there are additional topics to retrieve.
  */
 @property (nonatomic, retain) NSString *nextToken;
 
