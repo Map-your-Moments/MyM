@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "NewUserViewController.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUser" bundle:nil];
+    self.window.rootViewController = newUserViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

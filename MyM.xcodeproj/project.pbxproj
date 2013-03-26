@@ -10,7 +10,8 @@
 		549501BF16E7DA4800EA1B9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501BE16E7DA4800EA1B9E /* icon.png */; };
 		549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501C016E7DA4B00EA1B9E /* icon@2x.png */; };
 		552B63C01700CFE9004CBD82 /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B63BE1700CFE9004CBD82 /* NewUserViewController.m */; };
-		552B63C11700CFE9004CBD82 /* NewUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552B63BF1700CFE9004CBD82 /* NewUserViewController.xib */; };
+		552B63C11700CFE9004CBD82 /* NewUser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552B63BF1700CFE9004CBD82 /* NewUser.xib */; };
+		552B63C41700DAE8004CBD82 /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B63C31700DAE8004CBD82 /* AmazonClientManager.m */; };
 		55A0F64916C9E6DB00A364E3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F64816C9E6DB00A364E3 /* UIKit.framework */; };
 		55A0F64B16C9E6DB00A364E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F64A16C9E6DB00A364E3 /* Foundation.framework */; };
 		55A0F64D16C9E6DB00A364E3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F64C16C9E6DB00A364E3 /* CoreGraphics.framework */; };
@@ -38,7 +39,9 @@
 		549501C016E7DA4B00EA1B9E /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 		552B63BD1700CFE9004CBD82 /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserViewController.h; sourceTree = "<group>"; };
 		552B63BE1700CFE9004CBD82 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
-		552B63BF1700CFE9004CBD82 /* NewUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserViewController.xib; sourceTree = "<group>"; };
+		552B63BF1700CFE9004CBD82 /* NewUser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUser.xib; sourceTree = "<group>"; };
+		552B63C21700DAE8004CBD82 /* AmazonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonClientManager.h; sourceTree = "<group>"; };
+		552B63C31700DAE8004CBD82 /* AmazonClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonClientManager.m; sourceTree = "<group>"; };
 		55A0F64516C9E6DB00A364E3 /* MyM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A0F64816C9E6DB00A364E3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		55A0F64A16C9E6DB00A364E3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +129,8 @@
 				665A932D16E7CEFC00D22E11 /* Data */,
 				665A932916E7CDF900D22E11 /* View Controllers */,
 				55A0F65116C9E6DB00A364E3 /* Supporting Files */,
+				552B63C21700DAE8004CBD82 /* AmazonClientManager.h */,
+				552B63C31700DAE8004CBD82 /* AmazonClientManager.m */,
 			);
 			path = MyM;
 			sourceTree = "<group>";
@@ -155,7 +160,7 @@
 				69502F7816E47B5500E4B936 /* SignInView.xib */,
 				552B63BD1700CFE9004CBD82 /* NewUserViewController.h */,
 				552B63BE1700CFE9004CBD82 /* NewUserViewController.m */,
-				552B63BF1700CFE9004CBD82 /* NewUserViewController.xib */,
+				552B63BF1700CFE9004CBD82 /* NewUser.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -235,7 +240,7 @@
 				69502F7916E47B5500E4B936 /* SignInView.xib in Resources */,
 				549501BF16E7DA4800EA1B9E /* icon.png in Resources */,
 				549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */,
-				552B63C11700CFE9004CBD82 /* NewUserViewController.xib in Resources */,
+				552B63C11700CFE9004CBD82 /* NewUser.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +261,7 @@
 				665A933616E80F3600D22E11 /* Content.m in Sources */,
 				665A933B16E812C700D22E11 /* UserSettings.m in Sources */,
 				552B63C01700CFE9004CBD82 /* NewUserViewController.m in Sources */,
+				552B63C41700DAE8004CBD82 /* AmazonClientManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

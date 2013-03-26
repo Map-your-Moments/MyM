@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AmazonClientManager.h"
 
 @interface NewUserViewController : UIViewController
 
