@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <AWSiOSSDK/DynamoDB/AmazonDynamoDBClient.h>
+#import <AWSiOSSDK/SES/AmazonSESClient.h>
 
 @interface AmazonClientManager : NSObject
 
 + (AmazonDynamoDBClient *)amazonDynamoDBClient;
+
++ (AmazonSESClient *)amazonSESClient;
 
 @end
