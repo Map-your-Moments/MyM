@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		548799E9170CB9660065B7A0 /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 548799E7170CB9650065B7A0 /* FriendsListViewController.m */; };
+		548799EA170CB9660065B7A0 /* FriendsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548799E8170CB9650065B7A0 /* FriendsListViewController.xib */; };
 		549501BF16E7DA4800EA1B9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501BE16E7DA4800EA1B9E /* icon.png */; };
 		549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501C016E7DA4B00EA1B9E /* icon@2x.png */; };
 		55A0F64916C9E6DB00A364E3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F64816C9E6DB00A364E3 /* UIKit.framework */; };
@@ -32,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		548799E6170CB9650065B7A0 /* FriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListViewController.h; sourceTree = "<group>"; };
+		548799E7170CB9650065B7A0 /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
+		548799E8170CB9650065B7A0 /* FriendsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsListViewController.xib; sourceTree = "<group>"; };
 		549501BE16E7DA4800EA1B9E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		549501C016E7DA4B00EA1B9E /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 		55A0F64516C9E6DB00A364E3 /* MyM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyM.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +150,9 @@
 		665A932916E7CDF900D22E11 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				548799E6170CB9650065B7A0 /* FriendsListViewController.h */,
+				548799E7170CB9650065B7A0 /* FriendsListViewController.m */,
+				548799E8170CB9650065B7A0 /* FriendsListViewController.xib */,
 				69502F7516E47B4200E4B936 /* SignInViewController.h */,
 				69502F7616E47B4200E4B936 /* SignInViewController.m */,
 				69502F7816E47B5500E4B936 /* SignInView.xib */,
@@ -227,6 +235,7 @@
 				69502F7916E47B5500E4B936 /* SignInView.xib in Resources */,
 				549501BF16E7DA4800EA1B9E /* icon.png in Resources */,
 				549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */,
+				548799EA170CB9660065B7A0 /* FriendsListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +255,7 @@
 				665A933316E80F1700D22E11 /* User.m in Sources */,
 				665A933616E80F3600D22E11 /* Content.m in Sources */,
 				665A933B16E812C700D22E11 /* UserSettings.m in Sources */,
+				548799E9170CB9660065B7A0 /* FriendsListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
