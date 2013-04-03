@@ -10,5 +10,4 @@
 #import "AmazonClientManager.h"
 
 @interface NewUserViewController : UIViewController
-
 @end

@@ -54,7 +54,6 @@
         @try {
             DynamoDBQueryResponse *dynamoDBQueryResponse = [[AmazonClientManager amazonDynamoDBClient] query:dynamoDBQueryRequest];
             usersQueryResult = [dynamoDBQueryResponse.items copy];
-
         }
         @catch (AmazonClientException *exception) {
             NSLog(@"%@", exception.description);
@@ -65,12 +64,13 @@
             self.statusString = @"Username already exists";
         } else {  //Add the information to the database and send an email to the user
             @try {
+                int verificationCode = (arc4random() % 99999999) + 10000000;
                 NSMutableDictionary *items = [[NSMutableDictionary alloc] initWithCapacity:1];
                 [items setValue:[[DynamoDBAttributeValue alloc] initWithS:self.usernameTextField.text] forKey:@"username"];
                 [items setValue:[[DynamoDBAttributeValue alloc] initWithS:self.emailTextField.text] forKey:@"email"];
                 [items setValue:[[DynamoDBAttributeValue alloc] initWithS:self.passwordTextField.text] forKey:@"password"];
                 [items setValue:[[DynamoDBAttributeValue alloc] initWithS:self.fullNameTextField.text] forKey:@"name"];
-                [items setValue:[[DynamoDBAttributeValue alloc] initWithN:@"0"] forKey:@"email-confirm"];
+                [items setValue:[[DynamoDBAttributeValue alloc] initWithN:[NSString stringWithFormat:@"%i", verificationCode]] forKey:@"email-confirm"];
                 [items setValue:[[DynamoDBAttributeValue alloc] initWithN:[NSString stringWithFormat:@"%i", [self.userSubTypeSegmentedControl selectedSegmentIndex]]] forKey:@"sub-user"];
             
                 DynamoDBPutItemRequest *dynamoDBPutItemRequest = [[DynamoDBPutItemRequest alloc] initWithTableName:@"mym-login-database" andItem:items];
@@ -87,7 +87,7 @@
                 destination.toAddresses = [NSMutableArray arrayWithObject:self.emailTextField.text];
                 
                 contentSubject.data = @"MyM - Email Confirm";
-                contentBody.data = @"Welcome to MyM young traveler!";
+                contentBody.data = [NSString stringWithFormat: @"Welcome to MyM young traveler! Your verification code is: %i", verificationCode];
                 
                 sendEmailRequest.destination = destination;
                 body.text = contentBody;
@@ -101,7 +101,6 @@
                 NSLog(@"%@", exception.message);
             }
             
-            NSLog(@"Account was created and email was sent!");
             self.statusString = @"Your account was created successfully";
             self.statusTitleString = @"Success";
         }
@@ -111,4 +110,5 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.statusTitleString message:self.statusString delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
     [alert show];
 }
+
 @end

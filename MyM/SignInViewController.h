@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewUserViewController.h"
 
 @interface SignInViewController : UIViewController
 
