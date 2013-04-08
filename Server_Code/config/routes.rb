@@ -1,11 +1,11 @@
 ServerCode::Application.routes.draw do
-  resources :user_sessions
-
-
-	post '/' => 'users#index', :defaults => {:format => 'json'}
-	resources :users , :defaults => {:format => 'json'}
-	root :to => 'users#index'
-
+  post '/' => 'users#index', :defaults => {:format => 'json'}
+  resources :users #, :defaults => {:format => 'json'} 
+  get 'logout' => 'sessions#destroy', :as => 'logout'
+  get 'login' => 'sessions#new', :as => 'login'
+  post 'login' => 'sessions#create'
+  resources :sessions, :except => [:index, :edit]
+  root :to => 'users#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

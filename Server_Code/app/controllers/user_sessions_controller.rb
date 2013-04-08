@@ -44,6 +44,17 @@ class UserSessionsController < ApplicationController
   # POST /user_sessions
   # POST /user_sessions.json
   def create
+    user = User.find_by_username(params[:username])
+
+    if (user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        render json: {logged_in: true, session_key: session[:user_id]}
+    else 
+        render json: {logged_in: false, session_key: nil}
+    end
+  end
+
+=begin    
     @user_session = UserSession.new(params[:user_session])
 
     respond_to do |format|
@@ -56,6 +67,7 @@ class UserSessionsController < ApplicationController
       end
     end
   end
+=end
 =begin
   # PUT /user_sessions/1
   # PUT /user_sessions/1.json
@@ -77,6 +89,11 @@ class UserSessionsController < ApplicationController
   # DELETE /user_sessions/1
   # DELETE /user_sessions/1.json
   def destroy
+    session[:user_id]=nil
+    render json: {logged_out: true}
+  end
+
+=begin    
     @user_session = UserSession.find(params[:id])
     @user_session.destroy
 
@@ -85,4 +102,5 @@ class UserSessionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end 
 end
