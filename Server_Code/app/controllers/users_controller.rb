@@ -21,6 +21,9 @@ class UsersController < ApplicationController
     end
   end
 
+  # def confirmation
+  # resgt
+
   # GET /users/new
   # GET /users/new.json
   def new

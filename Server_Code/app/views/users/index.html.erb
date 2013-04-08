@@ -2,13 +2,21 @@
 
 <table>
   <tr>
+    <th>Database username</th>
+    <th>Database password</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
+  <%= form_tag root_path, :method => :post do %>
+    <%= submit_tag :submit %>
+  <% end %>
+
 <% @users.each do |user| %>
   <tr>
+    <td><%= user.username %></td>
+    <td><%= user.password_digest %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

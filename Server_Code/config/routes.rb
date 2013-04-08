@@ -1,4 +1,7 @@
 ServerCode::Application.routes.draw do
+  resources :user_sessions
+
+
 	post '/' => 'users#index', :defaults => {:format => 'json'}
 	resources :users , :defaults => {:format => 'json'}
 	root :to => 'users#index'
