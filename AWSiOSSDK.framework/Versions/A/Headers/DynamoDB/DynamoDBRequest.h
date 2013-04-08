@@ -34,6 +34,5 @@
 -(NSString *)generateAuthorization3;
 -(NSString *)generateSignature;
 -(NSString *)generateStringToSign;
--(NSArray *)headersToSign;
 
 @end

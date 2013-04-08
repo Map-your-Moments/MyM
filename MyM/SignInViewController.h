@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "NewUserViewController.h"
 
-@interface SignInViewController : UIViewController
-
-- (IBAction)signInButton:(id)sender;
-- (IBAction)registerButton:(id)sender;
+@interface SignInViewController : UIViewController <UITextFieldDelegate>
 
 @end

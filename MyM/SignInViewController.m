@@ -16,49 +16,78 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UITextField *txtVerificationCode;
 @property (strong, nonatomic) NSArray *usersQueryResult;
+@property (weak, nonatomic) IBOutlet UIButton *signInButton;
+@property (weak, nonatomic) IBOutlet UIButton *verifyButton;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+
+@property (strong, nonatomic) NSString *statusString;
+@property (strong, nonatomic) NSString *statusTitleString;
+
+- (IBAction)signInButton:(id)sender;
+- (IBAction)registerButton:(id)sender;
 @end
 
 @implementation SignInViewController
+
+/* >>>>>>>>>>>>>>>>>>>>> verifyButton
+ Check for the verification code
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)verifyButton:(UIButton *)sender
 {
-    if ([self.txtVerificationCode.text length] == 0) {
+    self.statusString = nil;
+    self.statusTitleString = @"Error";
+    
+    if ([self.txtVerificationCode.text length] == 0) { //Check if the verification code is empty
         NSLog(@"Verification code is empty");
+        self.statusString = @"Verification Code is empty";
     } else {
         DynamoDBAttributeValue *userVerificationCode = [[self.usersQueryResult lastObject] objectForKey:@"email-confirm"];
-        if ([userVerificationCode.n isEqualToString:self.txtVerificationCode.text]) {
+        if ([userVerificationCode.n isEqualToString:self.txtVerificationCode.text]) { //Check if the verification code matches
             @try {
-                DynamoDBAttributeValue *userUsernameD = [[self.usersQueryResult lastObject] objectForKey:@"username"];
-                DynamoDBAttributeValue *userEmail = [[self.usersQueryResult lastObject] objectForKey:@"email"];
-                NSString *userUsername = userUsernameD.s;
-                DynamoDBAttributeValue *n = [[DynamoDBAttributeValue alloc] initWithS:userUsername];
-                DynamoDBAttributeValue *z = [[DynamoDBAttributeValue alloc] initWithS:userEmail.s];
+                
+                //Replace the verification code with 1 (verified)
+                DynamoDBAttributeValue *userAttribute = [[DynamoDBAttributeValue alloc] initWithS:self.txtUsername.text];
+                DynamoDBAttributeValue *emailAttribute = [[DynamoDBAttributeValue alloc] initWithS:[[[self.usersQueryResult lastObject] objectForKey:@"email"] s]];
                 DynamoDBAttributeValue       *attr       = [[DynamoDBAttributeValue alloc] initWithN:@"1"];
                 DynamoDBAttributeValueUpdate *attrUpdate = [[DynamoDBAttributeValueUpdate alloc] initWithValue:attr andAction:@"PUT"];
                 
                 DynamoDBUpdateItemRequest    *request = [[DynamoDBUpdateItemRequest alloc] initWithTableName:@"mym-login-database"
-                                                                                                      andKey:[[DynamoDBKey alloc] initWithHashKeyElement:n andRangeKeyElement:z]
+                                                                                                      andKey:[[DynamoDBKey alloc] initWithHashKeyElement:userAttribute andRangeKeyElement:emailAttribute]
                                                                                          andAttributeUpdates:[NSMutableDictionary dictionaryWithObject:attrUpdate forKey:@"email-confirm"]];
                 [[AmazonClientManager amazonDynamoDBClient] updateItem:request];
             }
             @catch (AmazonClientException *exception) {
                 NSLog(@"%@", exception.description);
             }
-            
             NSLog(@"YOU ARE IN, WELCOME");
-        } else {
+            self.txtPassword.text = @"";
+        } else { //Verification code is wrong
             NSLog(@"Wrong verification code");
+            self.statusString = @"Vefification Code is wrong";
         }
     }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.statusTitleString message:self.statusString delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    [alert show];
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> signInButton
+ Sign in logic
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)signInButton:(id)sender
 {
-    if ([self.txtUsername.text length] == 0) {
+    self.statusString = nil;
+    self.statusTitleString = @"Error";
+    
+    if ([self.txtUsername.text length] == 0) { //Check if txtUsername is empty
         NSLog(@"Username is empty");
-    } else if ([self.txtPassword.text length] == 0) {
+        self.statusString = @"Username is empty";
+    } else if ([self.txtPassword.text length] == 0) { //Check if txtPassword is empty
         NSLog(@"Password is empty");
+        self.statusString = @"Password is empty";
     } else {
         
+        //Query the database
         DynamoDBQueryRequest *dynamoDBQueryRequest = [[DynamoDBQueryRequest alloc] initWithTableName:@"mym-login-database"
                                                                                      andHashKeyValue:[[DynamoDBAttributeValue alloc] initWithS:self.self.txtUsername.text]];
         @try {
@@ -69,32 +98,76 @@
             NSLog(@"%@", exception.description);
         }
         
-        if ([self.usersQueryResult count] == 1) {
+        if ([self.usersQueryResult count] == 1) { //Check if the query resulted in a match
             DynamoDBAttributeValue *userPassword = [[self.usersQueryResult lastObject] objectForKey:@"password"];
             
             if ([userPassword.s isEqualToString:self.txtPassword.text]) {
                 DynamoDBAttributeValue *userEmail = [[self.usersQueryResult lastObject] objectForKey:@"email-confirm"];
-                if ([userEmail.n integerValue] == 1) {
+                if ([userEmail.n integerValue] == 1) { //Check if the user already validated his email
                     self.txtUsername.hidden = NO;
                     self.txtPassword.hidden = NO;
                     self.txtVerificationCode.hidden = YES;
+                    self.verifyButton.hidden = YES;
+                    self.signInButton.hidden = NO;
+                    self.backButton.hidden = YES;
+                    self.txtPassword.text = @"";
                     NSLog(@"YOU ARE IN, WELCOME");
-                } else {
+                } else { //User still needs to validate his email
                     self.txtVerificationCode.hidden = NO;
                     self.txtUsername.hidden = YES;
                     self.txtPassword.hidden = YES;
+                    self.verifyButton.hidden = NO;
+                    self.signInButton.hidden = YES;
+                    self.backButton.hidden = NO;
+                    NSLog(@"You are just missing the security Code");
                 }
             } else {
                 NSLog(@"username or password wrong");
+                self.statusString = @"Username or Password is wrong";
             }
         }
     }
+    if (self.statusString) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.statusTitleString message:self.statusString delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> backButtonPressed
+ Go back from the verification code
+ >>>>>>>>>>>>>>>>>>>>>>>> */
+- (IBAction)backButtonPressed:(UIButton *)sender
+{
+    self.txtUsername.hidden = NO;
+    self.txtPassword.hidden = NO;
+    self.txtVerificationCode.hidden = YES;
+    self.verifyButton.hidden = YES;
+    self.signInButton.hidden = NO;
+    self.backButton.hidden = YES;
+    self.txtPassword.text = @"";
+}
+
+/* >>>>>>>>>>>>>>>>>>>>> registerButton
+ Open the New Use modal
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)registerButton:(id)sender
 {
     NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUserView" bundle:nil];
+    [self.txtUsername resignFirstResponder];
+    [self.txtPassword resignFirstResponder];
     [self presentViewController:newUserViewController animated:YES completion:nil];
+}
+
+/* >>>>>>>>>>>>>>>>>>>>> textFieldDidBeginEditing
+ Move the view when the keyboard is on
+ >>>>>>>>>>>>>>>>>>>>>>>> */
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField.superview.frame.origin.y == 20) {
+        [UIView animateWithDuration:0.5 animations:^{
+            textField.superview.frame = CGRectMake(textField.superview.frame.origin.x, textField.superview.frame.origin.y - 40, textField.superview.frame.size.width, textField.superview.frame.size.height);
+        }];
+    }
 }
 
 @end

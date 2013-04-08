@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "AmazonClientManager.h"
 
-@interface NewUserViewController : UIViewController
+@interface NewUserViewController : UIViewController <UITextFieldDelegate>
 @end
