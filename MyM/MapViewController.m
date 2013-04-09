@@ -53,11 +53,12 @@
                                     andSettings:nil
                                      andMoments:nil
                                      andFriends:nil];
-    Moment *moment1 = [[Moment alloc] initWithTitle:@"moment1"
+    Moment *moment1 = [[Moment alloc] initWithTitle:@"test moment"
+                                           withTags:nil
                                             andUser:user
                                          andContent:nil
                                             andDate:nil
-                                          andCoords:CLLocationCoordinate2DMake(40.2600, -74.7889)
+                                          andCoords:CLLocationCoordinate2DMake(40.0f, -70.0f)
                                         andComments:nil
                                           andTripID:nil];
     [dataController addMomentToMomentsWithMoment:moment1];

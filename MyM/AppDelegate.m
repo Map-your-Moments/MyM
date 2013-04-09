@@ -7,11 +7,7 @@
 //
 
 #import "AppDelegate.h"
-<<<<<<< HEAD
-#import "MapViewController.h"
-=======
-#import "TestingViewController.h"
->>>>>>> feature-createmoment_views
+#import "SignInViewController.h"
 
 @implementation AppDelegate
 
@@ -23,19 +19,13 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-<<<<<<< HEAD
-    MapViewController *vc = [[MapViewController alloc] init];
-    UINavigationController *navController=[[UINavigationController alloc]initWithRootViewController:vc];
+
+    SignInViewController *vc = [[SignInViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = navController;
-=======
-    
-    TestingViewController *testView = [[TestingViewController alloc] initWithNibName:@"TestingViewController" bundle:nil];
-    
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:testView];
-    self.window.rootViewController = nav;
-    
+
     self.window.backgroundColor = [UIColor whiteColor];
->>>>>>> feature-createmoment_views
+
     [self.window makeKeyAndVisible];
     return YES;
 }

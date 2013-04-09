@@ -26,9 +26,21 @@
 		55A0F65B16C9E6DB00A364E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */; };
 		55A0F65D16C9E6DB00A364E3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A0F65C16C9E6DB00A364E3 /* Default.png */; };
 		55A0F65F16C9E6DB00A364E3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A0F65E16C9E6DB00A364E3 /* Default@2x.png */; };
-		55A0F66116C9E6DB00A364E3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A0F66016C9E6DB00A364E3 /* Default-568h@2x.png */; };
 		55A0F66416C9E6DB00A364E3 /* MyM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55A0F66216C9E6DB00A364E3 /* MyM.xcdatamodeld */; };
 		55A0F66B16C9E76F00A364E3 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */; };
+		55EA75201714D0CD00D234C5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA751F1714D0CD00D234C5 /* AVFoundation.framework */; };
+		55EA75221714D0D500D234C5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA75211714D0D500D234C5 /* AudioToolbox.framework */; };
+		55EA75241714D0E600D234C5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA75231714D0E600D234C5 /* MediaPlayer.framework */; };
+		55EA75261714D0F000D234C5 /* MediaToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA75251714D0F000D234C5 /* MediaToolbox.framework */; };
+		55EC87291714CE0C00C1C52F /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC871C1714CE0B00C1C52F /* AmazonClientManager.m */; };
+		55EC872A1714CE0C00C1C52F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC871E1714CE0C00C1C52F /* Constants.m */; };
+		55EC872B1714CE0C00C1C52F /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC87201714CE0C00C1C52F /* FriendsListViewController.m */; };
+		55EC872C1714CE0C00C1C52F /* FriendsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87211714CE0C00C1C52F /* FriendsListViewController.xib */; };
+		55EC872D1714CE0C00C1C52F /* MomentCreateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87221714CE0C00C1C52F /* MomentCreateView.xib */; };
+		55EC872E1714CE0C00C1C52F /* MomentPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87231714CE0C00C1C52F /* MomentPictureView.xib */; };
+		55EC872F1714CE0C00C1C52F /* MomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC87251714CE0C00C1C52F /* MomentViewController.m */; };
+		55EC87301714CE0C00C1C52F /* NewUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87261714CE0C00C1C52F /* NewUserView.xib */; };
+		55EC87311714CE0C00C1C52F /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC87281714CE0C00C1C52F /* NewUserViewController.m */; };
 		663B1510170CC4CA00ED678A /* bg-addbutton-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 663B1502170CC4CA00ED678A /* bg-addbutton-highlighted.png */; };
 		663B1511170CC4CA00ED678A /* bg-addbutton-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 663B1503170CC4CA00ED678A /* bg-addbutton-highlighted@2x.png */; };
 		663B1512170CC4CA00ED678A /* bg-addbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 663B1504170CC4CA00ED678A /* bg-addbutton.png */; };
@@ -83,9 +95,26 @@
 		55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		55A0F65C16C9E6DB00A364E3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		55A0F65E16C9E6DB00A364E3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		55A0F66016C9E6DB00A364E3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		55A0F66316C9E6DB00A364E3 /* MyM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyM.xcdatamodel; sourceTree = "<group>"; };
 		55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
+		55EA751F1714D0CD00D234C5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		55EA75211714D0D500D234C5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		55EA75231714D0E600D234C5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		55EA75251714D0F000D234C5 /* MediaToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaToolbox.framework; path = System/Library/Frameworks/MediaToolbox.framework; sourceTree = SDKROOT; };
+		55EC871B1714CE0B00C1C52F /* AmazonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonClientManager.h; sourceTree = "<group>"; };
+		55EC871C1714CE0B00C1C52F /* AmazonClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonClientManager.m; sourceTree = "<group>"; };
+		55EC871D1714CE0B00C1C52F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		55EC871E1714CE0C00C1C52F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		55EC871F1714CE0C00C1C52F /* FriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListViewController.h; sourceTree = "<group>"; };
+		55EC87201714CE0C00C1C52F /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
+		55EC87211714CE0C00C1C52F /* FriendsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsListViewController.xib; sourceTree = "<group>"; };
+		55EC87221714CE0C00C1C52F /* MomentCreateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MomentCreateView.xib; sourceTree = "<group>"; };
+		55EC87231714CE0C00C1C52F /* MomentPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MomentPictureView.xib; sourceTree = "<group>"; };
+		55EC87241714CE0C00C1C52F /* MomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentViewController.h; sourceTree = "<group>"; };
+		55EC87251714CE0C00C1C52F /* MomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentViewController.m; sourceTree = "<group>"; };
+		55EC87261714CE0C00C1C52F /* NewUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserView.xib; sourceTree = "<group>"; };
+		55EC87271714CE0C00C1C52F /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserViewController.h; sourceTree = "<group>"; };
+		55EC87281714CE0C00C1C52F /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
 		663B1502170CC4CA00ED678A /* bg-addbutton-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-addbutton-highlighted.png"; sourceTree = "<group>"; };
 		663B1503170CC4CA00ED678A /* bg-addbutton-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-addbutton-highlighted@2x.png"; sourceTree = "<group>"; };
 		663B1504170CC4CA00ED678A /* bg-addbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-addbutton.png"; sourceTree = "<group>"; };
@@ -130,6 +159,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EA75261714D0F000D234C5 /* MediaToolbox.framework in Frameworks */,
+				55EA75241714D0E600D234C5 /* MediaPlayer.framework in Frameworks */,
+				55EA75221714D0D500D234C5 /* AudioToolbox.framework in Frameworks */,
+				55EA75201714D0CD00D234C5 /* AVFoundation.framework in Frameworks */,
 				663B1526170CC54700ED678A /* QuartzCore.framework in Frameworks */,
 				664FCBD517075E6F007A0C36 /* MapKit.framework in Frameworks */,
 				665A933816E80FB400D22E11 /* CoreLocation.framework in Frameworks */,
@@ -164,6 +197,10 @@
 		55A0F64716C9E6DB00A364E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55EA75251714D0F000D234C5 /* MediaToolbox.framework */,
+				55EA75231714D0E600D234C5 /* MediaPlayer.framework */,
+				55EA75211714D0D500D234C5 /* AudioToolbox.framework */,
+				55EA751F1714D0CD00D234C5 /* AVFoundation.framework */,
 				663B1525170CC54700ED678A /* QuartzCore.framework */,
 				664FCBD417075E6E007A0C36 /* MapKit.framework */,
 				665A933716E80FB400D22E11 /* CoreLocation.framework */,
@@ -179,11 +216,13 @@
 		55A0F65016C9E6DB00A364E3 /* MyM */ = {
 			isa = PBXGroup;
 			children = (
-				663B151E170CC4D500ED678A /* AwesomeMenu */,
-				663B1501170CC4CA00ED678A /* Images */,
+				55EC871B1714CE0B00C1C52F /* AmazonClientManager.h */,
+				55EC871C1714CE0B00C1C52F /* AmazonClientManager.m */,
+				55EC871D1714CE0B00C1C52F /* Constants.h */,
+				55EC871E1714CE0C00C1C52F /* Constants.m */,
 				55A0F65916C9E6DB00A364E3 /* AppDelegate.h */,
 				55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */,
-				665A932D16E7CEFC00D22E11 /* Data */,
+				665A932D16E7CEFC00D22E11 /* Model */,
 				665A932916E7CDF900D22E11 /* View Controllers */,
 				55A0F65116C9E6DB00A364E3 /* Supporting Files */,
 			);
@@ -193,6 +232,8 @@
 		55A0F65116C9E6DB00A364E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				663B151E170CC4D500ED678A /* AwesomeMenu */,
+				663B1501170CC4CA00ED678A /* Images */,
 				549501C016E7DA4B00EA1B9E /* icon@2x.png */,
 				549501BE16E7DA4800EA1B9E /* icon.png */,
 				55A0F66216C9E6DB00A364E3 /* MyM.xcdatamodeld */,
@@ -202,9 +243,21 @@
 				55A0F65816C9E6DB00A364E3 /* MyM-Prefix.pch */,
 				55A0F65C16C9E6DB00A364E3 /* Default.png */,
 				55A0F65E16C9E6DB00A364E3 /* Default@2x.png */,
-				55A0F66016C9E6DB00A364E3 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		55EC871A1714CD9600C1C52F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55EC87261714CE0C00C1C52F /* NewUserView.xib */,
+				55EC87211714CE0C00C1C52F /* FriendsListViewController.xib */,
+				55EC87221714CE0C00C1C52F /* MomentCreateView.xib */,
+				55EC87231714CE0C00C1C52F /* MomentPictureView.xib */,
+				69502F7816E47B5500E4B936 /* SignInView.xib */,
+				664FCBD117075B65007A0C36 /* MapViewController.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		663B1501170CC4CA00ED678A /* Images */ = {
@@ -250,17 +303,22 @@
 		665A932916E7CDF900D22E11 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				55EC871F1714CE0C00C1C52F /* FriendsListViewController.h */,
+				55EC87201714CE0C00C1C52F /* FriendsListViewController.m */,
+				55EC87241714CE0C00C1C52F /* MomentViewController.h */,
+				55EC87251714CE0C00C1C52F /* MomentViewController.m */,
+				55EC87271714CE0C00C1C52F /* NewUserViewController.h */,
+				55EC87281714CE0C00C1C52F /* NewUserViewController.m */,
 				69502F7516E47B4200E4B936 /* SignInViewController.h */,
 				69502F7616E47B4200E4B936 /* SignInViewController.m */,
-				69502F7816E47B5500E4B936 /* SignInView.xib */,
 				664FCBCF17075B65007A0C36 /* MapViewController.h */,
 				664FCBD017075B65007A0C36 /* MapViewController.m */,
-				664FCBD117075B65007A0C36 /* MapViewController.xib */,
+				55EC871A1714CD9600C1C52F /* View */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		665A932D16E7CEFC00D22E11 /* Data */ = {
+		665A932D16E7CEFC00D22E11 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				665A932E16E7D86F00D22E11 /* MomentDataController.h */,
@@ -274,7 +332,7 @@
 				665A933416E80F3600D22E11 /* Content.h */,
 				665A933516E80F3600D22E11 /* Content.m */,
 			);
-			name = Data;
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,7 +389,6 @@
 				55A0F65516C9E6DB00A364E3 /* InfoPlist.strings in Resources */,
 				55A0F65D16C9E6DB00A364E3 /* Default.png in Resources */,
 				55A0F65F16C9E6DB00A364E3 /* Default@2x.png in Resources */,
-				55A0F66116C9E6DB00A364E3 /* Default-568h@2x.png in Resources */,
 				69502F7916E47B5500E4B936 /* SignInView.xib in Resources */,
 				549501BF16E7DA4800EA1B9E /* icon.png in Resources */,
 				549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */,
@@ -358,6 +415,10 @@
 				54469F41170CFA1800F88DE3 /* Notepad@2x.png in Resources */,
 				54469F42170CFA1800F88DE3 /* Picture-Landscape.png in Resources */,
 				54469F43170CFA1800F88DE3 /* Picture-Landscape@2x.png in Resources */,
+				55EC872C1714CE0C00C1C52F /* FriendsListViewController.xib in Resources */,
+				55EC872D1714CE0C00C1C52F /* MomentCreateView.xib in Resources */,
+				55EC872E1714CE0C00C1C52F /* MomentPictureView.xib in Resources */,
+				55EC87301714CE0C00C1C52F /* NewUserView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +441,11 @@
 				664FCBD217075B65007A0C36 /* MapViewController.m in Sources */,
 				663B1523170CC4D500ED678A /* AwesomeMenu.m in Sources */,
 				663B1524170CC4D500ED678A /* AwesomeMenuItem.m in Sources */,
+				55EC87291714CE0C00C1C52F /* AmazonClientManager.m in Sources */,
+				55EC872A1714CE0C00C1C52F /* Constants.m in Sources */,
+				55EC872B1714CE0C00C1C52F /* FriendsListViewController.m in Sources */,
+				55EC872F1714CE0C00C1C52F /* MomentViewController.m in Sources */,
+				55EC87311714CE0C00C1C52F /* NewUserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
