@@ -14,11 +14,13 @@
 
 @property (nonatomic, retain) NSMutableArray *moments;
 
-/* Data Controller Methods */
--(NSUInteger)countOfMoments;
--(Moment *)objectInMomentsAtIndex:(NSUInteger)index;
 -(void)addMomentToMomentsWithMoment:(Moment *)moment;
 -(void)removeMomentAtIndex:(NSUInteger)index;
 -(void)removeAllMoments;
+
+-(NSUInteger)countOfMoments;
+
+-(Moment *)objectInMomentsAtIndex:(NSUInteger)index;
+
 
 @end

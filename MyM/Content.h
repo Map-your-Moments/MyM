@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Constants.h"
 
 @interface Content : NSObject
 
-@property (nonatomic) NSString *contentType;
+@property (nonatomic) id content;
+@property (nonatomic) int contentType;
+
 @property (nonatomic) NSMutableArray *tags;
 @property (nonatomic) UIImage *icon;
 
--(id)initWithContentType:(NSString *)theContentType andTags:(NSMutableArray *)theTags andIcon:(UIImage *)theIcon;
+-(id)initWithContentType:(int)theContentType andTags:(NSMutableArray *)theTags andIcon:(UIImage *)theIcon;
 
 @end

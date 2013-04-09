@@ -12,7 +12,7 @@
 @synthesize title, user, content, date, coords, comments, tripID;
 
 /* Main constructor for the Moment class */
--(id)initWithTitle:(NSString *)theTitle andUser:(User *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments andTripID:(NSString *)theTripID
+-(id)initWithTitle:(NSString *)theTitle withTags:(NSArray*)tagArray andUser:(User *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments andTripID:(NSString *)theTripID
 {
     title    = theTitle;
     user     = theUser;

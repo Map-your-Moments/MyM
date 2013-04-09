@@ -9,14 +9,27 @@
 #import "Content.h"
 
 @implementation Content
-@synthesize contentType, tags, icon;
+@synthesize contentType, tags, icon, content;
 
 /*Main constructor for the Content class */
--(id)initWithContentType:(NSString *)theContentType andTags:(NSMutableArray *)theTags andIcon:(UIImage *)theIcon
+-(id)initWithContentType:(int)theContentType andTags:(NSMutableArray *)theTags andIcon:(UIImage *)theIcon
 {
     contentType = theContentType;
     tags        = theTags;
     icon        = theIcon;
+    
+    if(contentType == kTAGMOMENTTEXT){
+        //Set text content
+    }
+    else if(contentType == kTAGMOMENTPICTURE){
+        //Set picture content
+    }
+    else if(contentType == kTAGMOMENTVIDEO){
+        //Set video content
+    }
+    else if(contentType == kTAGMOMENTAUDIO){
+        //Set audio
+    }
     
     return self;
 }

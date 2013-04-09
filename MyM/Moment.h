@@ -20,7 +20,8 @@
 @property (nonatomic) CLLocationCoordinate2D coords;
 @property (nonatomic) NSMutableArray *comments;
 @property (nonatomic) NSString *tripID;
+@property (nonatomic) NSArray *tags;
 
--(id)initWithTitle:(NSString *)theTitle andUser:(User *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments andTripID:(NSString *)theTripID;
+-(id)initWithTitle:(NSString *)theTitle withTags:(NSArray*)tagArray andUser:(User *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments andTripID:(NSString *)theTripID;
 
 @end
