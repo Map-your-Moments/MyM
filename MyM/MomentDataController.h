@@ -12,7 +12,7 @@
 
 @interface MomentDataController : NSObject
 
-@property (nonatomic) NSMutableArray *moments;
+@property (nonatomic, retain) NSMutableArray *moments;
 
 /* Data Controller Methods */
 -(NSUInteger)countOfMoments;

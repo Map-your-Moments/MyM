@@ -23,6 +23,14 @@
     self.moments = moments;
 }
 
+/* Setter for the moments in the dataController */
+-(void)setMoments:(NSMutableArray *)newList
+{
+    if(_moments != newList) {
+        _moments = [newList mutableCopy];
+    }
+}
+
 /* Initalize a new empty dataController if one does not already exist */
 -(id)init
 {
@@ -30,14 +38,6 @@
         [self initializeDefaultDataList];
         return self;
     } else return nil;
-}
-
-/* Setter for the moments in the dataController */
--(void)setMoments:(NSMutableArray *)moments
-{
-    if(self.moments != moments) {
-        self.moments = [moments mutableCopy];
-    }
 }
 
 # pragma mark - dataController methods

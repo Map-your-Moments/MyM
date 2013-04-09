@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "SignInViewController.h"
+#import "MapViewController.h"
 
 @implementation AppDelegate
 
@@ -19,9 +19,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    SignInViewController *signInViewController = [[SignInViewController alloc] initWithNibName:@"SignInView" bundle:nil];
-    self.window.rootViewController = signInViewController;
-    self.window.backgroundColor = [UIColor whiteColor];
+    MapViewController *vc = [[MapViewController alloc] init];
+    UINavigationController *navController=[[UINavigationController alloc]initWithRootViewController:vc];
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     return YES;
 }

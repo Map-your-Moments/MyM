@@ -1,4 +1,4 @@
 MyM - Map your Moments.
 ---
 
-Mym is a digital travelogue designed to revolutionize the way users submit content to social media. Designed for both heavy vacationers and the average user, Mym utilizes iOS functionality and Amazon Web Services in order to provide users with a unique experience. Users will be able to submit moments using their iPhone from around the world in either text, sound, image, or video formats. These formats will be uploaded to the MyM servers to be stored as part of the users account. All moments will be added to a user's map in order to track places visited as well as what they did at each place. Users will be able to follow or friend each other in order to track each other's whereabouts and what their friends are up to. In addition, users will be able to follow subscription accounts to keep up with their favorite artists or celebrities. Mym allows for people to track their trips while sharing content with friends, making MyM the preferable digital travelogue on the market.
+A digital travelogue.
