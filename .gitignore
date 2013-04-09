@@ -3,3 +3,4 @@
 *~.nib
 xcuserdata
 build/
+*.pbxproj
