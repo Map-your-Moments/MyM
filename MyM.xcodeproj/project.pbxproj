@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		549501BF16E7DA4800EA1B9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501BE16E7DA4800EA1B9E /* icon.png */; };
-		549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501C016E7DA4B00EA1B9E /* icon@2x.png */; };
+		22C0641E1714859700142CF7 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501BE16E7DA4800EA1B9E /* icon.png */; };
+		22C0641F1714859D00142CF7 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501C016E7DA4B00EA1B9E /* icon@2x.png */; };
 		55A0F64916C9E6DB00A364E3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F64816C9E6DB00A364E3 /* UIKit.framework */; };
 		55A0F64B16C9E6DB00A364E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F64A16C9E6DB00A364E3 /* Foundation.framework */; };
 		55A0F64D16C9E6DB00A364E3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F64C16C9E6DB00A364E3 /* CoreGraphics.framework */; };
@@ -225,8 +225,8 @@
 				55A0F65F16C9E6DB00A364E3 /* Default@2x.png in Resources */,
 				55A0F66116C9E6DB00A364E3 /* Default-568h@2x.png in Resources */,
 				69502F7916E47B5500E4B936 /* SignInView.xib in Resources */,
-				549501BF16E7DA4800EA1B9E /* icon.png in Resources */,
-				549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */,
+				22C0641E1714859700142CF7 /* icon.png in Resources */,
+				22C0641F1714859D00142CF7 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
