@@ -92,6 +92,7 @@
 - (void)createNavbox
 {
     navBox = [[UIView alloc] initWithFrame:navboxRectHidden];
+    navBox.hidden = YES;
     [navBox setBackgroundColor:[UIColor whiteColor]];
     [navBox.layer setCornerRadius:10.0f];
     [navBox.layer setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -184,7 +185,10 @@
         [UIView animateWithDuration:.2
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{ [navBox setFrame:navboxRectVisible]; }
+                         animations:^{
+                             [navBox setHidden:NO];
+                             [navBox setFrame:navboxRectVisible];
+                         }
                          completion:nil];
         navboxIsVisible = YES;
     }
@@ -198,7 +202,9 @@
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{ [navBox setFrame:navboxRectHidden]; }
-                         completion:nil];
+                         completion:^(BOOL finished){
+                             [navBox setHidden:YES];
+                         }];
         navboxIsVisible = NO;
     }
 }
