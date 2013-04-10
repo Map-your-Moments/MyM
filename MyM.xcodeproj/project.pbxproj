@@ -28,6 +28,7 @@
 		55A0F65F16C9E6DB00A364E3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A0F65E16C9E6DB00A364E3 /* Default@2x.png */; };
 		55A0F66416C9E6DB00A364E3 /* MyM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55A0F66216C9E6DB00A364E3 /* MyM.xcdatamodeld */; };
 		55A0F66B16C9E76F00A364E3 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */; };
+		55B1F0061715F52B00BE7F2B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55B1F0051715F52B00BE7F2B /* Default-568h@2x.png */; };
 		55EA75201714D0CD00D234C5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA751F1714D0CD00D234C5 /* AVFoundation.framework */; };
 		55EA75221714D0D500D234C5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA75211714D0D500D234C5 /* AudioToolbox.framework */; };
 		55EA75241714D0E600D234C5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA75231714D0E600D234C5 /* MediaPlayer.framework */; };
@@ -97,6 +98,7 @@
 		55A0F65E16C9E6DB00A364E3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		55A0F66316C9E6DB00A364E3 /* MyM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyM.xcdatamodel; sourceTree = "<group>"; };
 		55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
+		55B1F0051715F52B00BE7F2B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		55EA751F1714D0CD00D234C5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		55EA75211714D0D500D234C5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		55EA75231714D0E600D234C5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -180,6 +182,7 @@
 		55A0F63C16C9E6DB00A364E3 = {
 			isa = PBXGroup;
 			children = (
+				55B1F0051715F52B00BE7F2B /* Default-568h@2x.png */,
 				55A0F65016C9E6DB00A364E3 /* MyM */,
 				55A0F64716C9E6DB00A364E3 /* Frameworks */,
 				55A0F64616C9E6DB00A364E3 /* Products */,
@@ -419,6 +422,7 @@
 				55EC872D1714CE0C00C1C52F /* MomentCreateView.xib in Resources */,
 				55EC872E1714CE0C00C1C52F /* MomentPictureView.xib in Resources */,
 				55EC87301714CE0C00C1C52F /* NewUserView.xib in Resources */,
+				55B1F0061715F52B00BE7F2B /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

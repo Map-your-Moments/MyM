@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 #import "NewUserViewController.h"
 #import "AmazonClientManager.h"
+#import "MapViewController.h"
 
 @interface SignInViewController()
 @property (weak, nonatomic) IBOutlet UIImageView *icon_mym;
@@ -28,6 +29,11 @@
 @end
 
 @implementation SignInViewController
+
+- (void)viewDidLoad
+{
+    [self.navigationController setTitle:@"Log In"];
+}
 
 /* >>>>>>>>>>>>>>>>>>>>> verifyButton
  Check for the verification code
@@ -59,6 +65,8 @@
             @catch (AmazonClientException *exception) {
                 NSLog(@"%@", exception.description);
             }
+            MapViewController *mapViewController = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
+            [self.navigationController pushViewController:mapViewController animated:YES];
             NSLog(@"YOU ARE IN, WELCOME");
             self.txtPassword.text = @"";
         } else { //Verification code is wrong
@@ -112,6 +120,8 @@
                     self.signInButton.hidden = NO;
                     self.backButton.hidden = YES;
                     self.txtPassword.text = @"";
+                    MapViewController *mapViewController = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
+                    [self.navigationController pushViewController:mapViewController animated:YES];
                     NSLog(@"YOU ARE IN, WELCOME");
                 } else { //User still needs to validate his email
                     self.txtVerificationCode.hidden = NO;
