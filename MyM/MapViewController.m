@@ -12,7 +12,7 @@
 #import "MapViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FriendsListViewController.h"
-#import "MomentViewController.h"
+#import "MomentCreateViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -239,7 +239,7 @@
 {
     if(idx == 0) {
         NSLog(@"Add Picture Moment");
-        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTPICTURE];
         [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
         [vc setDataController:dataController];
@@ -249,7 +249,7 @@
     
     if(idx == 1) {
         NSLog(@"Add Audio Moment");
-        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTAUDIO];
         [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
         [vc setDataController:dataController];
@@ -259,7 +259,7 @@
     
     if(idx == 2) {
         NSLog(@"Add Text Moment");
-        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTTEXT];
         [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
         [vc setDataController:dataController];

@@ -21,11 +21,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-    //SignInViewController *vc = [[SignInViewController alloc] init];
+    SignInViewController *vc = [[SignInViewController alloc] init];
     
-    MomentCreateViewController *child = [[MomentCreateViewController alloc]initWithNibName:@"MomentCreateView" bundle:nil];
-    [child setContentType:kTAGMOMENTPICTURE];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:child];
+    //MomentCreateViewController *child = [[MomentCreateViewController alloc]initWithNibName:@"MomentCreateView" bundle:nil];
+    //[child setContentType:kTAGMOMENTPICTURE];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = navController;
     
 

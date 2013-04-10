@@ -138,9 +138,6 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     
     NSString *tripID = @"MyM_Trip";//[[self.tripButton titleLabel]text];
     
-    User *dummyUser = [[User alloc] initWithUserName:@"Steven" andPassword:@"Pass" andDateJoined:nil andEmail:@"zilberb2@tcnj.edu" andSettings:nil andMoments:nil andFriends:nil];
-    CLLocationCoordinate2D dummyCoordinates = CLLocationCoordinate2DMake(65, 76);
-    
     id momentContent = nil;
     switch(self.contentType)
     {
@@ -164,7 +161,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     {
         if(![[self.captionTextField text] isEqualToString:@""] && [tags count] != 0 && ![[self.tagTextField text] isEqualToString:@""])
         {
-            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:dummyUser andContent:content andDate:currentDate andCoords:dummyCoordinates andComments:nil andTripID:nil];
+            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser andContent:content andDate:currentDate andCoords:*(currentLocation) andComments:nil andTripID:tripID];
         }
     }
 }
