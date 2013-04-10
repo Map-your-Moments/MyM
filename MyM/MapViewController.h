@@ -13,6 +13,7 @@
 #import <MapKit/MapKit.h>
 #import "AwesomeMenu.h"
 #import "Moment.h"
+#import "Constants.h"
 
 @class MomentDataController;
 
@@ -20,5 +21,6 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic)  MomentDataController *dataController;
+@property (strong, nonatomic) User *user;
 
 @end

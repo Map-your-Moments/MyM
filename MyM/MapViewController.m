@@ -11,12 +11,14 @@
 
 #import "MapViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FriendsListViewController.h"
+#import "MomentViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
 
-#define navboxRectVisible CGRectMake(-10, 0, 90, screenHeight)
-#define navboxRectHidden CGRectMake(-100, 0, 90, screenHeight)
+#define navboxRectVisible CGRectMake(-10, 5, 90, screenHeight-55)
+#define navboxRectHidden CGRectMake(-100, 5, 90, screenHeight-55)
 #define navboxRectLoc CGRectMake(0, 0, 10, screenHeight)
 
 @implementation MapViewController
@@ -26,7 +28,7 @@
     BOOL navboxIsVisible;
 }
 
-@synthesize mapView, dataController;
+@synthesize mapView, dataController, user;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,13 +49,6 @@
     /*
      * Add some dummy moments to test with until we can pull them from the server
      */
-    User *user = [[User alloc] initWithUserName:@"adamcumiskey"
-                                    andPassword:nil
-                                  andDateJoined:nil
-                                       andEmail:nil
-                                    andSettings:nil
-                                     andMoments:nil
-                                     andFriends:nil];
     Moment *moment1 = [[Moment alloc] initWithTitle:@"test moment"
                                             andUser:user
                                          andContent:nil
@@ -89,6 +84,7 @@
 - (void)createNavbox
 {
     navBox = [[UIView alloc] initWithFrame:navboxRectHidden];
+    navBox.hidden = YES;
     [navBox setBackgroundColor:[UIColor whiteColor]];
     [navBox.layer setCornerRadius:10.0f];
     [navBox.layer setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -181,7 +177,10 @@
         [UIView animateWithDuration:.2
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{ [navBox setFrame:navboxRectVisible]; }
+                         animations:^{
+                             [navBox setHidden:NO];
+                             [navBox setFrame:navboxRectVisible];
+                         }
                          completion:nil];
         navboxIsVisible = YES;
     }
@@ -195,7 +194,9 @@
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{ [navBox setFrame:navboxRectHidden]; }
-                         completion:nil];
+                         completion:^(BOOL finished){
+                             [navBox setHidden:YES];
+                         }];
         navboxIsVisible = NO;
     }
 }
@@ -215,22 +216,21 @@
 
 - (void)search
 {
-    NSLog(@"Search");
 }
 
 - (void)friends
 {
-    NSLog(@"Friends");
+    FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)settings
 {
-    NSLog(@"Settings");
 }
 
 - (void)signOut
 {
-    NSLog(@"Sign Out");
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - AwesomeMenu Delegate
@@ -239,14 +239,32 @@
 {
     if(idx == 0) {
         NSLog(@"Add Picture Moment");
+        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        [vc setContentType:kTAGMOMENTPICTURE];
+        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setDataController:dataController];
+        [vc setCurrentUser:user];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     if(idx == 1) {
         NSLog(@"Add Audio Moment");
+        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        [vc setContentType:kTAGMOMENTAUDIO];
+        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setDataController:dataController];
+        [vc setCurrentUser:user];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     if(idx == 2) {
         NSLog(@"Add Text Moment");
+        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        [vc setContentType:kTAGMOMENTTEXT];
+        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setDataController:dataController];
+        [vc setCurrentUser:user];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -277,6 +295,8 @@
     [buttonView addTarget:self action:@selector(showMomentDetail) forControlEvents:UIControlEventTouchUpInside];
     
     pin.canShowCallout = YES;
+    pin.animatesDrop = YES;
+    pin.pinColor = MKPinAnnotationColorPurple;
     
     return pin;
 }

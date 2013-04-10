@@ -120,8 +120,20 @@
                     self.signInButton.hidden = NO;
                     self.backButton.hidden = YES;
                     self.txtPassword.text = @"";
+                    
+                    User *user = [[User alloc] initWithUserName:self.txtUsername.text
+                                                    andPassword:nil
+                                                  andDateJoined:nil
+                                                       andEmail:nil
+                                                    andSettings:nil
+                                                     andMoments:nil
+                                                     andFriends:nil];
+                    
                     MapViewController *mapViewController = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
+                    [mapViewController setUser:user];
                     [self.navigationController pushViewController:mapViewController animated:YES];
+                    
+                    
                     NSLog(@"YOU ARE IN, WELCOME");
                 } else { //User still needs to validate his email
                     self.txtVerificationCode.hidden = NO;

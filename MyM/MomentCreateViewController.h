@@ -33,6 +33,7 @@
 @property int contentType;
 @property CLLocationCoordinate2D *currentLocation;
 @property (strong, nonatomic) User *currentUser;
+@property (strong, nonatomic) MomentDataController *dataController;
 
 @property (strong, nonatomic) AVAudioRecorder *recorder;
 
