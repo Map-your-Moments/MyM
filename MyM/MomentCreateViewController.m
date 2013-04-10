@@ -161,7 +161,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     {
         if(![[self.captionTextField text] isEqualToString:@""] && [tags count] != 0 && ![[self.tagTextField text] isEqualToString:@""])
         {
-            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser andContent:content andDate:currentDate andCoords:*(currentLocation) andComments:nil andTripID:tripID];
+            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andTripID:tripID];
         }
     }
 }

@@ -31,7 +31,7 @@
 @property (strong, nonatomic) NSArray *trips;
 
 @property int contentType;
-@property CLLocationCoordinate2D *currentLocation;
+@property CLLocationCoordinate2D currentLocation;
 @property (strong, nonatomic) User *currentUser;
 @property (strong, nonatomic) MomentDataController *dataController;
 

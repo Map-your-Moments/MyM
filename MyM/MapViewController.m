@@ -58,6 +58,7 @@
                                           andTripID:nil];
     [dataController addMomentToMomentsWithMoment:moment1];
     
+    [mapView setShowsUserLocation:YES];
     [mapView setDelegate:self];
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
@@ -237,11 +238,14 @@
 
 - (void)AwesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx
 {
+    
+    CLLocationCoordinate2D currentLocation = [[[mapView userLocation] location] coordinate];
+    
     if(idx == 0) {
         NSLog(@"Add Picture Moment");
         MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTPICTURE];
-        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setCurrentLocation:currentLocation];
         [vc setDataController:dataController];
         [vc setCurrentUser:user];
         [self.navigationController pushViewController:vc animated:YES];
@@ -251,7 +255,7 @@
         NSLog(@"Add Audio Moment");
         MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTAUDIO];
-        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setCurrentLocation:currentLocation];
         [vc setDataController:dataController];
         [vc setCurrentUser:user];
         [self.navigationController pushViewController:vc animated:YES];
@@ -261,7 +265,7 @@
         NSLog(@"Add Text Moment");
         MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTTEXT];
-        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setCurrentLocation:currentLocation];
         [vc setDataController:dataController];
         [vc setCurrentUser:user];
         [self.navigationController pushViewController:vc animated:YES];
@@ -284,6 +288,11 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        //Don't trample the user location annotation (pulsing blue dot).
+        return nil;
+    }
+    
     MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"momentAnnotation"];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
@@ -295,7 +304,7 @@
     [buttonView addTarget:self action:@selector(showMomentDetail) forControlEvents:UIControlEventTouchUpInside];
     
     pin.canShowCallout = YES;
-    pin.animatesDrop = YES;
+    pin.animatesDrop = NO;
     pin.pinColor = MKPinAnnotationColorPurple;
     
     return pin;
