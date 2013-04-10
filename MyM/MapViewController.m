@@ -218,24 +218,20 @@
 
 - (void)search
 {
-    NSLog(@"Search");
 }
 
 - (void)friends
 {
-    NSLog(@"Friends");
     FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)settings
 {
-    NSLog(@"Settings");
 }
 
 - (void)signOut
 {
-    NSLog(@"Sign Out");
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
