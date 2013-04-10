@@ -288,6 +288,8 @@
     [buttonView addTarget:self action:@selector(showMomentDetail) forControlEvents:UIControlEventTouchUpInside];
     
     pin.canShowCallout = YES;
+    pin.animatesDrop = YES;
+    pin.pinColor = MKPinAnnotationColorPurple;
     
     return pin;
 }
