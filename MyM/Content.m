@@ -12,11 +12,10 @@
 @synthesize contentType, tags, icon, content;
 
 /*Main constructor for the Content class */
--(id)initWithContentType:(int)theContentType andTags:(NSMutableArray *)theTags andIcon:(UIImage *)theIcon
+-(id)initWithContentType:(int)theContentType andTags:(NSMutableArray *)theTags
 {
     contentType = theContentType;
     tags        = theTags;
-    icon        = theIcon;
     
     if(contentType == kTAGMOMENTTEXT){
         //Set text content

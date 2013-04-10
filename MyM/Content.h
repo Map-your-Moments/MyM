@@ -15,8 +15,7 @@
 @property (nonatomic) int contentType;
 
 @property (nonatomic) NSMutableArray *tags;
-@property (nonatomic) UIImage *icon;
 
--(id)initWithContentType:(int)theContentType andTags:(NSMutableArray *)theTags andIcon:(UIImage *)theIcon;
+-(id)initWithContentType:(int)theContentType andTags:(NSMutableArray *)theTags;
 
 @end
