@@ -11,6 +11,8 @@
 
 #import "MapViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FriendsListViewController.h"
+#import "MomentViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -221,6 +223,8 @@
 - (void)friends
 {
     NSLog(@"Friends");
+    FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)settings
@@ -231,6 +235,7 @@
 - (void)signOut
 {
     NSLog(@"Sign Out");
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - AwesomeMenu Delegate
