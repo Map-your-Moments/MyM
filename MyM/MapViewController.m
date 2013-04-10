@@ -28,7 +28,7 @@
     BOOL navboxIsVisible;
 }
 
-@synthesize mapView, dataController;
+@synthesize mapView, dataController, user;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,13 +49,6 @@
     /*
      * Add some dummy moments to test with until we can pull them from the server
      */
-    User *user = [[User alloc] initWithUserName:@"adamcumiskey"
-                                    andPassword:nil
-                                  andDateJoined:nil
-                                       andEmail:nil
-                                    andSettings:nil
-                                     andMoments:nil
-                                     andFriends:nil];
     Moment *moment1 = [[Moment alloc] initWithTitle:@"test moment"
                                            withTags:nil
                                             andUser:user
@@ -249,6 +242,9 @@
         NSLog(@"Add Picture Moment");
         MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTPICTURE];
+        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setDataController:dataController];
+        [vc setCurrentUser:user];
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -256,6 +252,9 @@
         NSLog(@"Add Audio Moment");
         MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTAUDIO];
+        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setDataController:dataController];
+        [vc setCurrentUser:user];
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -263,6 +262,9 @@
         NSLog(@"Add Text Moment");
         MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTTEXT];
+        [vc setCurrentLocation:(__bridge CLLocationCoordinate2D *)([mapView userLocation])];
+        [vc setDataController:dataController];
+        [vc setCurrentUser:user];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
