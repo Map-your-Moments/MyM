@@ -17,8 +17,8 @@
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
 
-#define navboxRectVisible CGRectMake(-10, 0, 90, screenHeight)
-#define navboxRectHidden CGRectMake(-100, 0, 90, screenHeight)
+#define navboxRectVisible CGRectMake(-10, 5, 90, screenHeight-55)
+#define navboxRectHidden CGRectMake(-100, 5, 90, screenHeight-55)
 #define navboxRectLoc CGRectMake(0, 0, 10, screenHeight)
 
 @implementation MapViewController
