@@ -39,7 +39,7 @@
 		55EC872C1714CE0C00C1C52F /* FriendsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87211714CE0C00C1C52F /* FriendsListViewController.xib */; };
 		55EC872D1714CE0C00C1C52F /* MomentCreateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87221714CE0C00C1C52F /* MomentCreateView.xib */; };
 		55EC872E1714CE0C00C1C52F /* MomentPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87231714CE0C00C1C52F /* MomentPictureView.xib */; };
-		55EC872F1714CE0C00C1C52F /* MomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC87251714CE0C00C1C52F /* MomentViewController.m */; };
+		55EC872F1714CE0C00C1C52F /* MomentCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC87251714CE0C00C1C52F /* MomentCreateViewController.m */; };
 		55EC87301714CE0C00C1C52F /* NewUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87261714CE0C00C1C52F /* NewUserView.xib */; };
 		55EC87311714CE0C00C1C52F /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC87281714CE0C00C1C52F /* NewUserViewController.m */; };
 		663B1510170CC4CA00ED678A /* bg-addbutton-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 663B1502170CC4CA00ED678A /* bg-addbutton-highlighted.png */; };
@@ -112,8 +112,8 @@
 		55EC87211714CE0C00C1C52F /* FriendsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsListViewController.xib; sourceTree = "<group>"; };
 		55EC87221714CE0C00C1C52F /* MomentCreateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MomentCreateView.xib; sourceTree = "<group>"; };
 		55EC87231714CE0C00C1C52F /* MomentPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MomentPictureView.xib; sourceTree = "<group>"; };
-		55EC87241714CE0C00C1C52F /* MomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentViewController.h; sourceTree = "<group>"; };
-		55EC87251714CE0C00C1C52F /* MomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentViewController.m; sourceTree = "<group>"; };
+		55EC87241714CE0C00C1C52F /* MomentCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentCreateViewController.h; sourceTree = "<group>"; };
+		55EC87251714CE0C00C1C52F /* MomentCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentCreateViewController.m; sourceTree = "<group>"; };
 		55EC87261714CE0C00C1C52F /* NewUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserView.xib; sourceTree = "<group>"; };
 		55EC87271714CE0C00C1C52F /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserViewController.h; sourceTree = "<group>"; };
 		55EC87281714CE0C00C1C52F /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
@@ -308,8 +308,8 @@
 			children = (
 				55EC871F1714CE0C00C1C52F /* FriendsListViewController.h */,
 				55EC87201714CE0C00C1C52F /* FriendsListViewController.m */,
-				55EC87241714CE0C00C1C52F /* MomentViewController.h */,
-				55EC87251714CE0C00C1C52F /* MomentViewController.m */,
+				55EC87241714CE0C00C1C52F /* MomentCreateViewController.h */,
+				55EC87251714CE0C00C1C52F /* MomentCreateViewController.m */,
 				55EC87271714CE0C00C1C52F /* NewUserViewController.h */,
 				55EC87281714CE0C00C1C52F /* NewUserViewController.m */,
 				69502F7516E47B4200E4B936 /* SignInViewController.h */,
@@ -448,7 +448,7 @@
 				55EC87291714CE0C00C1C52F /* AmazonClientManager.m in Sources */,
 				55EC872A1714CE0C00C1C52F /* Constants.m in Sources */,
 				55EC872B1714CE0C00C1C52F /* FriendsListViewController.m in Sources */,
-				55EC872F1714CE0C00C1C52F /* MomentViewController.m in Sources */,
+				55EC872F1714CE0C00C1C52F /* MomentCreateViewController.m in Sources */,
 				55EC87311714CE0C00C1C52F /* NewUserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

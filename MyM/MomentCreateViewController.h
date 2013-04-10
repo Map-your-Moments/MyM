@@ -12,7 +12,7 @@
 #import <AVFoundation/AVAudioPlayer.h>
 #import "Moment.h"
 
-@interface MomentViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+@interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
     IBOutlet UITextView *textView;
     IBOutlet UIImageView *imageView;
@@ -29,7 +29,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *tripButton;
 
 @property (strong, nonatomic) NSArray *trips;
-@property (strong, nonatomic) Content *momentContent;
 
 @property int contentType;
 @property CLLocationCoordinate2D *currentLocation;

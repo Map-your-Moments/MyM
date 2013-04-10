@@ -55,7 +55,6 @@
                                      andMoments:nil
                                      andFriends:nil];
     Moment *moment1 = [[Moment alloc] initWithTitle:@"test moment"
-                                           withTags:nil
                                             andUser:user
                                          andContent:nil
                                             andDate:nil

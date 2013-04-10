@@ -11,11 +11,14 @@
 
 @interface Content : NSObject
 
-@property (nonatomic) id content;
+@property (nonatomic) UIImage *picture;
+@property (nonatomic) NSString *text;
+@property (nonatomic) id sound;
+@property (nonatomic) id video;
 @property (nonatomic) int contentType;
 
 @property (nonatomic) NSMutableArray *tags;
 
--(id)initWithContentType:(int)theContentType andTags:(NSMutableArray *)theTags;
+-(id)initWithContent:(id)momentContent withType:(int)theContentType andTags:(NSMutableArray *)theTags;
 
 @end

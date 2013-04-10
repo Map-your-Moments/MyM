@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SignInViewController.h"
+#import "MomentCreateViewController.h"
 
 @implementation AppDelegate
 
@@ -20,9 +21,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-    SignInViewController *vc = [[SignInViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+    //SignInViewController *vc = [[SignInViewController alloc] init];
+    
+    MomentCreateViewController *child = [[MomentCreateViewController alloc]initWithNibName:@"MomentCreateView" bundle:nil];
+    [child setContentType:kTAGMOMENTPICTURE];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:child];
     self.window.rootViewController = navController;
+    
 
     self.window.backgroundColor = [UIColor whiteColor];
 
