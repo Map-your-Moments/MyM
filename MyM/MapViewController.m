@@ -244,14 +244,23 @@
 {
     if(idx == 0) {
         NSLog(@"Add Picture Moment");
+        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        [vc setContentType:kTAGMOMENTPICTURE];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     if(idx == 1) {
         NSLog(@"Add Audio Moment");
+        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        [vc setContentType:kTAGMOMENTAUDIO];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     if(idx == 2) {
         NSLog(@"Add Text Moment");
+        MomentViewController *vc = [[MomentViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        [vc setContentType:kTAGMOMENTTEXT];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
