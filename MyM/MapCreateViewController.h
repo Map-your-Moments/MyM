@@ -9,24 +9,16 @@
  *
  */
 
-#import "MomentDataController.h"
-
-@protocol mapProtocol
--(void)setDataController:(MomentDataController *)dataController;
-@end
-
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "AwesomeMenu.h"
 #import "Moment.h"
-#import "Constants.h"
 
 @class MomentDataController;
 
-@interface MapViewController : UIViewController <AwesomeMenuDelegate, MKMapViewDelegate, MKAnnotation>
+@interface MapCreateViewController : UIViewController <AwesomeMenuDelegate, MKMapViewDelegate, MKAnnotation>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic)  MomentDataController *dataController;
-@property (strong, nonatomic) User *user;
 
 @end

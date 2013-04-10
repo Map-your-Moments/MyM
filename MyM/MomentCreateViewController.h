@@ -11,8 +11,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVAudioPlayer.h>
 #import "Moment.h"
+#import "MapViewController.h"
 
-@interface MomentViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+@interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
     IBOutlet UITextView *textView;
     IBOutlet UIImageView *imageView;
@@ -29,13 +30,15 @@
 @property (strong, nonatomic) IBOutlet UIButton *tripButton;
 
 @property (strong, nonatomic) NSArray *trips;
-@property (strong, nonatomic) Content *momentContent;
 
 @property int contentType;
-@property CLLocationCoordinate2D *currentLocation;
+@property CLLocationCoordinate2D currentLocation;
 @property (strong, nonatomic) User *currentUser;
+@property (strong, nonatomic) MomentDataController *dataController;
 
 @property (strong, nonatomic) AVAudioRecorder *recorder;
+
+@property (nonatomic, weak) id<mapProtocol> delegate;
 
 -(void)presentTextView;
 -(void)presentImageSelector;

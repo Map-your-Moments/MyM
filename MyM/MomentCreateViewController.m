@@ -6,21 +6,20 @@
 //  Copyright (c) 2013 MyM Co. All rights reserved.
 //
 
-#import "MomentViewController.h"
+#import "MomentCreateViewController.h"
 #import "Constants.h"
 
-@interface MomentViewController ()
+@interface MomentCreateViewController ()
 
 @end
 
-@implementation MomentViewController
+@implementation MomentCreateViewController
 @synthesize contentView;
 @synthesize captionTextField;
 @synthesize tagTextField;
 @synthesize tripButton;
 @synthesize trips;
 
-@synthesize momentContent;
 @synthesize contentType;
 @synthesize currentLocation;
 @synthesize currentUser;
@@ -134,17 +133,38 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 -(void)share:(id)sender
 {
     NSString *title = [self.captionTextField text];
-    NSArray *tags = [[self.tagTextField text] componentsSeparatedByString:@","];
+    NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@","];
     NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-    NSString *tripID = [[self.tripButton titleLabel]text];
-    Content *content = self.momentContent;
+    
+    NSString *tripID = @"MyM_Trip";//[[self.tripButton titleLabel]text];
+    
+    id momentContent = nil;
+    switch(self.contentType)
+    {
+        case kTAGMOMENTTEXT:
+            momentContent = [textView text];
+            break;
+        case kTAGMOMENTPICTURE:
+            momentContent = [imageView image];
+            break;
+        case kTAGMOMENTAUDIO:
+            NSLog(@"Need Implementation");
+            break;
+        case kTAGMOMENTVIDEO:
+            NSLog(@"Need Implementation");
+            break;
+    }
+    
+    Content *content = [[Content alloc] initWithContent:momentContent withType:self.contentType andTags:tags];
     
     if(title != nil)
     {
-        if([tags count] != 0)
+        if(![[self.captionTextField text] isEqualToString:@""] && [tags count] != 0 && ![[self.tagTextField text] isEqualToString:@""])
         {
-            Moment *newMoment = [[Moment alloc] initWithTitle:title withTags:tags andUser:currentUser andContent:content andDate:currentDate andCoords:*(currentLocation) andComments:nil andTripID:tripID];
-            newMoment = newMoment;
+            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andTripID:tripID];
+            [self.dataController addMomentToMomentsWithMoment:newMoment];
+            [self.delegate setDataController:self.dataController];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }

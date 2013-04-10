@@ -9,26 +9,25 @@
  *
  */
 
-#import "MapViewController.h"
+#import "MapCreateViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "FriendsListViewController.h"
-#import "MomentCreateViewController.h"
+#import "MomentCreateView.xib"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
 
-#define navboxRectVisible CGRectMake(-10, 5, 90, screenHeight-55)
-#define navboxRectHidden CGRectMake(-100, 5, 90, screenHeight-55)
+#define navboxRectVisible CGRectMake(-10, 0, 90, screenHeight)
+#define navboxRectHidden CGRectMake(-100, 0, 90, screenHeight)
 #define navboxRectLoc CGRectMake(0, 0, 10, screenHeight)
 
-@implementation MapViewController
+@implementation MapCreateViewController
 {
     UIView *navBox;
     
     BOOL navboxIsVisible;
 }
 
-@synthesize mapView, dataController, user;
+@synthesize mapView, dataController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +45,26 @@
     dataController = [[MomentDataController alloc] init];
     self.navigationItem.hidesBackButton = YES;
     
+    /*
+     * Add some dummy moments to test with until we can pull them from the server
+     */
+    User *user = [[User alloc] initWithUserName:@"adamcumiskey"
+                                    andPassword:nil
+                                  andDateJoined:nil
+                                       andEmail:nil
+                                    andSettings:nil
+                                     andMoments:nil
+                                     andFriends:nil];
+    Moment *moment1 = [[Moment alloc] initWithTitle:@"test moment"
+                                           withTags:nil
+                                            andUser:user
+                                         andContent:nil
+                                            andDate:nil
+                                          andCoords:CLLocationCoordinate2DMake(40.0f, -70.0f)
+                                        andComments:nil
+                                          andTripID:nil];
+    [dataController addMomentToMomentsWithMoment:moment1];
+    
     [mapView setShowsUserLocation:YES];
     [mapView setDelegate:self];
     
@@ -58,10 +77,7 @@
 
     [self createNavbox];
     [self createAwesomeMenu];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
+    
     [self loadAnnotations];
 }
 
@@ -76,7 +92,6 @@
 - (void)createNavbox
 {
     navBox = [[UIView alloc] initWithFrame:navboxRectHidden];
-    navBox.hidden = YES;
     [navBox setBackgroundColor:[UIColor whiteColor]];
     [navBox.layer setCornerRadius:10.0f];
     [navBox.layer setBorderColor:[UIColor lightGrayColor].CGColor];
@@ -169,10 +184,7 @@
         [UIView animateWithDuration:.2
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
-                             [navBox setHidden:NO];
-                             [navBox setFrame:navboxRectVisible];
-                         }
+                         animations:^{ [navBox setFrame:navboxRectVisible]; }
                          completion:nil];
         navboxIsVisible = YES;
     }
@@ -186,9 +198,7 @@
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{ [navBox setFrame:navboxRectHidden]; }
-                         completion:^(BOOL finished){
-                             [navBox setHidden:YES];
-                         }];
+                         completion:nil];
         navboxIsVisible = NO;
     }
 }
@@ -208,21 +218,22 @@
 
 - (void)search
 {
+    NSLog(@"Search");
 }
 
 - (void)friends
 {
-    FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSLog(@"Friends");
 }
 
 - (void)settings
 {
+    NSLog(@"Settings");
 }
 
 - (void)signOut
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSLog(@"Sign Out");
 }
 
 #pragma mark - AwesomeMenu Delegate
@@ -234,7 +245,7 @@
     
     if(idx == 0) {
         NSLog(@"Add Picture Moment");
-        MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
+        MomentCre *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTPICTURE];
         [vc setCurrentLocation:currentLocation];
         [vc setDataController:dataController];
