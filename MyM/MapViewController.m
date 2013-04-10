@@ -42,6 +42,7 @@
     [super viewDidLoad];
     
     dataController = [[MomentDataController alloc] init];
+    self.navigationItem.hidesBackButton = YES;
     
     /*
      * Add some dummy moments to test with until we can pull them from the server
@@ -69,7 +70,7 @@
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(menuButtonShowHide)];
-    self.navigationItem.rightBarButtonItem = menuButton;
+    self.navigationItem.leftBarButtonItem = menuButton;
     
 
     [self createNavbox];
