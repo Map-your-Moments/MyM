@@ -4,6 +4,8 @@ ServerCode::Application.routes.draw do
   get 'logout' => 'user_sessions#destroy', :as => 'logout'
   get 'login' => 'user_sessions#new', :as => 'login'
   post 'login' => 'user_sessions#create'
+  post 'mym' => 'moments#edit', :as => 'mym'
+  get 'mym' => 'users#show', :as => 'mym'
   resources :user_sessions, :except => [:index, :edit]
   root :to => 'users#index'
   # The priority is based upon order of creation:

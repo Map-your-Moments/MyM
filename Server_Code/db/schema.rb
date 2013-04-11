@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409011452) do
+ActiveRecord::Schema.define(:version => 20130411005903) do
 
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -19,10 +19,12 @@ ActiveRecord::Schema.define(:version => 20130409011452) do
   end
 
   create_table "users", :force => true do |t|
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "username"
     t.string   "password_digest"
+    t.decimal  "latitude",        :precision => 15, :scale => 10
+    t.decimal  "longitude",       :precision => 15, :scale => 10
   end
 
 end
