@@ -1,24 +1,32 @@
-<p id="notice"><%= notice %></p>
+<%= form_for(@user) do |f| %>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
+  <p>
+    <b>Username:</b>
+    <%= @user.username %>
+  </p>
 
-<p>
-  <b>Password_digest:</b>
-  <%= @user.password_digest %>
-</p>
+  <p>
+    <b>Password_digest:</b>
+    <%= @user.password_digest %>
+  </p>
 
-<p>
-  <b>Latitude:</b>
-  <%= @user.latitude %>
-</p>
+  <p>
+    <b>Latitude:</b>
+    <%= @user.latitude %>
+  </p>
 
-<p>
-  <b>Longitude:</b>
-  <%= @user.longitude %>
-</p>
+  <p>
+    <b>Longitude:</b>
+    <%= @user.longitude %>
+  </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>
+<% end %>
+
+<%= form_tag mym_path, :method => :post do %>
+  <%= text_field_tag :latitude %>
+  <%= text_field_tag :longitude %>
+  <%= submit_tag :submit %>
+<% end %>

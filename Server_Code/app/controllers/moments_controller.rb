@@ -1,6 +1,7 @@
 class MomentsController < ApplicationController
+  before_filter :restrict_access
   def edit
-    @user = User.find(session[:user_id])
+    @user = current_user 
     if(@user)
       @user.latitude = params[:latitude]
       @user.longitude = params[:longitude]

@@ -45,6 +45,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faraday (0.8.7)
+      multipart-post (~> 1.1)
     haml (3.1.8)
     haml-rails (0.4)
       actionpack (>= 3.1, < 4.1)
@@ -52,12 +54,15 @@ GEM
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
     hike (1.2.1)
+    httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.7)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     libv8 (3.11.8.17)
     mail (2.5.3)
       i18n (>= 0.4.0)
@@ -65,7 +70,22 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.22)
     multi_json (1.7.2)
+    multi_xml (0.5.3)
+    multipart-post (1.2.0)
     nokogiri (1.5.9)
+    oauth (0.4.7)
+    oauth-plugin (0.4.1)
+      multi_json
+      oauth (~> 0.4.4)
+      oauth2 (>= 0.5.0)
+      rack
+    oauth2 (0.9.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -127,6 +147,8 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   haml-rails
   jquery-rails
+  oauth
+  oauth-plugin
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3

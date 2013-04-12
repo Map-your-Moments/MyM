@@ -9,6 +9,9 @@ gem 'sqlite3'
 gem 'aws-sdk'
 gem 'therubyracer'
 gem 'haml-rails'
+gem 'oauth'
+gem 'oauth-plugin'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

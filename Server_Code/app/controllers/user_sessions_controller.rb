@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  
   # GET /user_sessions
   # GET /user_sessions.json
 =begin
@@ -47,10 +48,9 @@ class UserSessionsController < ApplicationController
     user = User.find_by_username(params[:username])
 
     if (user && user.authenticate(params[:password]))
-        session[:user_id] = user.id
-        render json: {logged_in: true, session_key: session[:user_id]}
+        render json: {logged_in: true, access_token: @user.api_key.access_token}
     else 
-        render json: {logged_in: false, session_key: nil}
+        render json: {logged_in: false, access_token: nil}
     end
   end
 
@@ -89,7 +89,6 @@ class UserSessionsController < ApplicationController
   # DELETE /user_sessions/1
   # DELETE /user_sessions/1.json
   def destroy
-    session[:user_id]=nil
     render json: {logged_out: true}
   end
 
@@ -103,4 +102,13 @@ class UserSessionsController < ApplicationController
     end
   end
 =end 
+=begin 
+     private                                                                                                    
+        
+       def restrict_access
+         authenticate_or_request_with_http_token do |token, options|
+           ApiKey.exists?(access_token: token)
+         end
+    end
+=end
 end

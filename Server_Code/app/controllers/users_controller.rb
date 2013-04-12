@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+  
   def index
     @users = User.all
 
@@ -41,11 +42,12 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    @user.create_api_key
 
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: {created: true}}
+        format.json { render json: {created: true, access_token: @user.api_key.access_token}}
       else
         format.html { render action: "new" }
         format.json { render json: {created: false}}
@@ -80,4 +82,6 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 end
