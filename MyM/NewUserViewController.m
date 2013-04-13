@@ -16,8 +16,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmEmailTextField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userSubTypeSegmentedControl;
-@property (strong, nonatomic) NSString *statusString;
-@property (strong, nonatomic) NSString *statusTitleString;
+
+@property (strong, nonatomic) NSArray *usersQueryResult;
+
 
 - (IBAction)createNewUserButtonPress;
 @end
@@ -29,44 +30,46 @@
  >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)createNewUserButtonPress
 {
-    self.statusString = nil;
-    self.statusTitleString = @"Error";
+    NSString *statusString = nil;
+    NSString *statusTitleString = @"Error";
     
     if ([self.usernameTextField.text length] == 0) { //Check if userTextField is empty
         NSLog(@"Username is empty");
-        self.statusString = @"Username field is empty";
+        statusString = @"Username field is empty";
     } else if ([self.passwordTextField.text length] < 8) { //Check if passwordTextField is too short
         NSLog(@"Password is too short - 8");
-        self.statusString = @"Password is too short, at least 8 characters";
+        statusString = @"Password is too short, at least 8 characters";
     } else if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text]) { //Check if passwordTextField and confirmPasswordTextField are equal
         NSLog(@"Password and ConfirmPassword are not equal");
-        self.statusString = @"Passwords are not equal";
+        statusString = @"Passwords are not equal";
     } else if ([self.fullNameTextField.text length] == 0) { //Check if fullNameTextField is empty
         NSLog(@"FullName is empty");
-        self.statusString = @"Name field is empty";
+        statusString = @"Name field is empty";
     } else if ([self.emailTextField.text rangeOfString:@"@"].location == NSNotFound) { //Check if emailTextField has an @
         NSLog(@"Please enter a valid email");
-        self.statusString = @"Email is not valid";
+        statusString = @"Email is not valid";
     } else if (![self.emailTextField.text isEqualToString:self.confirmEmailTextField.text]) { //Check if emailTextField and confirmEmailTextField are equal
         NSLog(@"Email and ConfirmEmail are not equal");
-        self.statusString = @"Emails are not equal";
+        statusString = @"Emails are not equal";
     } else {
         
-        //Query the server for the usernameTextField
-        NSArray *usersQueryResult = nil;
-        DynamoDBQueryRequest *dynamoDBQueryRequest = [[DynamoDBQueryRequest alloc] initWithTableName:@"mym-login-database"
-                                                                                     andHashKeyValue:[[DynamoDBAttributeValue alloc] initWithS:self.usernameTextField.text]];
-        @try {
-            DynamoDBQueryResponse *dynamoDBQueryResponse = [[AmazonClientManager amazonDynamoDBClient] query:dynamoDBQueryRequest];
-            usersQueryResult = [dynamoDBQueryResponse.items copy];
-        }
-        @catch (AmazonClientException *exception) {
-            NSLog(@"%@", exception.description);
-        }
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            //Query the server for the usernameTextField
+            DynamoDBQueryRequest *dynamoDBQueryRequest = [[DynamoDBQueryRequest alloc] initWithTableName:@"mym-login-database"
+                                                                                         andHashKeyValue:[[DynamoDBAttributeValue alloc] initWithS:self.usernameTextField.text]];
+            @try {
+                DynamoDBQueryResponse *dynamoDBQueryResponse = [[AmazonClientManager amazonDynamoDBClient] query:dynamoDBQueryRequest];
+                self.usersQueryResult = [dynamoDBQueryResponse.items copy];
+            }
+            @catch (AmazonClientException *exception) {
+                NSLog(@"%@", exception.description);
+            }
+        });
         
-        if ([usersQueryResult count]) { //Check if the query result is empty or not
+        if ([self.usersQueryResult count]) { //Check if the query result is empty or not
             NSLog(@"Username already exists");
-            self.statusString = @"Username already exists";
+            statusString = @"Username already exists";
         } else {  //Add the information to the database and send an email to the user
             @try {
                 int verificationCode = (arc4random() % 99999999) + 10000000; //Generate a random verification code with 8 digits
@@ -109,17 +112,17 @@
             }
             
             //Acount was created successfully
-            self.statusString = @"Your account was created successfully";
-            self.statusTitleString = @"Success";
+            statusString = @"Your account was created successfully";
+            statusTitleString = @"Success";
         }
         
     }
     
     //Show UIAlertView with result
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.statusTitleString message:self.statusString delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:statusTitleString message:statusString delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
     [alert show];
     
-    if (![self.statusTitleString isEqualToString:@"Error"]) { //Check if the account was created successfully and close modal
+    if (![statusTitleString isEqualToString:@"Error"]) { //Check if the account was created successfully and close modal
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 
