@@ -94,8 +94,6 @@
         NSLog(@"Password is empty");
         statusString = @"Password is empty";
     } else {
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(queue, ^{
             //Query the database
             DynamoDBQueryRequest *dynamoDBQueryRequest = [[DynamoDBQueryRequest alloc] initWithTableName:@"mym-login-database"
                                                                                          andHashKeyValue:[[DynamoDBAttributeValue alloc] initWithS:self.self.txtUsername.text]];
@@ -106,8 +104,6 @@
             @catch (AmazonClientException *exception) {
                 NSLog(@"%@", exception.description);
             }
-        });
-
         if ([self.usersQueryResult count] == 1) { //Check if the query resulted in a match
             DynamoDBAttributeValue *userPassword = [[self.usersQueryResult lastObject] objectForKey:@"password"];
             
