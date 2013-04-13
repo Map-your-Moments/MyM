@@ -213,6 +213,7 @@
 - (void)friends
 {
     FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
+    [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -222,6 +223,7 @@
 
 - (void)signOut
 {
+    [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -239,6 +241,7 @@
         [vc setCurrentLocation:currentLocation];
         [vc setDataController:dataController];
         [vc setCurrentUser:user];
+        [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -249,6 +252,7 @@
         [vc setCurrentLocation:currentLocation];
         [vc setDataController:dataController];
         [vc setCurrentUser:user];
+        [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -259,6 +263,7 @@
         [vc setCurrentLocation:currentLocation];
         [vc setDataController:dataController];
         [vc setCurrentUser:user];
+        [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -295,7 +300,7 @@
     [buttonView addTarget:self action:@selector(showMomentDetail) forControlEvents:UIControlEventTouchUpInside];
     
     pin.canShowCallout = YES;
-    pin.animatesDrop = NO;
+    pin.animatesDrop = YES; //!
     pin.pinColor = MKPinAnnotationColorPurple;
     
     return pin;
