@@ -63,6 +63,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadAnnotations];
+    
+    [self zoomToUserLocation:mapView.userLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -304,6 +306,23 @@
     pin.pinColor = MKPinAnnotationColorPurple;
     
     return pin;
+}
+
+- (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    [self zoomToUserLocation:userLocation];
+}
+
+- (void)zoomToUserLocation:(MKUserLocation *)userLocation
+{
+    if (!userLocation)
+        return;
+    
+    MKCoordinateRegion region;
+    region.center = userLocation.location.coordinate;
+    region.span = MKCoordinateSpanMake(2.0, 2.0);
+    region = [self.mapView regionThatFits:region];
+    [self.mapView setRegion:region animated:YES];
 }
 
 - (void)showMomentDetail
