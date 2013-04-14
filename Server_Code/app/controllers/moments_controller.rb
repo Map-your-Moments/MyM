@@ -5,8 +5,9 @@ class MomentsController < ApplicationController
     if(@user)
       @user.latitude = params[:latitude]
       @user.longitude = params[:longitude]
+      @user.message = params[:message]
       @user.save
-      render json: {latitude: @user.latitude, longitude: @user.longitude}
+      render json: {latitude: @user.latitude, longitude: @user.longitude, message: @user.message}
     else
       render json: {error: 'No User Found'}
     end

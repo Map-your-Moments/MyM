@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412033056) do
+ActiveRecord::Schema.define(:version => 20130414173254) do
 
   create_table "api_keys", :force => true do |t|
     t.string   "access_token"
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(:version => 20130412033056) do
     t.string   "password_digest"
     t.decimal  "latitude",        :precision => 15, :scale => 10
     t.decimal  "longitude",       :precision => 15, :scale => 10
+    t.string   "email"
+    t.string   "message"
   end
 
 end

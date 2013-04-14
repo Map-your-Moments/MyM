@@ -33,6 +33,11 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
+    aws-ses (0.4.4)
+      builder
+      mail (> 2.2.5)
+      mime-types
+      xml-simple
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
     coffee-rails (3.2.2)
@@ -72,6 +77,7 @@ GEM
     multi_json (1.7.2)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
+    nifty-generators (0.4.6)
     nokogiri (1.5.9)
     oauth (0.4.7)
     oauth-plugin (0.4.1)
@@ -137,16 +143,19 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     uuidtools (2.1.3)
+    xml-simple (1.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   aws-sdk
+  aws-ses (~> 0.4.4)
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
   haml-rails
   jquery-rails
+  nifty-generators
   oauth
   oauth-plugin
   rails (= 3.2.13)

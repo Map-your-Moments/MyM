@@ -46,6 +46,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        UserMailer.welcome(@user).deliver
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: {created: true, access_token: @user.api_key.access_token}}
       else
@@ -82,6 +83,4 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-
 end
