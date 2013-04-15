@@ -58,13 +58,14 @@
 
     [self createNavbox];
     [self createAwesomeMenu];
+    [self createLocationButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadAnnotations];
     
-    [self zoomToUserLocation:mapView.userLocation];
+    [self zoomToUserLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,6 +161,17 @@
     menu.nearRadius = 65.0f;
     [self.view addSubview:menu];
     
+}
+
+- (void)createLocationButton
+{
+    UIButton *locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [locationButton.layer setCornerRadius:10.0f];
+    [locationButton setBackgroundColor:[UIColor colorWithWhite:1 alpha:.8f]];
+    [locationButton addTarget:self action:@selector(zoomToUserLocation) forControlEvents:UIControlEventTouchUpInside];
+    [locationButton setImage:[UIImage imageNamed:@"ic_action_location_on_me.png"] forState:UIControlStateNormal];
+    [locationButton setFrame:CGRectMake(screenWidth-37, 5, 32, 32)];
+    [mapView addSubview:locationButton];
 }
 
 #pragma mark - Animation methods for subviews
@@ -310,11 +322,13 @@
 
 - (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    [self zoomToUserLocation:userLocation];
+    [self zoomToUserLocation];
 }
 
-- (void)zoomToUserLocation:(MKUserLocation *)userLocation
+- (void)zoomToUserLocation
 {
+    MKUserLocation *userLocation = [mapView userLocation];
+    
     if (!userLocation)
         return;
     
