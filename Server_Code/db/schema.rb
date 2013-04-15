@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414173254) do
+ActiveRecord::Schema.define(:version => 20130415033554) do
 
   create_table "api_keys", :force => true do |t|
     t.string   "access_token"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20130414173254) do
   end
 
   add_index "client_applications", ["key"], :name => "index_client_applications_on_key", :unique => true
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "status",     :default => "Pending"
+  end
 
   create_table "oauth_nonces", :force => true do |t|
     t.string   "nonce"
