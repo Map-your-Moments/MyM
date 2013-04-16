@@ -11,7 +11,8 @@
 
 #import "MapViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "FriendsListViewController.h"
+#import "SearchBarTableViewController.h"
+
 #import "MomentCreateViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
@@ -226,7 +227,7 @@
 
 - (void)friends
 {
-    FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
+    UIViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:TRUE];
     [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController pushViewController:vc animated:YES];
 }
