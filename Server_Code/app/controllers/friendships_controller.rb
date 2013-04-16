@@ -92,14 +92,29 @@ class FriendshipsController < ApplicationController
   def destroy
     @user=current_user
     friend = User.find_by_email(Params[:email])
-    @friendship = @user.friendships.find(friend.id)
-    @friendship.destroy
-    @friendship = friend.friendships.find(@user.id)
-    @friendship.destroy
+    if(friend)
+      friendCheck=Friendship.find_by_user_id_and_friend_id(@user.id, friend.id)
+      if(friendCheck)
+        @friendship = @user.friendships.find_by_friend_id(friend.id)
+        @friendship.destroy
+        @friendship = friend.friendships.find_by_friend_id(@user.id)
+        @friendship.destroy
 
-    respond_to do |format|
+        respond_to do |format|
+        format.html { redirect_to root_url }
+        format.json { render json: {:deleted => 'true'}}
+        end
+      else
+        respond_to do |format|
+        format.html { redirect_to root_url }
+        format.json { render json: {:deleted => 'false'}}
+        end
+      end
+    else
+      respond_to do |format|
       format.html { redirect_to root_url }
-      format.json { render json: {:deleted => 'true'}}
+      format.json { render json: {:deleted => 'false'}}
+      end
     end
   end
 end
