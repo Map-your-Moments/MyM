@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Moment.h"
 
 @interface MomentDetailViewController : UIViewController
+
+@property (nonatomic, strong) Moment *moment;
 
 @end

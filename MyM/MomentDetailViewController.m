@@ -13,6 +13,7 @@
 @end
 
 @implementation MomentDetailViewController
+@synthesize moment;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
