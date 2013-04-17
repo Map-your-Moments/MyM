@@ -46,6 +46,11 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     textView = nil;
     imageView = nil;
     
+    UITapGestureRecognizer *hideKeyboardTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboards)];
+    [hideKeyboardTapGesture setNumberOfTapsRequired:1];
+    [hideKeyboardTapGesture setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:hideKeyboardTapGesture];
+    
     [self.captionTextField addTarget:self action:@selector(hideKeybord:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.tagTextField addTarget:self action:@selector(hideKeybord:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
@@ -56,7 +61,16 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     
     NSUserDefaults *ud = [[NSUserDefaults alloc] initWithUser:[currentUser username]];
     self.trips = [ud valueForKey:@"Trips"];
-    
+}
+
+-(void)hideKeyboards
+{
+    [self.captionTextField resignFirstResponder];
+    [self.tagTextField resignFirstResponder];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     [self doWork];
 }
 
