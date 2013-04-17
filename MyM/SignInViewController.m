@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @property (strong, nonatomic) NSArray *usersQueryResult;
+@property (strong, nonatomic) NSMutableData *responseData;
+@property (strong, nonatomic) NSMutableArray *responseArray;
 
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
@@ -205,6 +207,7 @@
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
 
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger nextTag = textField.tag + 1;
@@ -220,6 +223,26 @@
     }
     
     return NO;
+}
+- (IBAction)test:(id)sender{
+    
+    NSString *post = [NSString stringWithFormat:@"username=thoney&password=thoney"];
+    
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"http://54.225.76.23:3000/login/"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLResponse *response;
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSString *theReply = [[NSString alloc] initWithBytes:[POSTReply bytes] length:[POSTReply length] encoding: NSASCIIStringEncoding];
+    NSLog(@"Reply: %@", theReply);
 }
 
 @end
