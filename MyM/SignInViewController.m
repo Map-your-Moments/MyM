@@ -30,7 +30,9 @@
 
 - (void)viewDidLoad
 {
-    [self.navigationController setTitle:@"Log In"];
+    [super viewDidLoad];
+    
+    self.navigationItem.title = @"Map your Moments";
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> verifyButton
