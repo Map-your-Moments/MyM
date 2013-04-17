@@ -33,18 +33,6 @@
 - (void)viewDidLoad
 {
     [self.navigationController setTitle:@"Log In"];
-    
-    UITapGestureRecognizer *hideKeyboardTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboards)];
-    [hideKeyboardTapGesture setNumberOfTapsRequired:1];
-    [hideKeyboardTapGesture setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:hideKeyboardTapGesture];
-}
-
--(void)hideKeyboards
-{
-    [self.txtUsername resignFirstResponder];
-    [self.txtPassword resignFirstResponder];
-    [self.txtVerificationCode resignFirstResponder];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> verifyButton
@@ -180,18 +168,6 @@
     self.signInButton.hidden = NO;
     self.backButton.hidden = YES;
     self.txtPassword.text = @"";
-}
-
--(IBAction)moveToPasswordField:(id)sender
-{
-    [sender resignFirstResponder];
-    [self.txtPassword becomeFirstResponder];
-}
-
--(IBAction)keyboardEnterToLogin:(id)sender
-{
-    [sender resignFirstResponder];
-    [self signInButton:nil];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> registerButton
