@@ -38,7 +38,6 @@
 		55EC87291714CE0C00C1C52F /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC871C1714CE0B00C1C52F /* AmazonClientManager.m */; };
 		55EC872A1714CE0C00C1C52F /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC871E1714CE0C00C1C52F /* Constants.m */; };
 		55EC872B1714CE0C00C1C52F /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC87201714CE0C00C1C52F /* FriendsListViewController.m */; };
-		55EC872C1714CE0C00C1C52F /* FriendsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87211714CE0C00C1C52F /* FriendsListViewController.xib */; };
 		55EC872D1714CE0C00C1C52F /* MomentCreateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87221714CE0C00C1C52F /* MomentCreateView.xib */; };
 		55EC872E1714CE0C00C1C52F /* MomentPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EC87231714CE0C00C1C52F /* MomentPictureView.xib */; };
 		55EC872F1714CE0C00C1C52F /* MomentCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EC87251714CE0C00C1C52F /* MomentCreateViewController.m */; };
@@ -115,7 +114,6 @@
 		55EC871E1714CE0C00C1C52F /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		55EC871F1714CE0C00C1C52F /* FriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListViewController.h; sourceTree = "<group>"; };
 		55EC87201714CE0C00C1C52F /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
-		55EC87211714CE0C00C1C52F /* FriendsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsListViewController.xib; sourceTree = "<group>"; };
 		55EC87221714CE0C00C1C52F /* MomentCreateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MomentCreateView.xib; sourceTree = "<group>"; };
 		55EC87231714CE0C00C1C52F /* MomentPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MomentPictureView.xib; sourceTree = "<group>"; };
 		55EC87241714CE0C00C1C52F /* MomentCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentCreateViewController.h; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				55EC87261714CE0C00C1C52F /* NewUserView.xib */,
-				55EC87211714CE0C00C1C52F /* FriendsListViewController.xib */,
 				55EC87221714CE0C00C1C52F /* MomentCreateView.xib */,
 				55EC87231714CE0C00C1C52F /* MomentPictureView.xib */,
 				69502F7816E47B5500E4B936 /* SignInView.xib */,
@@ -429,7 +426,6 @@
 				54469F41170CFA1800F88DE3 /* Notepad@2x.png in Resources */,
 				54469F42170CFA1800F88DE3 /* Picture-Landscape.png in Resources */,
 				54469F43170CFA1800F88DE3 /* Picture-Landscape@2x.png in Resources */,
-				55EC872C1714CE0C00C1C52F /* FriendsListViewController.xib in Resources */,
 				55EC872D1714CE0C00C1C52F /* MomentCreateView.xib in Resources */,
 				55EC872E1714CE0C00C1C52F /* MomentPictureView.xib in Resources */,
 				55EC87301714CE0C00C1C52F /* NewUserView.xib in Resources */,
