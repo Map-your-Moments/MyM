@@ -24,24 +24,6 @@
 
 @implementation NewUserViewController
 
--(void)viewDidLoad
-{
-    UITapGestureRecognizer *hideKeyboardTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboards)];
-    [hideKeyboardTapGesture setNumberOfTapsRequired:1];
-    [hideKeyboardTapGesture setNumberOfTouchesRequired:1];
-    [self.view addGestureRecognizer:hideKeyboardTapGesture];
-}
-
--(void)hideKeyboards
-{
-    [self.usernameTextField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
-    [self.confirmPasswordTextField resignFirstResponder];
-    [self.fullNameTextField resignFirstResponder];
-    [self.emailTextField resignFirstResponder];
-    [self.confirmEmailTextField resignFirstResponder];
-}
-
 /* >>>>>>>>>>>>>>>>>>>>> createNewUserButtonPress
  Cretes a New User
  >>>>>>>>>>>>>>>>>>>>>>>> */
