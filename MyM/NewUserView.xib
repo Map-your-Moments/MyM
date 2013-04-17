@@ -86,6 +86,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -100,6 +101,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<int key="IBUIReturnKeyType">4</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="649489040">
@@ -122,6 +124,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">2</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -134,6 +137,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<int key="IBUIReturnKeyType">4</int>
 									<bool key="IBUISecureTextEntry">YES</bool>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
@@ -150,6 +154,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">3</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -162,6 +167,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<int key="IBUIReturnKeyType">4</int>
 									<bool key="IBUISecureTextEntry">YES</bool>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
@@ -220,6 +226,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">4</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -232,6 +239,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<int key="IBUIReturnKeyType">4</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="649489040"/>
@@ -268,6 +276,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">5</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -280,6 +289,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<int key="IBUIReturnKeyType">4</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="649489040"/>
@@ -316,6 +326,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">6</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -328,6 +339,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<int key="IBUIReturnKeyType">9</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="649489040"/>
@@ -393,7 +405,6 @@
 								<string key="NSFrame">{{186, 486}, {100, 44}}</string>
 								<reference key="NSSuperview" ref="851178911"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -555,11 +566,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">createButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="711730254"/>
+					</object>
+					<int key="connectionID">331</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="120104053"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
-					<int key="connectionID">323</int>
+					<int key="connectionID">330</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1813,7 +1832,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">328</int>
+			<int key="maxID">331</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1845,6 +1864,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="confirmEmailTextField">UITextField</string>
 						<string key="confirmPasswordTextField">UITextField</string>
+						<string key="createButton">UIButton</string>
 						<string key="emailTextField">UITextField</string>
 						<string key="fullNameTextField">UITextField</string>
 						<string key="passwordTextField">UITextField</string>
@@ -1859,6 +1879,10 @@
 						<object class="IBToOneOutletInfo" key="confirmPasswordTextField">
 							<string key="name">confirmPasswordTextField</string>
 							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="createButton">
+							<string key="name">createButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="emailTextField">
 							<string key="name">emailTextField</string>

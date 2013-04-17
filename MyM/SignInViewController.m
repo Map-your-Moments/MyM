@@ -11,7 +11,7 @@
 #import "AmazonClientManager.h"
 #import "MapViewController.h"
 
-@interface SignInViewController()
+@interface SignInViewController() <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *icon_mym;
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
@@ -201,6 +201,23 @@
     MapViewController *mapViewController = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
     [mapViewController setUser:user];
     [self.navigationController pushViewController:mapViewController animated:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+    
+    UIResponder *nextResponder = [textField.superview viewWithTag:nextTag];
+    
+    if (nextResponder) {
+        [nextResponder becomeFirstResponder];
+    } else if (nextTag == 3) {//Last tag in the UI
+        [self.signInButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [textField resignFirstResponder];
+    }
+    
+    return NO;
 }
 
 @end

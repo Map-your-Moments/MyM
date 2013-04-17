@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *userSubTypeSegmentedControl;
 
 @property (strong, nonatomic) NSArray *usersQueryResult;
+@property (weak, nonatomic) IBOutlet UIButton *createButton;
 
 
 - (IBAction)createNewUserButtonPress;
@@ -148,4 +149,20 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+    
+    UIResponder *nextResponder = [textField.superview viewWithTag:nextTag];
+    
+    if (nextResponder) {
+        [nextResponder becomeFirstResponder];
+    } else if (nextTag == 7) {//Last tag in the UI
+        [self.createButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [textField resignFirstResponder];
+    }
+    
+    return NO;
+}
 @end
