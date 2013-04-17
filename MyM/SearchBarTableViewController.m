@@ -32,11 +32,22 @@
     
     // The search bar is hidden when the view becomes visible the first time
     self.tableView.contentOffset = CGPointMake(0, CGRectGetHeight(self.searchBar.bounds));
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(addFriendButton)];
+    self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated
 {
     [self.tableView scrollRectToVisible:self.searchBar.frame animated:animated];
+}
+
+- (void)addFriendButton
+{
+    NSLog(@"Add a Friend");
 }
 
 @end
