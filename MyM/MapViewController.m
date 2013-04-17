@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FriendsListViewController.h"
 #import "MomentCreateViewController.h"
+#import "MomentDetailViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -341,7 +342,8 @@
 
 - (void)showMomentDetail
 {
-    NSLog(@"Show Moment Detail");
+    MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
