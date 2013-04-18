@@ -10,6 +10,7 @@
 #import "NewUserViewController.h"
 #import "AmazonClientManager.h"
 #import "MapViewController.h"
+#import "JSONKit.h"
 
 @interface SignInViewController() <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *icon_mym;
@@ -224,6 +225,7 @@
     
     return NO;
 }
+
 - (IBAction)test:(id)sender{
     
     NSString *post = [NSString stringWithFormat:@"username=thoney&password=thoney"];
@@ -242,7 +244,8 @@
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     NSString *theReply = [[NSString alloc] initWithBytes:[POSTReply bytes] length:[POSTReply length] encoding: NSASCIIStringEncoding];
-    NSLog(@"Reply: %@", theReply);
+    
+    NSLog(@"Reply: %@", [theReply objectFromJSONString][@"logged_in"]);
 }
 
 @end
