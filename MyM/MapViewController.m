@@ -11,15 +11,14 @@
 
 #import "MapViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SearchBarTableViewController.h"
-
+#import "FriendsListViewController.h"
 #import "MomentCreateViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
 
-#define navboxRectVisible CGRectMake(-10, 5, 90, screenHeight-55)
-#define navboxRectHidden CGRectMake(-100, 5, 90, screenHeight-55)
+#define navboxRectVisible CGRectMake(-10, 10, 90, screenHeight-25)
+#define navboxRectHidden CGRectMake(-100, 10, 90, screenHeight-25)
 #define navboxRectLoc CGRectMake(0, 0, 10, screenHeight)
 
 @implementation MapViewController
@@ -50,16 +49,17 @@
     [mapView setShowsUserLocation:YES];
     [mapView setDelegate:self];
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(menuButtonShowHide)];
-    self.navigationItem.leftBarButtonItem = menuButton;
+//    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+//                                                                   style:UIBarButtonItemStylePlain
+//                                                                  target:self
+//                                                                  action:@selector(menuButtonShowHide)];
+//    self.navigationItem.leftBarButtonItem = menuButton;
     
-
+    
     [self createNavbox];
     [self createAwesomeMenu];
     [self createLocationButton];
+    [self createMenuButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -67,6 +67,11 @@
     [self loadAnnotations];
     
     [self zoomToUserLocation];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -151,11 +156,11 @@
                                                                ContentImage:noteImage
                                                     highlightedContentImage:nil];
     
-
+    
     
     AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:[NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, nil]];
     menu.delegate = self;
-    menu.startPoint = CGPointMake(screenWidth-25, screenHeight-70);
+    menu.startPoint = CGPointMake(screenWidth-25, screenHeight-25);
     menu.menuWholeAngle = -M_2_PI * 3.5;
     menu.endRadius = 75.0f;
     menu.farRadius = 85.0f;
@@ -173,10 +178,23 @@
     [locationButton setImage:[UIImage imageNamed:@"ic_action_location_on_me.png"] forState:UIControlStateNormal];
     [locationButton setFrame:CGRectMake(screenWidth-37, 5, 32, 32)];
     [mapView addSubview:locationButton];
+    
+}
+
+- (void)createMenuButton
+{
+    UIButton *menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [menuButton.layer setCornerRadius:10.0f];
+    [menuButton setBackgroundColor:[UIColor colorWithWhite:1 alpha:.8f]];
+    [menuButton addTarget:self action:@selector(menuButtonShowHide) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setImage:[UIImage imageNamed:@"Menu.png"] forState:UIControlStateNormal];
+    [menuButton setFrame:CGRectMake(5, 5, 32, 32)];
+    [mapView addSubview:menuButton];
+    
 }
 
 #pragma mark - Animation methods for subviews
-                                          
+
 - (void)showNavbox
 {
     NSLog(@"Show Navbox");
@@ -227,7 +245,7 @@
 
 - (void)friends
 {
-    UIViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:TRUE];
+    FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
     [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController pushViewController:vc animated:YES];
 }
