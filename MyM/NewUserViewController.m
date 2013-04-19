@@ -26,6 +26,18 @@
 
 @implementation NewUserViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(createNewUserButtonPress)];
+}
+
 /* >>>>>>>>>>>>>>>>>>>>> createNewUserButtonPress
  Cretes a New User
  >>>>>>>>>>>>>>>>>>>>>>>> */

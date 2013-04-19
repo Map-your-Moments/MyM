@@ -11,19 +11,30 @@
 #import "AmazonClientManager.h"
 #import "MapViewController.h"
 #import "UtilityClass.h"
+
 #import "AJNotificationView.h"
 
-@interface SignInViewController() <UITextFieldDelegate>
+#define BANNER_DEFAULT_TIME 3
+
+@interface SignInViewController()
 @property (weak, nonatomic) IBOutlet UIImageView *icon_mym;
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *signInActivityIndicator;
+
+@property (nonatomic) NSDictionary *jsonLogin;
 
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
 @end
 
 @implementation SignInViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
 
 - (void)viewDidLoad
 {
@@ -32,84 +43,88 @@
     self.navigationController.navigationBarHidden = YES;
 }
 
-/* >>>>>>>>>>>>>>>>>>>>> signInButton
- Sign in logic
+/* >>>>>>>>>>>>>>>>>>>>> signInButton:
+ Log In logic
  >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)signInButton:(id)sender
-{
-    NSString *statusString = nil;
-    NSString *statusTitleString = @"Error";
-    
+{    
     if ([self.txtUsername.text length] == 0) { //Check if txtUsername is empty
+        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                       title:@"Username is empty"
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:BANNER_DEFAULT_TIME];
         NSLog(@"Username is empty");
-        statusString = @"Username is empty";
     } else if ([self.txtPassword.text length] == 0) { //Check if txtPassword is empty
+        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                       title:@"Password is empty"
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:BANNER_DEFAULT_TIME];
         NSLog(@"Password is empty");
-        statusString = @"Password is empty";
     } else {
-        NSDictionary *jsonLogin = [UtilityClass SendJSON:[NSString stringWithFormat:@"username=%@&password=%@", self.txtUsername.text, self.txtPassword.text]];
-        if (jsonLogin) { //Check if the query resulted in a match
-            if ([jsonLogin[@"logged_in"] boolValue]) {
-                if (jsonLogin[@"valid_email"]) { //Check if the user already validated his email
-                    [self logIn];
-                    NSLog(@"YOU ARE IN, WELCOME");
-                } else { //User still needs to validate his email
-                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
-                                                   title:@"Please verify your email address"
-                                         linedBackground:AJLinedBackgroundTypeDisabled
-                                               hideAfter:4];
-                    NSLog(@"You are just missing the security Code");
-                }
-            } else {
-                NSLog(@"username and/or password wrong");
-                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                               title:@"Username and/or Password is wrong"
-                                     linedBackground:AJLinedBackgroundTypeDisabled
-                                           hideAfter:4];
-//                statusString = @"Username and/or Password is wrong";
-            }
-        } else {
-            NSLog(@"Error");
-            statusString = @"Could not connect to the server";
-        }
+        [self.signInButton setTitle:@"" forState:UIControlStateDisabled];
+        self.view.userInteractionEnabled = NO;
+        self.signInButton.enabled = NO;
+        [self.signInActivityIndicator startAnimating];
+        NSString *jsonString = [NSString stringWithFormat:@"username=%@&password=%@", self.txtUsername.text, self.txtPassword.text];
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            self.jsonLogin = [UtilityClass SendJSON:jsonString];
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [self finishLogIn];
+            });
+        });
     }
-    
-    if (statusString) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:statusTitleString message:statusString delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [alert show];
-    }
+
 }
 
-/* >>>>>>>>>>>>>>>>>>>>> registerButton
- Open the New Use modal
+/* >>>>>>>>>>>>>>>>>>>>> finishLogIn
+ Once the asyng JSON request is done, finish the Log In
+ >>>>>>>>>>>>>>>>>>>>>>>> */
+- (void)finishLogIn
+{
+    if (self.jsonLogin) { //Check if the query resulted in a match
+        if ([self.jsonLogin[@"logged_in"] boolValue]) {
+            if (self.jsonLogin[@"valid_email"]) { //Check if the user already validated his email
+                [self logIn];
+                NSLog(@"YOU ARE IN, WELCOME");
+            } else { //User still needs to validate his email
+                self.txtPassword.text = @"";
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
+                                               title:@"Please verify your email address"
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+                NSLog(@"You are just missing the security Code");
+            }
+        } else {
+            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                           title:@"Username and/or Password is wrong"
+                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                       hideAfter:BANNER_DEFAULT_TIME];
+            NSLog(@"username and/or password wrong");
+        }
+    } else {
+        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                       title:@"Could not connect to the server"
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:BANNER_DEFAULT_TIME];
+        NSLog(@"Could not connect to the server");
+    }
+    self.view.userInteractionEnabled = YES;
+    [self.view endEditing:YES];
+
+    self.signInButton.enabled = YES;
+    [self.signInActivityIndicator stopAnimating];
+}
+
+/* >>>>>>>>>>>>>>>>>>>>> registerButton:
+ Push the New Use View
  >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)registerButton:(id)sender
 {
     [self.view endEditing:YES];
     NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUserView" bundle:nil];
-    [self presentViewController:newUserViewController animated:YES completion:nil];
-}
-
-/* >>>>>>>>>>>>>>>>>>>>> textFieldDidBeginEditing
- Move the view when the keyboard is on
- >>>>>>>>>>>>>>>>>>>>>>>> */
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if (textField.superview.frame.origin.y == 20) {
-        [UIView animateWithDuration:0.5 animations:^{
-            textField.superview.frame = CGRectMake(textField.superview.frame.origin.x, textField.superview.frame.origin.y - 40, textField.superview.frame.size.width, textField.superview.frame.size.height);
-        }];
-    }
-}
-
-/* >>>>>>>>>>>>>>>>>>>>> resetInterface
- Clear the interface
- >>>>>>>>>>>>>>>>>>>>>>>> */
-- (void)resetInterface
-{
-    self.txtPassword.text = @"";
-    self.txtUsername.text = @"";
-    [self.txtUsername becomeFirstResponder];
+    [self.navigationController pushViewController:newUserViewController animated:YES];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> logIn
@@ -125,14 +140,18 @@
                                      andMoments:nil
                                      andFriends:nil];
     
-    [self resetInterface];
+    self.txtPassword.text = @"";
+    self.txtUsername.text = @"";
+    [self.view endEditing:YES];
     
     MapViewController *mapViewController = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
     [mapViewController setUser:user];
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
 
-
+/* >>>>>>>>>>>>>>>>>>>>> textFieldShouldReturn:
+ Logic for NEXT and DONE keys
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger nextTag = textField.tag + 1;
@@ -150,6 +169,9 @@
     return NO;
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> backgroundTap:
+ Backgroun Tap to close the keyboard
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)backgroundTap:(UITapGestureRecognizer *)sender
 {
     [self.view endEditing:YES];

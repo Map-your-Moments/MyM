@@ -421,10 +421,10 @@ static NSMutableArray *notificationQueue = nil;       // Global notification que
     CGContextRestoreGState(ctx);
     
     //shadow
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowOpacity = 0.5f;
-    self.layer.shadowOffset = CGSizeMake(0.0, 2.0);
-    self.layer.shadowRadius = 2.0f;
+//    self.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.layer.shadowOpacity = 0.5f;
+//    self.layer.shadowOffset = CGSizeMake(0.0, 2.0);
+//    self.layer.shadowRadius = 2.0f;
     
     
     if (self.linedBackground){
