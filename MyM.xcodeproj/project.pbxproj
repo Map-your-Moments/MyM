@@ -928,8 +928,8 @@
 		55408F4E1720AF9C00AEBA60 /* glyphicons_417_rss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_417_rss.png; sourceTree = "<group>"; };
 		55408F4F1720AF9C00AEBA60 /* glyphicons_418_skype.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_418_skype.png; sourceTree = "<group>"; };
 		55408F501720AF9C00AEBA60 /* glyphicons_419_e-mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons_419_e-mail.png"; sourceTree = "<group>"; };
-		554090F51720C00300AEBA60 /* LoginTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginTop.png; sourceTree = "<group>"; };
-		554090F61720C00300AEBA60 /* LoginBot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginBot.png; sourceTree = "<group>"; };
+		554090F51720C00300AEBA60 /* LoginTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginTop.png; path = ../LoginTop.png; sourceTree = "<group>"; };
+		554090F61720C00300AEBA60 /* LoginBot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginBot.png; path = ../LoginBot.png; sourceTree = "<group>"; };
 		55975B34172038D300DDFCCB /* UtilityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityClass.h; sourceTree = "<group>"; };
 		55975B35172038D300DDFCCB /* UtilityClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityClass.m; sourceTree = "<group>"; };
 		55975B381720430C00DDFCCB /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJNotificationView.h; sourceTree = "<group>"; };
@@ -1512,8 +1512,6 @@
 				55EC871C1714CE0B00C1C52F /* AmazonClientManager.m */,
 				55EC871D1714CE0B00C1C52F /* Constants.h */,
 				55EC871E1714CE0C00C1C52F /* Constants.m */,
-				554090F51720C00300AEBA60 /* LoginTop.png */,
-				554090F61720C00300AEBA60 /* LoginBot.png */,
 				55A0F65916C9E6DB00A364E3 /* AppDelegate.h */,
 				55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */,
 				665A932D16E7CEFC00D22E11 /* Model */,
@@ -1559,6 +1557,8 @@
 		663B1501170CC4CA00ED678A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				554090F51720C00300AEBA60 /* LoginTop.png */,
+				554090F61720C00300AEBA60 /* LoginBot.png */,
 				55B1F0051715F52B00BE7F2B /* Default-568h@2x.png */,
 				66272810171BB0BB00C58148 /* ic_action_location_on_me.png */,
 				54469F34170CFA1700F88DE3 /* Camera.png */,

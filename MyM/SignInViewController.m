@@ -71,50 +71,43 @@
         dispatch_async(queue, ^{
             self.jsonLogin = [UtilityClass SendJSON:jsonString];
             dispatch_async(dispatch_get_main_queue(), ^ {
-                [self finishLogIn];
+                if (self.jsonLogin) { //Check if the query resulted in a match
+                    if ([self.jsonLogin[@"logged_in"] boolValue]) {
+                        if (!self.jsonLogin[@"valid_email"]) { //Check if the user already validated his email
+                            [self logIn];
+                            NSLog(@"You are in");
+                        } else { //User still needs to validate his email
+                            self.txtPassword.text = @"";
+                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
+                                                           title:@"Please verify your email address"
+                                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                                       hideAfter:BANNER_DEFAULT_TIME];
+                            NSLog(@"You are just missing the security Code");
+                        }
+                    } else {
+                        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                       title:@"Username and/or Password is wrong"
+                                             linedBackground:AJLinedBackgroundTypeDisabled
+                                                   hideAfter:BANNER_DEFAULT_TIME];
+                        self.txtPassword.text = @"";
+                        NSLog(@"username and/or password wrong");
+                    }
+                } else {
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:@"Could not connect to the server"
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                    NSLog(@"Could not connect to the server");
+                }
+                
+                self.view.userInteractionEnabled = YES;
+                [self.view endEditing:YES];
+                self.signInButton.enabled = YES;
+                [self.signInActivityIndicator stopAnimating];
             });
         });
     }
 
-}
-
-/* >>>>>>>>>>>>>>>>>>>>> finishLogIn
- Once the asyng JSON request is done, finish the Log In
- >>>>>>>>>>>>>>>>>>>>>>>> */
-- (void)finishLogIn
-{
-    if (self.jsonLogin) { //Check if the query resulted in a match
-        if ([self.jsonLogin[@"logged_in"] boolValue]) {
-            if (self.jsonLogin[@"valid_email"]) { //Check if the user already validated his email
-                [self logIn];
-                NSLog(@"YOU ARE IN, WELCOME");
-            } else { //User still needs to validate his email
-                self.txtPassword.text = @"";
-                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
-                                               title:@"Please verify your email address"
-                                     linedBackground:AJLinedBackgroundTypeDisabled
-                                           hideAfter:BANNER_DEFAULT_TIME];
-                NSLog(@"You are just missing the security Code");
-            }
-        } else {
-            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                           title:@"Username and/or Password is wrong"
-                                 linedBackground:AJLinedBackgroundTypeDisabled
-                                       hideAfter:BANNER_DEFAULT_TIME];
-            NSLog(@"username and/or password wrong");
-        }
-    } else {
-        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                       title:@"Could not connect to the server"
-                             linedBackground:AJLinedBackgroundTypeDisabled
-                                   hideAfter:BANNER_DEFAULT_TIME];
-        NSLog(@"Could not connect to the server");
-    }
-    self.view.userInteractionEnabled = YES;
-    [self.view endEditing:YES];
-
-    self.signInButton.enabled = YES;
-    [self.signInActivityIndicator stopAnimating];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> registerButton:
@@ -122,6 +115,8 @@
  >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)registerButton:(id)sender
 {
+    self.txtPassword.text = @"";
+    self.txtUsername.text = @"";
     [self.view endEditing:YES];
     NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUserView" bundle:nil];
     [self.navigationController pushViewController:newUserViewController animated:YES];
