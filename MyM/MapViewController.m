@@ -48,14 +48,7 @@
     
     [mapView setShowsUserLocation:YES];
     [mapView setDelegate:self];
-    
-//    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
-//                                                                   style:UIBarButtonItemStylePlain
-//                                                                  target:self
-//                                                                  action:@selector(menuButtonShowHide)];
-//    self.navigationItem.leftBarButtonItem = menuButton;
-    
-    
+
     [self createNavbox];
     [self createAwesomeMenu];
     [self createLocationButton];

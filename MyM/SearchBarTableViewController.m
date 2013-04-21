@@ -45,9 +45,4 @@
     [self.tableView scrollRectToVisible:self.searchBar.frame animated:animated];
 }
 
-- (void)addFriendButton
-{
-    NSLog(@"Add a Friend");
-}
-
 @end

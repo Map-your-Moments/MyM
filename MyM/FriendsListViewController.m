@@ -230,4 +230,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     return YES;
 }
 
+- (void)addFriendButton
+{
+    NSLog(@"Add a Friend");
+}
+
 @end
