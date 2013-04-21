@@ -20,6 +20,7 @@
     NSString *kTAGUSERINFORMATION_FRIENDS;
     NSString *kTAGUSERINFORMATION_MOMENTS;
     NSString *kTAGUSERINFORMATION_OTHER;
+    NSString *kTAGUSERINFORMATION_PROFILEURL;
 }
 
 @property (strong, nonatomic) NSArray *sectionHeaders;
@@ -48,10 +49,11 @@
     kTAGUSERINFORMATION_FRIENDS = @"FRIENDS";
     kTAGUSERINFORMATION_EMAIL = @"EMAIL";
     kTAGUSERINFORMATION_DATEJOINED = @"DATEJOINED";
+    kTAGUSERINFORMATION_PROFILEURL = @"PROFILEURL";
     
     self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Date Joined", @"Friends", @"Moments", @"Other Settings", nil];
     
-    self.userInformation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self.targetuser username], kTAGUSERINFORMATION_USERNAME, [self.targetuser password], kTAGUSERINFORMATION_PASSWORD, [self.targetuser email], kTAGUSERINFORMATION_EMAIL, [self.targetuser dateJoined], kTAGUSERINFORMATION_DATEJOINED, [self.targetuser friends], kTAGUSERINFORMATION_FRIENDS, [self.targetuser moments], [self.targetuser settings], kTAGUSERINFORMATION_OTHER, nil];
+    self.userInformation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self.targetuser username], kTAGUSERINFORMATION_USERNAME, [self.targetuser profileImageURL], kTAGUSERINFORMATION_PROFILEURL , [self.targetuser password], kTAGUSERINFORMATION_PASSWORD, [self.targetuser email], kTAGUSERINFORMATION_EMAIL, [self.targetuser dateJoined], kTAGUSERINFORMATION_DATEJOINED, [self.targetuser friends], kTAGUSERINFORMATION_FRIENDS, [self.targetuser moments], [self.targetuser settings], kTAGUSERINFORMATION_OTHER, nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,6 +94,21 @@
         case 0:
         {
             cell.textLabel.text = [self.userInformation valueForKey:kTAGUSERINFORMATION_USERNAME];
+            
+            if([self.targetuser profileImage] == nil)
+            {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[self.userInformation valueForKey:kTAGUSERINFORMATION_PROFILEURL]]];
+                    [self.targetuser setProfileImage:cell.imageView.image];
+                    [self.view setNeedsDisplay];
+                    self.view.contentMode = UIViewContentModeRedraw;
+                    [self.tableView reloadData];
+                });
+            }
+            else
+            {
+                cell.imageView.image = [self.targetuser profileImage];
+            }
             break;
         }
         case 1:
@@ -184,7 +201,7 @@
 {
     switch([indexPath section])
     {
-        case 0:     //Username
+        case 0:
         {
             NSLog(@"Touched Username");
             break;
