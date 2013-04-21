@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		541415831721D4CE004CFF58 /* UtilityClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 541415821721BFFD004CFF58 /* UtilityClass.m */; };
 		54469F3C170CFA1800F88DE3 /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F34170CFA1700F88DE3 /* Camera.png */; };
 		54469F3D170CFA1800F88DE3 /* Camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F35170CFA1700F88DE3 /* Camera@2x.png */; };
 		54469F3E170CFA1800F88DE3 /* Microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F36170CFA1700F88DE3 /* Microphone.png */; };
@@ -17,6 +18,7 @@
 		54469F43170CFA1800F88DE3 /* Picture-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F3B170CFA1800F88DE3 /* Picture-Landscape@2x.png */; };
 		54719A2B171E0D7C00BC3BF5 /* Top100FamousPersons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54719A2A171E0D7C00BC3BF5 /* Top100FamousPersons.plist */; };
 		54719A2C171E16CF00BC3BF5 /* SearchBarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54719A29171E08EF00BC3BF5 /* SearchBarTableViewController.m */; };
+		547B2BDF17246C2900DD0E53 /* ios-linen_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 547B2BDE17246C2900DD0E53 /* ios-linen_blue.png */; };
 		549501BF16E7DA4800EA1B9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501BE16E7DA4800EA1B9E /* icon.png */; };
 		549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501C016E7DA4B00EA1B9E /* icon@2x.png */; };
 		55A0F64916C9E6DB00A364E3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F64816C9E6DB00A364E3 /* UIKit.framework */; };
@@ -75,6 +77,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		541415811721BFFC004CFF58 /* UtilityClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilityClass.h; sourceTree = "<group>"; };
+		541415821721BFFD004CFF58 /* UtilityClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilityClass.m; sourceTree = "<group>"; };
 		54469F34170CFA1700F88DE3 /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
 		54469F35170CFA1700F88DE3 /* Camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera@2x.png"; sourceTree = "<group>"; };
 		54469F36170CFA1700F88DE3 /* Microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Microphone.png; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 		54719A28171E08EF00BC3BF5 /* SearchBarTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBarTableViewController.h; sourceTree = "<group>"; };
 		54719A29171E08EF00BC3BF5 /* SearchBarTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBarTableViewController.m; sourceTree = "<group>"; };
 		54719A2A171E0D7C00BC3BF5 /* Top100FamousPersons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Top100FamousPersons.plist; sourceTree = "<group>"; };
+		547B2BDE17246C2900DD0E53 /* ios-linen_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-linen_blue.png"; sourceTree = "<group>"; };
 		549501BE16E7DA4800EA1B9E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		549501C016E7DA4B00EA1B9E /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 		55A0F64516C9E6DB00A364E3 /* MyM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyM.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +229,8 @@
 		55A0F65016C9E6DB00A364E3 /* MyM */ = {
 			isa = PBXGroup;
 			children = (
+				541415811721BFFC004CFF58 /* UtilityClass.h */,
+				541415821721BFFD004CFF58 /* UtilityClass.m */,
 				55EC871B1714CE0B00C1C52F /* AmazonClientManager.h */,
 				55EC871C1714CE0B00C1C52F /* AmazonClientManager.m */,
 				55EC871D1714CE0B00C1C52F /* Constants.h */,
@@ -271,6 +278,7 @@
 		663B1501170CC4CA00ED678A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				547B2BDE17246C2900DD0E53 /* ios-linen_blue.png */,
 				66272810171BB0BB00C58148 /* ic_action_location_on_me.png */,
 				54469F34170CFA1700F88DE3 /* Camera.png */,
 				54469F35170CFA1700F88DE3 /* Camera@2x.png */,
@@ -432,6 +440,7 @@
 				55B1F0061715F52B00BE7F2B /* Default-568h@2x.png in Resources */,
 				66272811171BB0BB00C58148 /* ic_action_location_on_me.png in Resources */,
 				54719A2B171E0D7C00BC3BF5 /* Top100FamousPersons.plist in Resources */,
+				547B2BDF17246C2900DD0E53 /* ios-linen_blue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +451,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				541415831721D4CE004CFF58 /* UtilityClass.m in Sources */,
 				54719A2C171E16CF00BC3BF5 /* SearchBarTableViewController.m in Sources */,
 				55A0F65716C9E6DB00A364E3 /* main.m in Sources */,
 				55A0F65B16C9E6DB00A364E3 /* AppDelegate.m in Sources */,

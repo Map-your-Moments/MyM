@@ -55,6 +55,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
         _friends = [[NSArray alloc] initWithContentsOfFile:path];
         
+        //add code here
+        
+        
         if (showSectionIndexes) {
             UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
             
@@ -199,6 +202,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    //add code here
 }
 
 #pragma mark - Search Delegate
