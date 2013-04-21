@@ -33,9 +33,9 @@
 
 + (NSDictionary *)GetFriendsJSON:(NSString *)jsonString
 {
-    NSData *friendsData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    //NSData *friendsData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSString *friendLength = [NSString stringWithFormat:@"%d", [friendsData length]];
+    //NSString *friendLength = [NSString stringWithFormat:@"%d", [friendsData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:@"http://54.225.76.23:3000/friendships/"]];
@@ -43,8 +43,8 @@
     
     
     NSURLResponse *response;
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    NSDictionary *jsonresponse = POSTReply ? [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] : nil;
+    NSData *GETReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSDictionary *jsonresponse = GETReply ? [NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] : nil;
     
     return jsonresponse;
     

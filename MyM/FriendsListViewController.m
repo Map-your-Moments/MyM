@@ -7,6 +7,7 @@
 //
 
 #import "FriendsListViewController.h"
+#import "UtilityClass.h"
 
 static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentifier = @"kSearchBarTableViewControllerDefaultTableViewCellIdentifier";
 
@@ -23,20 +24,11 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 @property(nonatomic, strong) UISearchDisplayController *strongSearchDisplayController;
 
+@property (nonatomic) NSDictionary *jsonFriends;
+
 @end
 
 @implementation FriendsListViewController
-
-//@synthesize friends;
-
-//- (id)initWithStyle:(UITableViewStyle)style
-//{
-//    self = [super initWithStyle:style];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -48,7 +40,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (id)initWithSectionIndexes:(BOOL)showSectionIndexes
 {
     if ((self = [super initWithNibName:nil bundle:nil])) {
-        self.title = @"Search Bar";
+        self.title = @"Friends";
         
         _showSectionIndexes = showSectionIndexes;
         
@@ -56,6 +48,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         _friends = [[NSArray alloc] initWithContentsOfFile:path];
         
         //add code here
+        //[_friends addObjectsFromArray:[_jsonFriends objectForKey:@"Added"]];
         
         
         if (showSectionIndexes) {
