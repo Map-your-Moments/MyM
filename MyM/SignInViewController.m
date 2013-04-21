@@ -16,13 +16,12 @@
 
 #define BANNER_DEFAULT_TIME 3
 
-@interface SignInViewController()
+@interface SignInViewController() <NewUserDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *icon_mym;
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *signInActivityIndicator;
-
 @property (nonatomic) NSDictionary *jsonLogin;
 
 - (IBAction)signInButton:(id)sender;
@@ -30,6 +29,14 @@
 @end
 
 @implementation SignInViewController
+
+- (void)newUserCreated
+{
+    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                   title:@"Your account was created successfully"
+                         linedBackground:AJLinedBackgroundTypeDisabled
+                               hideAfter:BANNER_DEFAULT_TIME];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -65,11 +72,11 @@
         self.view.userInteractionEnabled = NO;
         self.signInButton.enabled = NO;
         [self.signInActivityIndicator startAnimating];
-        NSString *jsonString = [NSString stringWithFormat:@"username=%@&password=%@", self.txtUsername.text, self.txtPassword.text];
+        NSDictionary *jsonDictionary = @{ @"username" : self.txtUsername.text, @"password" : self.txtPassword.text};
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue, ^{
-            self.jsonLogin = [UtilityClass SendJSON:jsonString];
+            self.jsonLogin = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/login/"];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 if (self.jsonLogin) { //Check if the query resulted in a match
                     if ([self.jsonLogin[@"logged_in"] boolValue]) {
@@ -119,6 +126,7 @@
     self.txtUsername.text = @"";
     [self.view endEditing:YES];
     NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUserView" bundle:nil];
+    newUserViewController.delegate = self;
     [self.navigationController pushViewController:newUserViewController animated:YES];
 }
 
@@ -133,7 +141,8 @@
                                        andEmail:nil
                                     andSettings:nil
                                      andMoments:nil
-                                     andFriends:nil];
+                                     andFriends:nil
+                                       andToken:self.jsonLogin[@"access_token"]];
     
     self.txtPassword.text = @"";
     self.txtUsername.text = @"";

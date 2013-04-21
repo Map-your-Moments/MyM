@@ -10,21 +10,23 @@
 
 @implementation UtilityClass
 
-+ (NSDictionary *)SendJSON:(NSString *)jsonString
++ (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address
 {
-    NSData *postData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:kNilOptions error:nil];
+//    NSData *postData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"http://54.225.76.23:3000/login/"]];
+    [request setURL:[NSURL URLWithString:address]];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
     NSDictionary *jsonresponse = POSTReply ? [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] : nil;
     
     return jsonresponse;

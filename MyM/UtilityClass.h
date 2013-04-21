@@ -10,7 +10,6 @@
 
 @interface UtilityClass : NSObject
 
-+ (NSDictionary *)SendJSON:(NSString *)jsonString;
-
++ (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address;
 
 @end
