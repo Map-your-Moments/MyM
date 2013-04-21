@@ -182,15 +182,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
     switch([indexPath section])
     {
+        case 0:     //Username
+        {
+            NSLog(@"Touched Username");
+            break;
+        }
+        case 1:
+        {
+            NSLog(@"Touched Password");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+            [alert setTag:1];
+            [alert show];
+            break;
+        }
+        case 2:
+        {
+            NSLog(@"Touched Email");
+            break;
+        }
+        case 3:
+        {
+            NSLog(@"Touched Date");
+            break;
+        }
         case 4:
         {
+            NSLog(@"Touched Friends");
             FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
             //[mapView removeAnnotations:mapView.annotations]; //!
             [self.navigationController pushViewController:vc animated:YES];
@@ -198,15 +218,60 @@
         }
         case 5:
         {
-            #warning NEED TO IMPLEMENT
-            NSLog(@"View Moments");
+#warning NEED TO IMPLEMENT
+            NSLog(@"Touched Moments");
             break;
         }
         case 6:
         {
-            #warning NEED TO IMPLEMENT
-            NSLog(@"Change Settings");
+#warning NEED TO IMPLEMENT
+            NSLog(@"Touched Other");
             break;
+        }
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark UIAlertView Delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == 1)        //Confirm password
+    {
+        NSString *passwordEntered = [[alertView textFieldAtIndex:0] text];
+        if(passwordEntered == nil)
+            return;
+        if(![passwordEntered isEqualToString:[self.userInformation valueForKey:kTAGUSERINFORMATION_PASSWORD]])
+            return;
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Enter a new password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Change", nil];
+        [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+        [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
+        [[alert textFieldAtIndex:0]setPlaceholder:@"New Password"];
+        [[alert textFieldAtIndex:1]setPlaceholder:@"Confirm Password"];
+        [alert setTag:2];
+        [alert show];
+    }
+    else if([alertView tag] == 2)
+    {
+        NSString *newPassword = [[alertView textFieldAtIndex:0] text];
+        NSString *confirmedPwd = [[alertView textFieldAtIndex:1] text];
+        if(![newPassword isEqualToString:confirmedPwd])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid" message:@"Passwords do not match" delegate:self cancelButtonTitle:@"Damn..." otherButtonTitles: nil];
+            [alert show];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Password successfully changed" delegate:self cancelButtonTitle:@"Cool" otherButtonTitles:nil];
+            [alert show];
+            [self.userInformation setValue:newPassword forKey:kTAGUSERINFORMATION_PASSWORD];
+            [self.targetuser setPassword:newPassword];
+            #warning UPDATE THE SERVER WITH NEW PASSWORD AS WELL AS USER INFORMATION
         }
     }
 }

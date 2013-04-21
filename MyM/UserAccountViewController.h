@@ -10,7 +10,7 @@
 
 @class User;
 
-@interface UserAccountViewController : UITableViewController
+@interface UserAccountViewController : UITableViewController <UIAlertViewDelegate>
 
 @property (strong, nonatomic) User *targetuser;
 
