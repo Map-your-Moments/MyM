@@ -12,6 +12,8 @@
 
 @interface User : NSObject
 
+@property (nonatomic) UIImage *profileImage;
+@property (nonatomic) NSURL *profileImageURL;
 @property (nonatomic) NSString *username;
 @property (nonatomic) NSString *password; // should be encrypted
 @property (nonatomic) NSDate *dateJoined;
