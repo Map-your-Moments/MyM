@@ -13,7 +13,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 @interface FriendsListViewController ()
 
-@property(nonatomic, copy) NSArray *friends;
+@property(nonatomic, copy) NSMutableArray *friends;
 @property(nonatomic, copy) NSArray *sections;
 
 @property(nonatomic, copy) NSArray *filteredFriends;
@@ -45,11 +45,10 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         _showSectionIndexes = showSectionIndexes;
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
-        _friends = [[NSArray alloc] initWithContentsOfFile:path];
+        _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
         
-        //add code here
-        //[_friends addObjectsFromArray:[_jsonFriends objectForKey:@"Added"]];
-        
+//        self.jsonFriends = [UtilityClass GetFriendsJSON];
+//        [_friends addObjectsFromArray:[_jsonFriends objectForKey:@"Added"]];
         
         if (showSectionIndexes) {
             UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];

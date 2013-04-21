@@ -11,6 +11,7 @@
 @interface UtilityClass : NSObject
 
 + (NSDictionary *)SendJSON:(NSString *)jsonString;
++ (NSDictionary *)GetFriendsJSON;
 
 
 @end

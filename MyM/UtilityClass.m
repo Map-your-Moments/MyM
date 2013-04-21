@@ -31,7 +31,7 @@
     
 }
 
-+ (NSDictionary *)GetFriendsJSON:(NSString *)jsonString
++ (NSDictionary *)GetFriendsJSON
 {
     //NSData *friendsData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
