@@ -19,6 +19,7 @@
 #import <MapKit/MapKit.h>
 #import "AwesomeMenu.h"
 #import "Moment.h"
+#import "MomentAnnotation.h"
 #import "Constants.h"
 
 @class MomentDataController;

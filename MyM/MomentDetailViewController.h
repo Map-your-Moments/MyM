@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) Moment *moment;
 
+@property (nonatomic, strong) UILabel *name;
+
 @end
