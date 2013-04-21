@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class User;
+
 @interface UserAccountViewController : UITableViewController
+
+@property (strong, nonatomic) User *targetuser;
 
 @end

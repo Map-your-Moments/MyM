@@ -7,8 +7,23 @@
 //
 
 #import "UserAccountViewController.h"
+#import "FriendsListViewController.h"
+#import "User.h"
+#import "Constants.h"
 
 @interface UserAccountViewController ()
+{
+    NSString *kTAGUSERINFORMATION_USERNAME;
+    NSString *kTAGUSERINFORMATION_PASSWORD;
+    NSString *kTAGUSERINFORMATION_EMAIL;
+    NSString *kTAGUSERINFORMATION_DATEJOINED;
+    NSString *kTAGUSERINFORMATION_FRIENDS;
+    NSString *kTAGUSERINFORMATION_MOMENTS;
+    NSString *kTAGUSERINFORMATION_OTHER;
+}
+
+@property (strong, nonatomic) NSArray *sectionHeaders;
+@property (strong, nonatomic) NSMutableDictionary *userInformation;
 
 @end
 
@@ -26,12 +41,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    kTAGUSERINFORMATION_USERNAME = @"USERNAME";
+    kTAGUSERINFORMATION_PASSWORD = @"PASSWORD";
+    kTAGUSERINFORMATION_OTHER = @"OTHER";
+    kTAGUSERINFORMATION_MOMENTS = @"MOMENTS";
+    kTAGUSERINFORMATION_FRIENDS = @"FRIENDS";
+    kTAGUSERINFORMATION_EMAIL = @"EMAIL";
+    kTAGUSERINFORMATION_DATEJOINED = @"DATEJOINED";
+    
+    self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Date Joined", @"Friends", @"Moments", @"Other Settings", nil];
+    
+    self.userInformation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self.targetuser username], kTAGUSERINFORMATION_USERNAME, [self.targetuser password], kTAGUSERINFORMATION_PASSWORD, [self.targetuser email], kTAGUSERINFORMATION_EMAIL, [self.targetuser dateJoined], kTAGUSERINFORMATION_DATEJOINED, [self.targetuser friends], kTAGUSERINFORMATION_FRIENDS, [self.targetuser moments], [self.targetuser settings], kTAGUSERINFORMATION_OTHER, nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,25 +64,78 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return [self.sectionHeaders count];
+}
+
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [self.sectionHeaders objectAtIndex:section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"CellIdentifier";
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(cell == nil)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
+    switch([indexPath section])
+    {
+        case 0:
+        {
+            cell.textLabel.text = [self.userInformation valueForKey:kTAGUSERINFORMATION_USERNAME];
+            break;
+        }
+        case 1:
+        {
+            NSString *password = [self.userInformation valueForKey:kTAGUSERINFORMATION_PASSWORD];
+            if(password == nil)
+                password = @"Testing";
+            NSString *securedView = @"";
+            for(int c = 0; c < [password length]; c++)
+                securedView = [securedView stringByAppendingString:@"\u25cf"]; //U+25CF: Puts a block dot
+            cell.textLabel.text = securedView;
+            break;
+        }
+        case 2:
+        {
+            cell.textLabel.text = [self.userInformation valueForKey:kTAGUSERINFORMATION_EMAIL];
+            break;
+        }
+        case 3:
+        {
+            cell.textLabel.text = [self.userInformation valueForKey:kTAGUSERINFORMATION_DATEJOINED];
+            break;
+        }
+        case 4:
+        {
+            NSMutableArray *friendList = [self.userInformation valueForKey:kTAGUSERINFORMATION_FRIENDS];
+            cell.textLabel.text = [NSString stringWithFormat:@"%d Friends", [friendList count]];
+            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+            break;
+        }
+        case 5:
+        {
+            NSMutableArray *momentList = [self.userInformation valueForKey:kTAGUSERINFORMATION_MOMENTS];
+            cell.textLabel.text = [NSString stringWithFormat:@"%d Moments", [momentList count]];
+            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+            break;
+        }
+        case 6:
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"View Other Settings"];
+            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+            break;
+        }
+    }
     return cell;
 }
 
@@ -109,13 +182,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    switch([indexPath section])
+    {
+        case 4:
+        {
+            FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
+            //[mapView removeAnnotations:mapView.annotations]; //!
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 5:
+        {
+            #warning NEED TO IMPLEMENT
+            NSLog(@"View Moments");
+            break;
+        }
+        case 6:
+        {
+            #warning NEED TO IMPLEMENT
+            NSLog(@"Change Settings");
+            break;
+        }
+    }
 }
 
 @end
