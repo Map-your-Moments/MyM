@@ -93,8 +93,13 @@
     UIGraphicsEndImageContext();
     [navBox setBackgroundColor:[UIColor colorWithPatternImage: image]];
     
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"ios-linen_darkblue.png"] drawInRect:self.view.bounds];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     [navBox.layer setCornerRadius:10.0f];
-    [navBox.layer setBorderColor:[UIColor grayColor].CGColor];
+    [navBox.layer setBorderColor:[UIColor colorWithPatternImage: image].CGColor];
     [navBox.layer setBorderWidth:1.5f];
     [navBox.layer setShadowColor:[UIColor blackColor].CGColor];
     [navBox.layer setShadowOpacity:0.5];
