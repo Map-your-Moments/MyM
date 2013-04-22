@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "AmazonClientManager.h"
 
+@protocol NewUserDelegate <NSObject>
+- (void)newUserCreated;
+@end
+
 @interface NewUserViewController : UIViewController <UITextFieldDelegate>
+@property (weak, nonatomic) id<NewUserDelegate> delegate;
 @end
