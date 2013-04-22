@@ -22,10 +22,24 @@
 @property (weak, nonatomic) IBOutlet UITextField *confirmEmailTextField;
 
 @property (nonatomic) UIBarButtonItem *createNewUserButton;
+@property (nonatomic) UIBarButtonItem *activityIndicatorButton;
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) NSDictionary *jsonNewUser;
 @end
 
 @implementation NewUserViewController
+
+-(UIActivityIndicatorView *)activityIndicator
+{
+    if (!_activityIndicator) _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 310, 20)];
+    return _activityIndicator;
+}
+
+- (UIBarButtonItem *)activityIndicatorButton
+{
+    if (!_activityIndicatorButton) _activityIndicatorButton = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
+    return _activityIndicatorButton;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -51,53 +65,72 @@
                                        title:@"Username is empty"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
+        [self.usernameTextField becomeFirstResponder];
         NSLog(@"Username is empty");
+    } else if ([self.fullNameTextField.text length] == 0) { //Check if fullNameTextField is empty
+        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                       title:@"Name field is empty"
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:BANNER_DEFAULT_TIME];
+        [self.fullNameTextField becomeFirstResponder];
+        NSLog(@"FullName is empty");
     } else if ([self.passwordTextField.text length] < 8) { //Check if passwordTextField is too short
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                        title:@"Password is too short, at least 8 characters"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
+        [self.passwordTextField becomeFirstResponder];
         NSLog(@"Password is too short - 8");
     } else if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text]) { //Check if passwordTextField and confirmPasswordTextField are equal
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                        title:@"Passwords are not equal"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
+        [self.confirmPasswordTextField becomeFirstResponder];
         NSLog(@"Password and ConfirmPassword are not equal");
-    } else if ([self.fullNameTextField.text length] == 0) { //Check if fullNameTextField is empty
-        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                       title:@"Name field is empty"
-                             linedBackground:AJLinedBackgroundTypeDisabled
-                                   hideAfter:BANNER_DEFAULT_TIME];
-        NSLog(@"FullName is empty");
     } else if ([self.emailTextField.text rangeOfString:@"@"].location == NSNotFound) { //Check if emailTextField has an @
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                        title:@"Email is not valid"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
+        [self.emailTextField becomeFirstResponder];
         NSLog(@"Please enter a valid email");
     } else if (![self.emailTextField.text isEqualToString:self.confirmEmailTextField.text]) { //Check if emailTextField and confirmEmailTextField are equal
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                        title:@"Emails are not equal"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
+        [self.confirmEmailTextField becomeFirstResponder];
         NSLog(@"Email and ConfirmEmail are not equal");
     } else {
+        [self navigationItem].rightBarButtonItem = self.activityIndicatorButton;
+        [self.activityIndicator startAnimating];
+        [self.view endEditing:YES];
+        self.navigationItem.hidesBackButton = YES;
+        self.view.userInteractionEnabled = NO;
+        
         NSDictionary *jsonDictionary = @{ @"user": @{ @"username" : self.usernameTextField.text, @"password" : self.passwordTextField.text, @"email" : self.emailTextField.text, @"name" : self.fullNameTextField.text} };
+        
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue, ^{
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            });
             self.jsonNewUser = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/users"];
             dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
                 if (self.jsonNewUser) {
                     if ([self.jsonNewUser[@"created"] boolValue]) {
-                        [self.delegate newUserCreated];
                         [self.navigationController popToRootViewControllerAnimated:YES];
+                        [self.delegate newUserCreated];
                         NSLog(@"Your account was created successfully");
                     } else {
                         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                        title:@"Username already exists"
                                              linedBackground:AJLinedBackgroundTypeDisabled
                                                    hideAfter:BANNER_DEFAULT_TIME];
+                        [self.usernameTextField becomeFirstResponder];
                         NSLog(@"Username already exists");
                     }
                 } else {
@@ -107,6 +140,10 @@
                                                hideAfter:BANNER_DEFAULT_TIME];
                     NSLog(@"Could not connect to the server");
                 }
+                [self navigationItem].rightBarButtonItem = self.createNewUserButton;
+                 self.navigationItem.hidesBackButton = NO;
+                [self.activityIndicator stopAnimating];
+                self.view.userInteractionEnabled = YES;
             });
 
         });        

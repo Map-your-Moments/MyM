@@ -40,6 +40,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
+    [self.view endEditing:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
@@ -76,8 +79,12 @@
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue, ^{
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            });
             self.jsonLogin = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/login/"];
             dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 if (self.jsonLogin) { //Check if the query resulted in a match
                     if ([self.jsonLogin[@"logged_in"] boolValue]) {
                         if (!self.jsonLogin[@"valid_email"]) { //Check if the user already validated his email
