@@ -243,7 +243,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        self.jsonAddFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friendships/"];
+        self.jsonAddFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friendships/new/"];
         dispatch_async(dispatch_get_main_queue(), ^ {
             if(self.jsonAddFriend)
             {
