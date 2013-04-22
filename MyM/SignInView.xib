@@ -78,12 +78,12 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="379530803"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4wODI1Njc5MDk0OCAwLjQ0ODU2MzA4MjUgMC43ODczNjg0NjMAA</bytes>
-						</object>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">icon-large.png</string>
+						</object>
 					</object>
 					<object class="IBUITextField" id="323303715">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -198,6 +198,7 @@
 						<string key="NSFrame">{{282, 509}, {18, 19}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -288,7 +289,7 @@
 				<reference key="NSNextKeyView" ref="537207473"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
-					<bytes key="NSRGB">MC4xMDk4MDM5Mjk5IDAuNjQzMTM3Mjc2MiAwLjk4ODIzNTM1NDQAA</bytes>
+					<bytes key="NSRGB">MC4xMDk4MDM5MjE2IDAuNjU4ODIzNTI5NCAxAA</bytes>
 				</object>
 				<array key="IBUIGestureRecognizers" id="0"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -1584,6 +1585,7 @@
 			<string key="LoginTop.png">{480, 60}</string>
 			<string key="glyphicons_003_user.png">{23, 22}</string>
 			<string key="glyphicons_203_lock.png">{21, 26}</string>
+			<string key="icon-large.png">{500, 500}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

@@ -15,8 +15,9 @@
 		54469F41170CFA1800F88DE3 /* Notepad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F39170CFA1700F88DE3 /* Notepad@2x.png */; };
 		54469F42170CFA1800F88DE3 /* Picture-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F3A170CFA1800F88DE3 /* Picture-Landscape.png */; };
 		54469F43170CFA1800F88DE3 /* Picture-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F3B170CFA1800F88DE3 /* Picture-Landscape@2x.png */; };
-		549501BF16E7DA4800EA1B9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501BE16E7DA4800EA1B9E /* icon.png */; };
-		549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 549501C016E7DA4B00EA1B9E /* icon@2x.png */; };
+		5530D40F1724C8F000A262BE /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5530D40E1724C8F000A262BE /* icon.png */; };
+		5530D4111724C8F100A262BE /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5530D4101724C8F100A262BE /* icon@2x.png */; };
+		5530D4151724CA8300A262BE /* icon-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 5530D4141724CA8300A262BE /* icon-large.png */; };
 		55408F511720AF9C00AEBA60 /* glyphicons_000_glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 55408DAD1720AF9900AEBA60 /* glyphicons_000_glass.png */; };
 		55408F521720AF9C00AEBA60 /* glyphicons_001_leaf.png in Resources */ = {isa = PBXBuildFile; fileRef = 55408DAE1720AF9900AEBA60 /* glyphicons_001_leaf.png */; };
 		55408F531720AF9C00AEBA60 /* glyphicons_002_dog.png in Resources */ = {isa = PBXBuildFile; fileRef = 55408DAF1720AF9900AEBA60 /* glyphicons_002_dog.png */; };
@@ -506,8 +507,9 @@
 		54469F39170CFA1700F88DE3 /* Notepad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notepad@2x.png"; sourceTree = "<group>"; };
 		54469F3A170CFA1800F88DE3 /* Picture-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Picture-Landscape.png"; sourceTree = "<group>"; };
 		54469F3B170CFA1800F88DE3 /* Picture-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Picture-Landscape@2x.png"; sourceTree = "<group>"; };
-		549501BE16E7DA4800EA1B9E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
-		549501C016E7DA4B00EA1B9E /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		5530D40E1724C8F000A262BE /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../icon.png; sourceTree = "<group>"; };
+		5530D4101724C8F100A262BE /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../../icon@2x.png"; sourceTree = "<group>"; };
+		5530D4141724CA8300A262BE /* icon-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-large.png"; sourceTree = "<group>"; };
 		55408DAD1720AF9900AEBA60 /* glyphicons_000_glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_000_glass.png; sourceTree = "<group>"; };
 		55408DAE1720AF9900AEBA60 /* glyphicons_001_leaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_001_leaf.png; sourceTree = "<group>"; };
 		55408DAF1720AF9900AEBA60 /* glyphicons_002_dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_002_dog.png; sourceTree = "<group>"; };
@@ -1031,7 +1033,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		55408DAC1720AF9900AEBA60 /* glyphicons */ = {
+		55408DAC1720AF9900AEBA60 /* Glyphicons */ = {
 			isa = PBXGroup;
 			children = (
 				55408DAD1720AF9900AEBA60 /* glyphicons_000_glass.png */,
@@ -1455,7 +1457,8 @@
 				55408F4F1720AF9C00AEBA60 /* glyphicons_418_skype.png */,
 				55408F501720AF9C00AEBA60 /* glyphicons_419_e-mail.png */,
 			);
-			path = glyphicons;
+			name = Glyphicons;
+			path = ../glyphicons;
 			sourceTree = "<group>";
 		};
 		55975B371720430C00DDFCCB /* AJNotificationView */ = {
@@ -1524,12 +1527,9 @@
 		55A0F65116C9E6DB00A364E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55408DAC1720AF9900AEBA60 /* glyphicons */,
 				55975B371720430C00DDFCCB /* AJNotificationView */,
 				663B151E170CC4D500ED678A /* AwesomeMenu */,
 				663B1501170CC4CA00ED678A /* Images */,
-				549501C016E7DA4B00EA1B9E /* icon@2x.png */,
-				549501BE16E7DA4800EA1B9E /* icon.png */,
 				55A0F66216C9E6DB00A364E3 /* MyM.xcdatamodeld */,
 				55A0F65216C9E6DB00A364E3 /* MyM-Info.plist */,
 				55A0F65316C9E6DB00A364E3 /* InfoPlist.strings */,
@@ -1557,6 +1557,10 @@
 		663B1501170CC4CA00ED678A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5530D4141724CA8300A262BE /* icon-large.png */,
+				5530D4101724C8F100A262BE /* icon@2x.png */,
+				5530D40E1724C8F000A262BE /* icon.png */,
+				55408DAC1720AF9900AEBA60 /* Glyphicons */,
 				554090F51720C00300AEBA60 /* LoginTop.png */,
 				554090F61720C00300AEBA60 /* LoginBot.png */,
 				55B1F0051715F52B00BE7F2B /* Default-568h@2x.png */,
@@ -1688,8 +1692,6 @@
 				55A0F65D16C9E6DB00A364E3 /* Default.png in Resources */,
 				55A0F65F16C9E6DB00A364E3 /* Default@2x.png in Resources */,
 				69502F7916E47B5500E4B936 /* SignInView.xib in Resources */,
-				549501BF16E7DA4800EA1B9E /* icon.png in Resources */,
-				549501C116E7DA4B00EA1B9E /* icon@2x.png in Resources */,
 				664FCBD317075B65007A0C36 /* MapViewController.xib in Resources */,
 				663B1510170CC4CA00ED678A /* bg-addbutton-highlighted.png in Resources */,
 				663B1511170CC4CA00ED678A /* bg-addbutton-highlighted@2x.png in Resources */,
@@ -2141,6 +2143,9 @@
 				554090F41720AF9C00AEBA60 /* glyphicons_419_e-mail.png in Resources */,
 				554090F71720C00300AEBA60 /* LoginTop.png in Resources */,
 				554090F81720C00300AEBA60 /* LoginBot.png in Resources */,
+				5530D40F1724C8F000A262BE /* icon.png in Resources */,
+				5530D4111724C8F100A262BE /* icon@2x.png in Resources */,
+				5530D4151724CA8300A262BE /* icon-large.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
