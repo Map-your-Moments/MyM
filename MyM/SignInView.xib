@@ -811,7 +811,6 @@
 								<int key="contentType">2</int>
 							</object>
 							<reference ref="582219877"/>
-							<reference ref="537207473"/>
 							<reference ref="323303715"/>
 							<reference ref="844744348"/>
 							<reference ref="168751673"/>
@@ -819,6 +818,7 @@
 							<reference ref="869179894"/>
 							<reference ref="257985320"/>
 							<reference ref="552385088"/>
+							<reference ref="537207473"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1119,7 +1119,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">151</int>
+			<int key="maxID">152</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1159,6 +1159,7 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="appSigninLogo">UIImageView</string>
 						<string key="backButton">UIButton</string>
 						<string key="icon_mym">UIImageView</string>
 						<string key="signInButton">UIButton</string>
@@ -1168,6 +1169,10 @@
 						<string key="verifyButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="appSigninLogo">
+							<string key="name">appSigninLogo</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="backButton">
 							<string key="name">backButton</string>
 							<string key="candidateClassName">UIButton</string>

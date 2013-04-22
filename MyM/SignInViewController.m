@@ -32,6 +32,8 @@
 {
     [super viewDidLoad];
     
+    self.icon_mym.image = [UIImage imageNamed:@"icon@2x.png"];
+    
     self.navigationItem.title = @"Map your Moments";
 }
 
