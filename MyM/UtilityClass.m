@@ -13,7 +13,6 @@
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address
 {
     NSData *postData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:kNilOptions error:nil];
-//    NSData *postData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
@@ -26,7 +25,6 @@
     
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
     NSDictionary *jsonresponse = POSTReply ? [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] : nil;
     
     return jsonresponse;
