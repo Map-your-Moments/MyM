@@ -27,9 +27,11 @@ enum{
     kTAKEMEDIA
 }kUIActionSheetButtonIndexes;
 
-//NSString * const kStillImages = @"public.image";
-//NSString * const kVideoCamera = @"public.movie";
-//NSString * const kMomentAudioTempFile = @"";
+enum{
+    kUIAlertSettingsStandard,
+    kUIAlertSettingsConfirmChange,
+    kUIAlertSettingsVerifyChange
+}kUIAlertSetting;
 
 @interface Constants : NSObject
 

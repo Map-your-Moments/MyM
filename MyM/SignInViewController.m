@@ -36,6 +36,11 @@
                                    title:@"Your account was created successfully"
                          linedBackground:AJLinedBackgroundTypeDisabled
                                hideAfter:BANNER_DEFAULT_TIME];
+    [super viewDidLoad];
+    
+    self.icon_mym.image = [UIImage imageNamed:@"icon@2x.png"];
+    
+    self.navigationItem.title = @"Map your Moments";
 }
 
 - (void)viewWillAppear:(BOOL)animated
