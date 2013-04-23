@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) Moment *moment;
 
-@property (nonatomic, strong) UILabel *name;
+@property (nonatomic, strong) UILabel *username;
+@property (nonatomic, strong) UILabel *caption;
+@property (nonatomic, strong) UIView *content;
 
 @end

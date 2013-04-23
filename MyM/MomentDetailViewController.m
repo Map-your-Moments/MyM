@@ -16,7 +16,7 @@
 @end
 
 @implementation MomentDetailViewController
-@synthesize moment, name;
+@synthesize moment, username, caption, content;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,10 +34,17 @@
     
     [self.view setBackgroundColor:[UIColor colorWithRed:21 green:17 blue:54 alpha:1]];
     
-    name = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, screenWidth-10, 20)];
-    [name setText:@"name"];
-    [self.view addSubview:name];
+    username = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, screenWidth-10, 20)];
+    [username setText:moment.user.username];
+    [self.view addSubview:username];
     
+    caption = [[UILabel alloc] initWithFrame:CGRectMake(5, 50, screenWidth-10, 30)];
+    [caption setText:moment.title];
+    [self.view addSubview:caption];
+    
+    content = [[UIView alloc] initWithFrame:CGRectMake(0, 85, screenWidth, screenHeight-85)];
+    [content setBackgroundColor:[UIColor blueColor]];
+    [self.view addSubview:content];
     
 }
 
