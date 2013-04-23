@@ -106,11 +106,19 @@
             if([self.targetuser profileImage] == nil)
             {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                    });
+                    
+                    
                     cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[self.userInformation valueForKey:kTAGUSERINFORMATION_PROFILEURL]]];
                     [self.targetuser setProfileImage:cell.imageView.image];
-                    [self.view setNeedsDisplay];
-                    self.view.contentMode = UIViewContentModeRedraw;
-                    [self.tableView reloadData];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                        [self.tableView reloadData];
+                    });
+                    
                 });
             }
             else
@@ -378,6 +386,8 @@
 {
     UIImage *newImage = [info valueForKey:UIImagePickerControllerOriginalImage];
     [self.targetuser setProfileImage:newImage];
+    
+    [self.tableView reloadData];
     
     #warning need to update database with new picture
     
