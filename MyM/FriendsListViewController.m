@@ -27,6 +27,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 @property (nonatomic) NSDictionary *jsonGetFriends;
 @property (nonatomic) NSDictionary *jsonAddFriend;
 
+@property (nonatomic, copy,   readwrite) NSString *filePath;
+@property (nonatomic, strong, readwrite) NSOutputStream *fileStream;
+
 @end
 
 @implementation FriendsListViewController
@@ -45,11 +48,16 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         
         _showSectionIndexes = showSectionIndexes;
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
-        _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
+        //NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
+        //_friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
         
-//        self.jsonGetFriends = [UtilityClass GetFriendsJSON];
-//        [_friends addObjectsFromArray:[_jsonGetFriends objectForKey:@"Added"]];
+        self.filePath = [[NSBundle mainBundle] pathForResource:@"FriendsList" ofType:@"plist"];
+        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:YES];
+        [self.fileStream open];
+        
+        self.jsonGetFriends = [UtilityClass GetFriendsJSON:self.fileStream fromAddress:@"http://54.225.76.23:3000/friendships/17"];
+        
+        _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
         
         if (showSectionIndexes) {
             UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
@@ -237,9 +245,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     
     NSNumber *user = [NSNumber numberWithInt:17];
     NSNumber *friend = [NSNumber numberWithInt:18];
-    NSString *name = @"Marcellos M";
+    NSString *name = @"Marcelo M";
     
-    NSDictionary *jsonDictionary = @{ @"friendship_user_id" : user, @"friendship_friend_id" : friend};
+    NSDictionary *jsonDictionary = @{ @"friendship": @{ @"user_id" : user, @"friend_id" : friend} };
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -250,6 +258,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 NSLog(@"Friend added.");
                 [_friends addObject:name];
             }
+            else if(!self.jsonAddFriend)
+                NSLog(@"Friend not added.");
         });
     });
     

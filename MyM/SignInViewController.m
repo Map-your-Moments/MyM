@@ -203,4 +203,32 @@
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> textFieldShouldReturn:
+ Logic for NEXT and DONE keys
+ >>>>>>>>>>>>>>>>>>>>>>>> */
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+    
+    UIResponder *nextResponder = [textField.superview viewWithTag:nextTag];
+    
+    if (nextResponder) {
+        [nextResponder becomeFirstResponder];
+    } else if (nextTag == 3) {//Last tag in the UI
+        [self.signInButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [textField resignFirstResponder];
+    }
+    
+    return NO;
+}
+
+/* >>>>>>>>>>>>>>>>>>>>> backgroundTap:
+ Backgroun Tap to close the keyboard
+ >>>>>>>>>>>>>>>>>>>>>>>> */
+- (IBAction)backgroundTap:(UITapGestureRecognizer *)sender
+{
+    [self.view endEditing:YES];
+}
+
 @end

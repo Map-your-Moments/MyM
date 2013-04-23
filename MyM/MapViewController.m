@@ -90,7 +90,6 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [navBox setBackgroundColor:[UIColor colorWithPatternImage: image]];
-    
     UIGraphicsBeginImageContext(self.view.frame.size);
     [[UIImage imageNamed:@"ios-linen_darkblue.png"] drawInRect:self.view.bounds];
     image = UIGraphicsGetImageFromCurrentImageContext();
@@ -105,29 +104,32 @@
     [navBox.layer setShadowOffset:CGSizeMake(7.0, 5.0)];
     
     [self.view addSubview:navBox];
-    
+
     UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [searchButton setFrame:CGRectMake(14, 35, 70, 45)];
     [searchButton addTarget:self action:@selector(search) forControlEvents:UIControlEventTouchUpInside];
     [searchButton setTitle:@"Search" forState:UIControlStateNormal];
     [navBox addSubview:searchButton];
     
-    UIButton *friendsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [friendsButton setFrame:CGRectMake(14, 135, 70, 45)];
-    [friendsButton addTarget:self action:@selector(friends) forControlEvents:UIControlEventTouchUpInside];
-    [friendsButton setTitle:@"Friends" forState:UIControlStateNormal];
-    [navBox addSubview:friendsButton];
-    
-    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [settingsButton setFrame:CGRectMake(14, 235, 70, 45)];
+    UIImage *profileImage = [UIImage imageNamed:@"Cogwheels.png"];
+    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [settingsButton setFrame:CGRectMake(34, 135, 30, 30)];
     [settingsButton addTarget:self action:@selector(settings) forControlEvents:UIControlEventTouchUpInside];
-    [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+    [settingsButton setImage:profileImage forState:UIControlStateNormal];
     [navBox addSubview:settingsButton];
     
-    UIButton *signOutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [signOutButton setFrame:CGRectMake(14, 335, 70, 45)];
+    UIImage *friendsImage = [UIImage imageNamed:@"Group.png"];
+    UIButton *friendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [friendsButton setFrame:CGRectMake(34, 235, 30, 30)];
+    [friendsButton addTarget:self action:@selector(friends) forControlEvents:UIControlEventTouchUpInside];
+    [friendsButton setImage:friendsImage forState:UIControlStateNormal];
+    [navBox addSubview:friendsButton];
+    
+    UIImage *logoutImage = [UIImage imageNamed:@"Power.png"];
+    UIButton *signOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [signOutButton setFrame:CGRectMake(34, 335, 30, 30)];
     [signOutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside];
-    [signOutButton setTitle:@"Logout" forState:UIControlStateNormal];
+    [signOutButton setImage:logoutImage forState:UIControlStateNormal];
     [navBox addSubview:signOutButton];
     
     UIView *navboxGestureArea = [[UIView alloc] initWithFrame:navboxRectLoc];
@@ -362,7 +364,7 @@
     
     MKCoordinateRegion region;
     region.center = userLocation.location.coordinate;
-    region.span = MKCoordinateSpanMake(2.0, 2.0);
+    region.span = MKCoordinateSpanMake(0.8, 0.8);
     region = [self.mapView regionThatFits:region];
     [self.mapView setRegion:region animated:YES];
 }
