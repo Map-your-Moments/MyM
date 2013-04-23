@@ -111,25 +111,28 @@
     [searchButton setTitle:@"Search" forState:UIControlStateNormal];
     [navBox addSubview:searchButton];
     
-    UIImage *profileImage = [UIImage imageNamed:@"Cogwheels.png"];
-    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [settingsButton setFrame:CGRectMake(34, 135, 30, 30)];
-    [settingsButton addTarget:self action:@selector(settings) forControlEvents:UIControlEventTouchUpInside];
-    [settingsButton setImage:profileImage forState:UIControlStateNormal];
-    [navBox addSubview:settingsButton];
-    
     UIImage *friendsImage = [UIImage imageNamed:@"Group.png"];
     UIButton *friendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [friendsButton setFrame:CGRectMake(34, 235, 30, 30)];
+    [friendsButton setFrame:CGRectMake(34, 135, 30, 30)];
     [friendsButton addTarget:self action:@selector(friends) forControlEvents:UIControlEventTouchUpInside];
     [friendsButton setImage:friendsImage forState:UIControlStateNormal];
+    [friendsButton setShowsTouchWhenHighlighted:YES];
     [navBox addSubview:friendsButton];
+    
+    UIImage *profileImage = [UIImage imageNamed:@"Cogwheels.png"];
+    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [settingsButton setFrame:CGRectMake(34, 235, 30, 30)];
+    [settingsButton addTarget:self action:@selector(settings) forControlEvents:UIControlEventTouchUpInside];
+    [settingsButton setImage:profileImage forState:UIControlStateNormal];
+    [settingsButton setShowsTouchWhenHighlighted:YES];
+    [navBox addSubview:settingsButton];
     
     UIImage *logoutImage = [UIImage imageNamed:@"Power.png"];
     UIButton *signOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [signOutButton setFrame:CGRectMake(34, 335, 30, 30)];
     [signOutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside];
     [signOutButton setImage:logoutImage forState:UIControlStateNormal];
+    [signOutButton setShowsTouchWhenHighlighted:YES];
     [navBox addSubview:signOutButton];
     
     UIView *navboxGestureArea = [[UIView alloc] initWithFrame:navboxRectLoc];
