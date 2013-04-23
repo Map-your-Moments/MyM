@@ -42,10 +42,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.create_api_key
 
     respond_to do |format|
       if @user.save
+        @user.create_api_key
         UserMailer.welcome(@user).deliver
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: {created: true, access_token: @user.api_key.access_token}}
