@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5410CF6D172752FC0038EC76 /* Video.png in Resources */ = {isa = PBXBuildFile; fileRef = 5410CF6B172752FC0038EC76 /* Video.png */; };
+		5410CF6E172752FC0038EC76 /* Video@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5410CF6C172752FC0038EC76 /* Video@2x.png */; };
 		541415831721D4CE004CFF58 /* UtilityClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 541415821721BFFD004CFF58 /* UtilityClass.m */; };
 		54469F3C170CFA1800F88DE3 /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F34170CFA1700F88DE3 /* Camera.png */; };
 		54469F3D170CFA1800F88DE3 /* Camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54469F35170CFA1700F88DE3 /* Camera@2x.png */; };
@@ -19,9 +21,7 @@
 		54719A2B171E0D7C00BC3BF5 /* Top100FamousPersons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54719A2A171E0D7C00BC3BF5 /* Top100FamousPersons.plist */; };
 		54719A2C171E16CF00BC3BF5 /* SearchBarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54719A29171E08EF00BC3BF5 /* SearchBarTableViewController.m */; };
 		547B2BDF17246C2900DD0E53 /* ios-linen_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 547B2BDE17246C2900DD0E53 /* ios-linen_blue.png */; };
-		547E2BD717273D54007A0394 /* Video.png in Resources */ = {isa = PBXBuildFile; fileRef = 547E2BD217273D54007A0394 /* Video.png */; };
 		547E2BE6172741AB007A0394 /* Power.png in Resources */ = {isa = PBXBuildFile; fileRef = 547E2BE3172741AB007A0394 /* Power.png */; };
-		547E2BE7172741AB007A0394 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 547E2BE4172741AB007A0394 /* user.png */; };
 		547E2BE9172741EF007A0394 /* Group.png in Resources */ = {isa = PBXBuildFile; fileRef = 547E2BE8172741EF007A0394 /* Group.png */; };
 		547E2BEB1727425E007A0394 /* Cogwheels.png in Resources */ = {isa = PBXBuildFile; fileRef = 547E2BEA1727425E007A0394 /* Cogwheels.png */; };
 		547E2BEF17274C8A007A0394 /* Cogwheels@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 547E2BEC17274C8A007A0394 /* Cogwheels@2x.png */; };
@@ -91,6 +91,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5410CF6B172752FC0038EC76 /* Video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Video.png; sourceTree = "<group>"; };
+		5410CF6C172752FC0038EC76 /* Video@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Video@2x.png"; sourceTree = "<group>"; };
 		541415811721BFFC004CFF58 /* UtilityClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilityClass.h; sourceTree = "<group>"; };
 		541415821721BFFD004CFF58 /* UtilityClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilityClass.m; sourceTree = "<group>"; };
 		54469F34170CFA1700F88DE3 /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
@@ -105,9 +107,7 @@
 		54719A29171E08EF00BC3BF5 /* SearchBarTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBarTableViewController.m; sourceTree = "<group>"; };
 		54719A2A171E0D7C00BC3BF5 /* Top100FamousPersons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Top100FamousPersons.plist; sourceTree = "<group>"; };
 		547B2BDE17246C2900DD0E53 /* ios-linen_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-linen_blue.png"; sourceTree = "<group>"; };
-		547E2BD217273D54007A0394 /* Video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Video.png; sourceTree = "<group>"; };
 		547E2BE3172741AB007A0394 /* Power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Power.png; sourceTree = "<group>"; };
-		547E2BE4172741AB007A0394 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		547E2BE8172741EF007A0394 /* Group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Group.png; sourceTree = "<group>"; };
 		547E2BEA1727425E007A0394 /* Cogwheels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cogwheels.png; sourceTree = "<group>"; };
 		547E2BEC17274C8A007A0394 /* Cogwheels@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cogwheels@2x.png"; sourceTree = "<group>"; };
@@ -307,14 +307,14 @@
 		663B1501170CC4CA00ED678A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5410CF6B172752FC0038EC76 /* Video.png */,
+				5410CF6C172752FC0038EC76 /* Video@2x.png */,
 				547E2BEC17274C8A007A0394 /* Cogwheels@2x.png */,
 				547E2BED17274C8A007A0394 /* Group@2x.png */,
 				547E2BEE17274C8A007A0394 /* Power@2x.png */,
 				547E2BEA1727425E007A0394 /* Cogwheels.png */,
 				547E2BE8172741EF007A0394 /* Group.png */,
 				547E2BE3172741AB007A0394 /* Power.png */,
-				547E2BE4172741AB007A0394 /* user.png */,
-				547E2BD217273D54007A0394 /* Video.png */,
 				54B476741725D123009B5328 /* ios-linen_darkblue.png */,
 				548F53911725C30600D4CD25 /* bg-addbutton@2x.png */,
 				548F53921725C30600D4CD25 /* bg-addbutton-highlighted.png */,
@@ -489,14 +489,14 @@
 				548F53961725C30700D4CD25 /* bg-addbutton-highlighted@2x.png in Resources */,
 				54B476751725D123009B5328 /* ios-linen_darkblue.png in Resources */,
 				54B476771725E7C9009B5328 /* FriendsList.plist in Resources */,
-				547E2BD717273D54007A0394 /* Video.png in Resources */,
 				547E2BE6172741AB007A0394 /* Power.png in Resources */,
-				547E2BE7172741AB007A0394 /* user.png in Resources */,
 				547E2BE9172741EF007A0394 /* Group.png in Resources */,
 				547E2BEB1727425E007A0394 /* Cogwheels.png in Resources */,
 				547E2BEF17274C8A007A0394 /* Cogwheels@2x.png in Resources */,
 				547E2BF017274C8A007A0394 /* Group@2x.png in Resources */,
 				547E2BF117274C8A007A0394 /* Power@2x.png in Resources */,
+				5410CF6D172752FC0038EC76 /* Video.png in Resources */,
+				5410CF6E172752FC0038EC76 /* Video@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

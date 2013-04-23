@@ -157,6 +157,7 @@
     UIImage *picImage = [UIImage imageNamed:@"Camera.png"];
     UIImage *micImage = [UIImage imageNamed:@"Microphone.png"];
     UIImage *noteImage = [UIImage imageNamed:@"Notepad.png"];
+    UIImage *videoImage = [UIImage imageNamed:@"Video2.png"];
     AwesomeMenuItem *starMenuItem1 = [[AwesomeMenuItem alloc] initWithImage:storyMenuItemImage
                                                            highlightedImage:storyMenuItemImagePressed
                                                                ContentImage:picImage
@@ -169,13 +170,17 @@
                                                            highlightedImage:storyMenuItemImagePressed
                                                                ContentImage:noteImage
                                                     highlightedContentImage:nil];
+    AwesomeMenuItem *starMenuItem4 = [[AwesomeMenuItem alloc] initWithImage:storyMenuItemImage
+                                                           highlightedImage:storyMenuItemImagePressed
+                                                               ContentImage:videoImage
+                                                    highlightedContentImage:nil];
     
     
     
-    AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:[NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, nil]];
+    AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:[NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, nil]];
     menu.delegate = self;
     menu.startPoint = CGPointMake(screenWidth-25, screenHeight-25);
-    menu.menuWholeAngle = -M_2_PI * 3.5;
+    menu.menuWholeAngle = -M_2_PI * 3.3;
     menu.endRadius = 75.0f;
     menu.farRadius = 85.0f;
     menu.nearRadius = 65.0f;
