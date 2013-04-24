@@ -107,8 +107,8 @@
 
     UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [searchButton setFrame:CGRectMake(14, 35, 70, 45)];
-    [searchButton addTarget:self action:@selector(search) forControlEvents:UIControlEventTouchUpInside];
-    [searchButton setTitle:@"Search" forState:UIControlStateNormal];
+    [searchButton addTarget:self action:@selector(menuButtonShowHide) forControlEvents:UIControlEventTouchUpInside];
+    [searchButton setTitle:@"Close" forState:UIControlStateNormal];
     [navBox addSubview:searchButton];
     
     UIImage *friendsImage = [UIImage imageNamed:@"Group.png"];
@@ -157,7 +157,7 @@
     UIImage *picImage = [UIImage imageNamed:@"Camera.png"];
     UIImage *micImage = [UIImage imageNamed:@"Microphone.png"];
     UIImage *noteImage = [UIImage imageNamed:@"Notepad.png"];
-    UIImage *videoImage = [UIImage imageNamed:@"Video2.png"];
+    UIImage *videoImage = [UIImage imageNamed:@"Video.png"];
     AwesomeMenuItem *starMenuItem1 = [[AwesomeMenuItem alloc] initWithImage:storyMenuItemImage
                                                            highlightedImage:storyMenuItemImagePressed
                                                                ContentImage:picImage
