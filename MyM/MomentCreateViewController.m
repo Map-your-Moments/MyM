@@ -10,6 +10,9 @@
 #import "Constants.h"
 
 @interface MomentCreateViewController ()
+{
+    NSURL *takenVideo;
+}
 
 @end
 
@@ -79,18 +82,12 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     else if(contentType == kTAGMOMENTVIDEO){
         //Set video content
         NSLog(@"Video Content");
-        //[self performSelector:@selector(presentVideoSelector) withObject:nil afterDelay:0];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Yet Implemented" message:@"Video Moments are not yet completed" delegate:self cancelButtonTitle:@"Boo..." otherButtonTitles: nil];
-        [alert show];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self performSelector:@selector(presentVideoSelector) withObject:nil afterDelay:0];
     }
     else if(contentType == kTAGMOMENTAUDIO){
         //Set audio
         NSLog(@"Audio Content");
-        //[self performSelector:@selector(presentAudioSelector) withObject:nil afterDelay:0];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Yet Implemented" message:@"Audio Moments are not yet completed" delegate:self cancelButtonTitle:@"Boo..." otherButtonTitles: nil];
-        [alert show];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self performSelector:@selector(presentAudioSelector) withObject:nil afterDelay:0];
     }
 }
 
@@ -272,6 +269,10 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
             [recorder prepareToRecord];
             [recorder record];
         }
+        else if(buttonIndex == [actionSheet cancelButtonIndex])
+        {
+            
+        }
     }
 }
 
@@ -356,22 +357,37 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     
         NSURL *videoURL = [info valueForKey:UIImagePickerControllerMediaURL];
         
-        moviePlayer =  [[MPMoviePlayerController alloc]
-                        initWithContentURL:videoURL];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(moviePlayBackDidFinish:)
-                                                     name:MPMoviePlayerPlaybackDidFinishNotification
-                                                   object:moviePlayer];
-        moviePlayer.movieSourceType = MPMovieSourceTypeFile;
-        moviePlayer.view.backgroundColor = [UIColor clearColor];
-        moviePlayer.controlStyle = MPMovieControlStyleDefault;
-        moviePlayer.shouldAutoplay = YES;
-        [moviePlayer prepareToPlay];
-        [self.view addSubview:moviePlayer.view];
-        [moviePlayer setFullscreen:YES animated:YES];
-        [moviePlayer play];
+        takenVideo = videoURL;
     }
+}
+
+-(void)playVideo:(NSURL *)fileURL
+{
+    //NSString *url = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"mp4"];
+    
+    MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
+    [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
+    
+    moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    [moviePlayerViewController.moviePlayer play];
+}
+
+- (IBAction)playStockVideo:(id)sender
+{
+    MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:takenVideo];
+    [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
+    
+    moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    [moviePlayerViewController.moviePlayer play];
+    
+}
+
+- (void) movieFinishedCallback:(NSNotification*) aNotification {
+    MPMoviePlayerController *player = [aNotification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
 }
 
 -(IBAction)playMovie
@@ -392,7 +408,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [moviePlayer setFullscreen:YES animated:YES];
 }
 
-- (void) moviePlayBackDidFinish:(NSNotification*)notification {
+/*- (void) moviePlayBackDidFinish:(NSNotification*)notification {
     MPMoviePlayerController *player = [notification object];
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
@@ -403,7 +419,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     {
         [player.view removeFromSuperview];
     }
-}
+}*/
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {

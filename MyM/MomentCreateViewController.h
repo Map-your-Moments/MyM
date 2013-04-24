@@ -46,5 +46,6 @@
 - (void)share:(id)sender;
 
 - (IBAction)hideKeybord:(id)sender;
+- (IBAction)playStockVideo:(id)sender;
 
 @end
