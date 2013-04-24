@@ -261,6 +261,10 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
             [recorderImageView setUserInteractionEnabled:YES];
             [recorderView addSubview:recorderImageView];
             [self.view addSubview:recorderView];
+
+            AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+            [audioSession setActive:YES error:nil];
             
             tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]];
             
@@ -288,8 +292,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 {
     NSLog(@"Playing...");
     NSString *file = [[NSBundle mainBundle] resourcePath];
-    file = [file stringByAppendingString:@"TestAudio.mp4"];
-    NSURL *audioURL = [NSURL URLWithString:file];//[NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]]; //[NSURL URLWithString:[[NSBundle mainBundle] pathForResource:@"TestAudio" ofType:@"m4a"]];
+    file = [file stringByAppendingPathComponent:kMomemtAudio_temp];
+    NSURL *audioURL = tempFile;
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
     [player setDelegate:self];
     [player setVolume:1];

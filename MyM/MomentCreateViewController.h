@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
-#import <AVFoundation/AVAudioPlayer.h>
 #import "Moment.h"
 #import "MapViewController.h"
 
@@ -19,6 +18,7 @@
     IBOutlet UIImageView *imageView;
     
     MPMoviePlayerController *moviePlayer;
+    AVAudioRecorder *recorder;
     
     UIView *recorderView;
     NSURL *tempFile;
