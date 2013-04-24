@@ -11,6 +11,7 @@
 #import "UserSettings.h"
 
 @interface User : NSObject
+
 @property (nonatomic) NSString *token;
 @property (nonatomic) UIImage *profileImage;
 @property (nonatomic) NSURL *profileImageURL;

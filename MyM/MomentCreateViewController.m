@@ -53,6 +53,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     
     [self setTitle:@"Create Moment"];
     
+    [self.navigationController setNavigationBarHidden:NO];
     
     NSUserDefaults *ud = [[NSUserDefaults alloc] initWithUser:[currentUser username]];
     self.trips = [ud valueForKey:@"Trips"];
@@ -130,13 +131,15 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [actionSheet showInView:self.view];
 }
 
+#pragma mark - Add Moment
+
 -(void)share:(id)sender
 {
     NSString *title = [self.captionTextField text];
     NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@","];
     NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     
-    NSString *tripID = @"MyM_Trip";//[[self.tripButton titleLabel]text];
+    NSString *ID = [NSString stringWithFormat:@"%f_%f_%f", currentLocation.latitude, currentLocation.longitude, currentDate.timeIntervalSince1970];
     
     id momentContent = nil;
     switch(self.contentType)
@@ -161,12 +164,45 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     {
         if(![[self.captionTextField text] isEqualToString:@""] && [tags count] != 0 && ![[self.tagTextField text] isEqualToString:@""])
         {
-            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andTripID:tripID];
+            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andID:ID];
             [self.dataController addMomentToMomentsWithMoment:newMoment];
             [self.delegate setDataController:self.dataController];
+            [self addMomentToS3WithMoment:newMoment];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
+}
+
+- (void)addMomentToS3WithMoment:(Moment *)moment
+{
+    NSData *momentData = [NSKeyedArchiver archivedDataWithRootObject:moment];
+    NSString *key = [NSString stringWithFormat:@"%@/%@", currentUser.username, moment.ID];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        
+        @try{
+            S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:key
+                                                                         inBucket:kS3BUCKETNAME];
+            request.data = momentData;
+            S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
+            if(response.error != nil)
+                NSLog(@"Error: %@", response.error);
+        }
+        @catch (AmazonClientException *exception) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            NSLog(@"Exception: %@", exception);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        });
+    });
 }
 
 - (IBAction)hideKeybord:(id)sender {

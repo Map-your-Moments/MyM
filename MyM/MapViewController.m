@@ -290,7 +290,7 @@
         Moment *moment = [dataController objectInMomentsAtIndex:i];
         MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
         pin.coordinate = moment.coords;
-        pin.title = moment.user.username;
+        pin.title = moment.user;
         pin.subtitle = moment.title;
         [mapView addAnnotation:pin];
     }

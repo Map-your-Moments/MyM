@@ -23,9 +23,7 @@
     moments    = theMoments;
     friends    = theFriends;
     token      = theToken;
-    
-#warning Geturl for profile pic?
-    
+        
     return self;
 }
 

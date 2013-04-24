@@ -44,4 +44,30 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:picture forKey:@"picture"];
+    [coder encodeObject:text forKey:@"text"];
+    [coder encodeObject:sound forKey:@"sound"];
+    [coder encodeObject:video forKey:@"video"];
+    [coder encodeObject:[NSNumber numberWithInt:contentType] forKey:@"contentType"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    
+    if(self == nil) {
+        picture = [[decoder decodeObjectForKey:@"picture"] copy];
+        text = [[decoder decodeObjectForKey:@"text"] copy];
+        sound = [[decoder decodeObjectForKey:@"sound"] copy];
+        video = [[decoder decodeObjectForKey:@"video"] copy];
+        
+        NSNumber *CT = [[decoder decodeObjectForKey:@"contentType"] copy];
+        contentType = [CT integerValue];
+    }
+    
+    return self;
+}
+
 @end
