@@ -11,6 +11,7 @@
 #import "AmazonClientManager.h"
 #import "MapViewController.h"
 #import "UtilityClass.h"
+#import "InfoViewController.h"
 
 #import "AJNotificationView.h"
 
@@ -26,6 +27,7 @@
 
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
+- (IBAction)infoButton:(id)sender;
 @end
 
 @implementation SignInViewController
@@ -140,6 +142,23 @@
     NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUserView" bundle:nil];
     newUserViewController.delegate = self;
     [self.navigationController pushViewController:newUserViewController animated:YES];
+}
+
+- (IBAction)infoButton:(id)sender
+{
+    /*InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
+    
+    [UIView beginAnimations:@"flipView" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
+    
+    [self.view addSubview:infoViewController.view];
+    
+    [UIView commitAnimations];*/
+    
+    InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
+    [self presentViewController:infoViewController animated:YES completion:NULL];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> logIn
