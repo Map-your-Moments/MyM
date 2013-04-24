@@ -48,16 +48,22 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         
         _showSectionIndexes = showSectionIndexes;
         
-        //NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
-        //_friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
+//        _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
         
         self.filePath = [[NSBundle mainBundle] pathForResource:@"FriendsList" ofType:@"plist"];
         self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:YES];
         [self.fileStream open];
         
-        self.jsonGetFriends = [UtilityClass GetFriendsJSON:self.fileStream fromAddress:@"http://54.225.76.23:3000/friendships/17"];
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            self.jsonGetFriends = [UtilityClass GetFriendsJSON:self.fileStream fromAddress:@"http://54.225.76.23:3000/friends"];
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [self.fileStream close];
         
-        _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
+                _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
+            });
+        });
         
         if (showSectionIndexes) {
             UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
@@ -243,23 +249,45 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 {
     NSLog(@"Add a Friend");
     
-    NSNumber *user = [NSNumber numberWithInt:17];
-    NSNumber *friend = [NSNumber numberWithInt:18];
-    NSString *name = @"Marcelo M";
+    NSString *name = @"Justin Wagner";
     
-    NSDictionary *jsonDictionary = @{ @"friendship": @{ @"user_id" : user, @"friend_id" : friend} };
+    NSString *user = @"2b1afe455751c6404846ab13f8cf3eb5";
+    NSString *friend = @"wagnerj5@apps.tcnj.edu";
+    
+    NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email" : friend };
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        self.jsonAddFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friendships/new/"];
+        self.jsonAddFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/createfriend/"];
         dispatch_async(dispatch_get_main_queue(), ^ {
             if(self.jsonAddFriend)
             {
-                NSLog(@"Friend added.");
-                [_friends addObject:name];
+                if(![self.jsonAddFriend[@"friends"] boolValue])
+                {
+                    if([self.jsonAddFriend[@"exists"] boolValue])
+                    {
+                        if([self.jsonAddFriend[@"created"] boolValue])
+                        {
+                            NSLog(@"Friend request sent.");
+                            [_friends addObject:name];
+                        }
+                        else
+                        {
+                            NSLog(@"Friend request failed to send.");
+                        }
+                    }
+                    else
+                    {
+                        NSLog(@"Friend does not exist.");
+                    }
+                }
+                else
+                {
+                    NSLog(@"Already friends with this person");
+                }
             }
             else if(!self.jsonAddFriend)
-                NSLog(@"Friend not added.");
+                NSLog(@"Http request failed.");
         });
     });
     

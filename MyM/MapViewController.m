@@ -26,6 +26,7 @@
     UIView *navBox;
     
     BOOL navboxIsVisible;
+    BOOL firstLoad;
 }
 
 @synthesize mapView, dataController, user;
@@ -53,13 +54,19 @@
     [self createAwesomeMenu];
     [self createLocationButton];
     [self createMenuButton];
+    
+    firstLoad = TRUE;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadAnnotations];
     
-    [self zoomToUserLocation];
+    if(firstLoad)
+    {
+        [self zoomToUserLocation];
+        firstLoad = FALSE;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -358,10 +365,15 @@
     return pin;
 }
 
-- (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    [self zoomToUserLocation];
-}
+//- (void)centerOnUserLocation
+//{
+//    MKUserLocation *userLocation = [mapView userLocation];
+//    
+//    if (!userLocation)
+//        return;
+//    
+//    [self.mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
+//}
 
 - (void)zoomToUserLocation
 {
