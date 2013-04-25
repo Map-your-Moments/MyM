@@ -17,8 +17,9 @@
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
 
-#define navboxRectVisible CGRectMake(-10, 10, 90, screenHeight-25)
-#define navboxRectHidden CGRectMake(-100, 10, 90, screenHeight-25)
+#define navboxRecSize 230
+#define navboxRectVisible CGRectMake(-10, screenHeight / 2 - navboxRecSize / 2, 50, navboxRecSize)
+#define navboxRectHidden CGRectMake(-100, screenHeight / 2 - navboxRecSize / 2, 50, navboxRecSize)
 #define navboxRectLoc CGRectMake(0, 0, 10, screenHeight)
 
 @implementation MapViewController
@@ -112,15 +113,15 @@
     
     [self.view addSubview:navBox];
 
-    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [searchButton setFrame:CGRectMake(14, 35, 70, 45)];
-    [searchButton addTarget:self action:@selector(menuButtonShowHide) forControlEvents:UIControlEventTouchUpInside];
-    [searchButton setTitle:@"Close" forState:UIControlStateNormal];
-    [navBox addSubview:searchButton];
+//    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    [searchButton setFrame:CGRectMake(14, 35, 70, 45)];
+//    [searchButton addTarget:self action:@selector(menuButtonShowHide) forControlEvents:UIControlEventTouchUpInside];
+//    [searchButton setTitle:@"Close" forState:UIControlStateNormal];
+//    [navBox addSubview:searchButton];
     
     UIImage *friendsImage = [UIImage imageNamed:@"Group.png"];
     UIButton *friendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [friendsButton setFrame:CGRectMake(34, 135, 30, 30)];
+    [friendsButton setFrame:CGRectMake(15, 20, 30, 30)];
     [friendsButton addTarget:self action:@selector(friends) forControlEvents:UIControlEventTouchUpInside];
     [friendsButton setImage:friendsImage forState:UIControlStateNormal];
     [friendsButton setShowsTouchWhenHighlighted:YES];
@@ -128,7 +129,7 @@
     
     UIImage *profileImage = [UIImage imageNamed:@"Cogwheels.png"];
     UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [settingsButton setFrame:CGRectMake(34, 235, 30, 30)];
+    [settingsButton setFrame:CGRectMake(15, 100, 30, 30)];
     [settingsButton addTarget:self action:@selector(settings) forControlEvents:UIControlEventTouchUpInside];
     [settingsButton setImage:profileImage forState:UIControlStateNormal];
     [settingsButton setShowsTouchWhenHighlighted:YES];
@@ -136,7 +137,7 @@
     
     UIImage *logoutImage = [UIImage imageNamed:@"Power.png"];
     UIButton *signOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [signOutButton setFrame:CGRectMake(34, 335, 30, 30)];
+    [signOutButton setFrame:CGRectMake(15, 180, 30, 30)];
     [signOutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside];
     [signOutButton setImage:logoutImage forState:UIControlStateNormal];
     [signOutButton setShowsTouchWhenHighlighted:YES];
@@ -225,7 +226,7 @@
 {
     NSLog(@"Show Navbox");
     if(!navboxIsVisible) {
-        [UIView animateWithDuration:.2
+        [UIView animateWithDuration:.3
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
@@ -241,7 +242,7 @@
 {
     NSLog(@"Hide Navbox");
     if(navboxIsVisible) {
-        [UIView animateWithDuration:.2
+        [UIView animateWithDuration:.3
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{ [navBox setFrame:navboxRectHidden]; }
