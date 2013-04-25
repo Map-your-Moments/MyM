@@ -167,42 +167,9 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
             Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andID:ID];
             [self.dataController addMomentToMomentsWithMoment:newMoment];
             [self.delegate setDataController:self.dataController];
-            [self addMomentToS3WithMoment:newMoment];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
-}
-
-- (void)addMomentToS3WithMoment:(Moment *)moment
-{
-    NSData *momentData = [NSKeyedArchiver archivedDataWithRootObject:moment];
-    NSString *key = [NSString stringWithFormat:@"%@/%@", currentUser.username, moment.ID];
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        });
-        
-        @try{
-            S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:key
-                                                                         inBucket:kS3BUCKETNAME];
-            request.data = momentData;
-            S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
-            if(response.error != nil)
-                NSLog(@"Error: %@", response.error);
-        }
-        @catch (AmazonClientException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            NSLog(@"Exception: %@", exception);
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        });
-    });
 }
 
 - (IBAction)hideKeybord:(id)sender {
