@@ -13,6 +13,7 @@
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address
 {
     NSData *postData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:kNilOptions error:nil];
+    //    NSData *postData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
@@ -25,9 +26,46 @@
     
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
     NSDictionary *jsonresponse = POSTReply ? [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] : nil;
     
     return jsonresponse;
     
 }
+
++ (NSDictionary *)GetFriendsJSON:(NSOutputStream *)fileStream fromAddress:(NSString *)address
+{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:address]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLResponse *response;
+    NSData *GETReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] );
+    NSDictionary *jsonresponse = GETReply ? [NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] : nil;
+    
+//    NSInteger       dataLength;
+//    const uint8_t * dataBytes;
+//    NSInteger       bytesWritten;
+//    NSInteger       bytesWrittenSoFar;
+//    
+//    dataLength = [GETReply length];
+//    dataBytes  = [GETReply bytes];
+//    
+//    bytesWrittenSoFar = 0;
+//    do {
+//        bytesWritten = [fileStream write:&dataBytes[bytesWrittenSoFar] maxLength:dataLength - bytesWrittenSoFar];
+//        assert(bytesWritten != 0);
+//        if (bytesWritten == -1) {
+//            NSLog(@"Friends List file write error.");
+//            break;
+//        } else {
+//            bytesWrittenSoFar += bytesWritten;
+//        }
+//    } while (bytesWrittenSoFar != dataLength);
+//    
+    return jsonresponse;
+    
+}
+
 @end

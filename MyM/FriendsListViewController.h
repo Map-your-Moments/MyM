@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FriendsListViewController : UITableViewController
+@interface FriendsListViewController : UIViewController <UITableViewDataSource,
+                                    UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
-@property (nonatomic) NSMutableArray *friends;
+- (id)initWithSectionIndexes:(BOOL)showSectionIndexes;
+
+- (void)scrollTableViewToSearchBarAnimated:(BOOL)animated;
+
+@property(nonatomic, assign, readonly) BOOL showSectionIndexes;
+
+@property(nonatomic, strong, readonly) UITableView *tableView;
+@property(nonatomic, strong, readonly) UISearchBar *searchBar;
+
+//@property (nonatomic) NSMutableArray *friends;
 
 @end
