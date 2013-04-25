@@ -44,26 +44,26 @@
     NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] );
     NSDictionary *jsonresponse = GETReply ? [NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] : nil;
     
-    NSInteger       dataLength;
-    const uint8_t * dataBytes;
-    NSInteger       bytesWritten;
-    NSInteger       bytesWrittenSoFar;
-    
-    dataLength = [GETReply length];
-    dataBytes  = [GETReply bytes];
-    
-    bytesWrittenSoFar = 0;
-    do {
-        bytesWritten = [fileStream write:&dataBytes[bytesWrittenSoFar] maxLength:dataLength - bytesWrittenSoFar];
-        assert(bytesWritten != 0);
-        if (bytesWritten == -1) {
-            NSLog(@"Friends List file write error.");
-            break;
-        } else {
-            bytesWrittenSoFar += bytesWritten;
-        }
-    } while (bytesWrittenSoFar != dataLength);
-    
+//    NSInteger       dataLength;
+//    const uint8_t * dataBytes;
+//    NSInteger       bytesWritten;
+//    NSInteger       bytesWrittenSoFar;
+//    
+//    dataLength = [GETReply length];
+//    dataBytes  = [GETReply bytes];
+//    
+//    bytesWrittenSoFar = 0;
+//    do {
+//        bytesWritten = [fileStream write:&dataBytes[bytesWrittenSoFar] maxLength:dataLength - bytesWrittenSoFar];
+//        assert(bytesWritten != 0);
+//        if (bytesWritten == -1) {
+//            NSLog(@"Friends List file write error.");
+//            break;
+//        } else {
+//            bytesWrittenSoFar += bytesWritten;
+//        }
+//    } while (bytesWrittenSoFar != dataLength);
+//    
     return jsonresponse;
     
 }

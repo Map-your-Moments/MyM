@@ -48,22 +48,22 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         
         _showSectionIndexes = showSectionIndexes;
         
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
-//        _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
+        _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
         
-        self.filePath = [[NSBundle mainBundle] pathForResource:@"FriendsList" ofType:@"plist"];
-        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:YES];
-        [self.fileStream open];
-        
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(queue, ^{
-            self.jsonGetFriends = [UtilityClass GetFriendsJSON:self.fileStream fromAddress:@"http://54.225.76.23:3000/friends"];
-            dispatch_async(dispatch_get_main_queue(), ^ {
-                [self.fileStream close];
-        
-                _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
-            });
-        });
+//        self.filePath = [[NSBundle mainBundle] pathForResource:@"FriendsList" ofType:@"plist"];
+//        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:YES];
+//        [self.fileStream open];
+//        
+//        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//        dispatch_async(queue, ^{
+//            self.jsonGetFriends = [UtilityClass GetFriendsJSON:self.fileStream fromAddress:@"http://54.225.76.23:3000/friends"];
+//            dispatch_async(dispatch_get_main_queue(), ^ {
+//                [self.fileStream close];
+//        
+//                _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
+//            });
+//        });
         
         if (showSectionIndexes) {
             UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
@@ -254,7 +254,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     NSString *user = @"2b1afe455751c6404846ab13f8cf3eb5";
     NSString *friend = @"wagnerj5@apps.tcnj.edu";
     
-    NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email" : friend };
+    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : friend };
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
