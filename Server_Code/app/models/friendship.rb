@@ -4,7 +4,7 @@ class Friendship < ActiveRecord::Base
   belongs_to :friend, :class_name => "User"
 end
 
-class PendingFriendShip < FriendShip
+class PendingFriendship < Friendship
 end
-class ConfirmedFriendship < FriendShip
+class ConfirmedFriendship < Friendship
 end
