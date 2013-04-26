@@ -9,6 +9,10 @@
 #import "FriendsListViewController.h"
 #import "UtilityClass.h"
 
+#import "AJNotificationView.h"
+
+#define BANNER_DEFAULT_TIME 2
+
 static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentifier = @"kSearchBarTableViewControllerDefaultTableViewCellIdentifier";
 
 @interface FriendsListViewController ()
@@ -269,25 +273,48 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                         if([self.jsonAddFriend[@"created"] boolValue])
                         {
                             NSLog(@"Friend request sent.");
-                            [_friends addObject:name];
+                            //[_friends addObject:name];
+                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                           title:@"Friend request email successfully sent!"
+                                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                                       hideAfter:BANNER_DEFAULT_TIME];
                         }
                         else
                         {
                             NSLog(@"Friend request failed to send.");
+                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                           title:@"Friend request failed to send."
+                                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                                       hideAfter:BANNER_DEFAULT_TIME];
                         }
                     }
                     else
                     {
                         NSLog(@"Friend does not exist.");
+                        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                       title:@"Friend does not exist."
+                                             linedBackground:AJLinedBackgroundTypeDisabled
+                                                   hideAfter:BANNER_DEFAULT_TIME];
                     }
                 }
                 else
                 {
-                    NSLog(@"Already friends with this person");
+                    NSLog(@"Already friends with this person.");
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:@"You are already friends with this person."
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
                 }
             }
             else if(!self.jsonAddFriend)
+            {
                 NSLog(@"Http request failed.");
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Server request failed."
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+            }
+
         });
     });
     
