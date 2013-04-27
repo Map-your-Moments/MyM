@@ -11,7 +11,7 @@
 #import "User.h"
 #import "Content.h"
 
-@interface Moment : NSObject <NSCoding>
+@interface Moment : NSObject <NSCoding, NSCopying>
 
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *user;

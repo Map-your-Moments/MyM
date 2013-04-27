@@ -137,7 +137,7 @@
 }
 
 /* Remove all moments in the dataController
-   This method will also need aws support eventually
+   Leave this without aws support, so that it can clear the local data
  */
 -(void)removeAllMoments
 {

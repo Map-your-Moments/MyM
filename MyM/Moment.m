@@ -65,4 +65,19 @@
     return self;
 }
 
+#pragma mark - NSCopying Protocol
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    id moment = [[[self class] allocWithZone:zone] initWithTitle:self.title
+                                                         andUser:self.user
+                                                      andContent:self.content
+                                                         andDate:self.date
+                                                       andCoords:self.coords
+                                                     andComments:self.comments
+                                                           andID:self.ID];
+    return moment;
+                 
+}
+
 @end

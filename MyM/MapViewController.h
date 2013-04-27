@@ -28,5 +28,6 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic)  MomentDataController *dataController;
 @property (strong, nonatomic) User *user;
+@property (weak, nonatomic) Moment *tempMoment;
 
 @end
