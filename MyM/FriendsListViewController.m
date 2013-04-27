@@ -28,8 +28,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 @property(nonatomic, strong) UISearchDisplayController *strongSearchDisplayController;
 
-@property (nonatomic) NSDictionary *jsonGetFriends;
+@property (nonatomic) NSArray *jsonGetFriends;
 @property (nonatomic) NSDictionary *jsonAddFriend;
+@property (nonatomic) NSDictionary *jsonDeleteFriend;
 
 @property (nonatomic, copy,   readwrite) NSString *filePath;
 @property (nonatomic, strong, readwrite) NSOutputStream *fileStream;
@@ -52,46 +53,71 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         
         _showSectionIndexes = showSectionIndexes;
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
-        _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
-        
-//        self.filePath = [[NSBundle mainBundle] pathForResource:@"FriendsList" ofType:@"plist"];
-//        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:YES];
-//        [self.fileStream open];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
+//        _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
+//        
+////        self.filePath = [[NSBundle mainBundle] pathForResource:@"FriendsList" ofType:@"plist"];
+////        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:YES];
+////        [self.fileStream open];
+//        
+//        NSString *user = [_user token];
+//        NSLog(@"%@ DEBUG", user);
+//        NSDictionary *jsonDictionary = @{ @"access_token" : user};
 //        
 //        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 //        dispatch_async(queue, ^{
-//            self.jsonGetFriends = [UtilityClass GetFriendsJSON:self.fileStream fromAddress:@"http://54.225.76.23:3000/friends"];
+//            self.jsonGetFriends = [UtilityClass GetFriendsJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friends"];
 //            dispatch_async(dispatch_get_main_queue(), ^ {
-//                [self.fileStream close];
-//        
-//                _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
+//               if(self.jsonGetFriends)
+//                {
+//                    //_friends = [self.jsonGetFriends valueForKey: @"name"];
+//                }
+//                               
+////                [self.fileStream close];
+////                _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
 //            });
 //        });
-        
-        if (showSectionIndexes) {
-            UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
-            
-            NSMutableArray *unsortedSections = [[NSMutableArray alloc] initWithCapacity:[[collation sectionTitles] count]];
-            for (NSUInteger i = 0; i < [[collation sectionTitles] count]; i++) {
-                [unsortedSections addObject:[NSMutableArray array]];
-            }
-            
-            for (NSString *personName in self.friends) {
-                NSInteger index = [collation sectionForObject:personName collationStringSelector:@selector(description)];
-                [[unsortedSections objectAtIndex:index] addObject:personName];
-            }
-            
-            NSMutableArray *sortedSections = [[NSMutableArray alloc] initWithCapacity:unsortedSections.count];
-            for (NSMutableArray *section in unsortedSections) {
-                [sortedSections addObject:[collation sortedArrayFromArray:section collationStringSelector:@selector(description)]];
-            }
-            
-            self.sections = sortedSections;
-        }
+//        
+//        if (showSectionIndexes) {
+//            UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
+//            
+//            NSMutableArray *unsortedSections = [[NSMutableArray alloc] initWithCapacity:[[collation sectionTitles] count]];
+//            for (NSUInteger i = 0; i < [[collation sectionTitles] count]; i++) {
+//                [unsortedSections addObject:[NSMutableArray array]];
+//            }
+//            
+//            for (NSString *personName in self.friends) {
+//                NSInteger index = [collation sectionForObject:personName collationStringSelector:@selector(description)];
+//                [[unsortedSections objectAtIndex:index] addObject:personName];
+//            }
+//            
+//            NSMutableArray *sortedSections = [[NSMutableArray alloc] initWithCapacity:unsortedSections.count];
+//            for (NSMutableArray *section in unsortedSections) {
+//                [sortedSections addObject:[collation sortedArrayFromArray:section collationStringSelector:@selector(description)]];
+//            }
+//            
+//            self.sections = sortedSections;
+//        }
     }
     
     return self;
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
+    _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
+    
+    //        self.filePath = [[NSBundle mainBundle] pathForResource:@"FriendsList" ofType:@"plist"];
+    //        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:YES];
+    //        [self.fileStream open];
+    
+    //                [self.fileStream close];
+    //                _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
+    
+    if (_showSectionIndexes) {
+        [self loadSections:_friends];
+    }
 }
 
 - (void)viewDidLoad
@@ -217,6 +243,62 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     //add code here
 }
 
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    // Return YES if you want the specified item to be editable.
+//    return YES;
+//}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+        
+        NSString *user = [_user token];
+        NSString *email = @"wagnerj5@apps.tcnj.edu";
+        NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email": email };
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            self.jsonDeleteFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/deletefriend"];
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                if(self.jsonDeleteFriend)
+                {
+                    if([self.jsonDeleteFriend[@"deleted"] boolValue])
+                    {
+                        NSLog(@"%@ successfully removed from friends list.", email);
+                        NSString *title = email;
+                        title = [title stringByAppendingString:@" successfully removed from friends list."];
+                        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                       title:title
+                                             linedBackground:AJLinedBackgroundTypeDisabled
+                                                   hideAfter:BANNER_DEFAULT_TIME];
+                    }
+                    else
+                    {
+                        NSLog(@"%@ could not be removed from your friends list. Try again.", email);
+                        NSString *title = email;
+                        title = [title stringByAppendingString:@" could not be removed from your friends list. Try again."];
+                        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                       title:title
+                                             linedBackground:AJLinedBackgroundTypeDisabled
+                                                   hideAfter:BANNER_DEFAULT_TIME];
+                    }
+                }
+                else
+                {
+                    NSLog(@"Http request failed.");
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:@"Server request failed."
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                }
+            });
+        });
+
+        [self loadSections:_friends];
+        //[tableView reloadData];
+    }
+}
+
 #pragma mark - Search Delegate
 
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
@@ -249,16 +331,50 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     return YES;
 }
 
+- (void)loadSections:(NSMutableArray *)friends
+{
+    NSString *user = [_user token];
+    NSDictionary *jsonDictionary = @{ @"access_token" : user};
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        self.jsonGetFriends = [UtilityClass GetFriendsJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friends"];
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            if(self.jsonGetFriends)
+            {
+                //                _friends = [self.jsonGetFriends valueForKey: @"name"];
+            }
+        });
+    });
+    
+    UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
+    
+    NSMutableArray *unsortedSections = [[NSMutableArray alloc] initWithCapacity:[[collation sectionTitles] count]];
+    for (NSUInteger i = 0; i < [[collation sectionTitles] count]; i++) {
+        [unsortedSections addObject:[NSMutableArray array]];
+    }
+    
+    for (NSString *personName in friends) {
+        NSInteger index = [collation sectionForObject:personName collationStringSelector:@selector(description)];
+        [[unsortedSections objectAtIndex:index] addObject:personName];
+    }
+    
+    NSMutableArray *sortedSections = [[NSMutableArray alloc] initWithCapacity:unsortedSections.count];
+    for (NSMutableArray *section in unsortedSections) {
+        [sortedSections addObject:[collation sortedArrayFromArray:section collationStringSelector:@selector(description)]];
+    }
+    
+    self.sections = sortedSections;
+}
+
 - (void)addFriendButton
 {
     NSLog(@"Add a Friend");
     
-    NSString *name = @"Justin Wagner";
+    NSString *user = [_user token];
+    NSString *email = @"wagnerj5@apps.tcnj.edu";
     
-    NSString *user = @"2b1afe455751c6404846ab13f8cf3eb5";
-    NSString *friend = @"wagnerj5@apps.tcnj.edu";
-    
-    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : friend };
+    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : email };
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -272,8 +388,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         if([self.jsonAddFriend[@"created"] boolValue])
                         {
+                            //[_friends addObject:friend];
+                            [self loadSections:_friends];
                             NSLog(@"Friend request sent.");
-                            //[_friends addObject:name];
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
                                                            title:@"Friend request email successfully sent!"
                                                  linedBackground:AJLinedBackgroundTypeDisabled

@@ -13,7 +13,6 @@
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address
 {
     NSData *postData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:kNilOptions error:nil];
-    //    NSData *postData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     
@@ -33,17 +32,40 @@
     
 }
 
-+ (NSDictionary *)GetFriendsJSON:(NSOutputStream *)fileStream fromAddress:(NSString *)address
++ (NSArray *)GetFriendsJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address
 {
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:kNilOptions error:nil];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:address]];
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
     
     NSURLResponse *response;
-    NSData *GETReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] );
-    NSDictionary *jsonresponse = GETReply ? [NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] : nil;
+    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
+    NSArray *jsonresponse = POSTReply ? [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] : nil;
     
+    return jsonresponse;
+    
+}
+
+
+//+ (NSDictionary *)GetFriendsJSON:(NSOutputStream *)fileStream fromAddress:(NSString *)address
+//{
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    [request setURL:[NSURL URLWithString:address]];
+//    [request setHTTPMethod:@"GET"];
+//    
+//    NSURLResponse *response;
+//    NSData *GETReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+//    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] );
+//    NSDictionary *jsonresponse = GETReply ? [NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] : nil;
+//    
 //    NSInteger       dataLength;
 //    const uint8_t * dataBytes;
 //    NSInteger       bytesWritten;
@@ -64,8 +86,8 @@
 //        }
 //    } while (bytesWrittenSoFar != dataLength);
 //    
-    return jsonresponse;
-    
-}
+//    return jsonresponse;
+//    
+//}
 
 @end
