@@ -32,8 +32,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 @property (nonatomic) NSDictionary *jsonAddFriend;
 @property (nonatomic) NSDictionary *jsonDeleteFriend;
 
-@property (nonatomic, copy,   readwrite) NSString *filePath;
-@property (nonatomic, strong, readwrite) NSOutputStream *fileStream;
+@property (nonatomic) UITextField *textField;
+@property (nonatomic) UIAlertView* alert;
 
 @end
 
@@ -83,6 +83,30 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     self.searchDisplayController.searchResultsDataSource = self;
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.delegate = self;
+    
+    _alert = [[UIAlertView alloc] initWithTitle:@"Preset Saving..." message:@"Describe the Preset\n\n\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    _textField = [[UITextField alloc] init];
+    [_textField setBackgroundColor:[UIColor whiteColor]];
+    _textField.delegate = self;
+    _textField.borderStyle = UITextBorderStyleLine;
+    _textField.frame = CGRectMake(15, 75, 255, 30);
+    _textField.font = [UIFont fontWithName:@"ArialMT" size:20];
+    _textField.placeholder = @"Preset Name";
+    _textField.textAlignment = NSTextAlignmentCenter;
+    _textField.keyboardAppearance = UIKeyboardAppearanceAlert;
+    [_textField becomeFirstResponder];
+    [_alert addSubview:_textField];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString* detailString = _textField.text;
+    NSLog(@"String is: %@", detailString); //Put it on the debugger
+    if ([_textField.text length] <= 0 || buttonIndex == 0){
+        return; //If cancel or 0 length string the string doesn't matter
+    }
+    if (buttonIndex == 1) {
+        
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -330,8 +354,10 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 {
     NSLog(@"Add a Friend");
     
+    [_alert show];
+    
     NSString *user = [_user token];
-    NSString *email = @"wagnerj5@apps.tcnj.edu";
+    NSString *email = @"EvilAbed@mailinator.com";
     
     NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : email };
     
@@ -351,7 +377,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         if([self.jsonAddFriend[@"created"] boolValue])
                         {
-                            //[_friends addObject:friend];
                             [self loadSections];
                             NSLog(@"Friend request sent.");
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
@@ -363,7 +388,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                         {
                             NSLog(@"Friend request failed to send.");
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                                           title:@"Friend request failed to send."
+                                                           title:@"Failed to send friend request."
                                                  linedBackground:AJLinedBackgroundTypeDisabled
                                                        hideAfter:BANNER_DEFAULT_TIME];
                         }
