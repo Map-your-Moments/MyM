@@ -34,6 +34,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 @property (nonatomic) UITextField *textField;
 @property (nonatomic) UIAlertView* alert;
+@property (nonatomic) NSString* email;
 
 @end
 
@@ -84,29 +85,22 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.delegate = self;
     
-    _alert = [[UIAlertView alloc] initWithTitle:@"Preset Saving..." message:@"Describe the Preset\n\n\n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    _alert = [[UIAlertView alloc] initWithTitle:@"Add Friend"
+                                  message:@"Enter the user's email below.\n\n\n"
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  otherButtonTitles:@"Send", nil];
+    
     _textField = [[UITextField alloc] init];
     [_textField setBackgroundColor:[UIColor whiteColor]];
-    _textField.delegate = self;
-    _textField.borderStyle = UITextBorderStyleLine;
+    _textField.borderStyle = UITextBorderStyleRoundedRect;
     _textField.frame = CGRectMake(15, 75, 255, 30);
-    _textField.font = [UIFont fontWithName:@"ArialMT" size:20];
-    _textField.placeholder = @"Preset Name";
+    _textField.font = [UIFont fontWithName:@"ArialMT" size:16];
+    _textField.placeholder = @"email@example.com";
     _textField.textAlignment = NSTextAlignmentCenter;
     _textField.keyboardAppearance = UIKeyboardAppearanceAlert;
     [_textField becomeFirstResponder];
     [_alert addSubview:_textField];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString* detailString = _textField.text;
-    NSLog(@"String is: %@", detailString); //Put it on the debugger
-    if ([_textField.text length] <= 0 || buttonIndex == 0){
-        return; //If cancel or 0 length string the string doesn't matter
-    }
-    if (buttonIndex == 1) {
-        
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -350,16 +344,30 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     });
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString* detailString = _textField.text;
+    NSLog(@"String is: %@", detailString); //Put it on the debugger
+    if ([_textField.text length] <= 0 || buttonIndex == 0){
+        return; //If cancel or 0 length string the string doesn't matter
+    }
+    if (buttonIndex == 1) {
+        _email = _textField.text;
+        [self addFriend];
+    }
+}
+
 - (void)addFriendButton
 {
     NSLog(@"Add a Friend");
     
     [_alert show];
-    
+}
+
+- (void)addFriend
+{
     NSString *user = [_user token];
-    NSString *email = @"EvilAbed@mailinator.com";
     
-    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : email };
+    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : _email };
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -397,7 +405,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         NSLog(@"Friend does not exist.");
                         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                                       title:@"Friend does not exist."
+                                                       title:@"User does not exist."
                                              linedBackground:AJLinedBackgroundTypeDisabled
                                                    hideAfter:BANNER_DEFAULT_TIME];
                     }
@@ -419,10 +427,11 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                                      linedBackground:AJLinedBackgroundTypeDisabled
                                            hideAfter:BANNER_DEFAULT_TIME];
             }
-
+            
+            _textField.text = NULL;
+            
         });
     });
-    
 }
 
 @end
