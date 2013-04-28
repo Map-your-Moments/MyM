@@ -41008,3 +41008,77 @@ Served asset /users.js - 304 Not Modified (0ms)
 
 Started GET "/assets/application.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
 Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/users" for 159.91.66.170 at 2013-04-28 19:39:14 +0000
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Adam Cumiskey", "password"=>"[FILTERED]", "username"=>"adam", "email"=>"adam.cumiskey@gmail.com"}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."username" = 'adam' LIMIT 1
+Binary data inserted for `string` type on column `password_digest`
+  [1m[36mSQL (4.8ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "latitude", "longitude", "message", "name", "password_digest", "updated_at", "username") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", Sun, 28 Apr 2013 19:39:14 UTC +00:00], ["email", "adam.cumiskey@gmail.com"], ["latitude", nil], ["longitude", nil], ["message", nil], ["name", "Adam Cumiskey"], ["password_digest", "$2a$10$jiL4A4Toa2hgXak2bpdfge2tc0XfRHJGHIVXf2H0LB5GKPXN7qAI6"], ["updated_at", Sun, 28 Apr 2013 19:39:14 UTC +00:00], ["username", "adam"]]
+  [1m[35m (25.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mApiKey Exists (0.1ms)[0m  SELECT 1 AS one FROM "api_keys" WHERE "api_keys"."access_token" = 'd4fa7f569928473d7feba7307b1108c6' LIMIT 1
+Binary data inserted for `string` type on column `access_token`
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "api_keys" ("access_token", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["access_token", "d4fa7f569928473d7feba7307b1108c6"], ["created_at", Sun, 28 Apr 2013 19:39:14 UTC +00:00], ["updated_at", Sun, 28 Apr 2013 19:39:14 UTC +00:00], ["user_id", 7]]
+  [1m[35m (19.8ms)[0m  commit transaction
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 7 LIMIT 1[0m
+  Rendered user_mailer/welcome.html.erb (0.5ms)
+
+Sent mail to adam.cumiskey@gmail.com (239ms)
+Date: Sun, 28 Apr 2013 19:39:14 +0000
+From: mapyourmoments.corp@gmail.com
+To: adam.cumiskey@gmail.com
+Message-ID: <517d7ae23c067_58a41f62efc357f6@domU-12-31-39-0B-06-DA.mail>
+Subject: Thanks for signing up with MyM
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Thanks for using MyM, adam!</h1>
+    <p>
+    You have successfully signed up for MyM! 
+    </p>
+  </body>
+</html>
+
+
+Completed 200 OK in 446ms (Views: 0.2ms | ActiveRecord: 51.6ms)
+
+
+Started POST "/login/" for 159.91.102.187 at 2013-04-28 19:39:53 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 5 LIMIT 1[0m
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.102.187 at 2013-04-28 19:39:58 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"e354a9a2ab2737fec67170d19264e4bb", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'e354a9a2ab2737fec67170d19264e4bb' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."user_id" = 5[0m
+Completed 200 OK in 64ms (Views: 7.9ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/login/" for 159.91.66.170 at 2013-04-28 19:40:06 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"adam", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'adam' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 7 LIMIT 1[0m
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.5ms)
