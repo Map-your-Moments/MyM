@@ -186,6 +186,11 @@ bool startInsideAboutImageView;
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];    
+}
+
 /* >>>>>>>>>>>>>>>>>>>>> registerButton:
  Push the New Use View
  >>>>>>>>>>>>>>>>>>>>>>>> */
