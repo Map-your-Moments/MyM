@@ -11,12 +11,11 @@
 #import "AmazonClientManager.h"
 #import "MapViewController.h"
 #import "UtilityClass.h"
-#import "InfoViewController.h"
-
 #import "AJNotificationView.h"
 
 #define BANNER_DEFAULT_TIME 3
 #define SCREEN_HEIGHT [[UIScreen mainScreen] applicationFrame].size.height
+
 @interface SignInViewController() <NewUserDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
@@ -209,23 +208,6 @@ bool startInsideAboutImageView;
     NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUserView" bundle:nil];
     newUserViewController.delegate = self;
     [self.navigationController pushViewController:newUserViewController animated:YES];
-}
-
-- (IBAction)infoButton:(id)sender
-{
-    /*InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
-    
-    [UIView beginAnimations:@"flipView" context:nil];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
-    
-    [self.view addSubview:infoViewController.view];
-    
-    [UIView commitAnimations];*/
-    
-    InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
-    [self presentViewController:infoViewController animated:YES completion:NULL];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> logIn
