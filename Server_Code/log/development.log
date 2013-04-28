@@ -40732,3 +40732,64 @@ WARNING: Can't verify CSRF token authenticity
   [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'adam' LIMIT 1
   [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 4 LIMIT 1[0m
 Completed 200 OK in 79ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+Connecting to database specified by database.yml
+
+
+Started GET "/users.html" for 159.91.191.106 at 2013-04-28 19:27:47 +0000
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered users/index.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 249ms (Views: 178.0ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /application.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /friendships.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /scaffolds.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /user_sessions.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /users.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/moments.css?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /moments.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /jquery.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /friendships.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/moments.js?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /moments.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /user_sessions.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.js?body=1" for 159.91.191.106 at 2013-04-28 19:27:48 +0000
+Served asset /users.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 159.91.191.106 at 2013-04-28 19:27:49 +0000
+Served asset /application.js - 304 Not Modified (6ms)
+Connecting to database specified by database.yml
