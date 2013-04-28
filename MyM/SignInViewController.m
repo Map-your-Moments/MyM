@@ -16,15 +16,16 @@
 #import "AJNotificationView.h"
 
 #define BANNER_DEFAULT_TIME 3
-
+#define SCREEN_HEIGHT [[UIScreen mainScreen] applicationFrame].size.height
 @interface SignInViewController() <NewUserDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *icon_mym;
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *signInActivityIndicator;
 @property (nonatomic) NSDictionary *jsonLogin;
+@property (weak, nonatomic) IBOutlet UIImageView *aboutImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *aboutView;
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
 - (IBAction)infoButton:(id)sender;
@@ -32,17 +33,71 @@
 
 @implementation SignInViewController
 
+float initialTouchPoint;
+bool startInsideAboutImageView;
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint contentTouchPoint = [[touches anyObject] locationInView:self.aboutImageView];
+    if (CGRectContainsPoint(self.aboutImageView.bounds, contentTouchPoint)) {
+        initialTouchPoint = contentTouchPoint.y;
+        startInsideAboutImageView = YES;
+    } else {
+        startInsideAboutImageView = NO;
+    }
+
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (startInsideAboutImageView) {
+        CGPoint pointInView = [[touches anyObject] locationInView:self.view];
+        float yTarget = pointInView.y - initialTouchPoint;
+        if(yTarget < SCREEN_HEIGHT - self.aboutView.frame.size.height)
+            yTarget = SCREEN_HEIGHT - self.aboutView.frame.size.height;
+        else if( yTarget > SCREEN_HEIGHT - self.aboutImageView.frame.size.height)
+            yTarget = SCREEN_HEIGHT - self.aboutImageView.frame.size.height;
+        
+        [UIView animateWithDuration:.1
+                         animations:^{
+                             [self.aboutView setFrame:CGRectMake(self.aboutView.frame.origin.x, yTarget, self.aboutView.frame.size.width, self.aboutView.frame.size.height)];
+                         }];
+    }
+  
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self aboutViewFinalPosition:touches];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self aboutViewFinalPosition:touches];
+}
+
+- (void)aboutViewFinalPosition:(NSSet *)touches
+{
+    if (startInsideAboutImageView) {
+        CGPoint endTouchPoint = [[touches anyObject] locationInView:self.view];
+        float yTarget = endTouchPoint.y - initialTouchPoint;
+        if(yTarget < SCREEN_HEIGHT - self.aboutView.frame.size.height / 2)
+            yTarget = SCREEN_HEIGHT - self.aboutView.frame.size.height;
+        else
+            yTarget = SCREEN_HEIGHT - self.aboutImageView.frame.size.height;
+        
+        [UIView animateWithDuration:.5
+                         animations:^{
+                             [self.aboutView setFrame:CGRectMake(self.aboutView.frame.origin.x, yTarget, self.aboutView.frame.size.width, self.aboutView.frame.size.height)];
+                         }];
+    }
+}
+
 - (void)newUserCreated
 {
     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
                                    title:@"Your account was created successfully"
                          linedBackground:AJLinedBackgroundTypeDisabled
                                hideAfter:BANNER_DEFAULT_TIME];
-    [super viewDidLoad];
-    
-    self.icon_mym.image = [UIImage imageNamed:@"icon@2x.png"];
-    
-    self.navigationItem.title = @"Map your Moments";
 }
 
 - (void)viewWillAppear:(BOOL)animated
