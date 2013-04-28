@@ -1569,6 +1569,7 @@
 				55A0F65A16C9E6DB00A364E3 /* AppDelegate.m */,
 				665A932D16E7CEFC00D22E11 /* Model */,
 				665A932916E7CDF900D22E11 /* View Controllers */,
+				55EC871A1714CD9600C1C52F /* View */,
 				55A0F65116C9E6DB00A364E3 /* Supporting Files */,
 			);
 			path = MyM;
@@ -1693,7 +1694,6 @@
 				69482CF01724660600D38756 /* UserAccountViewController.m */,
 				69DF644E1727A87400291326 /* InfoViewController.h */,
 				69DF644F1727A87400291326 /* InfoViewController.m */,
-				55EC871A1714CD9600C1C52F /* View */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";

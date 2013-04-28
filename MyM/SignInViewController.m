@@ -24,11 +24,12 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *signInActivityIndicator;
 @property (nonatomic) NSDictionary *jsonLogin;
 @property (weak, nonatomic) IBOutlet UIImageView *aboutImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *aboutIcon;
 
 @property (weak, nonatomic) IBOutlet UIView *aboutView;
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
-- (IBAction)infoButton:(id)sender;
+
 @end
 
 @implementation SignInViewController
@@ -77,17 +78,23 @@ bool startInsideAboutImageView;
 
 - (void)aboutViewFinalPosition:(NSSet *)touches
 {
+    NSString *iconImage = nil;
     if (startInsideAboutImageView) {
         CGPoint endTouchPoint = [[touches anyObject] locationInView:self.view];
         float yTarget = endTouchPoint.y - initialTouchPoint;
-        if(yTarget < SCREEN_HEIGHT - self.aboutView.frame.size.height / 2)
+        if(yTarget < SCREEN_HEIGHT - self.aboutView.frame.size.height / 2) {
             yTarget = SCREEN_HEIGHT - self.aboutView.frame.size.height;
-        else
+            iconImage = @"glyphicons_195_circle_info";
+        }
+        else {
             yTarget = SCREEN_HEIGHT - self.aboutImageView.frame.size.height;
+            iconImage = @"glyphicons_213_up_arrow.png";
+        }
         
         [UIView animateWithDuration:.5
                          animations:^{
                              [self.aboutView setFrame:CGRectMake(self.aboutView.frame.origin.x, yTarget, self.aboutView.frame.size.width, self.aboutView.frame.size.height)];
+                             self.aboutIcon.image = [UIImage imageNamed:iconImage];
                          }];
     }
 }
