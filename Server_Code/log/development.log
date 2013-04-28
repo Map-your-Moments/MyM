@@ -40793,3 +40793,218 @@ Served asset /users.js - 304 Not Modified (1ms)
 Started GET "/assets/application.js?body=1" for 159.91.191.106 at 2013-04-28 19:27:49 +0000
 Served asset /application.js - 304 Not Modified (6ms)
 Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/users.html" for 159.91.191.106 at 2013-04-28 19:36:58 +0000
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered users/index.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 243ms (Views: 140.1ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 159.91.191.106 at 2013-04-28 19:36:58 +0000
+Served asset /application.css - 304 Not Modified (48ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 159.91.191.106 at 2013-04-28 19:36:58 +0000
+Served asset /friendships.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/moments.css?body=1" for 159.91.191.106 at 2013-04-28 19:36:58 +0000
+Served asset /moments.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.css?body=1" for 159.91.191.106 at 2013-04-28 19:36:58 +0000
+Served asset /users.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 159.91.191.106 at 2013-04-28 19:36:58 +0000
+Served asset /scaffolds.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 159.91.191.106 at 2013-04-28 19:36:58 +0000
+Served asset /user_sessions.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 159.91.191.106 at 2013-04-28 19:36:59 +0000
+Served asset /jquery.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 159.91.191.106 at 2013-04-28 19:36:59 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 159.91.191.106 at 2013-04-28 19:36:59 +0000
+Served asset /friendships.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/moments.js?body=1" for 159.91.191.106 at 2013-04-28 19:36:59 +0000
+Served asset /moments.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 159.91.191.106 at 2013-04-28 19:36:59 +0000
+Served asset /user_sessions.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/users.js?body=1" for 159.91.191.106 at 2013-04-28 19:36:59 +0000
+Served asset /users.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 159.91.191.106 at 2013-04-28 19:36:59 +0000
+Served asset /application.js - 304 Not Modified (6ms)
+
+
+Started POST "/login/" for 159.91.102.187 at 2013-04-28 19:37:32 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 5 LIMIT 1[0m
+Completed 200 OK in 199ms (Views: 0.3ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/users" for 159.91.66.170 at 2013-04-28 19:37:46 +0000
+Processing by UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Adam Cumiskey", "password"=>"[FILTERED]", "username"=>"adam", "email"=>"adam.cumiskey@gmail.com"}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'adam' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+Completed 200 OK in 150ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/rails.png" for 159.91.191.106 at 2013-04-28 19:37:48 +0000
+Served asset /rails.png - 200 OK (1ms)
+
+
+Started GET "/assets/rails.png" for 159.91.191.106 at 2013-04-28 19:38:09 +0000
+Served asset /rails.png - 304 Not Modified (0ms)
+
+
+Started GET "/" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered users/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 91ms (Views: 89.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:27 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started DELETE "/users/4" for 159.91.191.106 at 2013-04-28 19:38:42 +0000
+Processing by UsersController#destroy as JSON
+  Parameters: {"authenticity_token"=>"Av2eTp+y+fcLajKU8JuMO9BQH9kDEgP2pIx3xCi9jOQ=", "id"=>"4"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "4"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "users" WHERE "users"."id" = ?  [["id", 4]]
+  [1m[36m (17.6ms)[0m  [1mcommit transaction[0m
+Completed 204 No Content in 21ms (ActiveRecord: 18.2ms)
+
+
+Started GET "/" for 159.91.191.106 at 2013-04-28 19:38:43 +0000
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" 
+  Rendered users/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 92ms (Views: 90.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 159.91.191.106 at 2013-04-28 19:38:44 +0000
+Served asset /application.js - 304 Not Modified (1ms)
