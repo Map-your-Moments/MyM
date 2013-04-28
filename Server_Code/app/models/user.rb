@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
    has_many :friendships
-   has_many :cnfirmed_friendships
+   has_many :confirmed_friendships
    has_many :pending_friendships
    has_many :friends, :through => :confirmed_friendships
    has_one :api_key

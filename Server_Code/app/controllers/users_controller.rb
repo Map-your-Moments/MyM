@@ -14,11 +14,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(session[:user_id])
+    #@user = User.find(session[:user_id])
+    @user = current_user
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: {latitude:  @user.latitude, longitude: @user.longitude} }
+      format.json { render json: User.all }
+      #format.json { render json: {latitude:  @user.latitude, longitude: @user.longitude} }
     end
   end
 

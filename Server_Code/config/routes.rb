@@ -11,6 +11,7 @@ ServerCode::Application.routes.draw do
   post 'createfriend' => 'friendships#new', :defaults => {:format => 'json'}
   post 'friends' => 'friendships#show', :defaults => {:format => 'json'}
   post 'deletefriend' => 'friendships#destroy', :defaults => {:format => 'json'}
+  post 'users' => 'users#show', :defaults => {:format => 'json'}
   resources :user_sessions, :except => [:index, :edit]
   root :to => 'users#index'
   # The priority is based upon order of creation:
