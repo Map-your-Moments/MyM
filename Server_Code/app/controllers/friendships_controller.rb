@@ -145,7 +145,7 @@ class FriendshipsController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @friendship.errors, status: :unprocessable_entity }
+        format.json { render json: @friendship.errors, type: :unprocessable_entity }
       end
     end
   end
