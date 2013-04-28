@@ -14,11 +14,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(session[:user_id])
+    #@user = User.find(session[:user_id])
+    @user = current_user
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: {latitude:  @user.latitude, longitude: @user.longitude} }
+      format.json { render json: User.all }
+      #format.json { render json: {latitude:  @user.latitude, longitude: @user.longitude} }
     end
   end
 
@@ -42,10 +44,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.create_api_key
 
     respond_to do |format|
       if @user.save
+        @user.create_api_key
         UserMailer.welcome(@user).deliver
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: {created: true, access_token: @user.api_key.access_token}}

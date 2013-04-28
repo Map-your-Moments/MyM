@@ -25,11 +25,36 @@ class FriendshipsController < ApplicationController
   # GET /friendships/new
   # GET /friendships/new.json
   def new
-    @friendship = Friendship.new
+    @user=current_user
+    friend=User.find_by_email(params[:email])
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @friendship }
+    if(friend)
+      friendCheck=Friendship.find_by_user_id_and_friend_id(@user.id, friend.id)
+      if(!friendCheck)
+        @friendship = @user.friendships.build(:friend_id => friend.id)
+
+        respond_to do |format|
+          if @friendship.save
+            @friendship=friend.friendships.build(:friend_id => @user.id)
+            if @friendship.save
+              UserMailer.confirmation(@user,friend).deliver
+              format.html { redirect_to @friendship, notice: 'Friendship was successfully created.' }
+              format.json { render json: {:created => 'true', :exists => 'true', :friends => 'false'}}
+            else
+              format.html { render action: "new" }
+              format.json { render json: {:created => 'false', :exists => 'true', :friends => 'false'}}
+            end
+          else
+            render json: {:created => 'false', :exists => 'true', :friends => 'false'}
+          end
+        end
+      else
+        #If the friendship exist, return this fact to the app. It will notify the user.
+        render json: {:created => 'false', :exists => 'true', :friends => 'true'}
+      end
+    else
+      #If the user does not exist, let the app know.
+      render json: {:created => 'false', :exists => 'false',  :friends => 'false'}
     end
   end
 
@@ -37,7 +62,7 @@ class FriendshipsController < ApplicationController
   def edit
     @friendship = Friendship.find(params[:id])
   end
-
+=begin
   # POST /friendships
   # POST /friendships.json
   def create
@@ -68,6 +93,44 @@ class FriendshipsController < ApplicationController
       end
     else
       render json: {:created => 'false', :exists => 'false', :friends => 'false'}
+    end
+  end
+=end
+
+  def create
+    @user=User.find(params[:uid])
+    friend=User.find(params[:fid])
+    if(friend && @user)
+      friendShip=Friendship.find_by_user_id_and_friend_id(@user.id, friend.id)
+      if(friendShip)
+        friendShip.type='ConfirmedFriendship'
+        respond_to do |format|
+          if friendShip.save
+            friendShip=Friendship.find_by_user_id_and_friend_id(friend.id, @user.id)
+            friendShip.type='ConfirmedFriendship'
+            if friendShip.save
+              format.html { redirect_to @user, notice: 'Friendship was successfully created.' }
+              format.json { render json: {:created => 'true', :exists => 'true', :friends => 'false'}}
+            else
+              format.html { redirect_to @user, notice: 'Something went wrong!'}
+              format.json { render json: {:created => 'false', :exists => 'true', :friends => 'false'}}
+            end
+          else
+            format.html { redirect_to @user, notice: 'Something went wrong!'}
+            format.json {render json: {:created => 'false', :exists => 'false', :friends => 'false'}}
+          end
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to @user, notice: 'Something went wrong! According to our records, this friendship was never requested!'}
+          format.json {render json: {:created => 'false', :exists => 'false', :friends => 'false'}}
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @user, notice: 'Something went wrong! According to our records, you do not exist!'}
+        format.json {render json: {:created => 'false', :exists => 'false', :friends => 'false'}}
+      end
     end
   end
 
