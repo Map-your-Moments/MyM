@@ -16,7 +16,7 @@
 
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated;
 
-- (void)loadSections:(NSMutableArray *)friends;
+- (void)loadSections;
 
 @property(nonatomic, assign, readonly) BOOL showSectionIndexes;
 
