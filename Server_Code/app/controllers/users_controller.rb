@@ -53,7 +53,7 @@ class UsersController < ApplicationController
         format.json { render json: {created: true, exists: false, access_token: @user.api_key.access_token}}
       else
         format.html { render action: "new" }
-        format.json { render json: {created: false, exists: false, error: @user.errors_full_messages}}
+        format.json { render json: {created: false}}
       end
     end
   end

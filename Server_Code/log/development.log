@@ -46623,3 +46623,778 @@ Served asset /user_sessions.js - 304 Not Modified (0ms)
 
 Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 00:02:43 +0000
 Served asset /application.js - 304 Not Modified (44ms)
+
+
+Started GET "/" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered users/index.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 104ms (Views: 102.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /user_sessions.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /friendships.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:12 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" 
+  Rendered users/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 92ms (Views: 91.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 00:04:14 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 00:06:19 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.1ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 207ms (Views: 0.3ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 00:06:27 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (44.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 121ms (Views: 17.8ms | ActiveRecord: 45.6ms)
+
+
+Started GET "/" for 69.141.157.43 at 2013-04-29 00:12:27 +0000
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered users/index.html.erb within layouts/application (42.7ms)
+Completed 200 OK in 88ms (Views: 86.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /friendships.css - 304 Not Modified (6ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /moments.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 00:12:28 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 01:02:38 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 85ms (Views: 0.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 01:02:43 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 5ms (Views: 1.5ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 01:13:58 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 81ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 01:14:02 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 01:15:07 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 82ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 01:15:13 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.5ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 01:15:40 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 01:15:44 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 01:15:59 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 83ms (Views: 0.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 01:16:03 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.3ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 7ms (Views: 1.9ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 01:16:33 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 82ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 01:16:37 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 01:17:03 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwagner1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwagner1892' LIMIT 1
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 01:17:11 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 81ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 01:17:15 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/createfriend/" for 159.91.151.34 at 2013-04-29 01:17:55 +0000
+Processing by FriendshipsController#new as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"ger", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.3ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'ger' LIMIT 1
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/createfriend/" for 159.91.151.34 at 2013-04-29 01:18:13 +0000
+Processing by FriendshipsController#new as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"ger", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'ger' LIMIT 1
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered users/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 100ms (Views: 98.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /application.css - 304 Not Modified (39ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:37 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" 
+  Rendered users/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 89ms (Views: 88.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /jquery.js - 304 Not Modified (8ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:39 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/users/3" for 69.141.157.43 at 2013-04-29 01:30:42 +0000
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"3"}
+Completed 404 Not Found in 1ms
+
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  app/controllers/application_controller.rb:5:in `current_user'
+  app/controllers/users_controller.rb:18:in `show'
+
+
+  Rendered /home/ec2-user/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.5ms)
+  Rendered /home/ec2-user/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
+  Rendered /home/ec2-user/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.4ms)
+
+
+Started GET "/users/3/edit" for 69.141.157.43 at 2013-04-29 01:30:45 +0000
+Processing by UsersController#edit as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "3"]]
+Completed 500 Internal Server Error in 3ms
+
+ActionView::MissingTemplate (Missing template users/edit, application/edit with {:locale=>[:en], :formats=>[:json], :handlers=>[:erb, :builder, :coffee, :haml]}. Searched in:
+  * "/home/ec2-user/CSC470/Server_Code/app/views"
+):
+  actionpack (3.2.13) lib/action_view/path_set.rb:58:in `find'
+  actionpack (3.2.13) lib/action_view/lookup_context.rb:109:in `find'
+  actionpack (3.2.13) lib/action_view/renderer/abstract_renderer.rb:3:in `find_template'
+  actionpack (3.2.13) lib/action_view/renderer/template_renderer.rb:34:in `determine_template'
+  actionpack (3.2.13) lib/action_view/renderer/template_renderer.rb:10:in `render'
+  actionpack (3.2.13) lib/action_view/renderer/renderer.rb:36:in `render_template'
+  actionpack (3.2.13) lib/action_view/renderer/renderer.rb:17:in `render'
+  actionpack (3.2.13) lib/abstract_controller/rendering.rb:110:in `_render_template'
+  actionpack (3.2.13) lib/action_controller/metal/streaming.rb:225:in `_render_template'
+  actionpack (3.2.13) lib/abstract_controller/rendering.rb:103:in `render_to_body'
+  actionpack (3.2.13) lib/action_controller/metal/renderers.rb:28:in `render_to_body'
+  actionpack (3.2.13) lib/action_controller/metal/compatibility.rb:50:in `render_to_body'
+  actionpack (3.2.13) lib/abstract_controller/rendering.rb:88:in `render'
+  actionpack (3.2.13) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (3.2.13) lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render'
+  activesupport (3.2.13) lib/active_support/core_ext/benchmark.rb:5:in `block in ms'
+  /home/ec2-user/.rvm/rubies/ruby-1.9.3-p392/lib/ruby/1.9.1/benchmark.rb:295:in `realtime'
+  activesupport (3.2.13) lib/active_support/core_ext/benchmark.rb:5:in `ms'
+  actionpack (3.2.13) lib/action_controller/metal/instrumentation.rb:40:in `block in render'
+  actionpack (3.2.13) lib/action_controller/metal/instrumentation.rb:83:in `cleanup_view_runtime'
+  activerecord (3.2.13) lib/active_record/railties/controller_runtime.rb:24:in `cleanup_view_runtime'
+  actionpack (3.2.13) lib/action_controller/metal/instrumentation.rb:39:in `render'
+  actionpack (3.2.13) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (3.2.13) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (3.2.13) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.13) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.13) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:414:in `_run__532224798028855467__process_action__3019446779056672836__callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.13) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.13) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.13) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.13) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.13) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.13) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.13) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.13) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.13) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.13) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.13) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.13) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.13) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.13) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.13) lib/action_dispatch/routing/route_set.rb:612:in `call'
+  sass (3.2.7) lib/sass/plugin/rack.rb:54:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.5) lib/rack/etag.rb:23:in `call'
+  rack (1.4.5) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.5) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.13) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.13) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:405:in `_run__4344949929908901659__call__3585347549366773678__callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.13) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.13) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/reloader.rb:65:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.13) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.13) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.13) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.13) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.5) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.13) lib/action_dispatch/middleware/static.rb:63:in `call'
+  railties (3.2.13) lib/rails/engine.rb:479:in `call'
+  railties (3.2.13) lib/rails/application.rb:223:in `call'
+  rack (1.4.5) lib/rack/content_length.rb:14:in `call'
+  rack (1.4.5) lib/rack/handler/webrick.rb:59:in `service'
+  /home/ec2-user/.rvm/rubies/ruby-1.9.3-p392/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+  /home/ec2-user/.rvm/rubies/ruby-1.9.3-p392/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+  /home/ec2-user/.rvm/rubies/ruby-1.9.3-p392/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+
+
+  Rendered /home/ec2-user/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/missing_template.erb within rescues/layout (0.5ms)
+
+
+Started GET "/users/3/edit.html" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "3"]]
+  Rendered users/_form.html.erb (8.7ms)
+  Rendered users/edit.html.erb within layouts/application (15.5ms)
+Completed 200 OK in 102ms (Views: 101.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /jquery.js - 304 Not Modified (10ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 01:30:49 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/users" for 69.141.157.43 at 2013-04-29 01:30:54 +0000
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" [0m
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/new" for 69.141.157.43 at 2013-04-29 01:31:07 +0000
+Processing by UsersController#new as JSON
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new.html" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (2.9ms)
+  Rendered users/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 87ms (Views: 86.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /friendships.css - 304 Not Modified (7ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 01:31:10 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/users" for 69.141.157.43 at 2013-04-29 01:31:25 +0000
+Processing by UsersController#create as JSON
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Av2eTp+y+fcLajKU8JuMO9BQH9kDEgP2pIx3xCi9jOQ=", "user"=>{"username"=>"alsodave", "password"=>"[FILTERED]", "email"=>"davehand13@gmail.com", "name"=>"Also Dave"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'alsodave' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'davehand13@gmail.com' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 90ms
+
+NoMethodError (undefined method `errors_full_messages' for #<User:0x007fbc0075af58>):
+  app/controllers/users_controller.rb:56:in `block (2 levels) in create'
+  app/controllers/users_controller.rb:48:in `create'
+
+
+  Rendered /home/ec2-user/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /home/ec2-user/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /home/ec2-user/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.5ms)
+
+
+Started POST "/users" for 69.141.157.43 at 2013-04-29 01:32:41 +0000
+Processing by UsersController#create as JSON
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Av2eTp+y+fcLajKU8JuMO9BQH9kDEgP2pIx3xCi9jOQ=", "user"=>{"username"=>"alsodave", "password"=>"[FILTERED]", "email"=>"davehand13@gmail.com", "name"=>"Also Dave"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'alsodave' LIMIT 1[0m
+  [1m[35mUser Exists (0.0ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'davehand13@gmail.com' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Completed 200 OK in 93ms (Views: 0.2ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/users" for 69.141.157.43 at 2013-04-29 01:32:51 +0000
+Processing by UsersController#create as JSON
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Av2eTp+y+fcLajKU8JuMO9BQH9kDEgP2pIx3xCi9jOQ=", "user"=>{"username"=>"davehand", "password"=>"[FILTERED]", "email"=>"handd1@apps.tcnj.edu", "name"=>"Also Dave"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."username" = 'davehand' LIMIT 1[0m
+  [1m[35mUser Exists (0.0ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'handd1@apps.tcnj.edu' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Completed 200 OK in 83ms (Views: 0.2ms | ActiveRecord: 0.3ms)
