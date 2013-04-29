@@ -53,6 +53,9 @@
     [super viewDidLoad];
     self.createNewUserButton = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(createNewUserButtonPress)];
     self.navigationItem.rightBarButtonItem = self.createNewUserButton;
+    
+    UITapGestureRecognizer *tapDismiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTap)];
+    [self.view addGestureRecognizer:tapDismiss];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> createNewUserButtonPress
@@ -150,6 +153,8 @@
     }
 }
 
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger nextTag = textField.tag + 1;
@@ -166,4 +171,10 @@
     
     return NO;
 }
+
+- (void)backgroundTap
+{
+    [self.view endEditing:YES];
+}
+
 @end

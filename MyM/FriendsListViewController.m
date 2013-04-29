@@ -12,6 +12,8 @@
 #import "AJNotificationView.h"
 
 #define BANNER_DEFAULT_TIME 2
+#define TAG_ADD 1
+#define TAG_DELETE 2
 
 static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentifier = @"kSearchBarTableViewControllerDefaultTableViewCellIdentifier";
 
@@ -33,8 +35,11 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 @property (nonatomic) NSDictionary *jsonDeleteFriend;
 
 @property (nonatomic) UITextField *textField;
-@property (nonatomic) UIAlertView* alert;
+//@property (nonatomic) UIAlertView* alert;
 @property (nonatomic) NSString* email;
+
+- (IBAction)addFriendAlert:(id)sender;
+- (IBAction)deleteFriendAlert:(id)sender;
 
 @end
 
@@ -60,7 +65,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 -(void) viewWillAppear:(BOOL)animated
 {
     if (_showSectionIndexes) {
-        [self loadSections];
+        [self loadFriends];
     }
 }
 
@@ -84,23 +89,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     self.searchDisplayController.searchResultsDataSource = self;
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.delegate = self;
-    
-    _alert = [[UIAlertView alloc] initWithTitle:@"Friend Request"
-                                  message:@"Enter the user's email below.\n\n\n"
-                                  delegate:self
-                                  cancelButtonTitle:@"Cancel"
-                                  otherButtonTitles:@"Send", nil];
-    
-    _textField = [[UITextField alloc] init];
-    [_textField setBackgroundColor:[UIColor whiteColor]];
-    _textField.borderStyle = UITextBorderStyleRoundedRect;
-    _textField.frame = CGRectMake(15, 75, 255, 30);
-    //_textField.font = [UIFont fontWithName:@"ArialMT" size:16];
-    _textField.placeholder = @"email@example.com";
-    _textField.textAlignment = NSTextAlignmentCenter;
-    _textField.keyboardAppearance = UIKeyboardAppearanceDefault;
-    [_textField becomeFirstResponder];
-    [_alert addSubview:_textField];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -204,58 +192,77 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     //add code here
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
-        
-        NSString *user = [_user token];
-        NSString *email = @"jwagner1892@gmail.com";
-        NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email": email };
-        
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(queue, ^{
-            dispatch_async(dispatch_get_main_queue(), ^ {
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-            });
-            self.jsonDeleteFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/deletefriend"];
-            dispatch_async(dispatch_get_main_queue(), ^ {
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                if(self.jsonDeleteFriend)
+#pragma mark - Delete Friends
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self deleteFriendAlert:self];
+    }
+}
+
+- (void)deleteFriend
+{
+    NSString *user = [_user token];
+    NSString *email = @"jwagner1892@gmail.com";
+    NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email": email };
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        self.jsonDeleteFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/deletefriend"];
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            if(self.jsonDeleteFriend)
+            {
+                if([self.jsonDeleteFriend[@"deleted"] boolValue])
                 {
-                    if([self.jsonDeleteFriend[@"deleted"] boolValue])
-                    {
-                        NSLog(@"%@ successfully removed from friends list.", email);
-                        NSString *title = email;
-                        title = [title stringByAppendingString:@" successfully removed from friends list."];
-                        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
-                                                       title:title
-                                             linedBackground:AJLinedBackgroundTypeDisabled
-                                                   hideAfter:BANNER_DEFAULT_TIME];
-                    }
-                    else
-                    {
-                        NSLog(@"%@ could not be removed from your friends list. Try again.", email);
-                        NSString *title = email;
-                        title = [title stringByAppendingString:@" could not be removed from your friends list. Try again."];
-                        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                                       title:title
-                                             linedBackground:AJLinedBackgroundTypeDisabled
-                                                   hideAfter:BANNER_DEFAULT_TIME];
-                    }
-                }
-                else
-                {
-                    NSLog(@"Http request failed.");
-                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                                   title:@"Server request failed."
+                    NSLog(@"%@ successfully removed from friends list.", email);
+                    NSString *title = email;
+                    title = [title stringByAppendingString:@" successfully removed from friends list."];
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                   title:title
                                          linedBackground:AJLinedBackgroundTypeDisabled
                                                hideAfter:BANNER_DEFAULT_TIME];
                 }
-            });
+                else
+                {
+                    NSLog(@"%@ could not be removed from your friends list. Try again.", email);
+                    NSString *title = email;
+                    title = [title stringByAppendingString:@" could not be removed from your friends list. Try again."];
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:title
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                }
+            }
+            else
+            {
+                NSLog(@"Http request failed.");
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Server request failed."
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+            }
         });
+    });
+    
+    [self loadFriends];
+}
 
-        [self loadSections];
-    }
+- (IBAction)deleteFriendAlert:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Deleting Friend"
+                          message:@"Are you sure you want to unfriend this person?"
+                          delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Confirm", nil];
+    alert.tag = TAG_DELETE;
+    [alert show];
 }
 
 #pragma mark - Search Delegate
@@ -290,7 +297,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     return YES;
 }
 
-- (void)loadSections
+#pragma mark - Get Friends
+
+- (void)loadFriends
 {
     NSString *user = [_user token];
     NSDictionary *jsonDictionary = @{ @"access_token" : user};
@@ -339,24 +348,12 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     });
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString* detailString = _textField.text;
-    NSLog(@"Email is: %@", detailString); //Put it on the debugger
-    if ([_textField.text length] <= 0 || buttonIndex == 0){
-        _textField.text = NULL;
-        return; //If cancel or 0 length string the string doesn't matter
-    }
-    if (buttonIndex == 1) {
-        _email = _textField.text;
-        [self addFriend];
-    }
-}
+#pragma mark - Add Friend
 
 - (void)addFriendButton
 {
     NSLog(@"Add a Friend");
-    
-    [_alert show];
+    [self addFriendAlert:self];
 }
 
 - (void)addFriend
@@ -381,7 +378,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         if([self.jsonAddFriend[@"created"] boolValue])
                         {
-                            [self loadSections];
+                            [self loadFriends];
                             _textField.text = NULL;
                             NSLog(@"Friend request sent.");
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
@@ -426,6 +423,56 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             }
         });
     });
+}
+
+- (IBAction)addFriendAlert:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Friend Request"
+                          message:@"Please enter the user's email.\n\n\n"
+                          delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Send", nil];
+    
+    _textField = [[UITextField alloc] init];
+    [_textField setBackgroundColor:[UIColor whiteColor]];
+    _textField.borderStyle = UITextBorderStyleRoundedRect;
+    _textField.frame = CGRectMake(15, 75, 255, 30);
+    _textField.font = [UIFont fontWithName:@"ArialMT" size:20];
+    _textField.adjustsFontSizeToFitWidth = YES;
+    _textField.minimumFontSize = 10;
+    _textField.placeholder = @"email@example.com";
+    _textField.textAlignment = NSTextAlignmentCenter;
+    _textField.keyboardAppearance = UIKeyboardAppearanceDefault;
+    [_textField becomeFirstResponder];
+    [alert addSubview:_textField];
+    
+    alert.tag = TAG_ADD;
+    [alert show];
+    
+}
+
+#pragma mark - Alert Views
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString* detailString = _textField.text;
+    NSLog(@"Email is: %@", detailString); //Put it on the debugger
+    if (alertView.tag == TAG_ADD && ([_textField.text length] <= 0 || buttonIndex == 0)){
+        _textField.text = NULL;
+        return; //If cancel or 0 length string the string doesn't matter
+    }
+    if (alertView.tag == TAG_ADD && buttonIndex == 1) {
+        _email = _textField.text;
+        [self addFriend];
+    }
+    if(alertView.tag == TAG_DELETE && buttonIndex == 0)
+    {
+        return;
+    }
+    if(alertView.tag == TAG_DELETE && buttonIndex == 1)
+    {
+        [self deleteFriend];
+    }
 }
 
 @end
