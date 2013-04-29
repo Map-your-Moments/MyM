@@ -47398,3 +47398,1026 @@ Processing by UsersController#create as JSON
   [1m[35mUser Exists (0.0ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'handd1@apps.tcnj.edu' LIMIT 1
   [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
 Completed 200 OK in 83ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" 
+  Rendered users/index.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 91ms (Views: 89.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /user_sessions.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:04 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/" for 69.141.157.43 at 2013-04-29 01:53:05 +0000
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  Rendered users/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 49ms (Views: 47.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /friendships.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /moments.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /user_sessions.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_sessions.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /user_sessions.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/users.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/friendships.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /friendships.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/moments.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /moments.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 69.141.157.43 at 2013-04-29 01:53:06 +0000
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:02:05 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 88ms (Views: 0.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:02:10 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 7ms (Views: 2.6ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/createfriend/" for 159.91.151.34 at 2013-04-29 02:02:27 +0000
+Processing by FriendshipsController#new as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"jwagner1892@gmail.com", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'jwagner1892@gmail.com' LIMIT 1[0m
+  [1m[35mFriendship Load (0.1ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.4ms)[0m  INSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["created_at", Mon, 29 Apr 2013 02:02:27 UTC +00:00], ["friend_id", 4], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 02:02:27 UTC +00:00], ["user_id", 3]]
+  [1m[36m (23.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Mon, 29 Apr 2013 02:02:27 UTC +00:00], ["friend_id", 3], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 02:02:27 UTC +00:00], ["user_id", 4]]
+  [1m[35m (17.8ms)[0m  commit transaction
+  Rendered user_mailer/confirmation.html.erb (0.6ms)
+
+Sent mail to jwagner1892@gmail.com (246ms)
+Date: Mon, 29 Apr 2013 02:02:28 +0000
+From: mapyourmoments.corp@gmail.com
+To: jwagner1892@gmail.com
+Message-ID: <517dd4b45e1d_7a723fde001300242537e@domU-12-31-39-0B-06-DA.mail>
+Subject: MyM - Friend Request
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3>jwags1892 has requested to be your friend on MyM!</h3>
+    <p>Click the link below to confirm the friendship</p>
+    <p>
+    <a href="http://54.225.76.23:3000/confirm_friendship?uid=4&fid=3">Confirm</a>
+    </p>
+  </body>
+</html>
+
+Completed 200 OK in 373ms (Views: 0.3ms | ActiveRecord: 44.6ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:02:28 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.5ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/deletefriend" for 159.91.151.34 at 2013-04-29 02:03:36 +0000
+Processing by FriendshipsController#destroy as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"jwagner1892@gmail.com", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'jwagner1892@gmail.com' LIMIT 1
+  [1m[36mFriendship Load (0.1ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "friendships" WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = ?  [["id", 5]]
+  [1m[36m (27.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mFriendship Load (0.1ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 4 AND "friendships"."friend_id" = 3 LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "friendships" WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = ?  [["id", 6]]
+  [1m[36m (30.2ms)[0m  [1mcommit transaction[0m
+Completed 200 OK in 76ms (Views: 0.2ms | ActiveRecord: 59.0ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:03:36 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:06:18 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 81ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:06:28 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:07:11 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 79ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:07:15 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:07:41 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 79ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:07:46 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:08:25 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 81ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:08:29 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:09:07 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 79ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:09:11 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:10:18 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:10:22 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:11:19 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 80ms (Views: 0.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:11:23 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 5ms (Views: 1.4ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:15:21 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1[0m
+Completed 200 OK in 79ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 02:15:28 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 02:16:37 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwagner1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."username" = 'jwagner1892' LIMIT 1
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 03:20:31 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.1ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 80ms (Views: 0.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:20:37 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 03:31:25 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.1ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 81ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:31:32 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 50ms (Views: 47.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 03:33:59 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:34:08 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 03:39:43 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:39:50 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 03:42:07 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 98ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:43:41 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/createfriend/" for 159.91.151.34 at 2013-04-29 03:44:04 +0000
+Processing by FriendshipsController#new as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"jwagner1892@gmail.com", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.3ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'jwagner1892@gmail.com' LIMIT 1
+  [1m[36mFriendship Load (0.1ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Mon, 29 Apr 2013 03:44:04 UTC +00:00], ["friend_id", 4], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 03:44:04 UTC +00:00], ["user_id", 3]]
+  [1m[35m (22.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["created_at", Mon, 29 Apr 2013 03:44:04 UTC +00:00], ["friend_id", 3], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 03:44:04 UTC +00:00], ["user_id", 4]]
+  [1m[36m (18.6ms)[0m  [1mcommit transaction[0m
+  Rendered user_mailer/confirmation.html.erb (0.1ms)
+
+Sent mail to jwagner1892@gmail.com (241ms)
+Date: Mon, 29 Apr 2013 03:44:04 +0000
+From: mapyourmoments.corp@gmail.com
+To: jwagner1892@gmail.com
+Message-ID: <517dec84125e0_7a721db157c2546@domU-12-31-39-0B-06-DA.mail>
+Subject: MyM - Friend Request
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3>jwags1892 has requested to be your friend on MyM!</h3>
+    <p>Click the link below to confirm the friendship</p>
+    <p>
+    <a href="http://54.225.76.23:3000/confirm_friendship?uid=4&fid=3">Confirm</a>
+    </p>
+  </body>
+</html>
+
+Completed 200 OK in 299ms (Views: 0.4ms | ActiveRecord: 42.1ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:44:06 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/confirm_friendship?uid=4&fid=3" for 159.91.151.34 at 2013-04-29 03:45:48 +0000
+Processing by FriendshipsController#create as HTML
+  Parameters: {"uid"=>"4", "fid"=>"3"}
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" IS NULL LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "4"]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "3"]]
+  [1m[36mFriendship Load (0.1ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 4 AND "friendships"."friend_id" = 3 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mUPDATE "friendships" SET "type" = 'ConfirmedFriendship', "updated_at" = '2013-04-29 03:45:48.798230' WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = 8[0m
+  [1m[35m (28.3ms)[0m  commit transaction
+  [1m[36mFriendship Load (0.2ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mUPDATE "friendships" SET "type" = 'ConfirmedFriendship', "updated_at" = '2013-04-29 03:45:48.829884' WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = 7[0m
+  [1m[35m (17.7ms)[0m  commit transaction
+Redirected to http://54.225.76.23:3000/users/4
+Completed 302 Found in 55ms (ActiveRecord: 47.2ms)
+
+
+Started GET "/users/4" for 159.91.151.34 at 2013-04-29 03:45:50 +0000
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" 
+Completed 200 OK in 6ms (Views: 2.7ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:46:34 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 03:49:28 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.1ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:49:35 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 03:50:40 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 03:50:46 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/login/" for 159.91.151.34 at 2013-04-29 04:05:52 +0000
+Processing by UserSessionsController#create as */*
+  Parameters: {"username"=>"jwags1892", "password"=>"[FILTERED]", "user_session"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."username" = 'jwags1892' LIMIT 1[0m
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."user_id" = 3 LIMIT 1
+Completed 200 OK in 80ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:05:59 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/deletefriend" for 159.91.151.34 at 2013-04-29 04:06:16 +0000
+Processing by FriendshipsController#destroy as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"jwagner1892@gmail.com", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'jwagner1892@gmail.com' LIMIT 1
+  [1m[36mFriendship Load (0.2ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "friendships" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."id" = ?  [["id", 7]]
+  [1m[36m (25.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mFriendship Load (0.2ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 4 AND "friendships"."friend_id" = 3 LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "friendships" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."id" = ?  [["id", 8]]
+  [1m[36m (18.7ms)[0m  [1mcommit transaction[0m
+Completed 200 OK in 61ms (Views: 0.2ms | ActiveRecord: 45.1ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:06:16 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/createfriend/" for 159.91.151.34 at 2013-04-29 04:06:39 +0000
+Processing by FriendshipsController#new as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"jwagner1892@gmail.com", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.3ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'jwagner1892@gmail.com' LIMIT 1[0m
+  [1m[35mFriendship Load (0.1ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["created_at", Mon, 29 Apr 2013 04:06:39 UTC +00:00], ["friend_id", 4], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 04:06:39 UTC +00:00], ["user_id", 3]]
+  [1m[36m (25.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Mon, 29 Apr 2013 04:06:39 UTC +00:00], ["friend_id", 3], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 04:06:39 UTC +00:00], ["user_id", 4]]
+  [1m[35m (26.7ms)[0m  commit transaction
+  Rendered user_mailer/confirmation.html.erb (0.1ms)
+
+Sent mail to jwagner1892@gmail.com (199ms)
+Date: Mon, 29 Apr 2013 04:06:39 +0000
+From: mapyourmoments.corp@gmail.com
+To: jwagner1892@gmail.com
+Message-ID: <517df1cfa6af3_7a723fddf811c8742551e@domU-12-31-39-0B-06-DA.mail>
+Subject: MyM - Friend Request
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3>jwags1892 has requested to be your friend on MyM!</h3>
+    <p>Click the link below to confirm the friendship</p>
+    <p>
+    <a href="http://54.225.76.23:3000/confirm_friendship?uid=4&fid=3">Confirm</a>
+    </p>
+  </body>
+</html>
+
+Completed 200 OK in 273ms (Views: 0.3ms | ActiveRecord: 54.0ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:06:40 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 5ms (Views: 1.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/confirm_friendship?uid=4&fid=3" for 159.91.151.34 at 2013-04-29 04:07:27 +0000
+Processing by FriendshipsController#create as HTML
+  Parameters: {"uid"=>"4", "fid"=>"3"}
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" IS NULL LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "4"]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "3"]]
+  [1m[35mFriendship Load (0.1ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 4 AND "friendships"."friend_id" = 3 LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  UPDATE "friendships" SET "type" = 'ConfirmedFriendship', "updated_at" = '2013-04-29 04:07:27.282049' WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = 10
+  [1m[36m (36.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mFriendship Load (0.1ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 4 LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  UPDATE "friendships" SET "type" = 'ConfirmedFriendship', "updated_at" = '2013-04-29 04:07:27.321052' WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = 9
+  [1m[36m (18.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://54.225.76.23:3000/users/4
+Completed 302 Found in 62ms (ActiveRecord: 56.3ms)
+
+
+Started GET "/users/4" for 159.91.151.34 at 2013-04-29 04:07:28 +0000
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"4"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" [0m
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:07:41 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (1.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 54ms (Views: 2.0ms | ActiveRecord: 1.9ms)
+
+
+Started POST "/deletefriend" for 159.91.151.34 at 2013-04-29 04:07:48 +0000
+Processing by FriendshipsController#destroy as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"canas007@gmail.com", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'canas007@gmail.com' LIMIT 1[0m
+  [1m[35mFriendship Load (0.1ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 5 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 5 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "friendships" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."id" = ?[0m  [["id", 3]]
+  [1m[35m (22.1ms)[0m  commit transaction
+  [1m[36mFriendship Load (0.2ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 5 AND "friendships"."friend_id" = 3 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "friendships" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."id" = ?[0m  [["id", 4]]
+  [1m[35m (17.8ms)[0m  commit transaction
+Completed 200 OK in 48ms (Views: 0.2ms | ActiveRecord: 41.0ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:07:48 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 5ms (Views: 1.5ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/createfriend/" for 159.91.151.34 at 2013-04-29 04:08:34 +0000
+Processing by FriendshipsController#new as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"canas007@gmail.com", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'canas007@gmail.com' LIMIT 1
+  [1m[36mFriendship Load (0.1ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 5 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Mon, 29 Apr 2013 04:08:34 UTC +00:00], ["friend_id", 5], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 04:08:34 UTC +00:00], ["user_id", 3]]
+  [1m[35m (19.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["created_at", Mon, 29 Apr 2013 04:08:34 UTC +00:00], ["friend_id", 3], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 04:08:34 UTC +00:00], ["user_id", 5]]
+  [1m[36m (26.7ms)[0m  [1mcommit transaction[0m
+  Rendered user_mailer/confirmation.html.erb (0.1ms)
+
+Sent mail to canas007@gmail.com (242ms)
+Date: Mon, 29 Apr 2013 04:08:34 +0000
+From: mapyourmoments.corp@gmail.com
+To: canas007@gmail.com
+Message-ID: <517df24267a0b_7a722098614256a9@domU-12-31-39-0B-06-DA.mail>
+Subject: MyM - Friend Request
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3>jwags1892 has requested to be your friend on MyM!</h3>
+    <p>Click the link below to confirm the friendship</p>
+    <p>
+    <a href="http://54.225.76.23:3000/confirm_friendship?uid=5&fid=3">Confirm</a>
+    </p>
+  </body>
+</html>
+
+Completed 200 OK in 304ms (Views: 0.4ms | ActiveRecord: 47.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:08:36 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 5ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/confirm_friendship?uid=5&fid=3" for 159.91.151.34 at 2013-04-29 04:09:37 +0000
+Processing by FriendshipsController#create as HTML
+  Parameters: {"uid"=>"5", "fid"=>"3"}
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" IS NULL LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "5"]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "3"]]
+  [1m[36mFriendship Load (0.1ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 5 AND "friendships"."friend_id" = 3 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mUPDATE "friendships" SET "type" = 'ConfirmedFriendship', "updated_at" = '2013-04-29 04:09:37.215162' WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = 12[0m
+  [1m[35m (28.5ms)[0m  commit transaction
+  [1m[36mFriendship Load (0.2ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 5 LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mUPDATE "friendships" SET "type" = 'ConfirmedFriendship', "updated_at" = '2013-04-29 04:09:37.246191' WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = 11[0m
+  [1m[35m (17.7ms)[0m  commit transaction
+Redirected to http://54.225.76.23:3000/users/5
+Completed 302 Found in 53ms (ActiveRecord: 47.3ms)
+
+
+Started GET "/users/5" for 159.91.151.34 at 2013-04-29 04:09:38 +0000
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" 
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:25:36 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users" for 159.91.151.34 at 2013-04-29 04:25:54 +0000
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" [0m
+Completed 200 OK in 15ms (Views: 1.8ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/createfriend/" for 159.91.151.34 at 2013-04-29 04:26:34 +0000
+Processing by FriendshipsController#new as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"wagnerj5@apps.tcnj.edu", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.2ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'wagnerj5@apps.tcnj.edu' LIMIT 1[0m
+  [1m[35mFriendship Load (0.1ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 3 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["created_at", Mon, 29 Apr 2013 04:26:34 UTC +00:00], ["friend_id", 3], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 04:26:34 UTC +00:00], ["user_id", 3]]
+  [1m[36m (20.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "friendships" ("created_at", "friend_id", "type", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", Mon, 29 Apr 2013 04:26:34 UTC +00:00], ["friend_id", 3], ["type", "PendingFriendship"], ["updated_at", Mon, 29 Apr 2013 04:26:34 UTC +00:00], ["user_id", 3]]
+  [1m[35m (17.4ms)[0m  commit transaction
+  Rendered user_mailer/confirmation.html.erb (0.1ms)
+
+Sent mail to wagnerj5@apps.tcnj.edu (283ms)
+Date: Mon, 29 Apr 2013 04:26:34 +0000
+From: mapyourmoments.corp@gmail.com
+To: wagnerj5@apps.tcnj.edu
+Message-ID: <517df67add751_7a723fddf81689902577e@domU-12-31-39-0B-06-DA.mail>
+Subject: MyM - Friend Request
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3>jwags1892 has requested to be your friend on MyM!</h3>
+    <p>Click the link below to confirm the friendship</p>
+    <p>
+    <a href="http://54.225.76.23:3000/confirm_friendship?uid=3&fid=3">Confirm</a>
+    </p>
+  </body>
+</html>
+
+Completed 200 OK in 364ms (Views: 0.3ms | ActiveRecord: 40.0ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:26:37 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 6ms (Views: 2.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/confirm_friendship?uid=3&fid=3" for 159.91.151.34 at 2013-04-29 04:28:35 +0000
+Processing by FriendshipsController#create as HTML
+  Parameters: {"uid"=>"3", "fid"=>"3"}
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" IS NULL LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", "3"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", "3"]]
+  [1m[35mFriendship Load (0.1ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 3 LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  UPDATE "friendships" SET "type" = 'ConfirmedFriendship', "updated_at" = '2013-04-29 04:28:35.964234' WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = 13
+  [1m[36m (21.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mFriendship Load (0.2ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 3 LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to http://54.225.76.23:3000/users/3
+Completed 302 Found in 124ms (ActiveRecord: 23.7ms)
+
+
+Started GET "/users/3" for 159.91.151.34 at 2013-04-29 04:28:36 +0000
+Processing by UsersController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" 
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:28:47 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.2ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3
+Completed 200 OK in 13ms (Views: 2.7ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/deletefriend" for 159.91.151.34 at 2013-04-29 04:31:00 +0000
+Processing by FriendshipsController#destroy as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "email"=>"wagnerj5@apps.tcnj.edu", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[36mApiKey Load (0.1ms)[0m  [1mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'wagnerj5@apps.tcnj.edu' LIMIT 1
+  [1m[36mFriendship Load (0.1ms)[0m  [1mSELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 3 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 3 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "friendships" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."id" = ?  [["id", 13]]
+  [1m[36m (20.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mFriendship Load (0.3ms)[0m  SELECT "friendships".* FROM "friendships" WHERE "friendships"."user_id" = 3 AND "friendships"."friend_id" = 3 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "friendships" WHERE "friendships"."type" IN ('PendingFriendship') AND "friendships"."id" = ?  [["id", 14]]
+  [1m[36m (25.4ms)[0m  [1mcommit transaction[0m
+Completed 200 OK in 127ms (Views: 0.2ms | ActiveRecord: 49.4ms)
+
+
+Started POST "/friends" for 159.91.151.34 at 2013-04-29 04:31:01 +0000
+Processing by FriendshipsController#show as JSON
+  Parameters: {"access_token"=>"be93d4c868eca27f2b241bced9617e83", "friendship"=>{}}
+WARNING: Can't verify CSRF token authenticity
+  [1m[35mApiKey Load (0.3ms)[0m  SELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."access_token" = 'be93d4c868eca27f2b241bced9617e83' LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" INNER JOIN "friendships" ON "users"."id" = "friendships"."friend_id" WHERE "friendships"."type" IN ('ConfirmedFriendship') AND "friendships"."user_id" = 3[0m
+Completed 200 OK in 8ms (Views: 2.9ms | ActiveRecord: 0.8ms)
