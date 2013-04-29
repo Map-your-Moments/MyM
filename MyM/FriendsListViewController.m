@@ -19,7 +19,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 @interface FriendsListViewController ()
 
-@property(nonatomic, copy) NSMutableArray *friends;
+@property(nonatomic, copy) NSArray *friends;
 @property(nonatomic, copy) NSArray *sections;
 
 @property(nonatomic, copy) NSArray *filteredFriends;
@@ -35,8 +35,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 @property (nonatomic) NSDictionary *jsonDeleteFriend;
 
 @property (nonatomic) UITextField *textField;
-//@property (nonatomic) UIAlertView* alert;
-@property (nonatomic) NSString* email;
+
+@property (nonatomic) NSString* addEmail;
+@property (nonatomic) NSString* deleteEmail;
 
 - (IBAction)addFriendAlert:(id)sender;
 - (IBAction)deleteFriendAlert:(id)sender;
@@ -174,12 +175,15 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     
     if (tableView == self.tableView) {
         if (self.showSectionIndexes) {
-            cell.textLabel.text = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+            NSString* cellName = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"name"];
+            cell.textLabel.text = cellName;
         } else {
-            cell.textLabel.text = [self.friends objectAtIndex:indexPath.row];
+            NSString* cellName = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"name"];
+            cell.textLabel.text = cellName;
         }
     } else {
-        cell.textLabel.text = [self.filteredFriends objectAtIndex:indexPath.row];
+        NSString* cellName = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"name"];
+        cell.textLabel.text = cellName;
     }
     
     return cell;
@@ -198,6 +202,15 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
+        if (tableView == self.tableView) {
+            if (self.showSectionIndexes) {
+                _deleteEmail = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"email"];
+            } else {
+                _deleteEmail = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"email"];
+            }
+        } else {
+            _deleteEmail = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"email"];
+        }
         [self deleteFriendAlert:self];
     }
 }
@@ -205,8 +218,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (void)deleteFriend
 {
     NSString *user = [_user token];
-    NSString *email = @"jwagner1892@gmail.com";
-    NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email": email };
+    NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email": _deleteEmail };
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -220,8 +232,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 if([self.jsonDeleteFriend[@"deleted"] boolValue])
                 {
-                    NSLog(@"%@ successfully removed from friends list.", email);
-                    NSString *title = email;
+                    NSLog(@"%@ successfully removed from friends list.", _deleteEmail);
+                    NSString *title = _deleteEmail;
                     title = [title stringByAppendingString:@" successfully removed from friends list."];
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
                                                    title:title
@@ -230,8 +242,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 }
                 else
                 {
-                    NSLog(@"%@ could not be removed from your friends list. Try again.", email);
-                    NSString *title = email;
+                    NSLog(@"%@ could not be removed from your friends list. Try again.", _deleteEmail);
+                    NSString *title = _deleteEmail;
                     title = [title stringByAppendingString:@" could not be removed from your friends list. Try again."];
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                    title:title
@@ -314,7 +326,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if(self.jsonGetFriends)
             {
-                _friends = [self.jsonGetFriends valueForKey: @"name"];
+                _friends = self.jsonGetFriends;
             }
             else
             {
@@ -332,9 +344,10 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 [unsortedSections addObject:[NSMutableArray array]];
             }
             
-            for (NSString *personName in _friends) {
-                NSInteger index = [collation sectionForObject:personName collationStringSelector:@selector(description)];
-                [[unsortedSections objectAtIndex:index] addObject:personName];
+            for (NSDictionary* dict in _friends) {
+                NSString* name = [dict objectForKey:@"name"];
+                NSInteger index = [collation sectionForObject:name collationStringSelector:@selector(description)];
+                [[unsortedSections objectAtIndex:index] addObject:dict];
             }
             
             NSMutableArray *sortedSections = [[NSMutableArray alloc] initWithCapacity:unsortedSections.count];
@@ -360,7 +373,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 {
     NSString *user = [_user token];
     
-    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : _email };
+    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : _addEmail };
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
@@ -462,7 +475,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         return; //If cancel or 0 length string the string doesn't matter
     }
     if (alertView.tag == TAG_ADD && buttonIndex == 1) {
-        _email = _textField.text;
+        _addEmail = _textField.text;
         [self addFriend];
     }
     if(alertView.tag == TAG_DELETE && buttonIndex == 0)
