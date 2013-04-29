@@ -48,6 +48,7 @@ class UserSessionsController < ApplicationController
     user = User.find_by_username(params[:username])
 
     if (user && user.authenticate(params[:password]))
+        session[:user_id]=user.id
         render json: {logged_in: true, access_token: user.api_key.access_token}
     else 
         render json: {logged_in: false, access_token: nil}

@@ -108,6 +108,7 @@ class FriendshipsController < ApplicationController
           if friendShip.save
             friendShip=Friendship.find_by_user_id_and_friend_id(friend.id, @user.id)
             friendShip.type='ConfirmedFriendship'
+            session[:user_id]=@user.id
             if friendShip.save
               format.html { redirect_to @user, notice: 'Friendship was successfully created.' }
               format.json { render json: {:created => 'true', :exists => 'true', :friends => 'false'}}
@@ -154,7 +155,7 @@ class FriendshipsController < ApplicationController
   # DELETE /friendships/1.json
   def destroy
     @user=current_user
-    friend = User.find_by_email(Params[:email])
+    friend = User.find_by_email(params[:email])
     if(friend)
       friendCheck=Friendship.find_by_user_id_and_friend_id(@user.id, friend.id)
       if(friendCheck)

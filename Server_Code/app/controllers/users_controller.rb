@@ -50,10 +50,10 @@ class UsersController < ApplicationController
         @user.create_api_key
         UserMailer.welcome(@user).deliver
         format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: {created: true, access_token: @user.api_key.access_token}}
+        format.json { render json: {created: true, exists: false, access_token: @user.api_key.access_token}}
       else
         format.html { render action: "new" }
-        format.json { render json: {created: false}}
+        format.json { render json: {created: false, exists: false, error: @user.errors_full_messages}}
       end
     end
   end

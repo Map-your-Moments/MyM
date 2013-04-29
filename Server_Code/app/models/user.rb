@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
    has_one :api_key
    attr_accessible :username , :password , :latitude , :longitude , :email , :message , :name
    has_secure_password
-   validates_uniqueness_of :username
+   validates_uniqueness_of :username, :email
    
 end
