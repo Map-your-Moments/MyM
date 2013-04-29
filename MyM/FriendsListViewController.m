@@ -85,7 +85,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.delegate = self;
     
-    _alert = [[UIAlertView alloc] initWithTitle:@"Add Friend"
+    _alert = [[UIAlertView alloc] initWithTitle:@"Friend Request"
                                   message:@"Enter the user's email below.\n\n\n"
                                   delegate:self
                                   cancelButtonTitle:@"Cancel"
@@ -95,10 +95,10 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     [_textField setBackgroundColor:[UIColor whiteColor]];
     _textField.borderStyle = UITextBorderStyleRoundedRect;
     _textField.frame = CGRectMake(15, 75, 255, 30);
-    _textField.font = [UIFont fontWithName:@"ArialMT" size:16];
+    //_textField.font = [UIFont fontWithName:@"ArialMT" size:16];
     _textField.placeholder = @"email@example.com";
     _textField.textAlignment = NSTextAlignmentCenter;
-    _textField.keyboardAppearance = UIKeyboardAppearanceAlert;
+    _textField.keyboardAppearance = UIKeyboardAppearanceDefault;
     [_textField becomeFirstResponder];
     [_alert addSubview:_textField];
 }
@@ -209,7 +209,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         //add code here for when you hit delete
         
         NSString *user = [_user token];
-        NSString *email = @"wagnerj5@apps.tcnj.edu";
+        NSString *email = @"jwagner1892@gmail.com";
         NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email": email };
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -306,7 +306,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             if(self.jsonGetFriends)
             {
                 _friends = [self.jsonGetFriends valueForKey: @"name"];
-                NSLog(@"Friend array: %@", _friends);
             }
             else
             {
@@ -329,14 +328,10 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 [[unsortedSections objectAtIndex:index] addObject:personName];
             }
             
-            NSLog(@"unsortedSections array: %@", unsortedSections);
-            
             NSMutableArray *sortedSections = [[NSMutableArray alloc] initWithCapacity:unsortedSections.count];
             for (NSMutableArray *section in unsortedSections) {
                 [sortedSections addObject:[collation sortedArrayFromArray:section collationStringSelector:@selector(description)]];
             }
-            
-            NSLog(@"sortedSections array: %@", sortedSections);
             
             self.sections = sortedSections;
             [self.tableView reloadData];
@@ -346,8 +341,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString* detailString = _textField.text;
-    NSLog(@"String is: %@", detailString); //Put it on the debugger
+    NSLog(@"Email is: %@", detailString); //Put it on the debugger
     if ([_textField.text length] <= 0 || buttonIndex == 0){
+        _textField.text = NULL;
         return; //If cancel or 0 length string the string doesn't matter
     }
     if (buttonIndex == 1) {
@@ -386,6 +382,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                         if([self.jsonAddFriend[@"created"] boolValue])
                         {
                             [self loadSections];
+                            _textField.text = NULL;
                             NSLog(@"Friend request sent.");
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
                                                            title:@"Friend request email successfully sent!"
@@ -427,9 +424,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                                      linedBackground:AJLinedBackgroundTypeDisabled
                                            hideAfter:BANNER_DEFAULT_TIME];
             }
-            
-            _textField.text = NULL;
-            
         });
     });
 }
