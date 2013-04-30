@@ -10,6 +10,7 @@
  */
 
 #import "MomentDataController.h"
+#import "S3UtilityClass.h"
 
 @protocol mapProtocol
 -(void)setDataController:(MomentDataController *)dataController;
