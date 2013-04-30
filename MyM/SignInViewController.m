@@ -224,7 +224,7 @@ bool startInsideAboutImageView;
                                     andSettings:nil
                                      andMoments:nil
                                      andFriends:nil
-                               andPprofileImage:self.userPicture
+                               andProfileImage:self.userPicture
                                        andToken:self.jsonLogin[@"access_token"]];
     self.txtPassword.text = @"";
     self.txtUsername.text = @"";
