@@ -104,6 +104,11 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
+}
+
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated
 {
     NSAssert(YES, @"This method should be handled by a subclass!");
