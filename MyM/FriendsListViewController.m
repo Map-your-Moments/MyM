@@ -182,19 +182,95 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSearchBarTableViewControllerDefaultTableViewCellIdentifier];
     }
     
-    cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"]; //Add code for changing profile pic
-    
     if (tableView == self.tableView) {
         if (self.showSectionIndexes) {
             NSString* cellName = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"name"];
             cell.textLabel.text = cellName;
-        } else {
+            
+            NSString* cellEmail = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"email"];
+            
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                });
+            
+                NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+                    if(gravPic)
+                    {
+                        cell.imageView.image = [UIImage imageWithData:gravPic];
+                    }
+
+                });
+            });
+            
+            if(!cell.imageView.image)
+            {
+                cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
+            }
+        }
+        else {
             NSString* cellName = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"name"];
             cell.textLabel.text = cellName;
+            
+            NSString* cellEmail = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"email"];
+            
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                });
+                
+                NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                    
+                    if(gravPic)
+                    {
+                        cell.imageView.image = [UIImage imageWithData:gravPic];
+                    }
+                    
+                });
+            });
+            
+            if(!cell.imageView.image)
+            {
+                cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
+            }
+
         }
-    } else {
+    }
+    else {
         NSString* cellName = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"name"];
         cell.textLabel.text = cellName;
+        
+        NSString* cellEmail = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"email"];
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            });
+            
+            NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                
+                if(gravPic)
+                {
+                    cell.imageView.image = [UIImage imageWithData:gravPic];
+                }
+                
+            });
+        });
+        
+        if(!cell.imageView.image)
+        {
+            cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
+        }
     }
     
     return cell;

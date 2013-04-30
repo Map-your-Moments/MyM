@@ -17,7 +17,7 @@
 							   [NSCharacterSet whitespaceCharacterSet]]
 							  lowercaseString];
 	
-	NSString *gravatarEndPoint = [NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=80", [curatedEmail MD5]];
+	NSString *gravatarEndPoint = [NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=80&d=https%%3A%%2F%%2Fs3.amazonaws.com%%2Fmym-csc470%%2FDefaultProfilePic@2x.png", [curatedEmail MD5]];
 	
 	return [NSURL URLWithString:gravatarEndPoint];
 }
