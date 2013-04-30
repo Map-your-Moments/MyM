@@ -22,8 +22,7 @@
 #define navboxRectHidden CGRectMake(-100, screenHeight / 2 - navboxRecSize / 2, 50, navboxRecSize)
 #define navboxRectLoc CGRectMake(0, 0, 10, screenHeight)
 
-@implementation MapViewController
-{
+@implementation MapViewController {
     UIView *navBox;
     
     BOOL navboxIsVisible;
@@ -112,12 +111,6 @@
     [navBox.layer setShadowOffset:CGSizeMake(7.0, 5.0)];
     
     [self.view addSubview:navBox];
-
-//    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [searchButton setFrame:CGRectMake(14, 35, 70, 45)];
-//    [searchButton addTarget:self action:@selector(menuButtonShowHide) forControlEvents:UIControlEventTouchUpInside];
-//    [searchButton setTitle:@"Close" forState:UIControlStateNormal];
-//    [navBox addSubview:searchButton];
     
     UIImage *friendsImage = [UIImage imageNamed:@"Group.png"];
     UIButton *friendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -182,8 +175,6 @@
                                                            highlightedImage:storyMenuItemImagePressed
                                                                ContentImage:videoImage
                                                     highlightedContentImage:nil];
-    
-    
     
     AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:[NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, nil]];
     menu.delegate = self;
