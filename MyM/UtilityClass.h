@@ -11,6 +11,6 @@
 @interface UtilityClass : NSObject
 
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address;
-+ (NSDictionary *)GetFriendsJSON:(NSOutputStream *)fileStream fromAddress:(NSString *)address;
++ (NSArray *)GetFriendsJSON: (NSDictionary *)jsonDictionary toAddress:(NSString *)address;
 
 @end

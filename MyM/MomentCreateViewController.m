@@ -53,6 +53,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     
     [self setTitle:@"Create Moment"];
     
+    [self.navigationController setNavigationBarHidden:NO];
     
     NSUserDefaults *ud = [[NSUserDefaults alloc] initWithUser:[currentUser username]];
     self.trips = [ud valueForKey:@"Trips"];
@@ -130,13 +131,15 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [actionSheet showInView:self.view];
 }
 
+#pragma mark - Add Moment
+
 -(void)share:(id)sender
 {
     NSString *title = [self.captionTextField text];
     NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@","];
     NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     
-    NSString *tripID = @"MyM_Trip";//[[self.tripButton titleLabel]text];
+    NSString *ID = [NSString stringWithFormat:@"%f_%f_%f", currentLocation.latitude, currentLocation.longitude, currentDate.timeIntervalSince1970];
     
     id momentContent = nil;
     switch(self.contentType)
@@ -161,7 +164,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     {
         if(![[self.captionTextField text] isEqualToString:@""] && [tags count] != 0 && ![[self.tagTextField text] isEqualToString:@""])
         {
-            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andTripID:tripID];
+            Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andID:ID];
             [self.dataController addMomentToMomentsWithMoment:newMoment];
             [self.delegate setDataController:self.dataController];
             [self.navigationController popViewControllerAnimated:YES];

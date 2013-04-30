@@ -12,6 +12,8 @@
 
 static AmazonDynamoDBClient *amazonDynamoDBClient = nil;
 static AmazonSESClient *amazonSESClient = nil;
+static AmazonS3Client *amazonS3Client = nil;
+
 
 + (AmazonDynamoDBClient *)amazonDynamoDBClient
 {
@@ -29,6 +31,17 @@ static AmazonSESClient *amazonSESClient = nil;
     }
     
     return amazonSESClient;
+}
+
++ (AmazonS3Client *)amazonS3Client
+{
+    if (!amazonS3Client) {
+        amazonS3Client = [[AmazonS3Client alloc] initWithCredentials:[[AmazonCredentials alloc]
+                                                                initWithAccessKey:@"AKIAIJ2XEGCE5J2EWSTQ"
+                                                                    withSecretKey:@"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"]];
+    }
+    
+    return amazonS3Client;
 }
 
 @end

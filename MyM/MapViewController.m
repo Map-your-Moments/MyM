@@ -30,7 +30,7 @@
     BOOL firstLoad;
 }
 
-@synthesize mapView, dataController, user;
+@synthesize mapView, dataController, user, tempMoment;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,7 +61,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self loadAnnotations];
+    [self updateAnnotations];
+    [self zoomToUserLocation];
     
     if(firstLoad)
     {
@@ -274,6 +275,7 @@
 {
     SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
     [mapView removeAnnotations:mapView.annotations]; //!
+    [vc setUser:user];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -286,6 +288,7 @@
     [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 
 #pragma mark - AwesomeMenu Delegate
 
@@ -330,13 +333,32 @@
 
 #pragma mark - MapView methods
 
+- (void)updateAnnotations
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        
+        S3UtilityClass *s3 = [[S3UtilityClass alloc] init];
+        dataController = [s3 updateMomentsForUser:user];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [self loadAnnotations];
+        });
+    });
+}
+
 - (void)loadAnnotations
 {
     for(int i = 0; i < [dataController countOfMoments]; i++) {
         Moment *moment = [dataController objectInMomentsAtIndex:i];
         MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
         pin.coordinate = moment.coords;
-        pin.title = moment.user.username;
+        pin.title = moment.user;
         pin.subtitle = moment.title;
         [mapView addAnnotation:pin];
     }
