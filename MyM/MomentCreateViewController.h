@@ -9,16 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
-#import <AVFoundation/AVAudioPlayer.h>
 #import "Moment.h"
 #import "MapViewController.h"
 
 @interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
-    IBOutlet UITextView *textView;
-    IBOutlet UIImageView *imageView;
-    
     MPMoviePlayerController *moviePlayer;
+    AVAudioRecorder *recorder;
     
     UIView *recorderView;
     NSURL *tempFile;
@@ -40,11 +37,13 @@
 
 @property (nonatomic, weak) id<mapProtocol> delegate;
 
+-(void)detectMoementType;
 -(void)presentTextView;
 -(void)presentImageSelector;
 -(void)presentVideoSelector;
 - (void)share:(id)sender;
 
 - (IBAction)hideKeybord:(id)sender;
+- (IBAction)playStockVideo:(id)sender;
 
 @end

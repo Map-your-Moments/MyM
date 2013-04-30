@@ -10,6 +10,12 @@
 #import "Constants.h"
 
 @interface MomentCreateViewController ()
+{
+    IBOutlet UITextView *textView;
+    IBOutlet UIImageView *imageView;
+    
+    NSURL *takenVideo;
+}
 
 @end
 
@@ -42,32 +48,37 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    //Null objects
     textView = nil;
     imageView = nil;
     
+    //setup hide keyboard for textFields
     [self.captionTextField addTarget:self action:@selector(hideKeybord:) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.tagTextField addTarget:self action:@selector(hideKeybord:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
+    //setup navigation view with title and submit button
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStyleDone target:self action:@selector(share:)];
-    
     [self setTitle:@"Create Moment"];
     
     
-    NSUserDefaults *ud = [[NSUserDefaults alloc] initWithUser:[currentUser username]];
-    self.trips = [ud valueForKey:@"Trips"];
+    //not needed, no more trips
+    //NSUserDefaults *ud = [[NSUserDefaults alloc] initWithUser:[currentUser username]];
+    //self.trips = [ud valueForKey:@"Trips"];
     
-    [self doWork];
+    [self detectMoementType];
 }
 
--(void)doWork
-{
-    if(imageView != nil && [[imageView.gestureRecognizers objectAtIndex:0] isEnabled])
-    {
+-(void)detectMoementType {
+    
+    //if imageview exists and the gesture is enabled, set it enabled 
+    if(imageView != nil && [[imageView.gestureRecognizers objectAtIndex:0] isEnabled]){
+        
         [[imageView.gestureRecognizers objectAtIndex:0] setEnabled:NO];
         return;
     }
     
+    //Detect type of moment to setup
     if(contentType == kTAGMOMENTTEXT){
         NSLog(@"Text View");
         [self performSelector:@selector(presentTextView) withObject:nil afterDelay:0];
@@ -79,27 +90,19 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     else if(contentType == kTAGMOMENTVIDEO){
         //Set video content
         NSLog(@"Video Content");
-        //[self performSelector:@selector(presentVideoSelector) withObject:nil afterDelay:0];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Yet Implemented" message:@"Video Moments are not yet completed" delegate:self cancelButtonTitle:@"Boo..." otherButtonTitles: nil];
-        [alert show];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self performSelector:@selector(presentVideoSelector) withObject:nil afterDelay:0];
     }
     else if(contentType == kTAGMOMENTAUDIO){
         //Set audio
         NSLog(@"Audio Content");
-        //[self performSelector:@selector(presentAudioSelector) withObject:nil afterDelay:0];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not Yet Implemented" message:@"Audio Moments are not yet completed" delegate:self cancelButtonTitle:@"Boo..." otherButtonTitles: nil];
-        [alert show];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self performSelector:@selector(presentAudioSelector) withObject:nil afterDelay:0];
     }
 }
 
-#pragma mark Present ContentViews
-
+#pragma mark NEW Present Media Views
 -(void)presentTextView
 {
     UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
-    //UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
     textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
     [textView setTag:kTAGMOMENTTEXT];
     [textView setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
@@ -107,10 +110,78 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [self.contentView addSubview:textView];
 }
 
+-(void)presentImageSelector
+{
+    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+    [pickerController setDelegate:self];
+    [pickerController setMediaTypes:[NSArray arrayWithObject:kStillImages]];
+    [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+    [self presentViewController:pickerController animated:YES completion:NULL];
+}
+
+-(void)presentVideoSelector
+{
+    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+    [pickerController setDelegate:self];
+    [pickerController setMediaTypes:[NSArray arrayWithObject:kVideoCamera]];
+    [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+    [self presentViewController:pickerController animated:YES completion:NULL];
+}
+
+-(void)presentAudioSelector
+{
+    recorderView = [[UIView alloc]initWithFrame:CGRectMake(135, 214, 75, 75)];
+    [recorderView setBackgroundColor:[UIColor greenColor]];
+    UIImageView *recorderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
+    [recorderImageView setImage:[UIImage imageNamed:@"siri-logo.png"]];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopRecordingManually)];
+    [tapGesture setNumberOfTapsRequired:1];
+    [tapGesture setNumberOfTouchesRequired:1];
+    [recorderImageView addGestureRecognizer:tapGesture];
+    [recorderImageView setUserInteractionEnabled:YES];
+    [recorderView addSubview:recorderImageView];
+    [self.view addSubview:recorderView];
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [audioSession setActive:YES error:nil];
+    
+    tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]];
+    
+    recorder = [[AVAudioRecorder alloc] initWithURL:tempFile settings:nil error:nil];
+    [recorder setDelegate:self];
+    [recorder prepareToRecord];
+    [recorder record];
+}
+
+
+#pragma mark OLD Present Media Views
+/*
+-(void)presentTextView
+{
+    UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
+    textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
+    [textView setTag:kTAGMOMENTTEXT];
+    [textView setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+    [textView setFont:[UIFont fontWithName:@"Arial" size:24]];
+    [self.contentView addSubview:textView];
+}
 
 -(void)presentImageSelector
 {
-    NSLog(@"Displaying Picker");
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Select Media" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Saved Image", @"Take Picture", nil];
     [actionSheet setTag:kUIACTIONSHEETTAGPICTURE];
     [actionSheet showInView:self.view];
@@ -128,7 +199,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Select Media" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Saved Audio", @"Record Audio", nil];
     [actionSheet setTag:kUIACTIONSHEETTAGAUDIO];
     [actionSheet showInView:self.view];
-}
+}*/
 
 -(void)share:(id)sender
 {
@@ -169,110 +240,16 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     }
 }
 
-- (IBAction)hideKeybord:(id)sender {
-    [self.captionTextField resignFirstResponder];
-    [self.tagTextField resignFirstResponder];
-    if(textView != nil)
-        [textView resignFirstResponder];
-}
-
-#pragma mark UIActionSheet Delegate
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+-(void)playAudio
 {
-    if(imageView != nil && ![[imageView.gestureRecognizers objectAtIndex:0] isEnabled])
-        [[imageView.gestureRecognizers objectAtIndex:0] setEnabled:YES];
-    
-    if([actionSheet tag] == kUIACTIONSHEETTAGPICTURE)
-    {
-        if(buttonIndex == kSAVEDBUTTONINDEX)
-        {
-            UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
-            [pickerController setDelegate:self];
-            [pickerController setMediaTypes:[NSArray arrayWithObject:kStillImages]];
-            [pickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-            [self presentViewController:pickerController animated:YES completion:NULL];
-        }
-        else if(buttonIndex == kTAKEMEDIA)
-        {
-            if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
-                [alert show];
-                return;
-            }
-            UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
-            [pickerController setDelegate:self];
-            [pickerController setMediaTypes:[NSArray arrayWithObject:kStillImages]];
-            [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-            [self presentViewController:pickerController animated:YES completion:NULL];
-        }
-        else if(buttonIndex == [actionSheet cancelButtonIndex])
-        {
-            if(imageView == nil)
-                [self creatMissingImageView];
-        }
-        
-    }
-    else if([actionSheet tag] == kUIACTIONSHEETTAGVIDEO)
-    {
-        if(buttonIndex == kSAVEDBUTTONINDEX)
-        {
-            UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
-            [pickerController setDelegate:self];
-            [pickerController setMediaTypes:[NSArray arrayWithObject:kVideoCamera]];
-            [pickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-            [self presentViewController:pickerController animated:YES completion:NULL];
-        }
-        else if(buttonIndex == kTAKEMEDIA)
-        {
-            if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
-                [alert show];
-                return;
-            }
-            UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
-            [pickerController setDelegate:self];
-            [pickerController setMediaTypes:[NSArray arrayWithObject:kVideoCamera]];
-            [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-            [self presentViewController:pickerController animated:YES completion:NULL];
-        }
-        else if(buttonIndex == [actionSheet cancelButtonIndex])
-        {
-            if(imageView == nil)
-                [self creatMissingImageView];
-        }
-    }
-    else if([actionSheet tag] == kUIACTIONSHEETTAGAUDIO)
-    {
-        if(buttonIndex == kSAVEDBUTTONINDEX)
-        {
-            
-        }
-        else if(buttonIndex == kTAKEMEDIA)
-        {
-            
-            recorderView = [[UIView alloc]initWithFrame:CGRectMake(135, 214, 75, 75)];
-            [recorderView setBackgroundColor:[UIColor greenColor]];
-            UIImageView *recorderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
-            [recorderImageView setImage:[UIImage imageNamed:@"siri-logo.png"]];
-
-            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopRecordingManually)];
-            [tapGesture setNumberOfTapsRequired:1];
-            [tapGesture setNumberOfTouchesRequired:1];
-            [recorderImageView addGestureRecognizer:tapGesture];
-            [recorderImageView setUserInteractionEnabled:YES];
-            [recorderView addSubview:recorderImageView];
-            [self.view addSubview:recorderView];
-            
-            tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]];
-            
-            recorder = [[AVAudioRecorder alloc] initWithURL:tempFile settings:nil error:nil];
-            [recorder setDelegate:self];
-            [recorder prepareToRecord];
-            [recorder record];
-        }
-    }
+    NSLog(@"Playing...");
+    NSString *file = [[NSBundle mainBundle] resourcePath];
+    file = [file stringByAppendingPathComponent:kMomemtAudio_temp];
+    NSURL *audioURL = tempFile;
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
+    [player setDelegate:self];
+    [player setVolume:1];
+    [player play];
 }
 
 -(void)stopRecordingManually
@@ -283,51 +260,35 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [self playAudio];
 }
 
--(void)playAudio
+-(void)creatMissingImageView
 {
-    NSLog(@"Playing...");
-    NSString *file = [[NSBundle mainBundle] resourcePath];
-    file = [file stringByAppendingString:@"TestAudio.mp4"];
-    NSURL *audioURL = [NSURL URLWithString:file];//[NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]]; //[NSURL URLWithString:[[NSBundle mainBundle] pathForResource:@"TestAudio" ofType:@"m4a"]];
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
-    [player setDelegate:self];
-    [player setVolume:1];
-    [player play];
-}
-
--(IBAction)playTestFile:(id)sender
-{
-    /*NSString *path = [[NSBundle mainBundle] pathForResource:@"TestAudio"
-                                                     ofType:@"mp4"];
-    SystemSoundID soundID;
-    AudioServicesCreateSystemSoundID(
-                                     (__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
-    AudioServicesPlaySystemSound (soundID);*/
-    //*************************
+    UIImage *img = [UIImage imageNamed:@"missing_logo.png"];
+    imageView = [[UIImageView alloc] initWithImage:img];
+    [imageView setFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
     
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"TestAudio" ofType:@"mp4"];
-    NSURL *audioURL = [NSURL URLWithString:file];
-    NSData *fileData = [NSData dataWithContentsOfFile:file];
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:fileData error:NULL];
-    [player setDelegate:self];
-    [player setVolume:1];
-    [player play];
-}
-
-#pragma mark AVAudioRecorder Delegate
--(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
-{
-    NSLog(@"*Recording Finished*");
-}
-
-#pragma mark AVAudioPlayer Delegate
-
--(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-    NSLog(@"*Player Finished*");
+    UILongPressGestureRecognizer *holdDownRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doWork)];
+    [holdDownRecognizer setNumberOfTapsRequired:0];
+    [holdDownRecognizer setNumberOfTouchesRequired:1];
+    [holdDownRecognizer setMinimumPressDuration:0.5];
+    
+    [imageView setUserInteractionEnabled:YES];
+    [imageView addGestureRecognizer:holdDownRecognizer];
+    
+    [self.contentView addSubview:imageView];
 }
 
 #pragma mark UIImagePickerController Delegate
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    NSLog(@"No Picture Selected");
+    if(imageView == nil)
+    {
+        [self creatMissingImageView];
+    }
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -356,87 +317,179 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     
         NSURL *videoURL = [info valueForKey:UIImagePickerControllerMediaURL];
         
-        moviePlayer =  [[MPMoviePlayerController alloc]
-                        initWithContentURL:videoURL];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(moviePlayBackDidFinish:)
-                                                     name:MPMoviePlayerPlaybackDidFinishNotification
-                                                   object:moviePlayer];
-        moviePlayer.movieSourceType = MPMovieSourceTypeFile;
-        moviePlayer.view.backgroundColor = [UIColor clearColor];
-        moviePlayer.controlStyle = MPMovieControlStyleDefault;
-        moviePlayer.shouldAutoplay = YES;
-        [moviePlayer prepareToPlay];
-        [self.view addSubview:moviePlayer.view];
-        [moviePlayer setFullscreen:YES animated:YES];
-        [moviePlayer play];
+        takenVideo = videoURL;
     }
 }
 
--(IBAction)playMovie
+- (IBAction)playVideo:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:@"http://www.ebookfrenzy.com/ios_book/movie/movie.mov"];
-    moviePlayer =  [[MPMoviePlayerController alloc]
-                    initWithContentURL:url];
+    MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:takenVideo];
+    [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlayBackDidFinish:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:moviePlayer];
-    
-    
-    moviePlayer.controlStyle = MPMovieControlStyleDefault;
-    moviePlayer.shouldAutoplay = YES;
-    [self.view addSubview:moviePlayer.view];
-    [moviePlayer setFullscreen:YES animated:YES];
+    moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    [moviePlayerViewController.moviePlayer play];
 }
 
-- (void) moviePlayBackDidFinish:(NSNotification*)notification {
-    MPMoviePlayerController *player = [notification object];
+- (void) movieFinishedCallback:(NSNotification*) aNotification {
+    MPMoviePlayerController *player = [aNotification object];
     [[NSNotificationCenter defaultCenter]
      removeObserver:self
      name:MPMoviePlayerPlaybackDidFinishNotification
-     object:moviePlayer];
-    
-    if ([player respondsToSelector:@selector(setFullscreen:animated:)])
-    {
-        [player.view removeFromSuperview];
-    }
+     object:player];
 }
 
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+#pragma mark AVAudioRecorder Delegate
+-(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
-    NSLog(@"No Picture Selected");
-    if(imageView == nil)
-    {
-        [self creatMissingImageView];
-    }
-    
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    NSLog(@"*Recording Finished*");
 }
 
--(void)creatMissingImageView
+#pragma mark AVAudioPlayer Delegate
+
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    UIImage *img = [UIImage imageNamed:@"missing_logo.png"];
-    imageView = [[UIImageView alloc] initWithImage:img];
-    [imageView setFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
-    
-    UILongPressGestureRecognizer *holdDownRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doWork)];
-    [holdDownRecognizer setNumberOfTapsRequired:0];
-    [holdDownRecognizer setNumberOfTouchesRequired:1];
-    [holdDownRecognizer setMinimumPressDuration:0.5];
-    
-    [imageView setUserInteractionEnabled:YES];
-    [imageView addGestureRecognizer:holdDownRecognizer];
-    
-    [self.contentView addSubview:imageView];
+    NSLog(@"*Player Finished*");
+}
+
+- (IBAction)hideKeybord:(id)sender {
+    [self.captionTextField resignFirstResponder];
+    [self.tagTextField resignFirstResponder];
+    if(textView != nil)
+        [textView resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+//OLD METHOD: Keeping for reference for now...
+/*
+ #pragma mark UIActionSheet Delegate
+ -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+ {
+ if(imageView != nil && ![[imageView.gestureRecognizers objectAtIndex:0] isEnabled])
+ [[imageView.gestureRecognizers objectAtIndex:0] setEnabled:YES];
+ 
+ if([actionSheet tag] == kUIACTIONSHEETTAGPICTURE)
+ {
+ if(buttonIndex == kSAVEDBUTTONINDEX)
+ {
+ UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+ [pickerController setDelegate:self];
+ [pickerController setMediaTypes:[NSArray arrayWithObject:kStillImages]];
+ [pickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+ [self presentViewController:pickerController animated:YES completion:NULL];
+ }
+ else if(buttonIndex == kTAKEMEDIA)
+ {
+ if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+ {
+ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
+ [alert show];
+ return;
+ }
+ UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+ [pickerController setDelegate:self];
+ [pickerController setMediaTypes:[NSArray arrayWithObject:kStillImages]];
+ [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+ [self presentViewController:pickerController animated:YES completion:NULL];
+ }
+ else if(buttonIndex == [actionSheet cancelButtonIndex])
+ {
+ if(imageView == nil)
+ [self creatMissingImageView];
+ }
+ 
+ }
+ else if([actionSheet tag] == kUIACTIONSHEETTAGVIDEO)
+ {
+ if(buttonIndex == kSAVEDBUTTONINDEX)
+ {
+ UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+ [pickerController setDelegate:self];
+ [pickerController setMediaTypes:[NSArray arrayWithObject:kVideoCamera]];
+ [pickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+ [self presentViewController:pickerController animated:YES completion:NULL];
+ }
+ else if(buttonIndex == kTAKEMEDIA)
+ {
+ if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+ {
+ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
+ [alert show];
+ return;
+ }
+ UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+ [pickerController setDelegate:self];
+ [pickerController setMediaTypes:[NSArray arrayWithObject:kVideoCamera]];
+ [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+ [self presentViewController:pickerController animated:YES completion:NULL];
+ }
+ else if(buttonIndex == [actionSheet cancelButtonIndex])
+ {
+ if(imageView == nil)
+ [self creatMissingImageView];
+ }
+ }
+ else if([actionSheet tag] == kUIACTIONSHEETTAGAUDIO)
+ {
+ if(buttonIndex == kSAVEDBUTTONINDEX)
+ {
+ 
+ }
+ else if(buttonIndex == kTAKEMEDIA)
+ {
+ 
+ recorderView = [[UIView alloc]initWithFrame:CGRectMake(135, 214, 75, 75)];
+ [recorderView setBackgroundColor:[UIColor greenColor]];
+ UIImageView *recorderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
+ [recorderImageView setImage:[UIImage imageNamed:@"siri-logo.png"]];
+ 
+ UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopRecordingManually)];
+ [tapGesture setNumberOfTapsRequired:1];
+ [tapGesture setNumberOfTouchesRequired:1];
+ [recorderImageView addGestureRecognizer:tapGesture];
+ [recorderImageView setUserInteractionEnabled:YES];
+ [recorderView addSubview:recorderImageView];
+ [self.view addSubview:recorderView];
+ 
+ AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+ [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+ [audioSession setActive:YES error:nil];
+ 
+ tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]];
+ 
+ recorder = [[AVAudioRecorder alloc] initWithURL:tempFile settings:nil error:nil];
+ [recorder setDelegate:self];
+ [recorder prepareToRecord];
+ [recorder record];
+ }
+ else if(buttonIndex == [actionSheet cancelButtonIndex])
+ {
+ 
+ }
+ }
+ }
+ */
+
+/*-(IBAction)playTestFile:(id)sender
+ {
+ NSString *path = [[NSBundle mainBundle] pathForResource:@"TestAudio"
+ ofType:@"mp4"];
+ SystemSoundID soundID;
+ AudioServicesCreateSystemSoundID(
+ (__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
+ AudioServicesPlaySystemSound (soundID);
+ *************************
+ 
+ NSString *file = [[NSBundle mainBundle] pathForResource:@"TestAudio" ofType:@"mp4"];
+ NSURL *audioURL = [NSURL URLWithString:file];
+ NSData *fileData = [NSData dataWithContentsOfFile:file];
+ AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:fileData error:NULL];
+ [player setDelegate:self];
+ [player setVolume:1];
+ [player play];
+ }*/
 
 @end
