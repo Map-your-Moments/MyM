@@ -61,7 +61,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self updateAnnotations];
-    [self zoomToUserLocation];
     
     if(firstLoad)
     {
