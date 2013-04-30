@@ -20,7 +20,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 @interface FriendsListViewController ()
 
 @property(nonatomic, copy) NSArray *friends;
-@property(nonatomic, copy) NSArray *friendsNames;
 @property(nonatomic, copy) NSArray *sections;
 
 @property(nonatomic, copy) NSArray *filteredFriends;
@@ -173,8 +172,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSearchBarTableViewControllerDefaultTableViewCellIdentifier];
-    
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSearchBarTableViewControllerDefaultTableViewCellIdentifier];
@@ -341,7 +338,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             if(self.jsonGetFriends)
             {
                 _friends = [[NSArray alloc ] initWithArray: self.jsonGetFriends];
-                _friendsNames = [[NSArray alloc ] initWithArray: [self.jsonGetFriends valueForKey:@"name"]];
             }
             else
             {
