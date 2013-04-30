@@ -7,8 +7,28 @@
 //
 
 #import "UtilityClass.h"
+#import "NSString+MD5.h"
 
 @implementation UtilityClass
+
++ (NSURL*) getGravatarURL:(NSString*) emailAddress
+{
+	NSString *curatedEmail = [[emailAddress stringByTrimmingCharactersInSet:
+							   [NSCharacterSet whitespaceCharacterSet]]
+							  lowercaseString];
+	
+	NSString *gravatarEndPoint = [NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=80", [curatedEmail MD5]];
+	
+	return [NSURL URLWithString:gravatarEndPoint];
+}
+
++ (NSData *) requestGravatar:(NSURL*) gravatarURL
+{
+	NSError *error;
+	NSData* data = [[NSData alloc] initWithContentsOfURL:gravatarURL
+												 options:NSDataReadingUncached error:&error];
+    return data ? data : nil;
+}
 
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address
 {
@@ -26,11 +46,9 @@
     
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
     NSDictionary *jsonresponse = POSTReply ? [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] : nil;
     
     return jsonresponse;
-    
 }
 
 + (NSDictionary *)GetFriendsJSON:(NSOutputStream *)fileStream fromAddress:(NSString *)address

@@ -12,5 +12,8 @@
 
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address;
 + (NSDictionary *)GetFriendsJSON:(NSOutputStream *)fileStream fromAddress:(NSString *)address;
++ (NSURL*) getGravatarURL:(NSString*) emailAddress;
++ (NSData *) requestGravatar:(NSURL*) gravatarURL;
+
 
 @end
