@@ -272,6 +272,7 @@
 
 - (void)friends
 {
+    [self hideNavbox];
     SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
     [mapView removeAnnotations:mapView.annotations]; //!
     [vc setUser:user];

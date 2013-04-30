@@ -36,9 +36,7 @@
             }
         });
     });
-
-    
-    
+        
     return friends;
 }
 
