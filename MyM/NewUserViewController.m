@@ -48,6 +48,11 @@
     [self.usernameTextField becomeFirstResponder];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
