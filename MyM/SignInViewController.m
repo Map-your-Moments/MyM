@@ -45,7 +45,6 @@ bool startInsideAboutImageView;
     } else {
         startInsideAboutImageView = NO;
     }
-    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

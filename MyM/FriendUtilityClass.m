@@ -20,12 +20,10 @@
     
     jsonGetFriends = [UtilityClass GetFriendsJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friends"];
     
-    if(jsonGetFriends)
-    {
+    if(jsonGetFriends) {
         friends = [[NSArray alloc ] initWithArray: jsonGetFriends];
     }
-    else
-    {
+    else {
         NSLog(@"Http request for friends list failed.");
     }
     
