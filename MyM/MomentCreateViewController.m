@@ -131,6 +131,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
         [alert show];
+        [self.navigationController popViewControllerAnimated:YES];
         return;
     }
     UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
