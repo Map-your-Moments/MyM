@@ -20,6 +20,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 @interface FriendsListViewController ()
 
 @property(nonatomic, copy) NSArray *friends;
+@property(nonatomic, copy) NSArray *friendsNames;
 @property(nonatomic, copy) NSArray *sections;
 
 @property(nonatomic, copy) NSArray *filteredFriends;
@@ -58,7 +59,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     if ((self = [super initWithNibName:nil bundle:nil])) {
         self.title = @"Friends";
         
-        _showSectionIndexes = showSectionIndexes;   
+        _showSectionIndexes = showSectionIndexes;
+        
     }
     return self;
 }
@@ -90,6 +92,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     self.searchDisplayController.searchResultsDataSource = self;
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.delegate = self;
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -169,9 +173,14 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSearchBarTableViewControllerDefaultTableViewCellIdentifier];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSearchBarTableViewControllerDefaultTableViewCellIdentifier];
     }
+    
+    cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"]; //Add code for changing profile pic
     
     if (tableView == self.tableView) {
         if (self.showSectionIndexes) {
@@ -233,6 +242,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 if([self.jsonDeleteFriend[@"deleted"] boolValue])
                 {
                     NSLog(@"%@ successfully removed from friends list.", _deleteEmail);
+                    [self loadFriends];
+                    [self.searchDisplayController setActive:NO animated:YES];
                     NSString *title = _deleteEmail;
                     title = [title stringByAppendingString:@" successfully removed from friends list"];
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
@@ -294,14 +305,17 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     if (searchString.length > 0) { // Should always be the case
-        NSArray *personsToSearch = self.friends;
+        NSArray *personsToSearch = _friends;
+        NSLog(@"Log %@", personsToSearch);
+        NSLog(@"Friend Log %@", _friends);
+        NSLog(@"Search: %@", searchString);
         if (self.currentSearchString.length > 0 && [searchString rangeOfString:self.currentSearchString].location == 0) { // If the new search string starts with the last search string, reuse the already filtered array so searching is faster
             personsToSearch = self.filteredFriends;
         }
         
-        self.filteredFriends = [personsToSearch filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchString]];
+        self.filteredFriends = [personsToSearch filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name contains[cd] %@", searchString]];
     } else {
-        self.filteredFriends = self.friends;
+        self.filteredFriends = _friends;
     }
     
     self.currentSearchString = searchString;
@@ -326,7 +340,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if(self.jsonGetFriends)
             {
-                _friends = self.jsonGetFriends;
+                _friends = [[NSArray alloc ] initWithArray: self.jsonGetFriends];
+                _friendsNames = [[NSArray alloc ] initWithArray: [self.jsonGetFriends valueForKey:@"name"]];
             }
             else
             {
@@ -340,6 +355,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
             
             NSMutableArray *unsortedSections = [[NSMutableArray alloc] initWithCapacity:[[collation sectionTitles] count]];
+            
             for (NSUInteger i = 0; i < [[collation sectionTitles] count]; i++) {
                 [unsortedSections addObject:[NSMutableArray array]];
             }
