@@ -13,14 +13,14 @@
 #import "MapViewController.h"
 #import "AmazonClientManager.h"
 
-@interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+@interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate>
 {
     MPMoviePlayerController *moviePlayer;
     AVAudioRecorder *recorder;
     
     UIView *recorderView;
-    NSURL *tempFile;
 }
+@property (strong, nonatomic) IBOutlet UIImageView *testingImage;
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UITextField *captionTextField;
@@ -42,9 +42,11 @@
 -(void)presentTextView;
 -(void)presentImageSelector;
 -(void)presentVideoSelector;
-- (void)share:(id)sender;
+-(void)share:(id)sender;
+
+-(void)playVideo;
 
 - (IBAction)hideKeybord:(id)sender;
-- (IBAction)playStockVideo:(id)sender;
+- (IBAction)playMedia:(id)sender;
 
 @end

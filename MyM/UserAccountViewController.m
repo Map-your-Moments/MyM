@@ -112,7 +112,7 @@
                     
                     
                     cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[self.userInformation valueForKey:kTAGUSERINFORMATION_PROFILEURL]]];
-                    [self.targetuser setProfileImage:cell.imageView.image];
+                    [self.targetuser setProfileImage: UIImagePNGRepresentation(cell.imageView.image)];
                     
                     dispatch_async(dispatch_get_main_queue(), ^ {
                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -123,7 +123,7 @@
             }
             else
             {
-                cell.imageView.image = [self.targetuser profileImage];
+                cell.imageView.image = [UIImage imageWithData:[self.targetuser profileImage]];
             }
             break;
         }
@@ -172,45 +172,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -220,8 +181,8 @@
         case 0:
         {
             NSLog(@"Touched Username");
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Saved or New" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Saved Image", @"Take Picture", nil];
-            [actionSheet showInView:self.view];
+            //UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Saved or New" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Saved Image", @"Take Picture", nil];
+            //[actionSheet showInView:self.view];
             break;
         }
         case 1:
@@ -360,6 +321,7 @@
     if(buttonIndex == kSAVEDBUTTONINDEX)
     {
         UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+        //There is a warning here. I am not sure why but disregard
         [pickerController setDelegate:self];
         [pickerController setMediaTypes:[NSArray arrayWithObject:kStillImages]];
         [pickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
@@ -374,6 +336,7 @@
             return;
         }
         UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+        //There is a warning here. I am not sure why but disregard
         [pickerController setDelegate:self];
         [pickerController setMediaTypes:[NSArray arrayWithObject:kStillImages]];
         [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
@@ -385,7 +348,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *newImage = [info valueForKey:UIImagePickerControllerOriginalImage];
-    [self.targetuser setProfileImage:newImage];
+    [self.targetuser setProfileImage:UIImagePNGRepresentation(newImage)];
     
     [self.tableView reloadData];
     

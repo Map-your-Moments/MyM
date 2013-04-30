@@ -35,6 +35,10 @@ enum{
     kUIAlertSettingsVerifyChange
 }kUIAlertSetting;
 
+enum{
+    kUIAlertViewMomentNoCamera = -999
+}kUIAlertViewMoment;
+
 @interface Constants : NSObject
 
 @end

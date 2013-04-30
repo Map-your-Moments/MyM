@@ -7,7 +7,12 @@
 //
 
 #import "MomentCreateViewController.h"
+#import "AJNotificationView.h"
 #import "Constants.h"
+
+#define BANNER_DEFAULT_TIME 3
+#define SCREEN_HEIGHT [[UIScreen mainScreen] applicationFrame].size.height
+
 
 @interface MomentCreateViewController ()
 {
@@ -15,6 +20,8 @@
     IBOutlet UIImageView *imageView;
     
     NSURL *takenVideo;
+    NSURL *takenAudio;
+
 }
 
 @end
@@ -50,6 +57,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [super viewDidLoad];
 	
     //Null objects
+    takenVideo = nil;
+    recorder = nil;
     textView = nil;
     imageView = nil;
     
@@ -66,7 +75,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     //not needed, no more trips
     //NSUserDefaults *ud = [[NSUserDefaults alloc] initWithUser:[currentUser username]];
     //self.trips = [ud valueForKey:@"Trips"];
-    
+
     [self detectMoementType];
 }
 
@@ -116,6 +125,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
+        [alert setTag:kUIAlertViewMomentNoCamera];
         [alert show];
         return;
     }
@@ -131,8 +141,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
+        [alert setTag:kUIAlertViewMomentNoCamera];
         [alert show];
-        [self.navigationController popViewControllerAnimated:YES];
         return;
     }
     UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
@@ -161,12 +171,21 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [audioSession setActive:YES error:nil];
     
-    tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]];
+    takenAudio = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]];
     
-    recorder = [[AVAudioRecorder alloc] initWithURL:tempFile settings:nil error:nil];
+    recorder = [[AVAudioRecorder alloc] initWithURL:takenAudio settings:nil error:nil];
     [recorder setDelegate:self];
     [recorder prepareToRecord];
     [recorder record];
+}
+
+#pragma mark UIAlertView Delegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView tag] == kUIAlertViewMomentNoCamera)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 
@@ -234,34 +253,21 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     
     if(title != nil)
     {
-        if(![[self.captionTextField text] isEqualToString:@""] && [tags count] != 0 && ![[self.tagTextField text] isEqualToString:@""])
+        if(![[self.captionTextField text] isEqualToString:@""])
         {
             Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andID:ID];
             [self.dataController addMomentToMomentsWithMoment:newMoment];
             [self.delegate setDataController:self.dataController];
             [self.navigationController popViewControllerAnimated:YES];
         }
+        else
+        {
+            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                           title:@"Caption Needed"
+                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                       hideAfter:BANNER_DEFAULT_TIME];
+        }
     }
-}
-
--(void)playAudio
-{
-    NSLog(@"Playing...");
-    NSString *file = [[NSBundle mainBundle] resourcePath];
-    file = [file stringByAppendingPathComponent:kMomemtAudio_temp];
-    NSURL *audioURL = tempFile;
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
-    [player setDelegate:self];
-    [player setVolume:1];
-    [player play];
-}
-
--(void)stopRecordingManually
-{
-    NSLog(@"Stop recording");
-    [recorderView removeFromSuperview];
-    [recorder stop];
-    [self playAudio];
 }
 
 -(void)creatMissingImageView
@@ -270,7 +276,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     imageView = [[UIImageView alloc] initWithImage:img];
     [imageView setFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
     
-    UILongPressGestureRecognizer *holdDownRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doWork)];
+    UILongPressGestureRecognizer *holdDownRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(detectMoementType)];
     [holdDownRecognizer setNumberOfTapsRequired:0];
     [holdDownRecognizer setNumberOfTouchesRequired:1];
     [holdDownRecognizer setMinimumPressDuration:0.5];
@@ -302,6 +308,24 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     imageView = [[UIImageView alloc] initWithImage:img];
     [imageView setFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
     
+    
+    if([[info valueForKey:UIImagePickerControllerMediaType] isEqualToString:kVideoCamera])
+    {
+        NSLog(@"Is Video File");
+        
+#warning NEED TO MAKE AND IMPLEMENT BUTTON TO PLAY
+        
+        NSURL *videoURL = [info valueForKey:UIImagePickerControllerMediaURL];
+        
+        img = [moviePlayer thumbnailImageAtTime:0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+        self.testingImage.image = img;
+        imageView = nil;
+        imageView = [[UIImageView alloc] initWithImage:img];
+        [imageView setFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
+        
+        takenVideo = videoURL;
+    }
+    
     UILongPressGestureRecognizer *holdDownRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(presentImageSelector)];
     [holdDownRecognizer setNumberOfTapsRequired:0];
     [holdDownRecognizer setNumberOfTouchesRequired:1];
@@ -314,18 +338,42 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [self.contentView addSubview:imageView];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-    if([[info valueForKey:UIImagePickerControllerMediaType] isEqualToString:kVideoCamera])
+}
+
+- (IBAction)playMedia:(id)sender
+{
+    if(contentType == kTAGMOMENTVIDEO)
     {
-        NSLog(@"Is Video File");
-    
-        NSURL *videoURL = [info valueForKey:UIImagePickerControllerMediaURL];
-        
-        takenVideo = videoURL;
+        if(takenVideo != nil)
+            [self playVideo];
+    }
+    else if(contentType == kTAGMOMENTAUDIO)
+    {
+        if(takenAudio != nil)
+            [self playAudio];
     }
 }
 
-- (IBAction)playVideo:(id)sender
+-(void)playAudio
+{
+    NSLog(@"Playing...");
+    NSString *file = [[NSBundle mainBundle] resourcePath];
+    file = [file stringByAppendingPathComponent:kMomemtAudio_temp];
+    NSURL *audioURL = takenAudio;
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
+    [player setDelegate:self];
+    [player setVolume:1];
+    [player play];
+}
+
+-(void)stopRecordingManually
+{
+    NSLog(@"Stop recording");
+    [recorderView removeFromSuperview];
+    [recorder stop];
+}
+
+- (void)playVideo
 {
     MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:takenVideo];
     [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
@@ -334,15 +382,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [moviePlayerViewController.moviePlayer play];
 }
 
-- (void) movieFinishedCallback:(NSNotification*) aNotification {
-    MPMoviePlayerController *player = [aNotification object];
-    [[NSNotificationCenter defaultCenter]
-     removeObserver:self
-     name:MPMoviePlayerPlaybackDidFinishNotification
-     object:player];
-}
-
 #pragma mark AVAudioRecorder Delegate
+
 -(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
     NSLog(@"*Recording Finished*");
@@ -360,6 +401,14 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [self.tagTextField resignFirstResponder];
     if(textView != nil)
         [textView resignFirstResponder];
+}
+
+- (void) movieFinishedCallback:(NSNotification*) aNotification {
+    MPMoviePlayerController *player = [aNotification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
 }
 
 - (void)didReceiveMemoryWarning
@@ -462,9 +511,9 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
  [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
  [audioSession setActive:YES error:nil];
  
- tempFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]];
+ takenAudio = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:kMomemtAudio_temp]];
  
- recorder = [[AVAudioRecorder alloc] initWithURL:tempFile settings:nil error:nil];
+ recorder = [[AVAudioRecorder alloc] initWithURL:takenAudio settings:nil error:nil];
  [recorder setDelegate:self];
  [recorder prepareToRecord];
  [recorder record];
