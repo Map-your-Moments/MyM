@@ -234,7 +234,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 {
                     NSLog(@"%@ successfully removed from friends list.", _deleteEmail);
                     NSString *title = _deleteEmail;
-                    title = [title stringByAppendingString:@" successfully removed from friends list."];
+                    title = [title stringByAppendingString:@" successfully removed from friends list"];
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
                                                    title:title
                                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -244,7 +244,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 {
                     NSLog(@"%@ could not be removed from your friends list. Try again.", _deleteEmail);
                     NSString *title = _deleteEmail;
-                    title = [title stringByAppendingString:@" could not be removed from your friends list. Try again."];
+                    title = [title stringByAppendingString:@" could not be removed from your friends list"];
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                    title:title
                                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -255,7 +255,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 NSLog(@"Http request failed.");
                 [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                               title:@"Server request failed."
+                                               title:@"Server request failed"
                                      linedBackground:AJLinedBackgroundTypeDisabled
                                            hideAfter:BANNER_DEFAULT_TIME];
             }
@@ -332,7 +332,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 NSLog(@"Http request for friends list failed.");
                 [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                               title:@"Could not retrieve your friends list."
+                                               title:@"Could not retrieve your friends list"
                                      linedBackground:AJLinedBackgroundTypeDisabled
                                            hideAfter:BANNER_DEFAULT_TIME];
             }
@@ -395,7 +395,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                             _textField.text = NULL;
                             NSLog(@"Friend request sent.");
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
-                                                           title:@"Friend request email successfully sent!"
+                                                           title:@"Friend request email successfully sent"
                                                  linedBackground:AJLinedBackgroundTypeDisabled
                                                        hideAfter:BANNER_DEFAULT_TIME];
                         }
@@ -403,7 +403,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                         {
                             NSLog(@"Friend request failed to send.");
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                                           title:@"Failed to send friend request."
+                                                           title:@"Failed to send friend request"
                                                  linedBackground:AJLinedBackgroundTypeDisabled
                                                        hideAfter:BANNER_DEFAULT_TIME];
                         }
@@ -412,7 +412,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         NSLog(@"Friend does not exist.");
                         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                                       title:@"User does not exist."
+                                                       title:@"User does not exist"
                                              linedBackground:AJLinedBackgroundTypeDisabled
                                                    hideAfter:BANNER_DEFAULT_TIME];
                     }
@@ -421,7 +421,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 {
                     NSLog(@"Already friends with this person.");
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                                   title:@"You are already friends with this person."
+                                                   title:@"You are already friends with this person"
                                          linedBackground:AJLinedBackgroundTypeDisabled
                                                hideAfter:BANNER_DEFAULT_TIME];
                 }
@@ -430,7 +430,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 NSLog(@"Http request failed.");
                 [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                               title:@"Server request failed."
+                                               title:@"Server request failed"
                                      linedBackground:AJLinedBackgroundTypeDisabled
                                            hideAfter:BANNER_DEFAULT_TIME];
             }
@@ -442,7 +442,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"Friend Request"
-                          message:@"Please enter the user's email.\n\n\n"
+                          message:@"Please enter the user's email\n\n\n"
                           delegate:self
                           cancelButtonTitle:@"Cancel"
                           otherButtonTitles:@"Send", nil];
