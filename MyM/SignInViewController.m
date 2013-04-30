@@ -21,14 +21,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *signInActivityIndicator;
-@property (nonatomic) NSDictionary *jsonLogin;
-@property (nonatomic) NSData *userPicture;
 @property (weak, nonatomic) IBOutlet UIImageView *aboutImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *aboutIcon;
 @property (weak, nonatomic) IBOutlet UIView *aboutView;
+
+@property (nonatomic) NSDictionary *jsonLogin;
+@property (nonatomic) NSData *userPicture;
+
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
-
 @end
 
 @implementation SignInViewController
@@ -44,7 +45,6 @@ bool startInsideAboutImageView;
     } else {
         startInsideAboutImageView = NO;
     }
-    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -223,7 +223,7 @@ bool startInsideAboutImageView;
                                     andSettings:nil
                                      andMoments:nil
                                      andFriends:nil
-                               andPprofileImage:self.userPicture
+                               andProfileImage:self.userPicture
                                        andToken:self.jsonLogin[@"access_token"]];
     self.txtPassword.text = @"";
     self.txtUsername.text = @"";

@@ -13,6 +13,6 @@
 @property(nonatomic, copy) NSArray *friends;
 @property (nonatomic) NSArray *jsonGetFriends;
 
-- (NSArray *)getFriends:(NSString *)user;
+- (NSArray *)getFriends:(NSString *)token;
 
 @end

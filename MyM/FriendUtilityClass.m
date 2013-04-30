@@ -14,30 +14,18 @@
 @synthesize friends;
 @synthesize jsonGetFriends;
 
-- (NSArray *)getFriends:user
+- (NSArray *)getFriends:(NSString *)token
 {
-    NSDictionary *jsonDictionary = @{ @"access_token" : user};
+    NSDictionary *jsonDictionary = @{ @"access_token" : token};
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        });
-        jsonGetFriends = [UtilityClass GetFriendsJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friends"];
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            if(jsonGetFriends)
-            {
-                friends = [[NSArray alloc ] initWithArray: jsonGetFriends];
-            }
-            else
-            {
-                NSLog(@"Http request for friends list failed.");
-            }
-        });
-    });
-
+    jsonGetFriends = [UtilityClass GetFriendsJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friends"];
     
+    if(jsonGetFriends) {
+        friends = [[NSArray alloc ] initWithArray: jsonGetFriends];
+    }
+    else {
+        NSLog(@"Http request for friends list failed.");
+    }
     
     return friends;
 }

@@ -22,15 +22,14 @@
 #define navboxRectHidden CGRectMake(-100, screenHeight / 2 - navboxRecSize / 2, 50, navboxRecSize)
 #define navboxRectLoc CGRectMake(0, 0, 10, screenHeight)
 
-@implementation MapViewController
-{
+@implementation MapViewController {
     UIView *navBox;
     
     BOOL navboxIsVisible;
     BOOL firstLoad;
 }
 
-@synthesize mapView, dataController, user;
+@synthesize mapView, dataController, user, tempMoment;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,7 +60,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self loadAnnotations];
+    [self updateAnnotations];
     
     if(firstLoad)
     {
@@ -112,12 +111,6 @@
     [navBox.layer setShadowOffset:CGSizeMake(7.0, 5.0)];
     
     [self.view addSubview:navBox];
-
-//    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [searchButton setFrame:CGRectMake(14, 35, 70, 45)];
-//    [searchButton addTarget:self action:@selector(menuButtonShowHide) forControlEvents:UIControlEventTouchUpInside];
-//    [searchButton setTitle:@"Close" forState:UIControlStateNormal];
-//    [navBox addSubview:searchButton];
     
     UIImage *friendsImage = [UIImage imageNamed:@"Group.png"];
     UIButton *friendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -182,8 +175,6 @@
                                                            highlightedImage:storyMenuItemImagePressed
                                                                ContentImage:videoImage
                                                     highlightedContentImage:nil];
-    
-    
     
     AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:[NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, nil]];
     menu.delegate = self;
@@ -272,6 +263,7 @@
 
 - (void)friends
 {
+    [self hideNavbox];
     SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
     [mapView removeAnnotations:mapView.annotations]; //!
     [vc setUser:user];
@@ -287,6 +279,7 @@
     [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 
 #pragma mark - AwesomeMenu Delegate
 
@@ -331,13 +324,32 @@
 
 #pragma mark - MapView methods
 
+- (void)updateAnnotations
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        
+        S3UtilityClass *s3 = [[S3UtilityClass alloc] init];
+        dataController = [s3 updateMomentsForUser:user];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [self loadAnnotations];
+        });
+    });
+}
+
 - (void)loadAnnotations
 {
     for(int i = 0; i < [dataController countOfMoments]; i++) {
         Moment *moment = [dataController objectInMomentsAtIndex:i];
         MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
         pin.coordinate = moment.coords;
-        pin.title = moment.user.username;
+        pin.title = moment.user;
         pin.subtitle = moment.title;
         [mapView addAnnotation:pin];
     }

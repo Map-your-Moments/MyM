@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Moment.h"
 #import "MapViewController.h"
+#import "AmazonClientManager.h"
 
 @interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {

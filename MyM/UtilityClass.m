@@ -17,7 +17,7 @@
 							   [NSCharacterSet whitespaceCharacterSet]]
 							  lowercaseString];
 	
-	NSString *gravatarEndPoint = [NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=80", [curatedEmail MD5]];
+	NSString *gravatarEndPoint = [NSString stringWithFormat:@"http://www.gravatar.com/avatar/%@?s=80&d=https%%3A%%2F%%2Fs3.amazonaws.com%%2Fmym-csc470%%2FDefaultProfilePic@2x.png", [curatedEmail MD5]];
 	
 	return [NSURL URLWithString:gravatarEndPoint];
 }
@@ -65,47 +65,10 @@
     
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    NSLog(@"Response:\n%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
+//    NSLog(@"Response:\n%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
     NSArray *jsonresponse = POSTReply ? [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] : nil;
     
     return jsonresponse;
-    
 }
-
-
-//+ (NSDictionary *)GetFriendsJSON:(NSOutputStream *)fileStream fromAddress:(NSString *)address
-//{
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//    [request setURL:[NSURL URLWithString:address]];
-//    [request setHTTPMethod:@"GET"];
-//    
-//    NSURLResponse *response;
-//    NSData *GETReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-//    NSLog(@"%@",[NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] );
-//    NSDictionary *jsonresponse = GETReply ? [NSJSONSerialization JSONObjectWithData:GETReply options:kNilOptions error:nil] : nil;
-//    
-//    NSInteger       dataLength;
-//    const uint8_t * dataBytes;
-//    NSInteger       bytesWritten;
-//    NSInteger       bytesWrittenSoFar;
-//    
-//    dataLength = [GETReply length];
-//    dataBytes  = [GETReply bytes];
-//    
-//    bytesWrittenSoFar = 0;
-//    do {
-//        bytesWritten = [fileStream write:&dataBytes[bytesWrittenSoFar] maxLength:dataLength - bytesWrittenSoFar];
-//        assert(bytesWritten != 0);
-//        if (bytesWritten == -1) {
-//            NSLog(@"Friends List file write error.");
-//            break;
-//        } else {
-//            bytesWrittenSoFar += bytesWritten;
-//        }
-//    } while (bytesWrittenSoFar != dataLength);
-//    
-//    return jsonresponse;
-//    
-//}
 
 @end
