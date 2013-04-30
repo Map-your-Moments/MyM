@@ -9,16 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "Constants.h"
 
-@interface Content : NSObject
+@interface Content : NSObject <NSCoding, NSCopying>
 
 @property (nonatomic) UIImage *picture;
 @property (nonatomic) NSString *text;
 @property (nonatomic) id sound;
 @property (nonatomic) id video;
 @property (nonatomic) int contentType;
+@property (nonatomic) id content;
 
 @property (nonatomic) NSMutableArray *tags;
 
 -(id)initWithContent:(id)momentContent withType:(int)theContentType andTags:(NSMutableArray *)theTags;
+
+- (void)encodeWithCoder:(NSCoder *)coder;
+- (id)initWithCoder:(NSCoder *)decoder;
 
 @end

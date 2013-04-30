@@ -12,6 +12,8 @@
 
 @interface User : NSObject
 
+@property (nonatomic) NSString *token;
+@property (nonatomic) NSData *profileImage;
 @property (nonatomic) NSString *username;
 @property (nonatomic) NSString *password; // should be encrypted
 @property (nonatomic) NSDate *dateJoined;
@@ -20,6 +22,6 @@
 @property (nonatomic) MomentDataController *moments;
 @property (nonatomic) NSMutableArray *friends;
 
--(id)initWithUserName:(NSString *)theUsername andPassword:(NSString *)thePassword andDateJoined:(NSDate *)theDate andEmail:(NSString *)theEmail andSettings:(UserSettings *)theSettings andMoments:(MomentDataController *)theMoments andFriends:(NSMutableArray *)theFriends;
+-(id)initWithUserName:(NSString *)theUsername andPassword:(NSString *)thePassword andDateJoined:(NSDate *)theDate andEmail:(NSString *)theEmail andSettings:(UserSettings *)theSettings andMoments:(MomentDataController *)theMoments andFriends:(NSMutableArray *)theFriends andPprofileImage:(NSData *)profileImage andToken:(NSString *)theToken;
 
 @end

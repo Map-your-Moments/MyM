@@ -35,7 +35,7 @@
     [self.view setBackgroundColor:[UIColor colorWithRed:21 green:17 blue:54 alpha:1]];
     
     username = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, screenWidth-10, 20)];
-    [username setText:moment.user.username];
+    [username setText:moment.user];
     [self.view addSubview:username];
     
     caption = [[UILabel alloc] initWithFrame:CGRectMake(5, 50, screenWidth-10, 30)];

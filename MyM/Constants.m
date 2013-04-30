@@ -10,4 +10,6 @@
 
 @implementation Constants
 
+NSString *const kS3BUCKETNAME = @"mym-csc470";
+
 @end

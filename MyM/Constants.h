@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT NSString *const kS3BUCKETNAME;
+
 enum{
     kTAGMOMENTTEXT = 1,
     kTAGMOMENTPICTURE = 2,
@@ -27,9 +29,11 @@ enum{
     kTAKEMEDIA
 }kUIActionSheetButtonIndexes;
 
-//NSString * const kStillImages = @"public.image";
-//NSString * const kVideoCamera = @"public.movie";
-//NSString * const kMomentAudioTempFile = @"";
+enum{
+    kUIAlertSettingsStandard,
+    kUIAlertSettingsConfirmChange,
+    kUIAlertSettingsVerifyChange
+}kUIAlertSetting;
 
 @interface Constants : NSObject
 

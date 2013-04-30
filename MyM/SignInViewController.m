@@ -10,17 +10,23 @@
 #import "NewUserViewController.h"
 #import "AmazonClientManager.h"
 #import "MapViewController.h"
+#import "UtilityClass.h"
+#import "AJNotificationView.h"
 
-@interface SignInViewController() <UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *icon_mym;
+#define BANNER_DEFAULT_TIME 3
+#define SCREEN_HEIGHT [[UIScreen mainScreen] applicationFrame].size.height
+
+@interface SignInViewController() <NewUserDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *txtUsername;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
-@property (weak, nonatomic) IBOutlet UITextField *txtVerificationCode;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
-@property (weak, nonatomic) IBOutlet UIButton *verifyButton;
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *signInActivityIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *aboutImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *aboutIcon;
+@property (weak, nonatomic) IBOutlet UIView *aboutView;
 
-@property (strong, nonatomic) NSArray *usersQueryResult;
+@property (nonatomic) NSDictionary *jsonLogin;
+@property (nonatomic) NSData *userPicture;
 
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
@@ -28,161 +34,182 @@
 
 @implementation SignInViewController
 
+float initialTouchPoint;
+bool startInsideAboutImageView;
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint contentTouchPoint = [[touches anyObject] locationInView:self.aboutImageView];
+    if (CGRectContainsPoint(self.aboutImageView.bounds, contentTouchPoint)) {
+        initialTouchPoint = contentTouchPoint.y;
+        startInsideAboutImageView = YES;
+    } else {
+        startInsideAboutImageView = NO;
+    }
+    
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (startInsideAboutImageView) {
+        CGPoint pointInView = [[touches anyObject] locationInView:self.view];
+        float yTarget = pointInView.y - initialTouchPoint;
+        if(yTarget < SCREEN_HEIGHT - self.aboutView.frame.size.height)
+            yTarget = SCREEN_HEIGHT - self.aboutView.frame.size.height;
+        else if( yTarget > SCREEN_HEIGHT - self.aboutImageView.frame.size.height)
+            yTarget = SCREEN_HEIGHT - self.aboutImageView.frame.size.height;
+        
+        [UIView animateWithDuration:.1
+                         animations:^{
+                             [self.aboutView setFrame:CGRectMake(self.aboutView.frame.origin.x, yTarget, self.aboutView.frame.size.width, self.aboutView.frame.size.height)];
+                         }];
+    }
+    
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self aboutViewFinalPosition:touches];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self aboutViewFinalPosition:touches];
+}
+
+- (void)aboutViewFinalPosition:(NSSet *)touches
+{
+    NSString *iconImage = nil;
+    if (startInsideAboutImageView) {
+        CGPoint endTouchPoint = [[touches anyObject] locationInView:self.view];
+        float yTarget = endTouchPoint.y - initialTouchPoint;
+        if(yTarget < SCREEN_HEIGHT - self.aboutView.frame.size.height / 2) {
+            yTarget = SCREEN_HEIGHT - self.aboutView.frame.size.height;
+            iconImage = @"glyphicons_195_circle_info";
+        }
+        else {
+            yTarget = SCREEN_HEIGHT - self.aboutImageView.frame.size.height;
+            iconImage = @"glyphicons_213_up_arrow.png";
+        }
+        
+        [UIView animateWithDuration:.5
+                         animations:^{
+                             [self.aboutView setFrame:CGRectMake(self.aboutView.frame.origin.x, yTarget, self.aboutView.frame.size.width, self.aboutView.frame.size.height)];
+                             self.aboutIcon.image = [UIImage imageNamed:iconImage];
+                         }];
+    }
+}
+
+- (void)newUserCreated
+{
+    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                   title:@"Your account was created successfully"
+                         linedBackground:AJLinedBackgroundTypeDisabled
+                               hideAfter:BANNER_DEFAULT_TIME];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.view endEditing:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 - (void)viewDidLoad
 {
-    [self.navigationController setTitle:@"Log In"];
-}
-
-/* >>>>>>>>>>>>>>>>>>>>> verifyButton
- Check for the verification code
- >>>>>>>>>>>>>>>>>>>>>>>> */
-- (IBAction)verifyButton:(UIButton *)sender
-{
-    NSString *statusString = nil;
-    NSString *statusTitleString = @"Error";
+    [super viewDidLoad];
     
-    if ([self.txtVerificationCode.text length] == 0) { //Check if the verification code is empty
-        NSLog(@"Verification code is empty");
-        statusString = @"Verification Code is empty";
-    } else {
-        DynamoDBAttributeValue *userVerificationCode = [[self.usersQueryResult lastObject] objectForKey:@"email-confirm"];
-        if ([userVerificationCode.n isEqualToString:self.txtVerificationCode.text]) { //Check if the verification code matches
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-            dispatch_async(queue, ^{
-                @try {
-                    //Replace the verification code with 1 (verified)
-                    DynamoDBAttributeValue *userAttribute = [[DynamoDBAttributeValue alloc] initWithS:self.txtUsername.text];
-                    DynamoDBAttributeValue *emailAttribute = [[DynamoDBAttributeValue alloc] initWithS:[[[self.usersQueryResult lastObject] objectForKey:@"email"] s]];
-                    DynamoDBAttributeValueUpdate *attrUpdate = [[DynamoDBAttributeValueUpdate alloc] initWithValue:[[DynamoDBAttributeValue alloc] initWithN:@"1"] andAction:@"PUT"];
-                    DynamoDBUpdateItemRequest *updateItemRequest = [[DynamoDBUpdateItemRequest alloc] initWithTableName:@"mym-login-database"
-                                                                                                                 andKey:[[DynamoDBKey alloc] initWithHashKeyElement:userAttribute
-                                                                                                                                                 andRangeKeyElement:emailAttribute]
-                                                                                                    andAttributeUpdates:[NSMutableDictionary dictionaryWithObject:attrUpdate
-                                                                                                                                                           forKey:@"email-confirm"]];
-                    [[AmazonClientManager amazonDynamoDBClient] updateItem:updateItemRequest];
-                }
-                @catch (AmazonClientException *exception) {
-                    NSLog(@"%@", exception.description);
-                }
-            });
-
-            [self logIn];
-            NSLog(@"YOU ARE IN, WELCOME");
-        } else { //Verification code is wrong
-            NSLog(@"Wrong verification code");
-            statusString = @"Vefification Code is wrong";
-        }
-    }
-    if (statusString) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:statusTitleString message:statusString delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [alert show];
-    }
+    self.navigationController.navigationBarHidden = YES;
 }
 
-/* >>>>>>>>>>>>>>>>>>>>> signInButton
- Sign in logic
+/* >>>>>>>>>>>>>>>>>>>>> signInButton:
+ Log In logic
  >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)signInButton:(id)sender
 {
-    NSString *statusString = nil;
-    NSString *statusTitleString = @"Error";
-    
     if ([self.txtUsername.text length] == 0) { //Check if txtUsername is empty
+        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                       title:@"Username is empty"
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:BANNER_DEFAULT_TIME];
         NSLog(@"Username is empty");
-        statusString = @"Username is empty";
     } else if ([self.txtPassword.text length] == 0) { //Check if txtPassword is empty
+        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                       title:@"Password is empty"
+                             linedBackground:AJLinedBackgroundTypeDisabled
+                                   hideAfter:BANNER_DEFAULT_TIME];
         NSLog(@"Password is empty");
-        statusString = @"Password is empty";
     } else {
-            //Query the database
-            DynamoDBQueryRequest *dynamoDBQueryRequest = [[DynamoDBQueryRequest alloc] initWithTableName:@"mym-login-database"
-                                                                                         andHashKeyValue:[[DynamoDBAttributeValue alloc] initWithS:self.self.txtUsername.text]];
-            @try {
-                DynamoDBQueryResponse *dynamoDBQueryResponse = [[AmazonClientManager amazonDynamoDBClient] query:dynamoDBQueryRequest];
-                self.usersQueryResult = [dynamoDBQueryResponse.items copy];
-            }
-            @catch (AmazonClientException *exception) {
-                NSLog(@"%@", exception.description);
-            }
-        if ([self.usersQueryResult count] == 1) { //Check if the query resulted in a match
-            DynamoDBAttributeValue *userPassword = [[self.usersQueryResult lastObject] objectForKey:@"password"];
-            
-            if ([userPassword.s isEqualToString:self.txtPassword.text]) {
-                DynamoDBAttributeValue *userEmail = [[self.usersQueryResult lastObject] objectForKey:@"email-confirm"];
-                if ([userEmail.n integerValue] == 1) { //Check if the user already validated his email
-                    [self logIn];
-                    NSLog(@"YOU ARE IN, WELCOME");
-                } else { //User still needs to validate his email
-                    self.txtVerificationCode.hidden = NO;
-                    self.txtUsername.hidden = YES;
-                    self.txtPassword.hidden = YES;
-                    self.verifyButton.hidden = NO;
-                    self.signInButton.hidden = YES;
-                    self.backButton.hidden = NO;
-                    NSLog(@"You are just missing the security Code");
+        [self.signInButton setTitle:@"" forState:UIControlStateDisabled];
+        self.view.userInteractionEnabled = NO;
+        self.signInButton.enabled = NO;
+        [self.signInActivityIndicator startAnimating];
+        NSDictionary *jsonDictionary = @{ @"username" : self.txtUsername.text, @"password" : self.txtPassword.text};
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            });
+            self.jsonLogin = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/login/"];
+            self.userPicture = self.jsonLogin ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:self.jsonLogin[@"email"]]] : nil;
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                if (self.jsonLogin) { //Check if the query resulted in a match
+                    if ([self.jsonLogin[@"logged_in"] boolValue]) {
+                        if (!self.jsonLogin[@"valid_email"]) { //Check if the user already validated his email
+                            [self logIn];
+                            NSLog(@"You are in");
+                        } else { //User still needs to validate his email
+                            self.txtPassword.text = @"";
+                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
+                                                           title:@"Please verify your email address"
+                                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                                       hideAfter:BANNER_DEFAULT_TIME];
+                            NSLog(@"You are just missing the security Code");
+                        }
+                    } else {
+                        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                       title:@"Username and/or Password is wrong"
+                                             linedBackground:AJLinedBackgroundTypeDisabled
+                                                   hideAfter:BANNER_DEFAULT_TIME];
+                        self.txtPassword.text = @"";
+                        NSLog(@"username and/or password wrong");
+                    }
+                } else {
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:@"Could not connect to the server"
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                    NSLog(@"Could not connect to the server");
                 }
-            } else {
-                NSLog(@"username and/or password wrong");
-                statusString = @"Username and/or Password is wrong";
-            }
-        } else {
-            NSLog(@"username and/or password wrong");
-            statusString = @"Username and/or Password is wrong";
-        }
+                
+                self.view.userInteractionEnabled = YES;
+                [self.view endEditing:YES];
+                self.signInButton.enabled = YES;
+                [self.signInActivityIndicator stopAnimating];
+            });
+        });
     }
     
-    if (statusString) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:statusTitleString message:statusString delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [alert show];
-    }
 }
 
-/* >>>>>>>>>>>>>>>>>>>>> backButtonPressed
- Go back from the verification code to the login
- >>>>>>>>>>>>>>>>>>>>>>>> */
-- (IBAction)backButtonPressed:(UIButton *)sender
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [self resetInterface];
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
 }
 
-/* >>>>>>>>>>>>>>>>>>>>> registerButton
- Open the New Use modal
+/* >>>>>>>>>>>>>>>>>>>>> registerButton:
+ Push the New Use View
  >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)registerButton:(id)sender
 {
-    NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUserView" bundle:nil];
-    [self.txtUsername resignFirstResponder];
-    [self.txtPassword resignFirstResponder];
-    [self presentViewController:newUserViewController animated:YES completion:nil];
-}
-
-/* >>>>>>>>>>>>>>>>>>>>> textFieldDidBeginEditing
- Move the view when the keyboard is on
- >>>>>>>>>>>>>>>>>>>>>>>> */
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    if (textField.superview.frame.origin.y == 20) {
-        [UIView animateWithDuration:0.5 animations:^{
-            textField.superview.frame = CGRectMake(textField.superview.frame.origin.x, textField.superview.frame.origin.y - 40, textField.superview.frame.size.width, textField.superview.frame.size.height);
-        }];
-    }
-}
-
-/* >>>>>>>>>>>>>>>>>>>>> resetInterface
- Clear the interface
- >>>>>>>>>>>>>>>>>>>>>>>> */
-- (void)resetInterface
-{
-    self.txtUsername.hidden = NO;
-    self.txtPassword.hidden = NO;
-    self.txtVerificationCode.hidden = YES;
-    self.verifyButton.hidden = YES;
-    self.signInButton.hidden = NO;
-    self.backButton.hidden = YES;
     self.txtPassword.text = @"";
     self.txtUsername.text = @"";
-    self.txtVerificationCode.text = @"";
-    [self.txtUsername becomeFirstResponder];
+    [self.view endEditing:YES];
+    NewUserViewController *newUserViewController = [[NewUserViewController alloc] initWithNibName:@"NewUserView" bundle:nil];
+    newUserViewController.delegate = self;
+    [self.navigationController pushViewController:newUserViewController animated:YES];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> logIn
@@ -196,13 +223,21 @@
                                        andEmail:nil
                                     andSettings:nil
                                      andMoments:nil
-                                     andFriends:nil];
-    [self resetInterface];
+                                     andFriends:nil
+                               andPprofileImage:self.userPicture
+                                       andToken:self.jsonLogin[@"access_token"]];
+    self.txtPassword.text = @"";
+    self.txtUsername.text = @"";
+    [self.view endEditing:YES];
+    
     MapViewController *mapViewController = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
     [mapViewController setUser:user];
     [self.navigationController pushViewController:mapViewController animated:YES];
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> textFieldShouldReturn:
+ Logic for NEXT and DONE keys
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger nextTag = textField.tag + 1;
@@ -218,6 +253,14 @@
     }
     
     return NO;
+}
+
+/* >>>>>>>>>>>>>>>>>>>>> backgroundTap:
+ Backgroun Tap to close the keyboard
+ >>>>>>>>>>>>>>>>>>>>>>>> */
+- (IBAction)backgroundTap:(UITapGestureRecognizer *)sender
+{
+    [self.view endEditing:YES];
 }
 
 @end

@@ -1,0 +1,2 @@
+[1m[37m      invoke[0m  active_record
+[1m[32m      create[0m    db/migrate/20130410205550_add_latitude_column_to_users.rb
