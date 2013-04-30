@@ -14,9 +14,6 @@
 
 @interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
-    IBOutlet UITextView *textView;
-    IBOutlet UIImageView *imageView;
-    
     MPMoviePlayerController *moviePlayer;
     AVAudioRecorder *recorder;
     
@@ -40,6 +37,7 @@
 
 @property (nonatomic, weak) id<mapProtocol> delegate;
 
+-(void)detectMoementType;
 -(void)presentTextView;
 -(void)presentImageSelector;
 -(void)presentVideoSelector;
