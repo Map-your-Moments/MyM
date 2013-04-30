@@ -21,14 +21,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *signInActivityIndicator;
-@property (nonatomic) NSDictionary *jsonLogin;
 @property (weak, nonatomic) IBOutlet UIImageView *aboutImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *aboutIcon;
-
 @property (weak, nonatomic) IBOutlet UIView *aboutView;
+
+@property (nonatomic) NSDictionary *jsonLogin;
+@property (nonatomic) NSData *userPicture;
+
 - (IBAction)signInButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
-
 @end
 
 @implementation SignInViewController
@@ -44,7 +45,7 @@ bool startInsideAboutImageView;
     } else {
         startInsideAboutImageView = NO;
     }
-
+    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -62,7 +63,7 @@ bool startInsideAboutImageView;
                              [self.aboutView setFrame:CGRectMake(self.aboutView.frame.origin.x, yTarget, self.aboutView.frame.size.width, self.aboutView.frame.size.height)];
                          }];
     }
-  
+    
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -125,7 +126,7 @@ bool startInsideAboutImageView;
  Log In logic
  >>>>>>>>>>>>>>>>>>>>>>>> */
 - (IBAction)signInButton:(id)sender
-{    
+{
     if ([self.txtUsername.text length] == 0) { //Check if txtUsername is empty
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                        title:@"Username is empty"
@@ -151,6 +152,7 @@ bool startInsideAboutImageView;
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
             });
             self.jsonLogin = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/login/"];
+            self.userPicture = self.jsonLogin ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:self.jsonLogin[@"email"]]] : nil;
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 if (self.jsonLogin) { //Check if the query resulted in a match
@@ -189,12 +191,12 @@ bool startInsideAboutImageView;
             });
         });
     }
-
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [AJNotificationView hideCurrentNotificationViewAndClearQueue];    
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> registerButton:
@@ -222,8 +224,8 @@ bool startInsideAboutImageView;
                                     andSettings:nil
                                      andMoments:nil
                                      andFriends:nil
+                               andPprofileImage:self.userPicture
                                        andToken:self.jsonLogin[@"access_token"]];
-    
     self.txtPassword.text = @"";
     self.txtUsername.text = @"";
     [self.view endEditing:YES];

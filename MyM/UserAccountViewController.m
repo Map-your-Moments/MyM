@@ -61,7 +61,7 @@
     
     self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Date Joined", @"Friends", @"Moments", @"Other Settings", nil];
     
-    self.userInformation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self.targetuser username], kTAGUSERINFORMATION_USERNAME, [self.targetuser profileImageURL], kTAGUSERINFORMATION_PROFILEURL , [self.targetuser password], kTAGUSERINFORMATION_PASSWORD, [self.targetuser email], kTAGUSERINFORMATION_EMAIL, [self.targetuser dateJoined], kTAGUSERINFORMATION_DATEJOINED, [self.targetuser friends], kTAGUSERINFORMATION_FRIENDS, [self.targetuser moments], [self.targetuser settings], kTAGUSERINFORMATION_OTHER, nil];
+//    self.userInformation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self.targetuser username], kTAGUSERINFORMATION_USERNAME, [self.targetuser profileImageURL], kTAGUSERINFORMATION_PROFILEURL , [self.targetuser password], kTAGUSERINFORMATION_PASSWORD, [self.targetuser email], kTAGUSERINFORMATION_EMAIL, [self.targetuser dateJoined], kTAGUSERINFORMATION_DATEJOINED, [self.targetuser friends], kTAGUSERINFORMATION_FRIENDS, [self.targetuser moments], [self.targetuser settings], kTAGUSERINFORMATION_OTHER, nil];
 }
 
 - (void)didReceiveMemoryWarning

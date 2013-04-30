@@ -255,7 +255,7 @@
 						<string key="NSFrame">{{150, 280}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="133177614"/>
+						<reference key="NSNextKeyView" ref="1071589612"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -328,7 +328,7 @@
 										<string key="NSFrame">{{20, 54}, {280, 289}}</string>
 										<reference key="NSSuperview" ref="892633896"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="537207473"/>
+										<reference key="NSNextKeyView" ref="133177614"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<object class="NSColor" key="IBUIBackgroundColor">
 											<int key="NSColorSpace">2</int>
@@ -486,7 +486,7 @@ aWVzOgo</string>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="1071589612"/>
+				<reference key="NSNextKeyView" ref="537207473"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
 					<bytes key="NSRGB">MC4xMDk4MDM5MjE2IDAuNjU4ODIzNTI5NCAxAA</bytes>
@@ -2322,7 +2322,7 @@ aWVzOgo</string>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">925</int>
+			<int key="maxID">926</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

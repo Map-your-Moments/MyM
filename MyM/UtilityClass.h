@@ -11,6 +11,9 @@
 @interface UtilityClass : NSObject
 
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address;
++ (NSURL*) getGravatarURL:(NSString*) emailAddress;
++ (NSData *) requestGravatar:(NSURL*) gravatarURL;
+
 + (NSArray *)GetFriendsJSON: (NSDictionary *)jsonDictionary toAddress:(NSString *)address;
 
 @end
