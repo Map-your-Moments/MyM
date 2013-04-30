@@ -10,12 +10,14 @@
 #import "AmazonClientManager.h"
 #import "MomentDataController.h"
 #import "Constants.h"
+#import "FriendUtilityClass.h"
+#import "User.h"
 
 @interface S3UtilityClass : NSObject
 
 @property (nonatomic) MomentDataController *dataController;
 @property (nonatomic) Moment *tempMoment;
 
-- (MomentDataController *)updateMomentsForUser:(NSString *)user;
+- (MomentDataController *)updateMomentsForUser:(User *)user;
 
 @end

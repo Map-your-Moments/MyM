@@ -275,6 +275,7 @@
 {
     SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
     [mapView removeAnnotations:mapView.annotations]; //!
+    [vc setUser:user];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -342,7 +343,7 @@
         });
         
         S3UtilityClass *s3 = [[S3UtilityClass alloc] init];
-        dataController = [s3 updateMomentsForUser:user.username];
+        dataController = [s3 updateMomentsForUser:user];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];

@@ -28,7 +28,7 @@
  * the UI to hang until they finish.
  */
 
-- (MomentDataController *)updateMomentsForUser:(NSString *)user
+- (MomentDataController *)updateMomentsForUser:(User *)user
 {
     dataController = [[MomentDataController alloc] init];
     NSArray *keys = [NSArray arrayWithArray:[self listAllMomentsForUser:user]];
@@ -59,17 +59,21 @@
     return keys;
 }
 
-- (NSArray *)listAllMomentsForUser:(NSString *)username
+- (NSArray *)listAllMomentsForUser:(User *)user
 {
     NSMutableArray *objectKeys = [[NSMutableArray alloc] init];
     
-    /* the list moments in s3 folder will be called for each
-     * friend a user has, and will store all of the keys in an array,
-     * which it will return for the getAllObjectsFromKeys method
-     */
+    // Get the list of friends
+    FriendUtilityClass *friendUtil = [[FriendUtilityClass alloc] init];
+    NSArray *friends = [NSArray arrayWithArray:[friendUtil getFriends:[user token]]];
     
-    // for now, this will just return the user's moments
-    [objectKeys addObjectsFromArray:[self listMomentsInS3Folder:[NSString stringWithFormat:@"%@/", username]]];
+    // Add the user's moments
+    [objectKeys addObjectsFromArray:[self listMomentsInS3Folder:[NSString stringWithFormat:@"%@/", user.username]]];
+    
+    // Add the friend's moments
+    for(NSDictionary *friend in friends) {
+        [objectKeys addObjectsFromArray:[self listMomentsInS3Folder:[NSString stringWithFormat:@"%@/", [friend valueForKey:@"username"]]]];
+    }
     
     return objectKeys;
 }
