@@ -274,6 +274,7 @@
 {
     SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
     [mapView removeAnnotations:mapView.annotations]; //!
+    [vc setUser:user];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
