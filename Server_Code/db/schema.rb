@@ -20,12 +20,25 @@ ActiveRecord::Schema.define(:version => 20130428222339) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "client_applications", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "support_url"
+    t.string   "callback_url"
+    t.string   "key",          :limit => 40
+    t.string   "secret",       :limit => 40
+    t.integer  "user_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "client_applications", ["key"], :name => "index_client_applications_on_key", :unique => true
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.string   "type",       :default => "PendingFriendship"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "user_sessions", :force => true do |t|

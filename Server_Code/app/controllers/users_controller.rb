@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :restrict_access, :only => :destroy
   # GET /users
   # GET /users.json
   
@@ -82,8 +83,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { render json: {deleted: true} }
+      format.json { render json: {:deleted => ' true' }}
     end
   end
 end
