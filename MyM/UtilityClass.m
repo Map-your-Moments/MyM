@@ -45,7 +45,7 @@
     
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    NSLog(@"Response:\n%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
+    //NSLog(@"Response:\n%@",[NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] );
     NSDictionary *jsonresponse = POSTReply ? [NSJSONSerialization JSONObjectWithData:POSTReply options:kNilOptions error:nil] : nil;
     
     return jsonresponse;
