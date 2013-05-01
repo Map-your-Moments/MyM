@@ -285,10 +285,21 @@
                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                         if(self.jsonEditPassword)
                         {
-                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
-                                                           title:@"Password successfully changed"
-                                                 linedBackground:AJLinedBackgroundTypeDisabled
-                                                       hideAfter:BANNER_DEFAULT_TIME];
+                            if([self.jsonEditPassword[@"updated"] boolValue])
+                            {
+                                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                               title:@"Password successfully changed"
+                                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                                           hideAfter:BANNER_DEFAULT_TIME];
+                            }
+                            else
+                            {
+                                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                               title:@"Failed to change password"
+                                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                                           hideAfter:BANNER_DEFAULT_TIME];
+                            }
+                            
                         }
                         else
                         {
