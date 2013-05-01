@@ -260,7 +260,7 @@
 
 - (void)friends
 {
-    [self hideNavbox];
+    //[self hideNavbox];
     SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
     [mapView removeAnnotations:mapView.annotations]; //!
     [vc setUser:user];
@@ -269,10 +269,10 @@
 
 - (void)settings
 {
-    [self hideNavbox];
+    //[self hideNavbox];
     UserAccountViewController *vc = [[UserAccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [mapView removeAnnotations:mapView.annotations]; //!
-    [vc setTargetuser:user];
+    [vc setUser:user];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
