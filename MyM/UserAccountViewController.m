@@ -7,9 +7,13 @@
 //
 
 #import "UserAccountViewController.h"
-#import "FriendsListViewController.h"
+#import "SearchBarTableViewController.h"
 #import "User.h"
 #import "Constants.h"
+#import "UtilityClass.h"
+#import "AJNotificationView.h"
+
+#define BANNER_DEFAULT_TIME 2
 
 @interface UserAccountViewController ()
 {
@@ -20,7 +24,6 @@
     NSString *kTAGUSERINFORMATION_FRIENDS;
     NSString *kTAGUSERINFORMATION_MOMENTS;
     NSString *kTAGUSERINFORMATION_OTHER;
-    NSString *kTAGUSERINFORMATION_PROFILEURL;
     
     NSString *kStillImages;
     NSString *kVideoCamera;
@@ -29,6 +32,9 @@
 
 @property (strong, nonatomic) NSArray *sectionHeaders;
 @property (strong, nonatomic) NSMutableDictionary *userInformation;
+@property (nonatomic) NSDictionary *jsonDeleteAccount;
+
+- (IBAction)deleteUserAlert:(id)sender;
 
 @end
 
@@ -46,6 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self createDeleteUserButton];
+    
     kTAGUSERINFORMATION_USERNAME = @"USERNAME";
     kTAGUSERINFORMATION_PASSWORD = @"PASSWORD";
     kTAGUSERINFORMATION_OTHER = @"OTHER";
@@ -53,7 +62,6 @@
     kTAGUSERINFORMATION_FRIENDS = @"FRIENDS";
     kTAGUSERINFORMATION_EMAIL = @"EMAIL";
     kTAGUSERINFORMATION_DATEJOINED = @"DATEJOINED";
-    kTAGUSERINFORMATION_PROFILEURL = @"PROFILEURL";
     
     kStillImages = @"public.image";
     kVideoCamera = @"public.movie";
@@ -61,7 +69,12 @@
     
     self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Date Joined", @"Friends", @"Moments", @"Other Settings", nil];
     
-//    self.userInformation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self.targetuser username], kTAGUSERINFORMATION_USERNAME, [self.targetuser profileImageURL], kTAGUSERINFORMATION_PROFILEURL , [self.targetuser password], kTAGUSERINFORMATION_PASSWORD, [self.targetuser email], kTAGUSERINFORMATION_EMAIL, [self.targetuser dateJoined], kTAGUSERINFORMATION_DATEJOINED, [self.targetuser friends], kTAGUSERINFORMATION_FRIENDS, [self.targetuser moments], [self.targetuser settings], kTAGUSERINFORMATION_OTHER, nil];
+    self.userInformation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self.targetuser username], kTAGUSERINFORMATION_USERNAME, [self.targetuser password], kTAGUSERINFORMATION_PASSWORD, [self.targetuser email], kTAGUSERINFORMATION_EMAIL, [self.targetuser dateJoined], kTAGUSERINFORMATION_DATEJOINED, [self.targetuser friends], kTAGUSERINFORMATION_FRIENDS, [self.targetuser moments], [self.targetuser settings], kTAGUSERINFORMATION_OTHER, nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -289,8 +302,8 @@
         case 4:
         {
             NSLog(@"Accessory Friends");
-            FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
-            //[mapView removeAnnotations:mapView.annotations]; //!
+            SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
+            [vc setUser:_targetuser];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -352,6 +365,13 @@
             }
         }
     }
+    else if([alertView tag] == kUIAlertDeleteAccount)
+    {
+        if(buttonIndex != [alertView cancelButtonIndex])
+        {
+            [self deleteUserAccount];
+        }
+    }
 }
 
 #pragma mark UIActionSheet
@@ -392,6 +412,93 @@
     #warning need to update database with new picture
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)createDeleteUserButton
+{
+    // create a UIButton (Delete Account button)
+    UIImage *deleteImage = [UIImage imageNamed:@"delete~iphone.png"];
+    UIButton *btnDelete = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnDelete.frame = CGRectMake(-10, 25, self.view.bounds.size.width - 20, 40);
+    btnDelete.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    btnDelete.titleLabel.shadowColor = [UIColor lightGrayColor];
+    btnDelete.titleLabel.shadowOffset = CGSizeMake(0, -1);
+    [btnDelete setTitle:@"Delete Account" forState:UIControlStateNormal];
+    [btnDelete setBackgroundImage:[deleteImage resizableImageWithCapInsets:UIEdgeInsetsMake(20, 5, 5 ,5)] forState:UIControlStateNormal];
+    [btnDelete setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnDelete addTarget:self action:@selector(deleteUserButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    //create a footer view on the bottom of the tabeview
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 280, 100)];
+    [footerView addSubview:btnDelete];
+    
+    self.tableView.tableFooterView = footerView;
+}
+
+- (void)deleteUserButton
+{
+    NSLog(@"Delete Account");
+    [self deleteUserAlert:self];
+}
+
+- (IBAction)deleteUserAlert:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Deleting Account"
+                          message:@"Are you sure you want to permanently delete your account?"
+                          delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Confirm", nil];
+    alert.tag = kUIAlertDeleteAccount;
+    [alert show];
+}
+
+- (void)deleteUserAccount
+{
+    NSString *user = [_targetuser token];
+    NSDictionary *jsonDictionary = @{ @"access_token" : user};
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        self.jsonDeleteAccount = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/delete_user"];
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            if(self.jsonDeleteAccount)
+            {
+                if([self.jsonDeleteAccount[@"deleted"] boolValue])
+                {
+                    NSLog(@"Account deleted.");
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                   title:@"Account successfully deleted"
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                else
+                {
+                    NSLog(@"Failed to delete account.");
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:@"Failed to delete account"
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                
+            }
+            else
+            {
+                NSLog(@"Server request failed.");
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Server request failed"
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+            }
+        });
+    });
+    
 }
 
 @end

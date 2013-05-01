@@ -32,7 +32,8 @@ enum{
 enum{
     kUIAlertSettingsStandard,
     kUIAlertSettingsConfirmChange,
-    kUIAlertSettingsVerifyChange
+    kUIAlertSettingsVerifyChange,
+    kUIAlertDeleteAccount
 }kUIAlertSetting;
 
 @interface Constants : NSObject
