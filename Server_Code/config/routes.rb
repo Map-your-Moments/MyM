@@ -9,6 +9,7 @@ ServerCode::Application.routes.draw do
   post 'mym' => 'moments#edit', :as => 'mym'
   get 'mym' => 'users#show', :as => 'mym'
   get 'confirm_friendship' => 'friendships#create'
+  post 'edit_user' => 'users#update', :defaults => {:format => 'json'}
   post 'delete_user' => 'users#destroy', :defaults => {:format => 'json'}
   post 'createfriend' => 'friendships#new', :defaults => {:format => 'json'}
   post 'friends' => 'friendships#show', :defaults => {:format => 'json'}
