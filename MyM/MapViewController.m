@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SearchBarTableViewController.h"
 #import "MomentCreateViewController.h"
+#import "UserAccountViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -257,10 +258,6 @@
     }
 }
 
-- (void)search
-{
-}
-
 - (void)friends
 {
     [self hideNavbox];
@@ -272,6 +269,11 @@
 
 - (void)settings
 {
+    [self hideNavbox];
+    UserAccountViewController *vc = [[UserAccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [mapView removeAnnotations:mapView.annotations]; //!
+    [vc setTargetuser:user];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)signOut
