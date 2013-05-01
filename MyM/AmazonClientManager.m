@@ -14,7 +14,6 @@ static AmazonDynamoDBClient *amazonDynamoDBClient = nil;
 static AmazonSESClient *amazonSESClient = nil;
 static AmazonS3Client *amazonS3Client = nil;
 
-
 + (AmazonDynamoDBClient *)amazonDynamoDBClient
 {
     if (!amazonDynamoDBClient) {

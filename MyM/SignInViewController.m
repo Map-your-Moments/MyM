@@ -45,7 +45,6 @@ bool startInsideAboutImageView;
     } else {
         startInsideAboutImageView = NO;
     }
-    
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -224,7 +223,7 @@ bool startInsideAboutImageView;
                                     andSettings:nil
                                      andMoments:nil
                                      andFriends:nil
-                               andPprofileImage:self.userPicture
+                               andProfileImage:self.userPicture
                                        andToken:self.jsonLogin[@"access_token"]];
     self.txtPassword.text = @"";
     self.txtUsername.text = @"";
