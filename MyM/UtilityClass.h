@@ -15,5 +15,6 @@
 + (NSData *) requestGravatar:(NSURL*) gravatarURL;
 
 + (NSArray *)GetFriendsJSON: (NSDictionary *)jsonDictionary toAddress:(NSString *)address;
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 @end

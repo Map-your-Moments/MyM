@@ -7,28 +7,28 @@
 //
 
 #import "UserAccountViewController.h"
-#import "FriendsListViewController.h"
+#import "SearchBarTableViewController.h"
 #import "User.h"
 #import "Constants.h"
+#import "UtilityClass.h"
+#import "AJNotificationView.h"
+#import "FriendUtilityClass.h"
+
+#define BANNER_DEFAULT_TIME 2
 
 @interface UserAccountViewController ()
 {
-    NSString *kTAGUSERINFORMATION_USERNAME;
-    NSString *kTAGUSERINFORMATION_PASSWORD;
-    NSString *kTAGUSERINFORMATION_EMAIL;
-    NSString *kTAGUSERINFORMATION_DATEJOINED;
-    NSString *kTAGUSERINFORMATION_FRIENDS;
-    NSString *kTAGUSERINFORMATION_MOMENTS;
-    NSString *kTAGUSERINFORMATION_OTHER;
-    NSString *kTAGUSERINFORMATION_PROFILEURL;
-    
-    NSString *kStillImages;
-    NSString *kVideoCamera;
-    NSString *kMomemtAudio_temp;
+//    NSString *kStillImages;
+//    NSString *kVideoCamera;
+//    NSString *kMomemtAudio_temp;
 }
 
 @property (strong, nonatomic) NSArray *sectionHeaders;
 @property (strong, nonatomic) NSMutableDictionary *userInformation;
+@property (nonatomic) NSDictionary *jsonDeleteAccount;
+@property (nonatomic) NSDictionary *jsonEditPassword;
+
+- (IBAction)deleteUserAlert:(id)sender;
 
 @end
 
@@ -46,22 +46,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    kTAGUSERINFORMATION_USERNAME = @"USERNAME";
-    kTAGUSERINFORMATION_PASSWORD = @"PASSWORD";
-    kTAGUSERINFORMATION_OTHER = @"OTHER";
-    kTAGUSERINFORMATION_MOMENTS = @"MOMENTS";
-    kTAGUSERINFORMATION_FRIENDS = @"FRIENDS";
-    kTAGUSERINFORMATION_EMAIL = @"EMAIL";
-    kTAGUSERINFORMATION_DATEJOINED = @"DATEJOINED";
-    kTAGUSERINFORMATION_PROFILEURL = @"PROFILEURL";
     
-    kStillImages = @"public.image";
-    kVideoCamera = @"public.movie";
-    kMomemtAudio_temp = @"MomemtAudio_temp";
+    [self createDeleteUserButton];
     
-    self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Date Joined", @"Friends", @"Moments", @"Other Settings", nil];
+//    kStillImages = @"public.image";
+//    kVideoCamera = @"public.movie";
+//    kMomemtAudio_temp = @"MomemtAudio_temp";
     
-//    self.userInformation = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self.targetuser username], kTAGUSERINFORMATION_USERNAME, [self.targetuser profileImageURL], kTAGUSERINFORMATION_PROFILEURL , [self.targetuser password], kTAGUSERINFORMATION_PASSWORD, [self.targetuser email], kTAGUSERINFORMATION_EMAIL, [self.targetuser dateJoined], kTAGUSERINFORMATION_DATEJOINED, [self.targetuser friends], kTAGUSERINFORMATION_FRIENDS, [self.targetuser moments], [self.targetuser settings], kTAGUSERINFORMATION_OTHER, nil];
+    self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Friends", nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,10 +98,11 @@
     {
         case 0:
         {
-            cell.textLabel.text = [self.userInformation valueForKey:kTAGUSERINFORMATION_USERNAME];
+            cell.textLabel.text = [_user username];
             
-            if([self.targetuser profileImage] == nil)
+            if([_user profileImage])
             {
+<<<<<<< HEAD
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^ {
                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -124,12 +122,25 @@
             else
             {
                 cell.imageView.image = [UIImage imageWithData:[self.targetuser profileImage]];
+=======
+                UIImage *cellImg = [UIImage imageWithData:[_user profileImage]];
+                cellImg = [UtilityClass imageWithImage:cellImg scaledToSize:CGSizeMake(35,35)];
+                
+                cell.imageView.image = cellImg;
+            }
+            else
+            {
+                UIImage *cellImg = [UIImage imageNamed:@"DefaultProfilePic.png"];
+                cellImg = [UtilityClass imageWithImage:cellImg scaledToSize:CGSizeMake(35,35)];
+                
+                cell.imageView.image = cellImg;
+>>>>>>> 95925dd319e018a6e51e2972a665c249660e984c
             }
             break;
         }
         case 1:
         {
-            NSString *password = [self.userInformation valueForKey:kTAGUSERINFORMATION_PASSWORD];
+            NSString *password = [_user password];
             if(password == nil)
                 password = @"Testing";
             NSString *securedView = @"";
@@ -140,34 +151,33 @@
         }
         case 2:
         {
-            cell.textLabel.text = [self.userInformation valueForKey:kTAGUSERINFORMATION_EMAIL];
+            cell.textLabel.text = [_user email];
+            
             break;
         }
         case 3:
         {
-            cell.textLabel.text = [self.userInformation valueForKey:kTAGUSERINFORMATION_DATEJOINED];
+            FriendUtilityClass *fUtility = [[FriendUtilityClass alloc] init];
+            
+            NSArray *friendList = [fUtility getFriends:[_user token]];
+            
+            if([friendList count] == 1)
+            {
+                cell.textLabel.text = [NSString stringWithFormat:@"%d Friend", [friendList count]];
+            }
+            else
+            {
+                cell.textLabel.text = [NSString stringWithFormat:@"%d Friends", [friendList count]];
+            }
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         }
-        case 4:
-        {
-            NSMutableArray *friendList = [self.userInformation valueForKey:kTAGUSERINFORMATION_FRIENDS];
-            cell.textLabel.text = [NSString stringWithFormat:@"%d Friends", [friendList count]];
-            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-            break;
-        }
-        case 5:
-        {
-            NSMutableArray *momentList = [self.userInformation valueForKey:kTAGUSERINFORMATION_MOMENTS];
-            cell.textLabel.text = [NSString stringWithFormat:@"%d Moments", [momentList count]];
-            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-            break;
-        }
-        case 6:
-        {
-            cell.textLabel.text = [NSString stringWithFormat:@"View Other Settings"];
-            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-            break;
-        }
+//        case 4:
+//        {
+//            cell.textLabel.text = [NSString stringWithFormat:@"Other Settings"];
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            break;
+//        }
     }
     return cell;
 }
@@ -181,93 +191,58 @@
         case 0:
         {
             NSLog(@"Touched Username");
+<<<<<<< HEAD
             //UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Saved or New" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Saved Image", @"Take Picture", nil];
             //[actionSheet showInView:self.view];
+=======
+            //[self.navigationController popViewControllerAnimated:YES];
+>>>>>>> 95925dd319e018a6e51e2972a665c249660e984c
             break;
         }
         case 1:
         {
             NSLog(@"Touched Password");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
-            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-            [alert setTag:kUIAlertSettingsConfirmChange];
-            [alert show];
+            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
+                                           title:@"Editing password is not implemented yet"
+                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                       hideAfter:BANNER_DEFAULT_TIME];
+            
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+//            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+//            [alert setTag:kUIAlertSettingsConfirmChange];
+//            [alert show];
             break;
         }
         case 2:
         {
             NSLog(@"Touched Email");
+
+            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
+                                           title:@"Editing email is not implemented yet"
+                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                       hideAfter:BANNER_DEFAULT_TIME];
             break;
         }
         case 3:
-        {
-            NSLog(@"Touched Date");
-            break;
-        }
-        case 4:
         {
             NSLog(@"Touched Friends");
-            break;
-        }
-        case 5:
-        {
-            NSLog(@"Touched Moments");
-            break;
-        }
-        case 6:
-        {
-            NSLog(@"Touched Other");
-            break;
-        }
-    }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    switch([indexPath section])
-    {
-        case 0:
-        {
-            NSLog(@"Accessory Username");
-            break;
-        }
-        case 1:
-        {
-            NSLog(@"Accessory Password");
-            break;
-        }
-        case 2:
-        {
-            NSLog(@"Accessory Email");
-            break;
-        }
-        case 3:
-        {
-            NSLog(@"Accessory Date");
-            break;
-        }
-        case 4:
-        {
-            NSLog(@"Accessory Friends");
-            FriendsListViewController *vc = [[FriendsListViewController alloc] initWithNibName:@"FriendsListViewController" bundle:nil];
-            //[mapView removeAnnotations:mapView.annotations]; //!
+            SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
+            [vc setUser:_user];
             [self.navigationController pushViewController:vc animated:YES];
             break;
-        }
-        case 5:
-        {
-#warning NEED TO IMPLEMENT
-            NSLog(@"Accessory Moments");
             break;
         }
-        case 6:
-        {
-#warning NEED TO IMPLEMENT
-            NSLog(@"Accessory Other");
-            break;
-        }
+//        case 4:
+//        {
+//            NSLog(@"Touched Other");
+//            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
+//                                           title:@"Not implemented in this build."
+//                                 linedBackground:AJLinedBackgroundTypeDisabled
+//                                       hideAfter:BANNER_DEFAULT_TIME];
+//            break;
+//        }
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark UIAlertView Delegate
@@ -280,16 +255,24 @@
             NSString *passwordEntered = [[alertView textFieldAtIndex:0] text];
             if(passwordEntered == nil)
                 return;
-            if(![passwordEntered isEqualToString:[self.userInformation valueForKey:kTAGUSERINFORMATION_PASSWORD]])
+            if(![passwordEntered isEqualToString:[_user password]])
+            {
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Incorrect password"
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
                 return;
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Enter a new password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Change", nil];
-            [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-            [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
-            [[alert textFieldAtIndex:0]setPlaceholder:@"New Password"];
-            [[alert textFieldAtIndex:1]setPlaceholder:@"Confirm Password"];
-            [alert setTag:kUIAlertSettingsVerifyChange];
-            [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Enter a new password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
+                [[alert textFieldAtIndex:0]setPlaceholder:@"New Password"];
+                [[alert textFieldAtIndex:1]setPlaceholder:@"Confirm Password"];
+                [alert setTag:kUIAlertSettingsVerifyChange];
+                [alert show];
+            }
         }
     }
     else if([alertView tag] == kUIAlertSettingsVerifyChange)
@@ -298,21 +281,66 @@
         {
             NSString *newPassword = [[alertView textFieldAtIndex:0] text];
             NSString *confirmedPwd = [[alertView textFieldAtIndex:1] text];
+            
             if(![newPassword isEqualToString:confirmedPwd])
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid" message:@"Passwords do not match" delegate:self cancelButtonTitle:@"Damn..." otherButtonTitles: nil];
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Passwords do not match"
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Enter a new password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
+                [[alert textFieldAtIndex:0]setPlaceholder:@"New Password"];
+                [[alert textFieldAtIndex:1]setPlaceholder:@"Confirm Password"];
+                [alert setTag:kUIAlertSettingsVerifyChange];
                 [alert show];
             }
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"Password successfully changed" delegate:self cancelButtonTitle:@"Cool" otherButtonTitles:nil];
-                [alert show];
-                [self.userInformation setValue:newPassword forKey:kTAGUSERINFORMATION_PASSWORD];
-                [self.targetuser setPassword:newPassword];
-                #warning UPDATE THE SERVER WITH NEW PASSWORD AS WELL AS USER INFORMATION
+                [_user setPassword:newPassword];
+                
+                NSDictionary *jsonDictionary = @{ @"user": @{ @"username" : [_user username], @"password" : newPassword, @"email" : [_user email], @"name" : [_user name]} };
+                
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(queue, ^{
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                    });
+                    self.jsonEditPassword = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/edit_user"];
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                        if(self.jsonEditPassword)
+                        {
+                            if([self.jsonEditPassword[@"updated"] boolValue])
+                            {
+                                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                               title:@"Password successfully changed"
+                                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                                           hideAfter:BANNER_DEFAULT_TIME];
+                            }
+                            else
+                            {
+                                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                               title:@"Failed to change password"
+                                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                                           hideAfter:BANNER_DEFAULT_TIME];
+                            }
+                            
+                        }
+                        else
+                        {
+                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                           title:@"Server request failed"
+                                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                                       hideAfter:BANNER_DEFAULT_TIME];
+                        }
+                    });
+                });
             }
         }
     }
+<<<<<<< HEAD
 }
 
 #pragma mark UIActionSheet
@@ -328,33 +356,115 @@
         [self presentViewController:pickerController animated:YES completion:NULL];
     }
     else if(buttonIndex == kTAKEMEDIA)
+=======
+    else if([alertView tag] == kUIAlertDeleteAccount)
+>>>>>>> 95925dd319e018a6e51e2972a665c249660e984c
     {
-        if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        if(buttonIndex != [alertView cancelButtonIndex])
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
-            [alert show];
-            return;
+            [self deleteUserAccount];
         }
+<<<<<<< HEAD
         UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
         //There is a warning here. I am not sure why but disregard
         [pickerController setDelegate:self];
         [pickerController setMediaTypes:[NSArray arrayWithObject:kStillImages]];
         [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
         [self presentViewController:pickerController animated:YES completion:NULL];
+=======
+>>>>>>> 95925dd319e018a6e51e2972a665c249660e984c
     }
 }
 
-#pragma mark UIImageViewController
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)createDeleteUserButton
 {
+<<<<<<< HEAD
     UIImage *newImage = [info valueForKey:UIImagePickerControllerOriginalImage];
     [self.targetuser setProfileImage:UIImagePNGRepresentation(newImage)];
+=======
+    // create a UIButton (Delete Account button)
+    UIImage *deleteImage = [UIImage imageNamed:@"delete~iphone.png"];
+    UIButton *btnDelete = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnDelete.frame = CGRectMake(-10, 25, self.view.bounds.size.width - 20, 40);
+    btnDelete.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    btnDelete.titleLabel.shadowColor = [UIColor lightGrayColor];
+    btnDelete.titleLabel.shadowOffset = CGSizeMake(0, -1);
+    [btnDelete setTitle:@"Delete Account" forState:UIControlStateNormal];
+    [btnDelete setBackgroundImage:[deleteImage resizableImageWithCapInsets:UIEdgeInsetsMake(20, 5, 5 ,5)] forState:UIControlStateNormal];
+    [btnDelete setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnDelete addTarget:self action:@selector(deleteUserButton) forControlEvents:UIControlEventTouchUpInside];
+>>>>>>> 95925dd319e018a6e51e2972a665c249660e984c
     
-    [self.tableView reloadData];
+    //create a footer view on the bottom of the tabeview
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 280, 100)];
+    [footerView addSubview:btnDelete];
     
-    #warning need to update database with new picture
+    self.tableView.tableFooterView = footerView;
+}
+
+- (void)deleteUserButton
+{
+    NSLog(@"Delete Account");
+    [self deleteUserAlert:self];
+}
+
+- (IBAction)deleteUserAlert:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Deleting Account"
+                          message:@"Are you sure you want to permanently delete your account?"
+                          delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Confirm", nil];
+    alert.tag = kUIAlertDeleteAccount;
+    [alert show];
+}
+
+- (void)deleteUserAccount
+{
+    NSString *user = [_user token];
+    NSDictionary *jsonDictionary = @{ @"access_token" : user};
     
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        self.jsonDeleteAccount = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/delete_user"];
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            if(self.jsonDeleteAccount)
+            {
+                if([self.jsonDeleteAccount[@"deleted"] boolValue])
+                {
+                    NSLog(@"Account deleted.");
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                   title:@"Account successfully deleted"
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                else
+                {
+                    NSLog(@"Failed to delete account.");
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:@"Failed to delete account"
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                
+            }
+            else
+            {
+                NSLog(@"Server request failed.");
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Server request failed"
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+            }
+        });
+    });
 }
 
 @end
