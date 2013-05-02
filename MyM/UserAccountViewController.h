@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class User;
+#import "Moment.h"
 
 @interface UserAccountViewController : UITableViewController <UIAlertViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate>
 
-@property (strong, nonatomic) User *targetuser;
+@property (strong, nonatomic) User *user;
 
 @end

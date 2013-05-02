@@ -9,12 +9,13 @@
 #import "User.h"
 
 @implementation User
-@synthesize username, password, dateJoined, email, settings, moments, friends, profileImage, token;
+@synthesize username, name, password, dateJoined, email, settings, moments, friends, profileImage, token;
 
 /* Main constructor for the User class */
--(id)initWithUserName:(NSString *)theUsername andPassword:(NSString *)thePassword andDateJoined:(NSDate *)theDate andEmail:(NSString *)theEmail andSettings:(UserSettings *)theSettings andMoments:(MomentDataController *)theMoments andFriends:(NSMutableArray *)theFriends andProfileImage:(NSData *)theProfileImage andToken:(NSString *)theToken
+-(id)initWithUserName:(NSString *)theUsername andName:(NSString *)theName andPassword:(NSString *)thePassword andDateJoined:(NSDate *)theDate andEmail:(NSString *)theEmail andSettings:(UserSettings *)theSettings andMoments:(MomentDataController *)theMoments andFriends:(NSMutableArray *)theFriends andProfileImage:(NSData *)theProfileImage andToken:(NSString *)theToken
 {
     username   = theUsername;
+    name       = theName;
     password   = thePassword;
     dateJoined = theDate;
     email      = theEmail;

@@ -217,14 +217,16 @@ bool startInsideAboutImageView;
 - (void)logIn
 {
     User *user = [[User alloc] initWithUserName:self.txtUsername.text
-                                    andPassword:nil
+                                        andName:self.jsonLogin[@"name"]
+                                    andPassword:self.txtPassword.text
                                   andDateJoined:nil
-                                       andEmail:nil
+                                       andEmail:self.jsonLogin[@"email"]
                                     andSettings:nil
                                      andMoments:nil
                                      andFriends:nil
                                andProfileImage:self.userPicture
                                        andToken:self.jsonLogin[@"access_token"]];
+    
     self.txtPassword.text = @"";
     self.txtUsername.text = @"";
     [self.view endEditing:YES];

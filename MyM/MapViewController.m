@@ -14,6 +14,7 @@
 #import "SearchBarTableViewController.h"
 #import "MomentCreateViewController.h"
 #import "MomentDetailViewController.h"
+#import "UserAccountViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -258,13 +259,9 @@
     }
 }
 
-- (void)search
-{
-}
-
 - (void)friends
 {
-    [self hideNavbox];
+    //[self hideNavbox];
     SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
     [mapView removeAnnotations:mapView.annotations]; //!
     [vc setUser:user];
@@ -273,6 +270,11 @@
 
 - (void)settings
 {
+    //[self hideNavbox];
+    UserAccountViewController *vc = [[UserAccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [mapView removeAnnotations:mapView.annotations]; //!
+    [vc setUser:user];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)signOut
