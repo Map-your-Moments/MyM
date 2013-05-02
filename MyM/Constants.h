@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT NSString *const kS3BUCKETNAME;
+
 enum{
     kTAGMOMENTTEXT = 1,
     kTAGMOMENTPICTURE = 2,
@@ -30,7 +32,8 @@ enum{
 enum{
     kUIAlertSettingsStandard,
     kUIAlertSettingsConfirmChange,
-    kUIAlertSettingsVerifyChange
+    kUIAlertSettingsVerifyChange,
+    kUIAlertDeleteAccount
 }kUIAlertSetting;
 
 @interface Constants : NSObject

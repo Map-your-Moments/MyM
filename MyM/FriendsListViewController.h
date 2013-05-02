@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Moment.h"
 
 @interface FriendsListViewController : UIViewController <UITableViewDataSource,
                                     UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
@@ -15,10 +16,16 @@
 
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated;
 
+- (void)loadFriends;
+- (void)addFriendButton;
+- (void)addFriend;
+
 @property(nonatomic, assign, readonly) BOOL showSectionIndexes;
 
 @property(nonatomic, strong, readonly) UITableView *tableView;
 @property(nonatomic, strong, readonly) UISearchBar *searchBar;
+
+@property (strong, nonatomic) User *user;
 
 //@property (nonatomic) NSMutableArray *friends;
 

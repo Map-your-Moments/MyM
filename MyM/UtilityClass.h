@@ -11,6 +11,10 @@
 @interface UtilityClass : NSObject
 
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address;
-+ (NSDictionary *)GetFriendsJSON:(NSOutputStream *)fileStream fromAddress:(NSString *)address;
++ (NSURL*) getGravatarURL:(NSString*) emailAddress;
++ (NSData *) requestGravatar:(NSURL*) gravatarURL;
+
++ (NSArray *)GetFriendsJSON: (NSDictionary *)jsonDictionary toAddress:(NSString *)address;
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 @end

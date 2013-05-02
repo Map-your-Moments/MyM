@@ -9,11 +9,17 @@
 #import "FriendsListViewController.h"
 #import "UtilityClass.h"
 
+#import "AJNotificationView.h"
+
+#define BANNER_DEFAULT_TIME 2
+#define TAG_ADD 1
+#define TAG_DELETE 2
+
 static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentifier = @"kSearchBarTableViewControllerDefaultTableViewCellIdentifier";
 
 @interface FriendsListViewController ()
 
-@property(nonatomic, copy) NSMutableArray *friends;
+@property(nonatomic, copy) NSArray *friends;
 @property(nonatomic, copy) NSArray *sections;
 
 @property(nonatomic, copy) NSArray *filteredFriends;
@@ -24,11 +30,17 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 @property(nonatomic, strong) UISearchDisplayController *strongSearchDisplayController;
 
-@property (nonatomic) NSDictionary *jsonGetFriends;
+@property (nonatomic) NSArray *jsonGetFriends;
 @property (nonatomic) NSDictionary *jsonAddFriend;
+@property (nonatomic) NSDictionary *jsonDeleteFriend;
 
-@property (nonatomic, copy,   readwrite) NSString *filePath;
-@property (nonatomic, strong, readwrite) NSOutputStream *fileStream;
+@property (nonatomic) UITextField *textField;
+
+@property (nonatomic) NSString* addEmail;
+@property (nonatomic) NSString* deleteEmail;
+
+- (IBAction)addFriendAlert:(id)sender;
+- (IBAction)deleteFriendAlert:(id)sender;
 
 @end
 
@@ -48,46 +60,15 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         
         _showSectionIndexes = showSectionIndexes;
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Top100FamousPersons" ofType:@"plist"];
-        _friends = [[NSMutableArray alloc] initWithContentsOfFile:path];
-        
-//        self.filePath = [[NSBundle mainBundle] pathForResource:@"FriendsList" ofType:@"plist"];
-//        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:YES];
-//        [self.fileStream open];
-//        
-//        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//        dispatch_async(queue, ^{
-//            self.jsonGetFriends = [UtilityClass GetFriendsJSON:self.fileStream fromAddress:@"http://54.225.76.23:3000/friends"];
-//            dispatch_async(dispatch_get_main_queue(), ^ {
-//                [self.fileStream close];
-//        
-//                _friends = [[NSMutableArray alloc] initWithContentsOfFile:self.filePath];
-//            });
-//        });
-        
-        if (showSectionIndexes) {
-            UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
-            
-            NSMutableArray *unsortedSections = [[NSMutableArray alloc] initWithCapacity:[[collation sectionTitles] count]];
-            for (NSUInteger i = 0; i < [[collation sectionTitles] count]; i++) {
-                [unsortedSections addObject:[NSMutableArray array]];
-            }
-            
-            for (NSString *personName in self.friends) {
-                NSInteger index = [collation sectionForObject:personName collationStringSelector:@selector(description)];
-                [[unsortedSections objectAtIndex:index] addObject:personName];
-            }
-            
-            NSMutableArray *sortedSections = [[NSMutableArray alloc] initWithCapacity:unsortedSections.count];
-            for (NSMutableArray *section in unsortedSections) {
-                [sortedSections addObject:[collation sortedArrayFromArray:section collationStringSelector:@selector(description)]];
-            }
-            
-            self.sections = sortedSections;
-        }
     }
-    
     return self;
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    if (_showSectionIndexes) {
+        [self loadFriends];
+    }
 }
 
 - (void)viewDidLoad
@@ -110,6 +91,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     self.searchDisplayController.searchResultsDataSource = self;
     self.searchDisplayController.searchResultsDelegate = self;
     self.searchDisplayController.delegate = self;
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -119,6 +102,11 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     if (animated) {
         [self.tableView flashScrollIndicators];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
 }
 
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated
@@ -189,18 +177,100 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSearchBarTableViewControllerDefaultTableViewCellIdentifier];
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSearchBarTableViewControllerDefaultTableViewCellIdentifier];
     }
     
     if (tableView == self.tableView) {
         if (self.showSectionIndexes) {
-            cell.textLabel.text = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-        } else {
-            cell.textLabel.text = [self.friends objectAtIndex:indexPath.row];
+            NSString* cellName = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"name"];
+            cell.textLabel.text = cellName;
+            
+            NSString* cellEmail = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"email"];
+            
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                });
+            
+                NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+                    if(gravPic)
+                    {
+                        cell.imageView.image = [UIImage imageWithData:gravPic];
+                    }
+
+                });
+            });
+            
+            if(!cell.imageView.image)
+            {
+                cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
+            }
         }
-    } else {
-        cell.textLabel.text = [self.filteredFriends objectAtIndex:indexPath.row];
+        else {
+            NSString* cellName = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"name"];
+            cell.textLabel.text = cellName;
+            
+            NSString* cellEmail = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"email"];
+            
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                });
+                
+                NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                    
+                    if(gravPic)
+                    {
+                        cell.imageView.image = [UIImage imageWithData:gravPic];
+                    }
+                    
+                });
+            });
+            
+            if(!cell.imageView.image)
+            {
+                cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
+            }
+
+        }
+    }
+    else {
+        NSString* cellName = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"name"];
+        cell.textLabel.text = cellName;
+        
+        NSString* cellEmail = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"email"];
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            });
+            
+            NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                
+                if(gravPic)
+                {
+                    cell.imageView.image = [UIImage imageWithData:gravPic];
+                }
+                
+            });
+        });
+        
+        if(!cell.imageView.image)
+        {
+            cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
+        }
     }
     
     return cell;
@@ -211,6 +281,89 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     //add code here
+}
+
+#pragma mark - Delete Friends
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        if (tableView == self.tableView) {
+            if (self.showSectionIndexes) {
+                _deleteEmail = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"email"];
+            } else {
+                _deleteEmail = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"email"];
+            }
+        } else {
+            _deleteEmail = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"email"];
+        }
+        [self deleteFriendAlert:self];
+    }
+}
+
+- (void)deleteFriend
+{
+    NSString *user = [_user token];
+    NSDictionary *jsonDictionary = @{ @"access_token" : user, @"email": _deleteEmail };
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        self.jsonDeleteFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/deletefriend"];
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            if(self.jsonDeleteFriend)
+            {
+                if([self.jsonDeleteFriend[@"deleted"] boolValue])
+                {
+                    NSLog(@"%@ successfully removed from friends list.", _deleteEmail);
+                    [self loadFriends];
+                    [self.searchDisplayController setActive:NO animated:YES];
+                    NSString *title = _deleteEmail;
+                    title = [title stringByAppendingString:@" successfully removed from friends list"];
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                   title:title
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                }
+                else
+                {
+                    NSLog(@"%@ could not be removed from your friends list. Try again.", _deleteEmail);
+                    NSString *title = _deleteEmail;
+                    title = [title stringByAppendingString:@" could not be removed from your friends list"];
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:title
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
+                }
+            }
+            else
+            {
+                NSLog(@"Http request failed.");
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Server request failed"
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+            }
+        });
+    });
+    
+    [self loadFriends];
+}
+
+- (IBAction)deleteFriendAlert:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Deleting Friend"
+                          message:@"Are you sure you want to unfriend this person?"
+                          delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Confirm", nil];
+    alert.tag = TAG_DELETE;
+    [alert show];
 }
 
 #pragma mark - Search Delegate
@@ -230,14 +383,17 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     if (searchString.length > 0) { // Should always be the case
-        NSArray *personsToSearch = self.friends;
+        NSArray *personsToSearch = _friends;
+        NSLog(@"Log %@", personsToSearch);
+        NSLog(@"Friend Log %@", _friends);
+        NSLog(@"Search: %@", searchString);
         if (self.currentSearchString.length > 0 && [searchString rangeOfString:self.currentSearchString].location == 0) { // If the new search string starts with the last search string, reuse the already filtered array so searching is faster
             personsToSearch = self.filteredFriends;
         }
         
-        self.filteredFriends = [personsToSearch filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchString]];
+        self.filteredFriends = [personsToSearch filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name contains[cd] %@", searchString]];
     } else {
-        self.filteredFriends = self.friends;
+        self.filteredFriends = _friends;
     }
     
     self.currentSearchString = searchString;
@@ -245,21 +401,81 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     return YES;
 }
 
-- (void)addFriendButton
+#pragma mark - Get Friends
+
+- (void)loadFriends
 {
-    NSLog(@"Add a Friend");
-    
-    NSString *name = @"Justin Wagner";
-    
-    NSString *user = @"2b1afe455751c6404846ab13f8cf3eb5";
-    NSString *friend = @"wagnerj5@apps.tcnj.edu";
-    
-    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : friend };
+    NSString *user = [_user token];
+    NSDictionary *jsonDictionary = @{ @"access_token" : user};
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        self.jsonGetFriends = [UtilityClass GetFriendsJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friends"];
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            if(self.jsonGetFriends)
+            {
+                _friends = [[NSArray alloc ] initWithArray: self.jsonGetFriends];
+            }
+            else
+            {
+                NSLog(@"Http request for friends list failed.");
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Could not retrieve your friends list"
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+            }
+            
+            UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
+            
+            NSMutableArray *unsortedSections = [[NSMutableArray alloc] initWithCapacity:[[collation sectionTitles] count]];
+            
+            for (NSUInteger i = 0; i < [[collation sectionTitles] count]; i++) {
+                [unsortedSections addObject:[NSMutableArray array]];
+            }
+            
+            for (NSDictionary* dict in _friends) {
+                NSString* name = [dict objectForKey:@"name"];
+                NSInteger index = [collation sectionForObject:name collationStringSelector:@selector(description)];
+                [[unsortedSections objectAtIndex:index] addObject:dict];
+            }
+            
+            NSMutableArray *sortedSections = [[NSMutableArray alloc] initWithCapacity:unsortedSections.count];
+            for (NSMutableArray *section in unsortedSections) {
+                [sortedSections addObject:[collation sortedArrayFromArray:section collationStringSelector:@selector(description)]];
+            }
+            
+            self.sections = sortedSections;
+            [self.tableView reloadData];
+        });
+    });
+}
+
+#pragma mark - Add Friend
+
+- (void)addFriendButton
+{
+    NSLog(@"Add a Friend");
+    [self addFriendAlert:self];
+}
+
+- (void)addFriend
+{
+    NSString *user = [_user token];
+    
+    NSDictionary *jsonDictionary = @{  @"access_token" : user,  @"email" : _addEmail };
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
         self.jsonAddFriend = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/createfriend/"];
         dispatch_async(dispatch_get_main_queue(), ^ {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if(self.jsonAddFriend)
             {
                 if(![self.jsonAddFriend[@"friends"] boolValue])
@@ -268,29 +484,101 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         if([self.jsonAddFriend[@"created"] boolValue])
                         {
+                            [self loadFriends];
+                            _textField.text = NULL;
                             NSLog(@"Friend request sent.");
-                            [_friends addObject:name];
+                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                           title:@"Friend request email successfully sent"
+                                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                                       hideAfter:BANNER_DEFAULT_TIME];
                         }
                         else
                         {
                             NSLog(@"Friend request failed to send.");
+                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                           title:@"Failed to send friend request"
+                                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                                       hideAfter:BANNER_DEFAULT_TIME];
                         }
                     }
                     else
                     {
                         NSLog(@"Friend does not exist.");
+                        [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                       title:@"User does not exist"
+                                             linedBackground:AJLinedBackgroundTypeDisabled
+                                                   hideAfter:BANNER_DEFAULT_TIME];
                     }
                 }
                 else
                 {
-                    NSLog(@"Already friends with this person");
+                    NSLog(@"Already friends with this person.");
+                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                   title:@"You are already friends with this person"
+                                         linedBackground:AJLinedBackgroundTypeDisabled
+                                               hideAfter:BANNER_DEFAULT_TIME];
                 }
             }
             else if(!self.jsonAddFriend)
+            {
                 NSLog(@"Http request failed.");
+                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                               title:@"Server request failed"
+                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                           hideAfter:BANNER_DEFAULT_TIME];
+            }
         });
     });
+}
+
+- (IBAction)addFriendAlert:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Friend Request"
+                          message:@"Please enter the user's email\n\n\n"
+                          delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Send", nil];
     
+    _textField = [[UITextField alloc] init];
+    [_textField setBackgroundColor:[UIColor whiteColor]];
+    _textField.borderStyle = UITextBorderStyleRoundedRect;
+    _textField.frame = CGRectMake(15, 75, 255, 30);
+    _textField.font = [UIFont fontWithName:@"ArialMT" size:20];
+    _textField.adjustsFontSizeToFitWidth = YES;
+    _textField.minimumFontSize = 10;
+    _textField.placeholder = @"email@example.com";
+    _textField.textAlignment = NSTextAlignmentCenter;
+    _textField.keyboardAppearance = UIKeyboardAppearanceDefault;
+    [_textField becomeFirstResponder];
+    [alert addSubview:_textField];
+    
+    alert.tag = TAG_ADD;
+    [alert show];
+    
+}
+
+#pragma mark - Alert Views
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString* detailString = _textField.text;
+    NSLog(@"Email is: %@", detailString); //Put it on the debugger
+    if (alertView.tag == TAG_ADD && ([_textField.text length] <= 0 || buttonIndex == 0)){
+        _textField.text = NULL;
+        return; //If cancel or 0 length string the string doesn't matter
+    }
+    if (alertView.tag == TAG_ADD && buttonIndex == 1) {
+        _addEmail = _textField.text;
+        [self addFriend];
+    }
+    if(alertView.tag == TAG_DELETE && buttonIndex == 0)
+    {
+        return;
+    }
+    if(alertView.tag == TAG_DELETE && buttonIndex == 1)
+    {
+        [self deleteFriend];
+    }
 }
 
 @end
