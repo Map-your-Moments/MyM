@@ -23,10 +23,10 @@
 @property (nonatomic) NSDictionary *jsonEditPassword;
 
 - (IBAction)deleteUserAlert:(id)sender;
-
 @end
 
 @implementation UserAccountViewController
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -50,12 +50,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -191,7 +185,6 @@
             SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
             [vc setUser:_user];
             [self.navigationController pushViewController:vc animated:YES];
-            break;
             break;
         }
 //        case 4:
