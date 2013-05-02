@@ -57,11 +57,14 @@
     return moment;
 }
 
-/* Add a moment to the dataController
-   This method will need to eventually support 
-   adding to aws as well
- */
--(void)addMomentToMomentsWithMoment:(Moment *)moment
+/* Add a moment locally */
+- (void)addMomentToMomentsWithMoment:(Moment *)moment
+{
+    [self.moments addObject:moment];
+}
+
+/* Add a moment to the dataController and the server */
+- (void)addMomentToMomentsAndServerWithMoment:(Moment *)moment
 {
     [self.moments addObject:moment];
     

@@ -236,7 +236,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         if(![[self.captionTextField text] isEqualToString:@""] && [tags count] != 0 && ![[self.tagTextField text] isEqualToString:@""])
         {
             Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andID:ID];
-            [self.dataController addMomentToMomentsWithMoment:newMoment];
+            [self.dataController addMomentToMomentsAndServerWithMoment:newMoment];
             [self.delegate setDataController:self.dataController];
             [self.navigationController popViewControllerAnimated:YES];
         }
