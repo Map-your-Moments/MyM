@@ -18,6 +18,9 @@
 
 @property (nonatomic) MomentDataController *dataController;
 
++ (void)addMomentToS3:(Moment *)moment;
++ (void)removeMomentFromS3:(Moment *)moment;
+
 - (MomentDataController *)updateMomentsForUser:(User *)user;
 
 @end

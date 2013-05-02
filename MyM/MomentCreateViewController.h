@@ -12,6 +12,7 @@
 #import "Moment.h"
 #import "MapViewController.h"
 #import "AmazonClientManager.h"
+#import "S3UtilityClass.h"
 
 @interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {

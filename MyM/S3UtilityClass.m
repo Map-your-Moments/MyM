@@ -11,14 +11,80 @@
 @implementation S3UtilityClass
 @synthesize dataController;
 
+
++ (void)addMomentToS3:(Moment *)moment
+{
+    NSData *momentData = [NSKeyedArchiver archivedDataWithRootObject:moment];
+    NSString *key = [NSString stringWithFormat:@"%@/%@", moment.user, moment.ID];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        
+        @try{
+            S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:key
+                                                                         inBucket:kS3BUCKETNAME];
+            request.data = momentData;
+            [request addMetadataWithValue:moment.title forKey:@"title"];
+            [request addMetadataWithValue:moment.user forKey:@"user"];
+            S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
+            if(response.error != nil)
+                NSLog(@"Error: %@", response.error);
+        }
+        @catch (AmazonClientException *exception) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            NSLog(@"Exception: %@", exception);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        });
+    });
+}
+
++ (void)removeMomentFromS3:(Moment *)moment
+{
+    NSString *key = [NSString stringWithFormat:@"%@/%@", moment.user, moment.ID];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        
+        @try{
+            S3DeleteObjectRequest *request = [[S3DeleteObjectRequest alloc] init];
+            [request setKey:key];
+            S3DeleteObjectResponse *response = [[AmazonClientManager amazonS3Client] deleteObject:request];
+            if(response.error != nil)
+                NSLog(@"Error: %@", response.error);
+        }
+        @catch (AmazonClientException *exception) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            NSLog(@"Exception: %@", exception);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        });
+    });
+}
+
+
 /*     This group of methods updates the moments on the map from the S3 server
  *
  * Logical Structure :::
  *         -dataController is cleared
  *         -each s3 folder that the user has access to will list all of the keys
  *             for the objects in them and add them to an array
- *         -the getAllObjectsFromKeys: method will take that array and get the data
- *             for each individual object, unarchive it, then add it to the dataController
+ *         -the getMomentPreviews for keys will take the keys and create moment previews for
+ *             each one
  *
  *                            *** Caution ***
  *     The only method here that should be called outside of this block is the
