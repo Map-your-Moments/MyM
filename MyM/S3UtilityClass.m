@@ -102,7 +102,7 @@
                                            andDate:nil
                                          andCoords:coords
                                        andComments:nil
-                                             andID:object.key];
+                                             andID:[NSString stringWithFormat:@"%@_%@_%@", tokens[1], tokens[2], tokens[3]]];
             
             if(response.error != nil)
                 NSLog(@"Error: %@", response.error);
