@@ -38,6 +38,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
+        self.title = @"Account Settings";
         // Custom initialization
     }
     return self;
