@@ -13,7 +13,7 @@
 #import "UtilityClass.h"
 #import "AJNotificationView.h"
 
-#define BANNER_DEFAULT_TIME 3
+#define BANNER_DEFAULT_TIME 2
 #define SCREEN_HEIGHT [[UIScreen mainScreen] applicationFrame].size.height
 
 @interface SignInViewController() <NewUserDelegate>

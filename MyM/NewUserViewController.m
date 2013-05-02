@@ -11,7 +11,7 @@
 
 #import "AJNotificationView.h"
 
-#define BANNER_DEFAULT_TIME 3
+#define BANNER_DEFAULT_TIME 2
 
 @interface NewUserViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
