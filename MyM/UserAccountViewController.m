@@ -24,7 +24,6 @@
 }
 
 @property (strong, nonatomic) NSArray *sectionHeaders;
-@property (strong, nonatomic) NSMutableDictionary *userInformation;
 @property (nonatomic) NSDictionary *jsonDeleteAccount;
 @property (nonatomic) NSDictionary *jsonEditPassword;
 
@@ -176,15 +175,10 @@
         case 1:
         {
             NSLog(@"Touched Password");
-            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
-                                           title:@"Editing password is not implemented yet"
-                                 linedBackground:AJLinedBackgroundTypeDisabled
-                                       hideAfter:BANNER_DEFAULT_TIME];
-            
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
-//            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-//            [alert setTag:kUIAlertSettingsConfirmChange];
-//            [alert show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+            [alert setTag:kUIAlertSettingsConfirmChange];
+            [alert show];
             break;
         }
         case 2:
