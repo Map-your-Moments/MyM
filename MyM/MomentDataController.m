@@ -79,6 +79,8 @@
             S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:key
                                                                          inBucket:kS3BUCKETNAME];
             request.data = momentData;
+            [request addMetadataWithValue:moment.title forKey:@"title"];
+            [request addMetadataWithValue:moment.user forKey:@"user"];
             S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
             if(response.error != nil)
                 NSLog(@"Error: %@", response.error);
