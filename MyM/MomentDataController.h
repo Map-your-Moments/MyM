@@ -17,6 +17,7 @@
 -(void)addMomentToMomentsWithMoment:(Moment *)moment;
 - (void)addMomentToMomentsAndServerWithMoment:(Moment *)moment;
 -(void)removeMomentAtIndex:(NSUInteger)index;
+-(void)removeMomentFromMomentsAndServerAtIndex:(NSUInteger)index;
 -(void)removeAllMoments;
 
 -(NSUInteger)countOfMoments;

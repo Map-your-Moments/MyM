@@ -100,6 +100,11 @@
     });
 }
 
+- (void)removeMomentAtIndex:(NSUInteger)index
+{
+    [self.moments removeObjectAtIndex:index];
+}
+
 /* Remove the moment at the selected index
    This moment is used to remove a moment.
             *** Caution!!! ***
@@ -108,7 +113,7 @@
    as it will remove it from the server as
    well.
  */
--(void)removeMomentAtIndex:(NSUInteger)index
+-(void)removeMomentFromMomentsAndServerAtIndex:(NSUInteger)index
 {
     [self.moments removeObjectAtIndex:index];
     
