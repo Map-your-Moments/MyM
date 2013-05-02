@@ -17,12 +17,6 @@
 #define BANNER_DEFAULT_TIME 2
 
 @interface UserAccountViewController ()
-{
-//    NSString *kStillImages;
-//    NSString *kVideoCamera;
-//    NSString *kMomemtAudio_temp;
-}
-
 @property (strong, nonatomic) NSArray *sectionHeaders;
 @property (strong, nonatomic) NSMutableDictionary *userInformation;
 @property (nonatomic) NSDictionary *jsonDeleteAccount;
@@ -33,15 +27,6 @@
 @end
 
 @implementation UserAccountViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -71,7 +56,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return [self.sectionHeaders count];
 }
 
@@ -82,7 +66,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return 1;
 }
 
@@ -99,6 +82,7 @@
         case 0:
         {
             cell.textLabel.text = [_user username];
+            [cell setUserInteractionEnabled:NO];
             
             if([_user profileImage])
             {
@@ -161,7 +145,6 @@
 }
 
 #pragma mark - Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch([indexPath section])

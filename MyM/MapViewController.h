@@ -9,20 +9,17 @@
  *
  */
 
+#import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "AwesomeMenu.h"
+#import "Moment.h"
+#import "Constants.h"
 #import "MomentDataController.h"
 #import "S3UtilityClass.h"
 
 @protocol mapProtocol
 -(void)setDataController:(MomentDataController *)dataController;
 @end
-
-#import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
-#import "AwesomeMenu.h"
-#import "Moment.h"
-#import "Constants.h"
-
-@class MomentDataController;
 
 @interface MapViewController : UIViewController <AwesomeMenuDelegate, MKMapViewDelegate, MKAnnotation>
 
