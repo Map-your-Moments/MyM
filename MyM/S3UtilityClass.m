@@ -112,13 +112,12 @@
         [request setPrefix:folder];
         [request setMarker:folder];
         S3ListObjectsResponse *response = [[AmazonClientManager amazonS3Client] listObjects:request];
-        keys = response.listObjectsResult.objectSummaries;
         if(response.error != nil)
             NSLog(@"Error: %@", response.error);
+        
+        keys = response.listObjectsResult.objectSummaries;
     }
     @catch (AmazonClientException *exception) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
         NSLog(@"Exception: %@", exception);
     }
     
@@ -173,8 +172,6 @@
                 NSLog(@"Error: %@", response.error);
         }
         @catch (AmazonClientException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
             NSLog(@"Exception: %@", exception);
         }
         
@@ -201,8 +198,6 @@
             NSLog(@"Error: %@", response.error);
     }
     @catch (AmazonClientException *exception) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
         NSLog(@"Exception: %@", exception);
     }
     return moment;

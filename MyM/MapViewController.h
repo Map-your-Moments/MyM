@@ -13,11 +13,6 @@
 #import "S3UtilityClass.h"
 #import "FriendUtilityClass.h"
 #import "GravitarUtilityClass.h"
-
-@protocol mapProtocol
--(void)setDataController:(MomentDataController *)dataController;
-@end
-
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "AwesomeMenu.h"

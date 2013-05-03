@@ -237,7 +237,6 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         {
             Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andID:ID];
             [S3UtilityClass addMomentToS3:newMoment];
-            [self.delegate setDataController:self.dataController];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }

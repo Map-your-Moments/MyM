@@ -296,7 +296,6 @@
         MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTPICTURE];
         [vc setCurrentLocation:currentLocation];
-        [vc setDataController:dataController];
         [vc setCurrentUser:user];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
@@ -307,7 +306,6 @@
         MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTAUDIO];
         [vc setCurrentLocation:currentLocation];
-        [vc setDataController:dataController];
         [vc setCurrentUser:user];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
@@ -318,7 +316,6 @@
         MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
         [vc setContentType:kTAGMOMENTTEXT];
         [vc setCurrentLocation:currentLocation];
-        [vc setDataController:dataController];
         [vc setCurrentUser:user];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
