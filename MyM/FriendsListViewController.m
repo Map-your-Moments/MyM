@@ -215,8 +215,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
             }
-            
-            NSLog(@"Section Cell method called");
 
         }
         else {
@@ -249,10 +247,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
             }
-            
-            NSLog(@"Friends Cell method called");
-
-
         }
     }
     else {
@@ -285,8 +279,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         {
             cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
         }
-        
-        NSLog(@"Filtered Cell method called");
     }
     
     return cell;
