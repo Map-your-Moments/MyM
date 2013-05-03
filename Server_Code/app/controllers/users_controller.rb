@@ -4,10 +4,11 @@ class UsersController < ApplicationController
   # GET /users.json
   
   def index
-    @users = User.all
+    @users = User.find(:all, :select => 'username, email, name')
+    #@users = User.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      #format.html # index.html.erb
       format.json { render json: @users }
     end
   end
@@ -15,13 +16,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    #@user = User.find(session[:user_id])
-    @user = current_user
+    user = User.find_by_username(params[:username])
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: User.all }
-      #format.json { render json: {latitude:  @user.latitude, longitude: @user.longitude} }
+      format.html #show.html.erb
+      format.json { render json: { email: user.email }}
     end
   end
 
@@ -51,17 +50,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-    respond_to do |format|
+    #respond_to do |format|
       if @user.save
         @user.create_api_key
         UserMailer.welcome(@user).deliver
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: {created: true, exists: false, access_token: @user.api_key.access_token}}
+        #format.html { redirect_to @user, notice: 'User was successfully created.' }
+        render json: {created: true, access_token: @user.api_key.access_token}
       else
-        format.html { render action: "new" }
-        format.json { render json: {created: false}}
+        #format.html { render action: "new" }
+        render json: {created: false}
       end
-    end
   end
 
   # PUT /users/1
@@ -89,8 +87,7 @@ class UsersController < ApplicationController
     @user = current_user
     @user.destroy
 
-    respond_to do |format|
-      format.json { render json: {:deleted => ' true' }}
-    end
-  end
+    #respond_to do |format|
+      render json: {:deleted => ' true' }
+  end  
 end

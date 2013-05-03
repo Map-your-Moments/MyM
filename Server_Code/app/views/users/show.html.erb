@@ -1,32 +1,55 @@
-<%= form_for(@user) do |f| %>
-  <p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
 
-  <p>
-    <b>Username:</b>
-    <%= @user.username %>
-  </p>
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Friendship confirmed!</title>
 
-  <p>
-    <b>Password_digest:</b>
-    <%= @user.password_digest %>
-  </p>
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <p>
-    <b>Latitude:</b>
-    <%= @user.latitude %>
-  </p>
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="https://rawgithub.com/dhgamache/Skeleton/master/stylesheets/base.css">
+	<link rel="stylesheet" href="https://rawgithub.com/dhgamache/Skeleton/master/stylesheets/skeleton.css">
+	<link rel="stylesheet" href="https://rawgithub.com/dhgamache/Skeleton/master/stylesheets/layout.css">
 
-  <p>
-    <b>Longitude:</b>
-    <%= @user.longitude %>
-  </p>
+  <style>
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  </style>
 
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
-<% end %>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
-<%= form_tag mym_path, :method => :post do %>
-  <%= text_field_tag :latitude %>
-  <%= text_field_tag :longitude %>
-  <%= submit_tag :submit %>
-<% end %>
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+
+	<div class="container">
+	  
+	  <!-- Give column value in word form (one, two..., twelve) -->
+	  <div class="sixteen columns">
+  		<h1>Friendship confirmed!</h1>
+	  	<hr />
+	  	<footer>Copyright &copy; 2013 - MyM Corp.</footer>
+	  </div>
+
+	</div><!-- container -->
+
+<!-- End Document
+================================================== -->
+</body>
+</html>
+

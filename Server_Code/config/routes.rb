@@ -2,7 +2,7 @@ ServerCode::Application.routes.draw do
 
   resources :friendships
   post '/' => 'users#index', :defaults => {:format => 'json'}
-  resources :users , :defaults => {:format => 'json'} 
+  resources :users # , :defaults => {:format => 'json'} 
   get 'logout' => 'user_sessions#destroy', :as => 'logout'
   get 'login' => 'user_sessions#new', :as => 'login'
   post 'login' => 'user_sessions#create'
@@ -14,7 +14,8 @@ ServerCode::Application.routes.draw do
   post 'createfriend' => 'friendships#new', :defaults => {:format => 'json'}
   post 'friends' => 'friendships#show', :defaults => {:format => 'json'}
   post 'deletefriend' => 'friendships#destroy', :defaults => {:format => 'json'}
-  post 'users' => 'users#show', :defaults => {:format => 'json'}
+  post 'get_user' => 'users#show', :defaults => {:format => 'json'}
+  post 'get_all_users' => 'users#index', :defaults => {:format => 'json'}
   resources :user_sessions, :except => [:index, :edit]
   root :to => 'users#index'
   # The priority is based upon order of creation:
