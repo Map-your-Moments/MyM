@@ -130,7 +130,6 @@
 
                 if (self.jsonNewUser) {
                     if ([self.jsonNewUser[@"created"] boolValue]) {
-                        [self createS3FolderForUser];
                         [self.navigationController popToRootViewControllerAnimated:YES];
                         [self.delegate newUserCreated];
                         NSLog(@"Your account was created successfully");
@@ -174,31 +173,6 @@
     }
     
     return NO;
-}
-
-- (void)createS3FolderForUser
-{
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        });
-        
-        @try{
-            S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"%@/", self.usernameTextField.text] inBucket:@"mym-csc470"];
-            S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
-            if(response.error != nil) NSLog(@"Error: %@", response.error);
-        }
-        @catch (AmazonClientException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            NSLog(@"Exception: %@", exception);
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        });
-    });
 }
 
 - (void)backgroundTap

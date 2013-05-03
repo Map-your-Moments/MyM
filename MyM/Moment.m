@@ -12,7 +12,7 @@
 @synthesize title, user, content, date, coords, comments, ID;
 
 /* Main constructor for the Moment class */
-- (id)initWithTitle:(NSString *)theTitle andUser:(NSString *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments andID:(NSString *)theID
+- (id)initWithTitle:(NSString *)theTitle andUser:(NSString *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments
 {
     title    = theTitle;
     user     = theUser;
@@ -20,7 +20,7 @@
     date     = theDate;
     coords   = theCoords;
     comments = theComments;
-    ID       = theID;
+    ID = [NSString stringWithFormat:@"%f_%f_%@_%@_%f", coords.latitude, coords.longitude, title, user, date.timeIntervalSince1970];
     
     return self;
 }
@@ -74,8 +74,7 @@
                                                       andContent:self.content
                                                          andDate:self.date
                                                        andCoords:self.coords
-                                                     andComments:self.comments
-                                                           andID:self.ID];
+                                                     andComments:self.comments];
     return moment;
                  
 }
