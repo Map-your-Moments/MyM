@@ -12,8 +12,9 @@
 #import "AJNotificationView.h"
 
 #define BANNER_DEFAULT_TIME 2
-#define TAG_ADD 1
+#define TAG_ADD_EMAIL 1
 #define TAG_DELETE 2
+#define TAG_ADD 3
 
 static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentifier = @"kSearchBarTableViewControllerDefaultTableViewCellIdentifier";
 
@@ -203,6 +204,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         cell.imageView.image = [UIImage imageWithData:gravPic];
                     }
+                    else
+                        cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
 
                 });
             });
@@ -211,6 +214,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
             }
+            
+            NSLog(@"Section Cell method called");
+
         }
         else {
             NSString* cellName = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"name"];
@@ -232,6 +238,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         cell.imageView.image = [UIImage imageWithData:gravPic];
                     }
+                    else
+                        cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
                     
                 });
             });
@@ -240,6 +248,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
             }
+            
+            NSLog(@"Friends Cell method called");
+
 
         }
     }
@@ -263,6 +274,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 {
                     cell.imageView.image = [UIImage imageWithData:gravPic];
                 }
+                else
+                    cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
                 
             });
         });
@@ -271,6 +284,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
         {
             cell.imageView.image = [UIImage imageNamed:@"DefaultProfilePic.png"];
         }
+        
+        NSLog(@"Filtered Cell method called");
     }
     
     return cell;
@@ -350,8 +365,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             }
         });
     });
-    
-    [self loadFriends];
 }
 
 - (IBAction)deleteFriendAlert:(id)sender
@@ -384,9 +397,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 {
     if (searchString.length > 0) { // Should always be the case
         NSArray *personsToSearch = _friends;
-        NSLog(@"Log %@", personsToSearch);
-        NSLog(@"Friend Log %@", _friends);
-        NSLog(@"Search: %@", searchString);
         if (self.currentSearchString.length > 0 && [searchString rangeOfString:self.currentSearchString].location == 0) { // If the new search string starts with the last search string, reuse the already filtered array so searching is faster
             personsToSearch = self.filteredFriends;
         }
@@ -437,10 +447,10 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 [unsortedSections addObject:[NSMutableArray array]];
             }
             
-            for (NSDictionary* dict in _friends) {
-                NSString* name = [dict objectForKey:@"name"];
+            for (NSDictionary* friend in _friends) {
+                NSString* name = [friend objectForKey:@"name"];
                 NSInteger index = [collation sectionForObject:name collationStringSelector:@selector(description)];
-                [[unsortedSections objectAtIndex:index] addObject:dict];
+                [[unsortedSections objectAtIndex:index] addObject:friend];
             }
             
             NSMutableArray *sortedSections = [[NSMutableArray alloc] initWithCapacity:unsortedSections.count];
@@ -484,7 +494,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         if([self.jsonAddFriend[@"created"] boolValue])
                         {
-                            [self loadFriends];
                             _textField.text = NULL;
                             NSLog(@"Friend request sent.");
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
@@ -553,7 +562,12 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     [_textField becomeFirstResponder];
     [alert addSubview:_textField];
     
-    alert.tag = TAG_ADD;
+//    UIButton*testButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    [testButton setFrame:CGRectMake(235, 15, 25, 25)];
+//    [testButton addTarget:self action:@selector(someAction) forControlEvents:UIControlEventTouchUpInside];
+//    [alert addSubview:testButton];
+    
+    alert.tag = TAG_ADD_EMAIL;
     [alert show];
     
 }
@@ -563,11 +577,11 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString* detailString = _textField.text;
     NSLog(@"Email is: %@", detailString); //Put it on the debugger
-    if (alertView.tag == TAG_ADD && ([_textField.text length] <= 0 || buttonIndex == 0)){
+    if (alertView.tag == TAG_ADD_EMAIL && ([_textField.text length] <= 0 || buttonIndex == 0)){
         _textField.text = NULL;
         return; //If cancel or 0 length string the string doesn't matter
     }
-    if (alertView.tag == TAG_ADD && buttonIndex == 1) {
+    if (alertView.tag == TAG_ADD_EMAIL && buttonIndex == 1) {
         _addEmail = _textField.text;
         [self addFriend];
     }
