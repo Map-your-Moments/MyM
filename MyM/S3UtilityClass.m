@@ -64,8 +64,7 @@
     NSMutableArray *objectKeys = [[NSMutableArray alloc] init];
     
     // Get the list of friends
-    FriendUtilityClass *friendUtil = [[FriendUtilityClass alloc] init];
-    NSArray *friends = [NSArray arrayWithArray:[friendUtil getFriends:[user token]]];
+    NSArray *friends = [NSArray arrayWithArray:[FriendUtilityClass getFriends:[user token]]];
     
     // Add the user's moments
     [objectKeys addObjectsFromArray:[self listMomentsInS3Folder:[NSString stringWithFormat:@"%@/", user.username]]];
