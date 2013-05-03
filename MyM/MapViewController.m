@@ -439,7 +439,7 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     MomentAnnotation *annotation = view.annotation;
-    Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", user.username, annotation.moment.ID]];
+    Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", annotation.moment.user, annotation.moment.ID]];
     
     MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
     [vc setMoment:moment];
