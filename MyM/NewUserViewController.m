@@ -84,7 +84,7 @@
         NSLog(@"FullName is empty");
     } else if ([self.passwordTextField.text length] < 8) { //Check if passwordTextField is too short
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                       title:@"Password is too short, at least 8 characters"
+                                       title:@"Password must be at least 8 characters"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
         [self.passwordTextField becomeFirstResponder];
