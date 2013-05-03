@@ -28,8 +28,6 @@
             S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:key
                                                                          inBucket:kS3BUCKETNAME];
             request.data = momentData;
-            [request addMetadataWithValue:moment.title forKey:@"title"];
-            [request addMetadataWithValue:moment.user forKey:@"user"];
             S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
             if(response.error != nil)
                 NSLog(@"Error: %@", response.error);
@@ -155,25 +153,12 @@
         double longitude = [[tokens objectAtIndex:2] doubleValue];
         CLLocationCoordinate2D coords = CLLocationCoordinate2DMake( latitude, longitude );
         
-        // get the title and user name from the metadata
-        @try {
-            S3GetObjectMetadataRequest *request = [[S3GetObjectMetadataRequest alloc] initWithKey:object.key withBucket:kS3BUCKETNAME];
-            S3GetObjectMetadataResponse *response = [[AmazonClientManager amazonS3Client] getObjectMetadata:request];
-            
-            moment = [[Moment alloc] initWithTitle:[response getMetadataForKey:@"title"]
-                                           andUser:[response getMetadataForKey:@"user"]
-                                        andContent:nil
-                                           andDate:nil
-                                         andCoords:coords
-                                       andComments:nil
-                                             andID:[NSString stringWithFormat:@"%@_%@_%@", tokens[1], tokens[2], tokens[3]]];
-            
-            if(response.error != nil)
-                NSLog(@"Error: %@", response.error);
-        }
-        @catch (AmazonClientException *exception) {
-            NSLog(@"Exception: %@", exception);
-        }
+        moment = [[Moment alloc] initWithTitle:[tokens objectAtIndex:3]
+                                       andUser:[tokens objectAtIndex:4]
+                                    andContent:nil
+                                       andDate:nil
+                                     andCoords:coords
+                                   andComments:nil];
         
         [dataController addMomentToMomentsWithMoment:moment];
     }

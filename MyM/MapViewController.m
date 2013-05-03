@@ -360,8 +360,8 @@
         Moment *moment = [dataController objectInMomentsAtIndex:i];
 
         MomentAnnotation *pin = [[MomentAnnotation alloc] initWithMoment:moment
-                                                                   title:moment.user
-                                                                subtitle:moment.title
+                                                                   title:moment.title
+                                                                subtitle:moment.user
                                                               coordinate:moment.coords];
         [mapView addAnnotation:pin];
     }
