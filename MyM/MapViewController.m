@@ -60,7 +60,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated
-{
+{    
     [self updateAnnotations];
     
     if(firstLoad)

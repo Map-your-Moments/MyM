@@ -30,4 +30,21 @@
     return friends;
 }
 
++ (NSString *)getEmailFromUsername:(NSString *)username
+{
+    NSDictionary *jsonDictionary = @{ @"username" : username };
+    
+    NSDictionary *response = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/get_user"];
+    
+    NSString *email;
+    if(response) {
+        email = [response valueForKey:@"email"];
+    }
+    else {
+        NSLog(@"HTTP request for email failed");
+    }
+    
+    return email;
+}
+
 @end
