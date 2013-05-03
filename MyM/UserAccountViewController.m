@@ -134,10 +134,8 @@
             break;
         }
         case 3:
-        {
-            FriendUtilityClass *fUtility = [[FriendUtilityClass alloc] init];
-            
-            NSArray *friendList = [fUtility getFriends:[_user token]];
+        {            
+            NSArray *friendList = [FriendUtilityClass getFriends:[_user token]];
             
             if([friendList count] == 1)
             {

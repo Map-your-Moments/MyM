@@ -12,14 +12,14 @@
 @implementation FriendUtilityClass
 
 @synthesize friends;
-@synthesize jsonGetFriends;
 
-- (NSArray *)getFriends:(NSString *)token
++ (NSArray *)getFriends:(NSString *)token
 {
     NSDictionary *jsonDictionary = @{ @"access_token" : token};
     
-    jsonGetFriends = [UtilityClass GetFriendsJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friends"];
+    NSArray *jsonGetFriends = [UtilityClass GetFriendsJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/friends"];
     
+    NSArray *friends;
     if(jsonGetFriends) {
         friends = [[NSArray alloc ] initWithArray: jsonGetFriends];
     }

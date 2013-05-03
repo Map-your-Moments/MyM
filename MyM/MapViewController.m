@@ -381,15 +381,21 @@
     return pin;
 }
 
-//- (void)centerOnUserLocation
-//{
-//    MKUserLocation *userLocation = [mapView userLocation];
-//    
-//    if (!userLocation)
-//        return;
-//    
-//    [self.mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
-//}
+- (NSArray *)getPinColorsForEachUser
+{
+    NSArray *friends = [NSArray arrayWithArray:[FriendUtilityClass getFriends:[user token]]];
+    
+    NSMutableArray *colors = [[NSMutableArray alloc] initWithCapacity:[friends count]];
+    
+    double increment = 1 / [friends count];
+    
+    for(int i = 0; i < [friends count]; i++) {
+        UIColor *color = [UIColor colorWithHue:(increment * i) saturation:.8 brightness:.8 alpha:1];
+        [colors addObject:color];
+    }
+    
+    return colors;
+}
 
 - (void)zoomToUserLocation
 {
