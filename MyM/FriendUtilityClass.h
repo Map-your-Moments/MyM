@@ -11,8 +11,8 @@
 @interface FriendUtilityClass : NSObject
 
 @property(nonatomic, copy) NSArray *friends;
-@property (nonatomic) NSArray *jsonGetFriends;
 
-- (NSArray *)getFriends:(NSString *)token;
++ (NSArray *)getFriends:(NSString *)token;
++ (NSString *)getEmailFromUsername:(NSString *)username;
 
 @end
