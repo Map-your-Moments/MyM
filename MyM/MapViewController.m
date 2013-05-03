@@ -366,18 +366,34 @@
         return nil;
     }
     
-    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"momentAnnotation"];
+    MomentAnnotation *momentAnnotation = annotation;
+    
+    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:momentAnnotation reuseIdentifier:@"momentAnnotation"];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [imageView setImage:[UIImage imageNamed:@"Default.png"]];
     pin.leftCalloutAccessoryView = imageView;
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        
+        [imageView setImage:[GravitarUtilityClass gravitarImageForUser:momentAnnotation.moment.user]];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        });
+    });
+    
     
     UIButton *buttonView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     pin.rightCalloutAccessoryView = buttonView;
     
     pin.canShowCallout = YES;
     pin.animatesDrop = YES; //!
-    pin.pinColor = MKPinAnnotationColorPurple;
+    pin.pinColor = MKPinAnnotationColorGreen;
     
     return pin;
 }
@@ -415,7 +431,7 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     MomentAnnotation *annotation = view.annotation;
-    Moment *moment = annotation.moment;
+    Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", user.username, annotation.moment.ID]];
     
     MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
     [vc setMoment:moment];

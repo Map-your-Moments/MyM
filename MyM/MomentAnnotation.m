@@ -12,7 +12,7 @@
 @implementation MomentAnnotation
 @synthesize moment, title, subtitle, coordinate;
 
--(id)initWithMoment:(Moment *)themoment title:(NSString *)thetitle subtitle:(NSString *)thesubtitle coordinate:(CLLocationCoordinate2D)thecoordinate
+- (id)initWithMoment:(Moment *)themoment title:(NSString *)thetitle subtitle:(NSString *)thesubtitle coordinate:(CLLocationCoordinate2D)thecoordinate
 {
     moment = themoment;
     title = thetitle;

@@ -184,7 +184,7 @@
 
 // This method will return the moment with the content.
 // Only use this when requesting an individual moment.
-- (Moment *)getMomentWithKey:(NSString *)key
++ (Moment *)getMomentWithKey:(NSString *)key
 {
     Moment *moment;
     
