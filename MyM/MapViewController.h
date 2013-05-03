@@ -19,6 +19,7 @@
 #import "Moment.h"
 #import "MomentAnnotation.h"
 #import "Constants.h"
+#import "Reachability.h"
 
 @class MomentDataController;
 

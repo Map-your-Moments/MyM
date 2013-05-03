@@ -61,8 +61,19 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated
-{    
-    [self updateAnnotations];
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    if([reachability isReachable]) {
+        [self updateAnnotations];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                        message:@"Internet is required to load moments"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
     
     if(firstLoad)
     {

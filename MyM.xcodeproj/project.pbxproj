@@ -511,6 +511,8 @@
 		668132B9171F2F4E00292C69 /* MomentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 668132B7171F2F4E00292C69 /* MomentDetailViewController.m */; };
 		668132BA171F2F4E00292C69 /* MomentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 668132B8171F2F4E00292C69 /* MomentDetailViewController.xib */; };
 		669568B21734315800F4B8AF /* GravitarUtilityClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 669568B11734315800F4B8AF /* GravitarUtilityClass.m */; };
+		669568B817345A1B00F4B8AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 669568B717345A1A00F4B8AF /* Reachability.m */; };
+		669568BA17345A3300F4B8AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 669568B917345A3300F4B8AF /* SystemConfiguration.framework */; };
 		66EC8A7E17247DE800CE6E8A /* MomentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EC8A7C1724777B00CE6E8A /* MomentAnnotation.m */; };
 		69502F7716E47B4200E4B936 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69502F7616E47B4200E4B936 /* SignInViewController.m */; };
 		69502F7916E47B5500E4B936 /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69502F7816E47B5500E4B936 /* SignInView.xib */; };
@@ -1046,6 +1048,9 @@
 		668132B8171F2F4E00292C69 /* MomentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MomentDetailViewController.xib; sourceTree = "<group>"; };
 		669568B01734315800F4B8AF /* GravitarUtilityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravitarUtilityClass.h; sourceTree = "<group>"; };
 		669568B11734315800F4B8AF /* GravitarUtilityClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravitarUtilityClass.m; sourceTree = "<group>"; };
+		669568B617345A1800F4B8AF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		669568B717345A1A00F4B8AF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		669568B917345A3300F4B8AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		66EC8A7B1724777A00CE6E8A /* MomentAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentAnnotation.h; sourceTree = "<group>"; };
 		66EC8A7C1724777B00CE6E8A /* MomentAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentAnnotation.m; sourceTree = "<group>"; };
 		69482CEF1724660600D38756 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
@@ -1060,6 +1065,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669568BA17345A3300F4B8AF /* SystemConfiguration.framework in Frameworks */,
 				55EA75261714D0F000D234C5 /* MediaToolbox.framework in Frameworks */,
 				55EA75241714D0E600D234C5 /* MediaPlayer.framework in Frameworks */,
 				55EA75221714D0D500D234C5 /* AudioToolbox.framework in Frameworks */,
@@ -1535,6 +1541,7 @@
 		55A0F64716C9E6DB00A364E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				669568B917345A3300F4B8AF /* SystemConfiguration.framework */,
 				55EA75251714D0F000D234C5 /* MediaToolbox.framework */,
 				55EA75231714D0E600D234C5 /* MediaPlayer.framework */,
 				55EA75211714D0D500D234C5 /* AudioToolbox.framework */,
@@ -1556,6 +1563,8 @@
 			children = (
 				66255FB817305F0600F57B68 /* S3UtilityClass.h */,
 				66255FB917305F0600F57B68 /* S3UtilityClass.m */,
+				669568B617345A1800F4B8AF /* Reachability.h */,
+				669568B717345A1A00F4B8AF /* Reachability.m */,
 				549D18D117305EB300EF13BA /* FriendUtilityClass.h */,
 				549D18D217305EB300EF13BA /* FriendUtilityClass.m */,
 				5465DD791729B69D0099A727 /* UtilityClass.h */,
@@ -2266,6 +2275,7 @@
 				5599F3FD17305E7800921489 /* NSString+MD5.m in Sources */,
 				549D18D317305EB300EF13BA /* FriendUtilityClass.m in Sources */,
 				669568B21734315800F4B8AF /* GravitarUtilityClass.m in Sources */,
+				669568B817345A1B00F4B8AF /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
