@@ -443,6 +443,7 @@
     
     MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
     [vc setMoment:moment];
+    [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController pushViewController:vc animated:YES];
 }
 
