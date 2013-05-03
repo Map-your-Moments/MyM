@@ -237,6 +237,7 @@
                                            hideAfter:BANNER_DEFAULT_TIME];
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Password entered was incorrect" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
                 [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
                 [alert setTag:kUIAlertSettingsConfirmChangePassword];
                 [alert show];
             }
@@ -335,6 +336,7 @@
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Password entered was incorrect" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
                 [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
                 [alert setTag:kUIAlertSettingsConfirmChangeEmail];
                 [alert show];
             }
@@ -342,6 +344,8 @@
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Enter a new email" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
                 [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:1] setSecureTextEntry:NO];
                 [[alert textFieldAtIndex:0]setPlaceholder:@"new@example.com"];
                 [[alert textFieldAtIndex:1]setPlaceholder:@"confirm@example.com"];
                 [alert setTag:kUIAlertSettingsVerifyEmail];
@@ -360,6 +364,8 @@
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Emails did not match" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
                 [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:1] setSecureTextEntry:NO];
                 [[alert textFieldAtIndex:0]setPlaceholder:@"new@example.com"];
                 [[alert textFieldAtIndex:1]setPlaceholder:@"confirm@example.com"];
                 [alert setTag:kUIAlertSettingsVerifyEmail];
@@ -369,6 +375,8 @@
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Invalid email entered" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
                 [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:1] setSecureTextEntry:NO];
                 [[alert textFieldAtIndex:0]setPlaceholder:@"new@example.com"];
                 [[alert textFieldAtIndex:1]setPlaceholder:@"confirm@example.com"];
                 [alert setTag:kUIAlertSettingsVerifyEmail];
