@@ -508,6 +508,7 @@
 		665A933616E80F3600D22E11 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 665A933516E80F3600D22E11 /* Content.m */; };
 		665A933816E80FB400D22E11 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665A933716E80FB400D22E11 /* CoreLocation.framework */; };
 		665A933B16E812C700D22E11 /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 665A933A16E812C700D22E11 /* UserSettings.m */; };
+		669568B21734315800F4B8AF /* GravitarUtilityClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 669568B11734315800F4B8AF /* GravitarUtilityClass.m */; };
 		69502F7716E47B4200E4B936 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69502F7616E47B4200E4B936 /* SignInViewController.m */; };
 		69502F7916E47B5500E4B936 /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69502F7816E47B5500E4B936 /* SignInView.xib */; };
 /* End PBXBuildFile section */
@@ -1037,6 +1038,8 @@
 		665A933716E80FB400D22E11 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		665A933916E812C700D22E11 /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
 		665A933A16E812C700D22E11 /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
+		669568B01734315800F4B8AF /* GravitarUtilityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravitarUtilityClass.h; sourceTree = "<group>"; };
+		669568B11734315800F4B8AF /* GravitarUtilityClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravitarUtilityClass.m; sourceTree = "<group>"; };
 		69482CEF1724660600D38756 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		69482CF01724660600D38756 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
 		69502F7516E47B4200E4B936 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
@@ -1549,6 +1552,8 @@
 				549D18D217305EB300EF13BA /* FriendUtilityClass.m */,
 				5465DD791729B69D0099A727 /* UtilityClass.h */,
 				5465DD7A1729B69E0099A727 /* UtilityClass.m */,
+				669568B01734315800F4B8AF /* GravitarUtilityClass.h */,
+				669568B11734315800F4B8AF /* GravitarUtilityClass.m */,
 				55EC871B1714CE0B00C1C52F /* AmazonClientManager.h */,
 				55EC871C1714CE0B00C1C52F /* AmazonClientManager.m */,
 				55EC871D1714CE0B00C1C52F /* Constants.h */,
@@ -2243,6 +2248,7 @@
 				66255FBA17305F0600F57B68 /* S3UtilityClass.m in Sources */,
 				5599F3FD17305E7800921489 /* NSString+MD5.m in Sources */,
 				549D18D317305EB300EF13BA /* FriendUtilityClass.m in Sources */,
+				669568B21734315800F4B8AF /* GravitarUtilityClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
