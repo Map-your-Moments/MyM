@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SearchBarTableViewController.h"
 #import "MomentCreateViewController.h"
+#import "MomentDetailViewController.h"
 #import "UserAccountViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
@@ -349,10 +350,11 @@
 {
     for(int i = 0; i < [dataController countOfMoments]; i++) {
         Moment *moment = [dataController objectInMomentsAtIndex:i];
-        MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
-        pin.coordinate = moment.coords;
-        pin.title = moment.user;
-        pin.subtitle = moment.title;
+
+        MomentAnnotation *pin = [[MomentAnnotation alloc] initWithMoment:moment
+                                                                   title:moment.user
+                                                                subtitle:moment.title
+                                                              coordinate:moment.coords];
         [mapView addAnnotation:pin];
     }
 }
@@ -372,7 +374,6 @@
     
     UIButton *buttonView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     pin.rightCalloutAccessoryView = buttonView;
-    [buttonView addTarget:self action:@selector(showMomentDetail) forControlEvents:UIControlEventTouchUpInside];
     
     pin.canShowCallout = YES;
     pin.animatesDrop = YES; //!
@@ -411,9 +412,14 @@
     [self.mapView setRegion:region animated:YES];
 }
 
-- (void)showMomentDetail
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    NSLog(@"Show Moment Detail");
+    MomentAnnotation *annotation = view.annotation;
+    Moment *moment = annotation.moment;
+    
+    MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
+    [vc setMoment:moment];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
