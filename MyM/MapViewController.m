@@ -267,7 +267,6 @@
     [vc setCurrentLocation:[[[self.mapView userLocation] location] coordinate]];
 //    [vc setDataController:self.dataController];
     [vc setCurrentUser:self.user];
-    [self.mapView removeAnnotations:self.mapView.annotations];
     
     if(index == 0) {
         NSLog(@"Add Picture Moment");
@@ -391,7 +390,6 @@
     
     MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
     [vc setMoment:moment];
-    [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController pushViewController:vc animated:YES];
 }
 
