@@ -7,12 +7,23 @@
 //
 
 #import "MomentContentViewController.h"
+#import "Constants.h"
+
+#define MOMENT_CONTENTVIEW_X        20
+#define MOMENT_CONTENTVIEW_Y        90
+#define MOMENT_CONTENTVIEW_WIDTH    280
+#define MOMENT_CONTENTVIEW_HEIGHT   180
 
 @interface MomentContentViewController ()
+{
+    NSData *rawContent;
+    int contentType;
+}
 
 @end
 
 @implementation MomentContentViewController
+@synthesize momentContent;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +38,50 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    
+    contentType = [momentContent contentType];
+    contentType = kTAGMOMENTTEXT;
+    rawContent = [momentContent content];
+    
+    switch(contentType)
+    {
+        case kTAGMOMENTTEXT:
+        {
+            UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
+            UITextView *momentText = [[UITextView alloc]initWithFrame:CGRectMake(MOMENT_CONTENTVIEW_X, MOMENT_CONTENTVIEW_Y, 280, 180)];
+            [momentText setTag:kTAGMOMENTTEXT];
+            [momentText setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+            [momentText setFont:[UIFont fontWithName:@"Arial" size:24]];
+            NSString *dataString = nil;
+            @try
+            {
+                dataString = [NSString stringWithUTF8String:[rawContent bytes]];
+            }
+            @catch(NSException *ex)
+            {
+                NSLog(@"%@",ex.description);
+            }
+            [momentText setText:dataString];
+            [self.view addSubview:momentText];
+            break;
+        }
+        case kTAGMOMENTPICTURE:
+        {
+            UIImageView *momentView = [[UIImageView alloc] init];
+            [momentView setImage:[UIImage imageWithData:rawContent]];
+            break;
+        }
+        case kTAGMOMENTAUDIO:
+        {
+            break;
+        }
+        case kTAGMOMENTVIDEO:
+        {
+            break;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

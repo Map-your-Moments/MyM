@@ -13,4 +13,6 @@
 
 @property (strong, nonatomic) Moment *targetMoment;
 
+-(void)viewContent;
+
 @end

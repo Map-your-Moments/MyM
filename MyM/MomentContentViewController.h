@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Content.h"
 
 @interface MomentContentViewController : UIViewController
+
+@property (strong, nonatomic) Content *momentContent;
 
 @end
