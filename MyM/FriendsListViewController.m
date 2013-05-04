@@ -422,6 +422,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             if(self.jsonGetFriends)
             {
                 _friends = [[NSArray alloc ] initWithArray: self.jsonGetFriends];
+                NSMutableArray *mutableFriends = [_friends mutableCopy];
+                [_user setFriends:mutableFriends];
             }
             else
             {

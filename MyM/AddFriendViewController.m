@@ -39,7 +39,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 @property (nonatomic) UITextField *textField;
 
 @property (nonatomic) NSString* addEmail;
-//@property (nonatomic) NSString* addFriendEmail;
 
 - (IBAction)addFriendAlert:(id)sender;
 
