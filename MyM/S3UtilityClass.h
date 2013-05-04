@@ -23,4 +23,6 @@
 
 - (MomentDataController *)updateMomentsForUser:(User *)user;
 
++ (Moment *)getMomentWithKey:(NSString *)key;
+
 @end

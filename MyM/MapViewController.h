@@ -9,13 +9,19 @@
  *
  */
 
+#import "MomentDataController.h"
+#import "S3UtilityClass.h"
+#import "FriendUtilityClass.h"
+#import "GravitarUtilityClass.h"
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "AwesomeMenu.h"
 #import "Moment.h"
+#import "MomentAnnotation.h"
 #import "Constants.h"
 #import "MomentDataController.h"
 #import "S3UtilityClass.h"
+#import "Reachability.h"
 
 @protocol mapProtocol
 -(void)setDataController:(MomentDataController *)dataController;

@@ -28,8 +28,6 @@
             S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:key
                                                                          inBucket:kS3BUCKETNAME];
             request.data = momentData;
-            [request addMetadataWithValue:moment.title forKey:@"title"];
-            [request addMetadataWithValue:moment.user forKey:@"user"];
             S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
             if(response.error != nil)
                 NSLog(@"Error: %@", response.error);
@@ -112,13 +110,12 @@
         [request setPrefix:folder];
         [request setMarker:folder];
         S3ListObjectsResponse *response = [[AmazonClientManager amazonS3Client] listObjects:request];
-        keys = response.listObjectsResult.objectSummaries;
         if(response.error != nil)
             NSLog(@"Error: %@", response.error);
+        
+        keys = response.listObjectsResult.objectSummaries;
     }
     @catch (AmazonClientException *exception) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
         NSLog(@"Exception: %@", exception);
     }
     
@@ -130,8 +127,7 @@
     NSMutableArray *objectKeys = [[NSMutableArray alloc] init];
     
     // Get the list of friends
-    FriendUtilityClass *friendUtil = [[FriendUtilityClass alloc] init];
-    NSArray *friends = [NSArray arrayWithArray:[friendUtil getFriends:[user token]]];
+    NSArray *friends = [NSArray arrayWithArray:[FriendUtilityClass getFriends:[user token]]];
     
     // Add the user's moments
     [objectKeys addObjectsFromArray:[self listMomentsInS3Folder:[NSString stringWithFormat:@"%@/", user.username]]];
@@ -157,27 +153,12 @@
         double longitude = [[tokens objectAtIndex:2] doubleValue];
         CLLocationCoordinate2D coords = CLLocationCoordinate2DMake( latitude, longitude );
         
-        // get the title and user name from the metadata
-        @try {
-            S3GetObjectMetadataRequest *request = [[S3GetObjectMetadataRequest alloc] initWithKey:object.key withBucket:kS3BUCKETNAME];
-            S3GetObjectMetadataResponse *response = [[AmazonClientManager amazonS3Client] getObjectMetadata:request];
-            
-            moment = [[Moment alloc] initWithTitle:[response getMetadataForKey:@"title"]
-                                           andUser:[response getMetadataForKey:@"user"]
-                                        andContent:nil
-                                           andDate:nil
-                                         andCoords:coords
-                                       andComments:nil
-                                             andID:[NSString stringWithFormat:@"%@_%@_%@", tokens[1], tokens[2], tokens[3]]];
-            
-            if(response.error != nil)
-                NSLog(@"Error: %@", response.error);
-        }
-        @catch (AmazonClientException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            NSLog(@"Exception: %@", exception);
-        }
+        moment = [[Moment alloc] initWithTitle:[tokens objectAtIndex:3]
+                                       andUser:[tokens objectAtIndex:4]
+                                    andContent:nil
+                                       andDate:nil
+                                     andCoords:coords
+                                   andComments:nil];
         
         [dataController addMomentToMomentsWithMoment:moment];
     }
@@ -185,7 +166,7 @@
 
 // This method will return the moment with the content.
 // Only use this when requesting an individual moment.
-- (Moment *)getMomentWithKey:(NSString *)key
++ (Moment *)getMomentWithKey:(NSString *)key
 {
     Moment *moment;
     
@@ -202,8 +183,6 @@
             NSLog(@"Error: %@", response.error);
     }
     @catch (AmazonClientException *exception) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
         NSLog(@"Exception: %@", exception);
     }
     return moment;

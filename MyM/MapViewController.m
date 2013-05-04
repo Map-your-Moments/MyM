@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SearchBarTableViewController.h"
 #import "MomentCreateViewController.h"
+#import "MomentDetailViewController.h"
 #import "UserAccountViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
@@ -50,7 +51,18 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self updateAnnotations];
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    if([reachability isReachable]) {
+        [self updateAnnotations];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                        message:@"Internet is required to load moments"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
     
     if(self.firstLoad)
     {
@@ -258,12 +270,28 @@
     if(index == 0) {
         NSLog(@"Add Picture Moment");
         [vc setContentType:kTAGMOMENTPICTURE];
-    } else if(index == 1) {
+        [vc setCurrentLocation:currentLocation];
+        [vc setCurrentUser:user];
+        [mapView removeAnnotations:mapView.annotations]; //!
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if(idx == 1) {
         NSLog(@"Add Audio Moment");
         [vc setContentType:kTAGMOMENTAUDIO];
-    } else if(index == 2) {
+        [vc setCurrentLocation:currentLocation];
+        [vc setCurrentUser:user];
+        [mapView removeAnnotations:mapView.annotations]; //!
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if(idx == 2) {
         NSLog(@"Add Text Moment");
         [vc setContentType:kTAGMOMENTTEXT];
+        [vc setCurrentLocation:currentLocation];
+        [vc setCurrentUser:user];
+        [mapView removeAnnotations:mapView.annotations]; //!
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -291,13 +319,14 @@
 
 - (void)loadAnnotations
 {
-    for(int i = 0; i < [self.dataController countOfMoments]; i++) {
-        Moment *moment = [self.dataController objectInMomentsAtIndex:i];
-        MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
-        pin.coordinate = moment.coords;
-        pin.title = moment.user;
-        pin.subtitle = moment.title;
-        [self.mapView addAnnotation:pin];
+    for(int i = 0; i < [dataController countOfMoments]; i++) {
+        Moment *moment = [dataController objectInMomentsAtIndex:i];
+
+        MomentAnnotation *pin = [[MomentAnnotation alloc] initWithMoment:moment
+                                                                   title:moment.title
+                                                                subtitle:moment.user
+                                                              coordinate:moment.coords];
+        [mapView addAnnotation:pin];
     }
 }
 
@@ -308,21 +337,52 @@
         return nil;
     }
     
-    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"momentAnnotation"];
+    MomentAnnotation *momentAnnotation = annotation;
+    
+    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:momentAnnotation reuseIdentifier:@"momentAnnotation"];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [imageView setImage:[UIImage imageNamed:@"Default.png"]];
     pin.leftCalloutAccessoryView = imageView;
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        
+        [imageView setImage:[GravitarUtilityClass gravitarImageForUser:momentAnnotation.moment.user]];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        });
+    });
+    
     
     UIButton *buttonView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     pin.rightCalloutAccessoryView = buttonView;
-    [buttonView addTarget:self action:@selector(showMomentDetail) forControlEvents:UIControlEventTouchUpInside];
     
     pin.canShowCallout = YES;
     pin.animatesDrop = YES; //!
-    pin.pinColor = MKPinAnnotationColorPurple;
+    pin.pinColor = MKPinAnnotationColorGreen;
     
     return pin;
+}
+
+- (NSArray *)getPinColorsForEachUser
+{
+    NSArray *friends = [NSArray arrayWithArray:[FriendUtilityClass getFriends:[user token]]];
+    
+    NSMutableArray *colors = [[NSMutableArray alloc] initWithCapacity:[friends count]];
+    
+    double increment = 1 / [friends count];
+    
+    for(int i = 0; i < [friends count]; i++) {
+        UIColor *color = [UIColor colorWithHue:(increment * i) saturation:.8 brightness:.8 alpha:1];
+        [colors addObject:color];
+    }
+    
+    return colors;
 }
 
 - (void)zoomToUserLocation
@@ -338,9 +398,15 @@
     [self.mapView setRegion:region animated:YES];
 }
 
-- (void)showMomentDetail
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    NSLog(@"Show Moment Detail");
+    MomentAnnotation *annotation = view.annotation;
+    Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", user.username, annotation.moment.ID]];
+    
+    MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
+    [vc setMoment:moment];
+    [mapView removeAnnotations:mapView.annotations]; //!
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
