@@ -38,7 +38,8 @@
 		549E1DC017301B54009751A8 /* ios-linen_darkblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 549E1DBE17301B54009751A8 /* ios-linen_darkblue.png */; };
 		549E1DC317301B8E009751A8 /* DefaultProfilePic.png in Resources */ = {isa = PBXBuildFile; fileRef = 549E1DC117301B8D009751A8 /* DefaultProfilePic.png */; };
 		549E1DC417301B8E009751A8 /* DefaultProfilePic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 549E1DC217301B8E009751A8 /* DefaultProfilePic@2x.png */; };
-		54EA4AAD17346317001CA522 /* SBTableAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EA4AAC17346317001CA522 /* SBTableAlert.m */; };
+		54EA4AC317348991001CA522 /* AddFriendSearchBarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EA4AC0173488BF001CA522 /* AddFriendSearchBarTableViewController.m */; };
+		54EA4AC417348995001CA522 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EA4AC2173488C0001CA522 /* AddFriendViewController.m */; };
 		5530D40F1724C8F000A262BE /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5530D40E1724C8F000A262BE /* icon.png */; };
 		5530D4111724C8F100A262BE /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5530D4101724C8F100A262BE /* icon@2x.png */; };
 		5530D4151724CA8300A262BE /* icon-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 5530D4141724CA8300A262BE /* icon-large.png */; };
@@ -553,8 +554,10 @@
 		549E1DBE17301B54009751A8 /* ios-linen_darkblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-linen_darkblue.png"; sourceTree = "<group>"; };
 		549E1DC117301B8D009751A8 /* DefaultProfilePic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultProfilePic.png; sourceTree = "<group>"; };
 		549E1DC217301B8E009751A8 /* DefaultProfilePic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultProfilePic@2x.png"; sourceTree = "<group>"; };
-		54EA4AAB17346317001CA522 /* SBTableAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTableAlert.h; sourceTree = "<group>"; };
-		54EA4AAC17346317001CA522 /* SBTableAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTableAlert.m; sourceTree = "<group>"; };
+		54EA4ABF173488BF001CA522 /* AddFriendSearchBarTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFriendSearchBarTableViewController.h; sourceTree = "<group>"; };
+		54EA4AC0173488BF001CA522 /* AddFriendSearchBarTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFriendSearchBarTableViewController.m; sourceTree = "<group>"; };
+		54EA4AC1173488BF001CA522 /* AddFriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
+		54EA4AC2173488C0001CA522 /* AddFriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
 		5530D40E1724C8F000A262BE /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../icon.png; sourceTree = "<group>"; };
 		5530D4101724C8F100A262BE /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../../icon@2x.png"; sourceTree = "<group>"; };
 		5530D4141724CA8300A262BE /* icon-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-large.png"; sourceTree = "<group>"; };
@@ -1087,15 +1090,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		54EA4AAA17346317001CA522 /* SBTableAlert */ = {
-			isa = PBXGroup;
-			children = (
-				54EA4AAB17346317001CA522 /* SBTableAlert.h */,
-				54EA4AAC17346317001CA522 /* SBTableAlert.m */,
-			);
-			path = SBTableAlert;
-			sourceTree = "<group>";
-		};
 		55408DAC1720AF9900AEBA60 /* Glyphicons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1598,7 +1592,6 @@
 		55A0F65116C9E6DB00A364E3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				54EA4AAA17346317001CA522 /* SBTableAlert */,
 				663B1501170CC4CA00ED678A /* Images */,
 				55975B371720430C00DDFCCB /* AJNotificationView */,
 				663B151E170CC4D500ED678A /* AwesomeMenu */,
@@ -1692,6 +1685,10 @@
 		665A932916E7CDF900D22E11 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				54EA4ABF173488BF001CA522 /* AddFriendSearchBarTableViewController.h */,
+				54EA4AC0173488BF001CA522 /* AddFriendSearchBarTableViewController.m */,
+				54EA4AC1173488BF001CA522 /* AddFriendViewController.h */,
+				54EA4AC2173488C0001CA522 /* AddFriendViewController.m */,
 				54719A28171E08EF00BC3BF5 /* SearchBarTableViewController.h */,
 				54719A29171E08EF00BC3BF5 /* SearchBarTableViewController.m */,
 				55EC871F1714CE0C00C1C52F /* FriendsListViewController.h */,
@@ -2262,6 +2259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54EA4AC417348995001CA522 /* AddFriendViewController.m in Sources */,
+				54EA4AC317348991001CA522 /* AddFriendSearchBarTableViewController.m in Sources */,
 				66EC8A7E17247DE800CE6E8A /* MomentAnnotation.m in Sources */,
 				5465DD7B1729B6B10099A727 /* UtilityClass.m in Sources */,
 				5465DD781729B61D0099A727 /* UserAccountViewController.m in Sources */,
@@ -2287,7 +2286,6 @@
 				66255FBA17305F0600F57B68 /* S3UtilityClass.m in Sources */,
 				5599F3FD17305E7800921489 /* NSString+MD5.m in Sources */,
 				549D18D317305EB300EF13BA /* FriendUtilityClass.m in Sources */,
-				54EA4AAD17346317001CA522 /* SBTableAlert.m in Sources */,
 				669568B21734315800F4B8AF /* GravitarUtilityClass.m in Sources */,
 				669568B817345A1B00F4B8AF /* Reachability.m in Sources */,
 			);

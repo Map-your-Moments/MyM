@@ -1,5 +1,5 @@
 //
-//  FriendsListViewController.h
+//  AddFriendViewController.h
 //  MyM
 //
 //  Created by Justin Wagner on 4/3/13.
@@ -9,15 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "Moment.h"
 
-@interface FriendsListViewController : UIViewController <UITableViewDataSource,
+@interface AddFriendViewController : UIViewController <UITableViewDataSource,
                                     UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 - (id)initWithSectionIndexes:(BOOL)showSectionIndexes;
 
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated;
 
-- (void)loadFriends;
-- (void)addFriendButton;
+- (void)loadUsers;
+- (void)addFriendByEmail;
+- (void)addFriend;
 
 @property(nonatomic, assign, readonly) BOOL showSectionIndexes;
 
