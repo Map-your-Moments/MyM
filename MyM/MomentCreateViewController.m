@@ -137,10 +137,6 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 
 -(void)presentAudio
 {
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [audioSession setActive:YES error:nil];
-    
     recorderView = [[UIView alloc]initWithFrame:CGRectMake(135, 214, 75, 75)];
     [recorderView setBackgroundColor:[UIColor greenColor]];
     UIImageView *recorderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
@@ -320,6 +316,11 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [recorder stop];
 }
 
+-(void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error
+{
+    NSLog(@"ERROR");
+}
+
 -(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
     NSLog(@"*Recorder Stopped");
@@ -337,7 +338,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     if(contentType == kTAGMOMENTAUDIO)
     {
         NSLog(@"*Playing Sound*");
-        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"TestAudio" ofType:@"mp4"]] error:nil];
+        NSURL *fileURL = [NSURL URLWithString:[[NSBundle mainBundle] pathForResource:@"TestAudio" ofType:@"mp4"]];
+        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
         [player setVolume:1.0];
         [player setDelegate:self];
         [player prepareToPlay];
