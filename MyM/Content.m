@@ -9,20 +9,25 @@
 #import "Content.h"
 
 @implementation Content
-@synthesize contentType, tags, picture, text, sound, video, content;
+@synthesize contentType;
+@synthesize content;
+@synthesize tags;
+//@synthesize contentType, tags, picture, text, sound, video, content;
 
 /*Main constructor for the Content class */
--(id)initWithContent:(id)momentContent withType:(int)theContentType andTags:(NSMutableArray *)theTags
+-(id)initWithContent:(NSData*)momentContent withType:(int)theContentType andTags:(NSMutableArray *)theTags
 {
-    picture = nil;
-    text = nil;
-    sound = nil;
-    video = nil;
+    //picture = nil;
+    //text = nil;
+    //sound = nil;
+    //video = nil;
     
+    content = momentContent;
     contentType = theContentType;
     tags        = theTags;
     
-    if(contentType == kTAGMOMENTTEXT){
+    
+    /*if(contentType == kTAGMOMENTTEXT){
         //Set text content
         text = (NSString*)momentContent;
         content = text;
@@ -41,7 +46,7 @@
         //Set audio
         //self.sound = (NSString*)momentContent;
         NSLog(@"Still need implementation");
-    }
+    }*/
     
     
     return self;
@@ -51,10 +56,12 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeObject:picture forKey:@"picture"];
-    [coder encodeObject:text forKey:@"text"];
-    [coder encodeObject:sound forKey:@"sound"];
-    [coder encodeObject:video forKey:@"video"];
+    //[coder encodeObject:picture forKey:@"picture"];
+    //[coder encodeObject:text forKey:@"text"];
+    //[coder encodeObject:sound forKey:@"sound"];
+    //[coder encodeObject:video forKey:@"video"];
+    [coder encodeObject:content forKey:@"content"];
+    [coder encodeObject:tags forKey:@"tags"];
     [coder encodeObject:[NSNumber numberWithInt:contentType] forKey:@"contentType"];
 }
 
@@ -63,10 +70,13 @@
     self = [super init];
     
     if(self == nil) {
-        picture = [[decoder decodeObjectForKey:@"picture"] copy];
-        text = [[decoder decodeObjectForKey:@"text"] copy];
-        sound = [[decoder decodeObjectForKey:@"sound"] copy];
-        video = [[decoder decodeObjectForKey:@"video"] copy];
+        //picture = [[decoder decodeObjectForKey:@"picture"] copy];
+        //text = [[decoder decodeObjectForKey:@"text"] copy];
+        //sound = [[decoder decodeObjectForKey:@"sound"] copy];
+        //video = [[decoder decodeObjectForKey:@"video"] copy];
+        
+        content = [[decoder decodeObjectForKey:@"content"]copy];
+        tags = [[decoder decodeObjectForKey:@"tags"]copy];
         
         NSNumber *CT = [[decoder decodeObjectForKey:@"contentType"] copy];
         contentType = [CT integerValue];

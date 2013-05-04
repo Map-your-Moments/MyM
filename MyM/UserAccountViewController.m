@@ -85,7 +85,7 @@
             
             if([_user profileImage])
             {
-
+                
                 UIImage *cellImg = [UIImage imageWithData:[_user profileImage]];
                 cellImg = [UtilityClass imageWithImage:cellImg scaledToSize:CGSizeMake(35,35)];
                 
@@ -118,7 +118,7 @@
             break;
         }
         case 3:
-        {            
+        {
             NSArray *friendList = [FriendUtilityClass getFriends:[_user token]];
             
             if([friendList count] == 1)
@@ -132,12 +132,12 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         }
-//        case 4:
-//        {
-//            cell.textLabel.text = [NSString stringWithFormat:@"Other Settings"];
-//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//            break;
-//        }
+            //        case 4:
+            //        {
+            //            cell.textLabel.text = [NSString stringWithFormat:@"Other Settings"];
+            //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            //            break;
+            //        }
     }
     return cell;
 }
@@ -185,15 +185,15 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-//        case 4:
-//        {
-//            NSLog(@"Touched Other");
-//            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
-//                                           title:@"Not implemented in this build."
-//                                 linedBackground:AJLinedBackgroundTypeDisabled
-//                                       hideAfter:BANNER_DEFAULT_TIME];
-//            break;
-//        }
+            //        case 4:
+            //        {
+            //            NSLog(@"Touched Other");
+            //            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
+            //                                           title:@"Not implemented in this build."
+            //                                 linedBackground:AJLinedBackgroundTypeDisabled
+            //                                       hideAfter:BANNER_DEFAULT_TIME];
+            //            break;
+            //        }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -426,7 +426,7 @@
         [pickerController setDelegate:self];
         [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
         [self presentViewController:pickerController animated:YES completion:NULL];
-
+        
     }
 }
 
