@@ -273,6 +273,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         
         [momentImage setUserInteractionEnabled:YES];
         [momentImage addGestureRecognizer:[self createTapGestureForContent]];
+        
+        hasContentSet = YES;
     }
     else if(contentType == kTAGMOMENTVIDEO)
     {
@@ -304,9 +306,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         [self.view addSubview:playButton];
         
         hasContentSet = YES;
-        
-        [picker dismissViewControllerAnimated:YES completion:NULL];
     }
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark AVAudioRecorder Delegate
