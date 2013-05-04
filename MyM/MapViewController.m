@@ -78,7 +78,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.mapView removeAnnotations:self.mapView.annotations];
 }
 
