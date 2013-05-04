@@ -1,47 +1,50 @@
 //
-//  MomentCreateViewController.h
+//  MomentViewController.h
 //  MyM
 //
-//  Created by Steven Zilberberg on 5/3/13.
+//  Created by Steven Zilberberg on 3/25/13.
 //  Copyright (c) 2013 MyM Co. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
-#import <CoreAudio/CoreAudioTypes.h>
 #import "Moment.h"
 #import "MapViewController.h"
 #import "AmazonClientManager.h"
 
 @interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate>
-
-//IBOUTLETS For View
+{
+    MPMoviePlayerController *moviePlayer;
+    AVAudioRecorder *recorder;
+    
+    UIView *recorderView;
+}
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UITextField *captionTextField;
 @property (strong, nonatomic) IBOutlet UITextField *tagTextField;
+@property (strong, nonatomic) IBOutlet UIButton *tripButton;
 
-//Passed Data about user and location Type
+@property (strong, nonatomic) NSArray *trips;
+
 @property int contentType;
 @property CLLocationCoordinate2D currentLocation;
 @property (strong, nonatomic) User *currentUser;
 @property (strong, nonatomic) MomentDataController *dataController;
 
-//Delegate
+@property (strong, nonatomic) AVAudioRecorder *recorder;
+
 @property (nonatomic, weak) id<mapProtocol> delegate;
 
-//Core Functions of View
--(void)detectMomentType;
--(void)presentText;
--(void)presentAudio;
--(void)presentImage;
--(void)presentVideo;
--(void)playMedia;
--(void)stopRecording;
--(void)share;
+-(void)detectMoementType;
+-(void)presentTextView;
+-(void)presentImageSelector;
+-(void)presentVideoSelector;
+-(void)share:(id)sender;
 
-//Helper Functions
--(UITapGestureRecognizer*)createTapGestureForContent;
--(void)nillObjects;
--(void)hideKeyboard;
+-(void)playVideo;
+
+- (IBAction)hideKeybord:(id)sender;
+- (IBAction)playMedia:(id)sender;
 
 @end
