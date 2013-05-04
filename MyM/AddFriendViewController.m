@@ -1,10 +1,16 @@
-//
-//  AddFriendViewController.m
-//  MyM
-//
-//  Created by Justin Wagner on 4/3/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * AddFriendViewController.m
+ * Displays a tableview of all users currently registered on MyM. A user can click on a name
+ * to send a friend request to that user. A user can also search for a user's name in the search bar
+ * and click on their name to send them a friend request. Furthermore, if a user clicks the top right
+ * navigation bar button he/she can send a friend request to a specified email of a user if the email exists.
+ *
+ */
 
 #import "AddFriendViewController.h"
 #import "UtilityClass.h"
@@ -13,9 +19,9 @@
 #import "SearchBarTableViewController.h"
 
 #define BANNER_DEFAULT_TIME 2
+
 #define TAG_ADD_EMAIL 1
-#define TAG_DELETE 2
-#define TAG_ADD 3
+#define TAG_ADD 2
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -49,13 +55,13 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 @implementation AddFriendViewController
 
+// Dispose of any resources that can be recreated.
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-
+//Initializes the view's title and boolean for showing sections
 - (id)initWithSectionIndexes:(BOOL)showSectionIndexes
 {
     if ((self = [super initWithNibName:nil bundle:nil])) {
@@ -67,11 +73,13 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     return self;
 }
 
+//Loads all the users into the table view when the view appears
 -(void) viewWillAppear:(BOOL)animated
 {
     [self loadUsers];
 }
 
+//loads the tableview and the search bar
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -96,6 +104,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     
 }
 
+//displays the scroll bar for a brief second
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -106,11 +115,14 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     }
 }
 
+//safety measure against bug that may appear when a
+//AJNotification is displaying when the view changes
 - (void)viewDidDisappear:(BOOL)animated
 {
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];
 }
 
+//scrolls table view to the search bar
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated
 {
     NSAssert(YES, @"This method should be handled by a subclass!");
@@ -118,6 +130,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 #pragma mark - TableView Delegate and DataSource
 
+//sets the section index control display titles
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
     if (tableView == self.tableView && self.showSectionIndexes) {
@@ -127,6 +140,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     }
 }
 
+//sets the title of each of the table view's sections
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (tableView == self.tableView && self.showSectionIndexes) {
@@ -140,6 +154,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     }
 }
 
+//sets the section index control connections with section headers
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
     if ([title isEqualToString:UITableViewIndexSearch]) {
@@ -150,6 +165,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     }
 }
 
+//sets the number of sections displayed in the table
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.tableView) {
@@ -163,6 +179,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     }
 }
 
+//sets the number of rows displayed in the table view determined
+//by the number of users and how the view is being displayed
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.tableView) {
@@ -176,6 +194,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     }
 }
 
+//Displays the correct name and profile image of each user in the cell where
+//their respective json string object is located. A default profile image
+//is displayed if no gravatar image for the user's email exists.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSearchBarTableViewControllerDefaultTableViewCellIdentifier];
@@ -284,6 +305,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     return cell;
 }
 
+//calls an addFriend alert to add the friend at the selected index
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.tableView) {
@@ -303,18 +325,23 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 #pragma mark - Search Delegate
 
+//sets the displayed users for a search to nil and the current search string
+//to blank.
 - (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
 {
     self.filteredUsers = nil;
     self.currentSearchString = @"";
 }
 
+//sets the displayed users for a search to nil and the current search string to nil
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
     self.filteredUsers = nil;
     self.currentSearchString = nil;
 }
 
+//displays users whose names contain the current search string. When the search string
+//changes the search tableview is updated with the correct listing of users.
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     if (searchString.length > 0) { // Should always be the case
@@ -335,6 +362,9 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 #pragma mark - Get Users
 
+//Pulls all the users from the server as an array of JSON strings.
+//The sections are generated from the users' names and each respective index
+//in the table view is loaded with a user JSON string.
 - (void)loadUsers
 {
     NSDictionary *jsonDictionary = @{};
@@ -387,12 +417,16 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 #pragma mark - Add Friend
 
+//calls for an addFriendByEmail alert to be displayed
 - (void)addFriendByEmailButton
 {
     NSLog(@"Add a Friend");
     [self addFriendByEmailAlert:self];
 }
 
+//Generates an alert with a text field where a user
+//can input a potential friend's email and send a friend
+//request to them.
 - (IBAction)addFriendByEmailAlert:(id)sender
 {
     UIAlertView *alert = [[UIAlertView alloc]
@@ -420,6 +454,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     
 }
 
+//Action that generates a send friend request alert
+//when a user's name is clicked in the table view
 - (IBAction)addFriendByClickAlert:(id)sender
 {
     UIAlertView *alert = [[UIAlertView alloc]
@@ -433,6 +469,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     
 }
 
+
+//Send a server request to add a user as a friend
 - (void)addFriend
 {
     NSString *user = [_user token];
@@ -503,6 +541,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 #pragma mark - Alert Views
 
+//Determines the action to take depending upon the alert's tag and the
+//index of the button that was clicked
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString* detailString = _textField.text;
     NSLog(@"Email is: %@", detailString); //Put it on the debugger

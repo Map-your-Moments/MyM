@@ -1,10 +1,16 @@
-//
-//  UserAccountViewController.m
-//  MyM
-//
-//  Created by Steven Zilberberg on 4/21/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * FriendAccountViewController.m
+ * Display for a friend's account information. The view shows the friend's username
+ * as the title. The table view includes the friend's username and profile pic, full name,
+ * and email each in their respective cell. At the bottom of a view is a delete friend button
+ * to remove the friend from your friends list
+ *
+ */
 
 #import "FriendAccountViewController.h"
 #import "Constants.h"
@@ -28,15 +34,19 @@
 
 @implementation FriendAccountViewController
 
+//initialization of tableview which is set to Grouped style
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
+    
     return self;
 }
 
+//Loads the view, sets the title to the friend's name, creates te delete friend button
+//and initializes each of the section headers for each cell of the grouped tableview
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,9 +58,16 @@
     self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Name", @"Email", nil];
 }
 
+//safety measure for AJNotification bug that occurs when a notification
+//is being displayed when the view changes
 - (void)viewDidDisappear:(BOOL)animated
 {
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,23 +78,28 @@
 
 #pragma mark - Table view data source
 
+// Return the number of sections.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return [self.sectionHeaders count];
 }
 
+//Displays the header title of the sections
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return [self.sectionHeaders objectAtIndex:section];
 }
 
+// Return the number of rows in the section.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return 1;
 }
 
+//Sets what to display in each cell of the table view
+//The first cell displays the friend's username and profile pic
+//The second cell displays the friend's name
+//The third cell displays the friend's email
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"CellIdentifier";
@@ -142,12 +164,16 @@
 
 #pragma mark - Table view delegate
 
+//Deselects the cell after it is clicked
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark UIAlertView Delegate
+
+//If the confirm button is clicked on a delete friend alert
+//then then the friend is removed from the user's friends list
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if([alertView tag] == kUIAlertDeleteAccount)
@@ -159,6 +185,8 @@
     }
 }
 
+//Creates the display button for deleting a friend and sets
+//it as a footer for the tableView
 - (void)createDeleteFriendButton
 {
     // create a UIButton (Delete Account button)
@@ -180,12 +208,14 @@
     self.tableView.tableFooterView = footerView;
 }
 
+//when the delete friend button is pressed, a delete friend alert is called
 - (void)deleteFriendButton
 {
     NSLog(@"Delete Account");
     [self deleteFriendAlert:self];
 }
 
+//displays a delete friend alert for confirming the friend deletion
 - (IBAction)deleteFriendAlert:(id)sender
 {
     UIAlertView *alert = [[UIAlertView alloc]
@@ -198,6 +228,9 @@
     [alert show];
 }
 
+//Sends a JSON request to delete a friendship on the server
+//If the friendship is successfully deleted then we return
+//to the last view controller
 - (void)deleteFriend
 {
     NSString *user = [_user token];
