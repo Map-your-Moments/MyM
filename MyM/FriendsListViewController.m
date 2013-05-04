@@ -280,10 +280,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *email, *username, *name;
-    UIImage *profileImage;
-    
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    profileImage = cell.imageView.image;
 
     if (tableView == self.tableView) {
         if (self.showSectionIndexes) {
@@ -306,7 +302,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
     [vc setEmail:email];
     [vc setUsername:username];
     [vc setName:name];
-    [vc setProfileImage:profileImage];
 
     [self.navigationController pushViewController:vc animated:YES];
         

@@ -11,6 +11,7 @@
 #import "UtilityClass.h"
 #import "AJNotificationView.h"
 #import "FriendUtilityClass.h"
+#import "GravitarUtilityClass.h"
 
 #define BANNER_DEFAULT_TIME 2
 
@@ -93,14 +94,28 @@
         {
             cell.textLabel.text = _username;
             
-            if(_profileImage)
-            {
-                UIImage *cellImg = _profileImage;
-                cellImg = [UtilityClass imageWithImage:cellImg scaledToSize:CGSizeMake(35,35)];
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(queue, ^{
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                });
                 
-                cell.imageView.image = cellImg;
-            }
-            else
+                NSData *gravPic = [GravitarUtilityClass requestGravatar:[GravitarUtilityClass getGravatarURL:_email]];
+                dispatch_async(dispatch_get_main_queue(), ^ {
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                    
+                    if(gravPic)
+                    {
+                        UIImage *cellImg = [UIImage imageWithData:gravPic];
+                        cellImg = [UtilityClass imageWithImage:cellImg scaledToSize:CGSizeMake(35,35)];
+                        
+                        cell.imageView.image = cellImg;
+                    }
+                    
+                });
+            });
+            
+            if(!cell.imageView.image)
             {
                 UIImage *cellImg = [UIImage imageNamed:@"DefaultProfilePic.png"];
                 cellImg = [UtilityClass imageWithImage:cellImg scaledToSize:CGSizeMake(35,35)];
