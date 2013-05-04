@@ -8,6 +8,7 @@
 
 #import "FriendsListViewController.h"
 #import "UtilityClass.h"
+#import "GravitarUtilityClass.h"
 
 #import "AJNotificationView.h"
 
@@ -195,7 +196,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
                 });
             
-                NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+                NSData *gravPic = self.jsonGetFriends ? [GravitarUtilityClass requestGravatar:[GravitarUtilityClass getGravatarURL:cellEmail]] : nil;
                 dispatch_async(dispatch_get_main_queue(), ^ {
                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             
@@ -224,7 +225,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
                 });
                 
-                NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+                NSData *gravPic = self.jsonGetFriends ? [GravitarUtilityClass requestGravatar:[GravitarUtilityClass getGravatarURL:cellEmail]] : nil;
                 dispatch_async(dispatch_get_main_queue(), ^ {
                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                     
@@ -255,7 +256,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
             });
             
-            NSData *gravPic = self.jsonGetFriends ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:cellEmail]] : nil;
+            NSData *gravPic = self.jsonGetFriends ? [GravitarUtilityClass requestGravatar:[GravitarUtilityClass getGravatarURL:cellEmail]] : nil;
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 

@@ -183,7 +183,6 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     NSString *title = [[self.captionTextField text]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@","];
     NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-    NSString *ID = [NSString stringWithFormat:@"%f_%f_%f", currentLocation.latitude, currentLocation.longitude, currentDate.timeIntervalSince1970];
     
     NSData *momentContent = nil;
     switch (contentType)
@@ -225,9 +224,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     if(hasContentSet == YES && title != nil && [title length] != 0)
     {
         Content *content = [[Content alloc] initWithContent:momentContent withType:self.contentType andTags:tags];
-        Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil andID:ID];
-        [self.dataController addMomentToMomentsWithMoment:newMoment];
-        [self.delegate setDataController:self.dataController];
+        Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil];
+        [S3UtilityClass addMomentToS3:newMoment];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else

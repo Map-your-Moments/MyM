@@ -13,6 +13,7 @@
 #import "Moment.h"
 #import "MapViewController.h"
 #import "AmazonClientManager.h"
+#import "S3UtilityClass.h"
 
 @interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate>
 
@@ -24,10 +25,6 @@
 @property int contentType;
 @property CLLocationCoordinate2D currentLocation;
 @property (strong, nonatomic) User *currentUser;
-@property (strong, nonatomic) MomentDataController *dataController;
-
-//Delegate
-@property (nonatomic, weak) id<mapProtocol> delegate;
 
 //Core Functions of View
 -(void)detectMomentType;
