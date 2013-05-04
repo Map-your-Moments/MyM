@@ -30,7 +30,7 @@
     UITextView *momentText;
     UIImageView *momentImage;
     
-    MPMoviePlayerController *moviePlayer;
+    MPMoviePlayerViewController *moviePlayer;
     AVAudioRecorder *recorder;
 
     UIView *recorderView;
@@ -85,7 +85,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 
 -(void)detectMomentType
 {
-    hasContentSet = NO;
+    if(momentImage == nil)
+        hasContentSet = NO;
     
     if(contentType == kTAGMOMENTTEXT)
     {
@@ -97,10 +98,6 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     }
     else if(contentType == kTAGMOMENTAUDIO)
     {
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-        [audioSession setActive:YES error:nil];
-        
         [self presentAudio];
     }
     else if(contentType == kTAGMOMENTVIDEO)
@@ -140,6 +137,10 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 
 -(void)presentAudio
 {
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [audioSession setActive:YES error:nil];
+    
     recorderView = [[UIView alloc]initWithFrame:CGRectMake(135, 214, 75, 75)];
     [recorderView setBackgroundColor:[UIColor greenColor]];
     UIImageView *recorderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
@@ -166,7 +167,19 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 
 -(void)presentVideo
 {
-    
+    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Detected" message:@"Your device doesn't have a camera." delegate:self cancelButtonTitle:@"Darn..." otherButtonTitles:nil];
+        [alert setTag:kUIAlertViewMomentNoCamera];
+        [alert show];
+        return;
+    }
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+    [pickerController setVideoMaximumDuration:5];
+    [pickerController setDelegate:self];
+    [pickerController setMediaTypes:[NSArray arrayWithObject:kVideoCamera]];
+    [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+    [self presentViewController:pickerController animated:YES completion:NULL];
 }
 
 -(void)share
@@ -201,6 +214,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         }
         case kTAGMOMENTVIDEO:
         {
+            if([momentImage tag] == MOMENT_IMAGEVIEW_HASCONTENT)
+                momentContent = [[NSFileManager defaultManager] contentsAtPath:[takenVideoURL path]];
             break;
         }
     }
@@ -248,19 +263,54 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSLog(@"Picture Selected");
-    if(momentImage != nil)
-        [momentImage removeFromSuperview];
+    if(contentType == kTAGMOMENTPICTURE)
+    {
+        NSLog(@"Picture Selected");
+        if(momentImage != nil)
+            [momentImage removeFromSuperview];
+        
+        UIImage *selectedPicture = [info valueForKey:UIImagePickerControllerOriginalImage];
+        momentImage = [[UIImageView alloc] initWithImage:selectedPicture];
+        [momentImage setTag:MOMENT_IMAGEVIEW_HASCONTENT];
+        [momentImage setFrame:CGRectMake(MOMENT_CONTENTVIEW_X+10, MOMENT_CONTENTVIEW_Y+20, selectedPicture.size.width/9, selectedPicture.size.height/9)];
+        [self.view addSubview:momentImage];
+        
+        [momentImage setUserInteractionEnabled:YES];
+        [momentImage addGestureRecognizer:[self createTapGestureForContent]];
+    }
+    else if(contentType == kTAGMOMENTVIDEO)
+    {
+        NSLog(@"Video Selected");
+        if(momentImage != nil)
+            [momentImage removeFromSuperview];
+        
+        takenVideoURL = [info valueForKey:UIImagePickerControllerMediaURL];
+        
+        MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:takenVideoURL];
+        [player setShouldAutoplay:NO];
     
-    UIImage *selectedPicture = [info valueForKey:UIImagePickerControllerOriginalImage];
-    momentImage = [[UIImageView alloc] initWithImage:selectedPicture];
-    [momentImage setTag:MOMENT_IMAGEVIEW_HASCONTENT];
-    [momentImage setFrame:CGRectMake(MOMENT_CONTENTVIEW_X+10, MOMENT_CONTENTVIEW_Y+20, selectedPicture.size.width/9, selectedPicture.size.height/9)];
-    [self.view addSubview:momentImage];
-    
-    [momentImage setUserInteractionEnabled:YES];
-    [momentImage addGestureRecognizer:[self createTapGestureForContent]];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+        UIImage *thumbnail = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+        
+        momentImage = [[UIImageView alloc] initWithImage:thumbnail];
+        [momentImage setTag:MOMENT_IMAGEVIEW_HASCONTENT];
+        [momentImage setFrame:CGRectMake(MOMENT_CONTENTVIEW_X+10, MOMENT_CONTENTVIEW_Y+50, thumbnail.size.width/2, thumbnail.size.height/2)];
+        
+        
+        [momentImage setUserInteractionEnabled:YES];
+        [momentImage addGestureRecognizer:[self createTapGestureForContent]];
+        [self.view addSubview:momentImage];
+        
+        playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [playButton setFrame:CGRectMake(MOMENT_CONTENTVIEW_X, MOMENT_CONTENTVIEW_Y, 100, 45)];
+        [playButton setTitle:@"Play Video" forState:UIControlStateNormal];
+        [playButton addTarget:self action:@selector(playMedia) forControlEvents:UIControlEventTouchUpInside];
+        [playButton setUserInteractionEnabled:YES];
+        [self.view addSubview:playButton];
+        
+        hasContentSet = YES;
+        
+        [picker dismissViewControllerAnimated:YES completion:NULL];
+    }
 }
 
 #pragma mark AVAudioRecorder Delegate
@@ -284,12 +334,23 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 #pragma mark AVAudioPlayer Delegate
 -(void)playMedia
 {
-    NSLog(@"*Playing*");
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"TestAudio" ofType:@"mp4"]] error:nil];
-    [player setVolume:1.0];
-    [player setDelegate:self];
-    [player prepareToPlay];
-    [player play];
+    if(contentType == kTAGMOMENTAUDIO)
+    {
+        NSLog(@"*Playing Sound*");
+        AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"TestAudio" ofType:@"mp4"]] error:nil];
+        [player setVolume:1.0];
+        [player setDelegate:self];
+        [player prepareToPlay];
+        [player play];
+    }
+    else if(contentType == kTAGMOMENTVIDEO)
+    {
+        moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:takenVideoURL];
+        [self presentMoviePlayerViewControllerAnimated:moviePlayer];
+        
+        moviePlayer.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+        [moviePlayer.moviePlayer play];
+    }
 }
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
@@ -333,6 +394,14 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [self.tagTextField resignFirstResponder];
     if(momentText != nil)
         [momentText resignFirstResponder];
+}
+
+- (void) movieFinishedCallback:(NSNotification*) aNotification {
+    MPMoviePlayerController *player = [aNotification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
 }
 
 - (void)didReceiveMemoryWarning
