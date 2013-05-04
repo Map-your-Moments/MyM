@@ -85,6 +85,8 @@
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     switch([indexPath section])
     {
         case 0:
@@ -127,7 +129,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark UIAlertView Delegate

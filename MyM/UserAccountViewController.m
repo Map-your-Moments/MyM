@@ -93,6 +93,7 @@
         case 0:
         {
             cell.textLabel.text = [_user username];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
             if([_user profileImage])
             {
