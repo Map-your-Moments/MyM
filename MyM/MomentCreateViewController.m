@@ -202,7 +202,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         case kTAGMOMENTPICTURE:
         {
             if([momentImage tag] == MOMENT_IMAGEVIEW_HASCONTENT)
-                momentContent = UIImagePNGRepresentation(momentImage.image);
+                momentContent = UIImageJPEGRepresentation(momentImage.image, 0.25);
+            NSLog(@"%Size: %d", [momentContent bytes]);
             break;
         }
         case kTAGMOMENTAUDIO:
