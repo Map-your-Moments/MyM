@@ -8,7 +8,6 @@
 
 #import "UserAccountViewController.h"
 #import "SearchBarTableViewController.h"
-#import "User.h"
 #import "Constants.h"
 #import "UtilityClass.h"
 #import "AJNotificationView.h"
@@ -18,9 +17,6 @@
 
 @interface UserAccountViewController ()
 {
-//    NSString *kStillImages;
-//    NSString *kVideoCamera;
-//    NSString *kMomemtAudio_temp;
 }
 
 @property (strong, nonatomic) NSArray *sectionHeaders;
@@ -50,10 +46,6 @@
     [super viewDidLoad];
     
     [self createDeleteUserButton];
-    
-//    kStillImages = @"public.image";
-//    kVideoCamera = @"public.movie";
-//    kMomemtAudio_temp = @"MomemtAudio_temp";
     
     self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Friends", nil];
 }
