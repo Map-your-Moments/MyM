@@ -40,8 +40,6 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 @property (nonatomic) NSString* addEmail;
 
-- (IBAction)addFriendAlert:(id)sender;
-
 @end
 
 @implementation AddFriendViewController

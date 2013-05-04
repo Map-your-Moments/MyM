@@ -17,7 +17,6 @@
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated;
 
 - (void)loadUsers;
-- (void)addFriendByEmail;
 - (void)addFriend;
 
 @property(nonatomic, assign, readonly) BOOL showSectionIndexes;
