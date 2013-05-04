@@ -290,6 +290,13 @@
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
+    
+    if(index == 3) {
+        NSLog(@"Add Video Moment");
+        [vc setContentType:kTAGMOMENTVIDEO];
+        [mapView removeAnnotations:mapView.annotations]; //!
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - MapView methods

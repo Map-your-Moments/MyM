@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Moment.h"
 
-@interface UserAccountViewController : UITableViewController <UIAlertViewDelegate>
+@interface UserAccountViewController : UITableViewController <UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) User *user;
 

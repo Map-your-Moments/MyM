@@ -1,48 +1,44 @@
 //
-//  MomentViewController.h
+//  MomentCreateViewController.h
 //  MyM
 //
-//  Created by Steven Zilberberg on 3/25/13.
+//  Created by Steven Zilberberg on 5/3/13.
 //  Copyright (c) 2013 MyM Co. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
+#import <CoreAudio/CoreAudioTypes.h>
 #import "Moment.h"
 #import "MapViewController.h"
 #import "AmazonClientManager.h"
 #import "S3UtilityClass.h"
 
-@interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
-{
-    MPMoviePlayerController *moviePlayer;
-    AVAudioRecorder *recorder;
-    
-    UIView *recorderView;
-    NSURL *tempFile;
-}
+@interface MomentCreateViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIView *contentView;
+//IBOUTLETS For View
 @property (strong, nonatomic) IBOutlet UITextField *captionTextField;
 @property (strong, nonatomic) IBOutlet UITextField *tagTextField;
-@property (strong, nonatomic) IBOutlet UIButton *tripButton;
 
-@property (strong, nonatomic) NSArray *trips;
-
+//Passed Data about user and location Type
 @property int contentType;
 @property CLLocationCoordinate2D currentLocation;
 @property (strong, nonatomic) User *currentUser;
 
-@property (strong, nonatomic) AVAudioRecorder *recorder;
+//Core Functions of View
+-(void)detectMomentType;
+-(void)presentText;
+-(void)presentAudio;
+-(void)presentImage;
+-(void)presentVideo;
+-(void)playMedia;
+-(void)stopRecording;
+-(void)share;
 
--(void)detectMoementType;
--(void)presentTextView;
--(void)presentImageSelector;
--(void)presentVideoSelector;
-- (void)share:(id)sender;
-
-- (IBAction)hideKeybord:(id)sender;
-- (IBAction)playStockVideo:(id)sender;
+//Helper Functions
+-(UITapGestureRecognizer*)createTapGestureForContent;
+-(void)nillObjects;
+-(void)hideKeyboard;
 
 @end

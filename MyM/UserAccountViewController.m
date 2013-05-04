@@ -85,6 +85,7 @@
             
             if([_user profileImage])
             {
+
                 UIImage *cellImg = [UIImage imageWithData:[_user profileImage]];
                 cellImg = [UtilityClass imageWithImage:cellImg scaledToSize:CGSizeMake(35,35)];
                 
@@ -149,7 +150,8 @@
         case 0:
         {
             NSLog(@"Touched Username");
-            //[self.navigationController popViewControllerAnimated:YES];
+            //UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Saved or New" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Saved Image", @"Take Picture", nil];
+            //[actionSheet showInView:self.view];
             break;
         }
         case 1:
@@ -404,13 +406,27 @@
             }
         }
     }
+}
 
-    else if([alertView tag] == kUIAlertDeleteAccount)
+#pragma mark UIActionSheet
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == kSAVEDBUTTONINDEX)
     {
-        if(buttonIndex != [alertView cancelButtonIndex])
-        {
-            [self deleteUserAccount];
-        }
+        UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+        //There is a warning here. I am not sure why but disregard
+        [pickerController setDelegate:self];
+        [pickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self presentViewController:pickerController animated:YES completion:NULL];
+    }
+    else if(buttonIndex == kTAKEMEDIA)
+    {
+        UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+        //There is a warning here. I am not sure why but disregard
+        [pickerController setDelegate:self];
+        [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:pickerController animated:YES completion:NULL];
+
     }
 }
 

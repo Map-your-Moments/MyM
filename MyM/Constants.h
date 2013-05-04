@@ -38,6 +38,10 @@ enum{
     kUIAlertDeleteAccount
 }kUIAlertSetting;
 
+enum{
+    kUIAlertViewMomentNoCamera = -999
+}kUIAlertViewMoment;
+
 @interface Constants : NSObject
 
 @end
