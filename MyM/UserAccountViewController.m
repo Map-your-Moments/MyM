@@ -34,13 +34,6 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationItem setTitle:@"Settings"];
-    self = [super initWithStyle:style];
-    if (self) {
-        self.title = @"Account Settings";
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad

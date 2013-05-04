@@ -31,6 +31,10 @@
 @end
 
 @implementation MapViewController
+@synthesize mapView;
+@synthesize dataController;
+@synthesize user;
+@synthesize tempMoment;
 
 - (void)viewDidLoad
 {
@@ -264,37 +268,28 @@
 {
     MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
     [vc setCurrentLocation:[[[self.mapView userLocation] location] coordinate]];
-    [vc setDataController:self.dataController];
     [vc setCurrentUser:self.user];
     
     if(index == 0) {
         NSLog(@"Add Picture Moment");
         [vc setContentType:kTAGMOMENTPICTURE];
-        [vc setCurrentLocation:currentLocation];
-        [vc setCurrentUser:user];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-    if(idx == 1) {
+    if(index == 1) {
         NSLog(@"Add Audio Moment");
         [vc setContentType:kTAGMOMENTAUDIO];
-        [vc setCurrentLocation:currentLocation];
-        [vc setCurrentUser:user];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
     
-    if(idx == 2) {
+    if(index == 2) {
         NSLog(@"Add Text Moment");
         [vc setContentType:kTAGMOMENTTEXT];
-        [vc setCurrentLocation:currentLocation];
-        [vc setCurrentUser:user];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - MapView methods

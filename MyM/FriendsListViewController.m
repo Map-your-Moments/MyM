@@ -71,6 +71,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 -(void) viewWillAppear:(BOOL)animated
 {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self loadFriends];
 }
 
