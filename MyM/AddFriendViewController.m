@@ -422,7 +422,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"Friend Request"
-                          message:@"Would you like to send a friend request to this user?\n\n\n"
+                          message:nil
                           delegate:self
                           cancelButtonTitle:@"Cancel"
                           otherButtonTitles:@"Send", nil];
