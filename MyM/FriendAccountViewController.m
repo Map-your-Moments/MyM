@@ -31,8 +31,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.title = _name;
-        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
         // Custom initialization
     }
     return self;
@@ -41,6 +39,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = _name;
     
     [self createDeleteFriendButton];
     
