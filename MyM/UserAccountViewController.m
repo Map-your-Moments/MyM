@@ -8,7 +8,6 @@
 
 #import "UserAccountViewController.h"
 #import "SearchBarTableViewController.h"
-#import "User.h"
 #import "Constants.h"
 #import "UtilityClass.h"
 #import "AJNotificationView.h"
@@ -17,10 +16,13 @@
 #define BANNER_DEFAULT_TIME 2
 
 @interface UserAccountViewController ()
+{
+}
+
 @property (strong, nonatomic) NSArray *sectionHeaders;
-@property (strong, nonatomic) NSMutableDictionary *userInformation;
 @property (nonatomic) NSDictionary *jsonDeleteAccount;
 @property (nonatomic) NSDictionary *jsonEditPassword;
+@property (nonatomic) NSDictionary *jsonEditEmail;
 
 - (IBAction)deleteUserAlert:(id)sender;
 @end
@@ -32,6 +34,13 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationItem setTitle:@"Settings"];
+    self = [super initWithStyle:style];
+    if (self) {
+        self.title = @"Account Settings";
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+        // Custom initialization
+    }
+    return self;
 }
 
 - (void)viewDidLoad
@@ -39,10 +48,6 @@
     [super viewDidLoad];
     
     [self createDeleteUserButton];
-    
-//    kStillImages = @"public.image";
-//    kVideoCamera = @"public.movie";
-//    kMomemtAudio_temp = @"MomemtAudio_temp";
     
     self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Friends", nil];
 }
@@ -83,6 +88,7 @@
         {
             cell.textLabel.text = [_user username];
             [cell setUserInteractionEnabled:NO];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
             if([_user profileImage])
             {
@@ -156,30 +162,29 @@
         case 1:
         {
             NSLog(@"Touched Password");
-            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
-                                           title:@"Editing password is not implemented yet"
-                                 linedBackground:AJLinedBackgroundTypeDisabled
-                                       hideAfter:BANNER_DEFAULT_TIME];
             
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
-//            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-//            [alert setTag:kUIAlertSettingsConfirmChange];
-//            [alert show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+            [alert setTag:kUIAlertSettingsConfirmChangePassword];
+            [alert show];
+            
             break;
         }
         case 2:
         {
             NSLog(@"Touched Email");
-
-            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
-                                           title:@"Editing email is not implemented yet"
-                                 linedBackground:AJLinedBackgroundTypeDisabled
-                                       hideAfter:BANNER_DEFAULT_TIME];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+            [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+            [alert setTag:kUIAlertSettingsConfirmChangeEmail];
+            [alert show];
+            
             break;
         }
         case 3:
         {
             NSLog(@"Touched Friends");
+            
             SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
             [vc setUser:_user];
             [self.navigationController pushViewController:vc animated:YES];
@@ -201,7 +206,7 @@
 #pragma mark UIAlertView Delegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if([alertView tag] == kUIAlertSettingsConfirmChange)
+    if([alertView tag] == kUIAlertSettingsConfirmChangePassword)
     {
         if(buttonIndex != [alertView cancelButtonIndex])
         {
@@ -214,7 +219,11 @@
                                                title:@"Incorrect password"
                                      linedBackground:AJLinedBackgroundTypeDisabled
                                            hideAfter:BANNER_DEFAULT_TIME];
-                return;
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Password entered was incorrect" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
+                [alert setTag:kUIAlertSettingsConfirmChangePassword];
+                [alert show];
             }
             else
             {
@@ -223,12 +232,12 @@
                 [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
                 [[alert textFieldAtIndex:0]setPlaceholder:@"New Password"];
                 [[alert textFieldAtIndex:1]setPlaceholder:@"Confirm Password"];
-                [alert setTag:kUIAlertSettingsVerifyChange];
+                [alert setTag:kUIAlertSettingsVerifyPassword];
                 [alert show];
             }
         }
     }
-    else if([alertView tag] == kUIAlertSettingsVerifyChange)
+    else if([alertView tag] == kUIAlertSettingsVerifyPassword)
     {
         if(buttonIndex != [alertView cancelButtonIndex])
         {
@@ -237,23 +246,29 @@
             
             if(![newPassword isEqualToString:confirmedPwd])
             {
-                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                               title:@"Passwords do not match"
-                                     linedBackground:AJLinedBackgroundTypeDisabled
-                                           hideAfter:BANNER_DEFAULT_TIME];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Enter a new password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Passwords did not match" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
                 [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
                 [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
                 [[alert textFieldAtIndex:0]setPlaceholder:@"New Password"];
                 [[alert textFieldAtIndex:1]setPlaceholder:@"Confirm Password"];
-                [alert setTag:kUIAlertSettingsVerifyChange];
+                [alert setTag:kUIAlertSettingsVerifyPassword];
+                [alert show];
+            }
+            else if([newPassword length] < 8)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Password too short (8 character minimum)" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
+                [[alert textFieldAtIndex:0]setPlaceholder:@"New Password"];
+                [[alert textFieldAtIndex:1]setPlaceholder:@"Confirm Password"];
+                [alert setTag:kUIAlertSettingsVerifyPassword];
                 [alert show];
             }
             else
             {
                 [_user setPassword:newPassword];
                 
-                NSDictionary *jsonDictionary = @{ @"user": @{ @"username" : [_user username], @"password" : newPassword, @"email" : [_user email], @"name" : [_user name]} };
+                NSDictionary *jsonDictionary = @{ @"user": @{ @"username" : [_user username], @"password" : newPassword, @"email" : [_user email], @"name" : [_user name]}, @"access_token": [_user token] };
                 
                 dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
                 dispatch_async(queue, ^{
@@ -271,6 +286,7 @@
                                                                title:@"Password successfully changed"
                                                      linedBackground:AJLinedBackgroundTypeDisabled
                                                            hideAfter:BANNER_DEFAULT_TIME];
+                                [self.tableView reloadData];
                             }
                             else
                             {
@@ -293,6 +309,109 @@
             }
         }
     }
+    else if([alertView tag] == kUIAlertSettingsConfirmChangeEmail)
+    {
+        if(buttonIndex != [alertView cancelButtonIndex])
+        {
+            NSString *passwordEntered = [[alertView textFieldAtIndex:0] text];
+            if(passwordEntered == nil)
+                return;
+            if(![passwordEntered isEqualToString:[_user password]])
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Password entered was incorrect" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
+                [alert setTag:kUIAlertSettingsConfirmChangeEmail];
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Enter a new email" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:1] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:0]setPlaceholder:@"new@example.com"];
+                [[alert textFieldAtIndex:1]setPlaceholder:@"confirm@example.com"];
+                [alert setTag:kUIAlertSettingsVerifyEmail];
+                [alert show];
+            }
+        }
+    }
+    else if([alertView tag] == kUIAlertSettingsVerifyEmail)
+    {
+        if(buttonIndex != [alertView cancelButtonIndex])
+        {
+            NSString *newEmail = [[alertView textFieldAtIndex:0] text];
+            NSString *confirmedEmail = [[alertView textFieldAtIndex:1] text];
+            
+            if(![newEmail isEqualToString:confirmedEmail])
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Emails did not match" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:1] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:0]setPlaceholder:@"new@example.com"];
+                [[alert textFieldAtIndex:1]setPlaceholder:@"confirm@example.com"];
+                [alert setTag:kUIAlertSettingsVerifyEmail];
+                [alert show];
+            }
+            else if ([newEmail rangeOfString:@"@"].location == NSNotFound) //Check if emailTextField has an @
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Invalid email entered" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:1] setSecureTextEntry:NO];
+                [[alert textFieldAtIndex:0]setPlaceholder:@"new@example.com"];
+                [[alert textFieldAtIndex:1]setPlaceholder:@"confirm@example.com"];
+                [alert setTag:kUIAlertSettingsVerifyEmail];
+                [alert show];
+            }
+            else
+            {
+                [_user setEmail:newEmail];
+                
+                NSDictionary *jsonDictionary = @{ @"user": @{ @"username" : [_user username], @"password" : [_user password], @"email" : newEmail, @"name" : [_user name]}, @"access_token": [_user token] };
+                
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(queue, ^{
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                    });
+                    self.jsonEditEmail = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/edit_user"];
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                        if(self.jsonEditEmail)
+                        {
+                            if([self.jsonEditEmail[@"updated"] boolValue])
+                            {
+                                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
+                                                               title:@"Email successfully changed"
+                                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                                           hideAfter:BANNER_DEFAULT_TIME];
+                                [self.tableView reloadData];
+                            }
+                            else
+                            {
+                                [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                               title:@"Failed to change email"
+                                                     linedBackground:AJLinedBackgroundTypeDisabled
+                                                           hideAfter:BANNER_DEFAULT_TIME];
+                            }
+                            
+                        }
+                        else
+                        {
+                            [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
+                                                           title:@"Server request failed"
+                                                 linedBackground:AJLinedBackgroundTypeDisabled
+                                                       hideAfter:BANNER_DEFAULT_TIME];
+                        }
+                    });
+                });
+            }
+        }
+    }
+
     else if([alertView tag] == kUIAlertDeleteAccount)
     {
         if(buttonIndex != [alertView cancelButtonIndex])

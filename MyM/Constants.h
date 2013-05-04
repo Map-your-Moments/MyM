@@ -31,8 +31,10 @@ enum{
 
 enum{
     kUIAlertSettingsStandard,
-    kUIAlertSettingsConfirmChange,
-    kUIAlertSettingsVerifyChange,
+    kUIAlertSettingsConfirmChangePassword,
+    kUIAlertSettingsConfirmChangeEmail,
+    kUIAlertSettingsVerifyPassword,
+    kUIAlertSettingsVerifyEmail,
     kUIAlertDeleteAccount
 }kUIAlertSetting;
 

@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Moment.h"
 
-@interface UserAccountViewController : UITableViewController <UIAlertViewDelegate>
+@interface FriendAccountViewController : UITableViewController <UIAlertViewDelegate>
 
 @property (strong, nonatomic) User *user;
+@property (nonatomic) NSString *email;
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *username;
+
 
 @end

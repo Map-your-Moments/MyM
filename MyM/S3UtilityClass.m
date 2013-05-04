@@ -144,8 +144,6 @@
 {
     for (S3ObjectSummary *object in keys) {
         
-        Moment *moment;
-        
         // get the coordinates by parsing the string
         NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"/_"];
         NSArray *tokens = [object.key componentsSeparatedByCharactersInSet:set];
@@ -153,10 +151,12 @@
         double longitude = [[tokens objectAtIndex:2] doubleValue];
         CLLocationCoordinate2D coords = CLLocationCoordinate2DMake( latitude, longitude );
         
-        moment = [[Moment alloc] initWithTitle:[tokens objectAtIndex:3]
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[tokens objectAtIndex:5] doubleValue]];
+        
+        Moment *moment = [[Moment alloc] initWithTitle:[tokens objectAtIndex:3]
                                        andUser:[tokens objectAtIndex:4]
                                     andContent:nil
-                                       andDate:nil
+                                       andDate:date
                                      andCoords:coords
                                    andComments:nil];
         

@@ -9,6 +9,7 @@
 #import "FriendsListViewController.h"
 #import "UtilityClass.h"
 #import "GravitarUtilityClass.h"
+#import "FriendAccountViewController.h"
 #import "AJNotificationView.h"
 #import "SearchBarTableViewController.h"
 #import "AddFriendSearchBarTableViewController.h"
@@ -286,9 +287,34 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *email, *username, *name;
+
+    if (tableView == self.tableView) {
+        if (self.showSectionIndexes) {
+            email = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"email"];
+            username = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"username"];
+            name = [[[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"name"];
+        } else {
+            email = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"email"];
+            username = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"username"];
+            name = [[self.friends objectAtIndex:indexPath.row] objectForKey:@"name"];
+        }
+    } else {
+        email = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"email"];
+        username = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"username"];
+        name = [[self.filteredFriends objectAtIndex:indexPath.row] objectForKey:@"name"];
+    }
+    
+    FriendAccountViewController *vc = [[FriendAccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [vc setUser:_user];
+    [vc setEmail:email];
+    [vc setUsername:username];
+    [vc setName:name];
+
+    [self.navigationController pushViewController:vc animated:YES];
+        
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    //add code here
 }
 
 #pragma mark - Delete Friends
