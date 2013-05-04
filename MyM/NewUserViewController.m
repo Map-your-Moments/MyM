@@ -11,7 +11,7 @@
 
 #import "AJNotificationView.h"
 
-#define BANNER_DEFAULT_TIME 3
+#define BANNER_DEFAULT_TIME 2
 
 @interface NewUserViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -58,9 +58,6 @@
     [super viewDidLoad];
     self.createNewUserButton = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(createNewUserButtonPress)];
     self.navigationItem.rightBarButtonItem = self.createNewUserButton;
-    
-    UITapGestureRecognizer *tapDismiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTap)];
-    [self.view addGestureRecognizer:tapDismiss];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> createNewUserButtonPress
@@ -158,6 +155,9 @@
     }
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> textFieldShouldReturn:
+ Logic for NEXT and DONE keys
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger nextTag = textField.tag + 1;
@@ -175,9 +175,29 @@
     return NO;
 }
 
-- (void)backgroundTap
+- (void)createS3FolderForUser
 {
-    [self.view endEditing:YES];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+        
+        @try{
+            S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:[NSString stringWithFormat:@"%@/", self.usernameTextField.text] inBucket:@"mym-csc470"];
+            S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
+            if(response.error != nil) NSLog(@"Error: %@", response.error);
+        }
+        @catch (AmazonClientException *exception) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+            NSLog(@"Exception: %@", exception);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        });
+    });
 }
 
 @end

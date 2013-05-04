@@ -17,30 +17,21 @@
 #define BANNER_DEFAULT_TIME 2
 
 @interface UserAccountViewController ()
-{
-//    NSString *kStillImages;
-//    NSString *kVideoCamera;
-//    NSString *kMomemtAudio_temp;
-}
-
 @property (strong, nonatomic) NSArray *sectionHeaders;
 @property (strong, nonatomic) NSMutableDictionary *userInformation;
 @property (nonatomic) NSDictionary *jsonDeleteAccount;
 @property (nonatomic) NSDictionary *jsonEditPassword;
 
 - (IBAction)deleteUserAlert:(id)sender;
-
 @end
 
 @implementation UserAccountViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (void)viewWillAppear:(BOOL)animated
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationItem setTitle:@"Settings"];
 }
 
 - (void)viewDidLoad
@@ -61,17 +52,10 @@
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return [self.sectionHeaders count];
 }
 
@@ -82,7 +66,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return 1;
 }
 
@@ -99,6 +82,7 @@
         case 0:
         {
             cell.textLabel.text = [_user username];
+            [cell setUserInteractionEnabled:NO];
             
             if([_user profileImage])
             {
@@ -161,7 +145,6 @@
 }
 
 #pragma mark - Table view delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch([indexPath section])
@@ -202,7 +185,6 @@
             SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
             [vc setUser:_user];
             [self.navigationController pushViewController:vc animated:YES];
-            break;
             break;
         }
 //        case 4:
