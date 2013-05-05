@@ -69,7 +69,6 @@
 		55A0F65F16C9E6DB00A364E3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A0F65E16C9E6DB00A364E3 /* Default@2x.png */; };
 		55A0F66B16C9E76F00A364E3 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55A0F66A16C9E76F00A364E3 /* AWSiOSSDK.framework */; };
 		55DC058F1736DCC5005613A5 /* MomentCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC058E1736DCC5005613A5 /* MomentCreateViewController.m */; };
-		55DC05921736DDB2005613A5 /* MomentContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC05911736DDB2005613A5 /* MomentContentViewController.m */; };
 		55EA75201714D0CD00D234C5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA751F1714D0CD00D234C5 /* AVFoundation.framework */; };
 		55EA75221714D0D500D234C5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA75211714D0D500D234C5 /* AudioToolbox.framework */; };
 		55EA75241714D0E600D234C5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EA75231714D0E600D234C5 /* MediaPlayer.framework */; };
@@ -188,8 +187,6 @@
 		55DC058B1736DC3B005613A5 /* MomentDetailedSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentDetailedSecondViewController.m; sourceTree = "<group>"; };
 		55DC058D1736DCC5005613A5 /* MomentCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentCreateViewController.h; sourceTree = "<group>"; };
 		55DC058E1736DCC5005613A5 /* MomentCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentCreateViewController.m; sourceTree = "<group>"; };
-		55DC05901736DDB2005613A5 /* MomentContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentContentViewController.h; sourceTree = "<group>"; };
-		55DC05911736DDB2005613A5 /* MomentContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentContentViewController.m; sourceTree = "<group>"; };
 		55EA751F1714D0CD00D234C5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		55EA75211714D0D500D234C5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		55EA75231714D0E600D234C5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -249,8 +246,6 @@
 		692CF3091736DBEC009B1645 /* MomentCreateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MomentCreateView.xib; path = MyM/MomentCreateView.xib; sourceTree = SOURCE_ROOT; };
 		69482CEF1724660600D38756 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		69482CF01724660600D38756 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
-		694843DC173589230051B6BF /* MomentContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentContentViewController.h; sourceTree = "<group>"; };
-		694843DD173589230051B6BF /* MomentContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentContentViewController.m; sourceTree = "<group>"; };
 		69502F7516E47B4200E4B936 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		69502F7616E47B4200E4B936 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		69DB6E9517356F1B000270E5 /* MomentDetailedSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentDetailedSecondViewController.h; sourceTree = "<group>"; };
@@ -464,8 +459,6 @@
 		665A932916E7CDF900D22E11 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				55DC05901736DDB2005613A5 /* MomentContentViewController.h */,
-				55DC05911736DDB2005613A5 /* MomentContentViewController.m */,
 				55DC058A1736DC3B005613A5 /* MomentDetailedSecondViewController.h */,
 				55DC058B1736DC3B005613A5 /* MomentDetailedSecondViewController.m */,
 				55DC058D1736DCC5005613A5 /* MomentCreateViewController.h */,
@@ -486,8 +479,6 @@
 				55EC87251714CE0C00C1C52F /* MomentCreateViewController.m */,
 				69DB6E9517356F1B000270E5 /* MomentDetailedSecondViewController.h */,
 				69DB6E9617356F1B000270E5 /* MomentDetailedSecondViewController.m */,
-				694843DC173589230051B6BF /* MomentContentViewController.h */,
-				694843DD173589230051B6BF /* MomentContentViewController.m */,
 				55EC87271714CE0C00C1C52F /* NewUserViewController.h */,
 				55EC87281714CE0C00C1C52F /* NewUserViewController.m */,
 				69502F7516E47B4200E4B936 /* SignInViewController.h */,
@@ -639,7 +630,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55DC05921736DDB2005613A5 /* MomentContentViewController.m in Sources */,
 				692CF3001736D942009B1645 /* MomentDetailedSecondViewController.m in Sources */,
 				54EA4AC417348995001CA522 /* AddFriendViewController.m in Sources */,
 				54EA4AC317348991001CA522 /* AddFriendSearchBarTableViewController.m in Sources */,
