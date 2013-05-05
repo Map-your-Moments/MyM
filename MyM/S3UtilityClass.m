@@ -1,10 +1,13 @@
-//
-//  S3UtilityClass.m
-//  MyM
-//
-//  Created by Adam on 4/30/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * S3UtilityClass.m
+ * Collection of utility methods that do various S3 functions when called.
+ *
+ */
 
 #import "S3UtilityClass.h"
 

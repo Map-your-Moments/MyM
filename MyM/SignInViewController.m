@@ -1,10 +1,13 @@
-//
-//  SignInViewController.m
-//  MyM
-//
-//  Created by Steven Zilberberg on 3/4/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * SignInViewController.h
+ * Fist view displayed to the user. Login page for the rest of the app
+ *
+ */
 
 #import "SignInViewController.h"
 #import "NewUserViewController.h"
