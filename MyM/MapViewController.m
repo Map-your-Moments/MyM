@@ -13,8 +13,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SearchBarTableViewController.h"
 #import "MomentCreateViewController.h"
-#import "MomentDetailViewController.h"
 #import "UserAccountViewController.h"
+#import "MomentDetailedSecondViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -31,6 +31,10 @@
 @end
 
 @implementation MapViewController
+@synthesize mapView;
+@synthesize dataController;
+@synthesize user;
+@synthesize tempMoment;
 
 - (void)viewDidLoad
 {
@@ -78,6 +82,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.mapView removeAnnotations:self.mapView.annotations];
 }
 
@@ -264,22 +269,35 @@
 {
     MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
     [vc setCurrentLocation:[[[self.mapView userLocation] location] coordinate]];
-//    [vc setDataController:self.dataController];
     [vc setCurrentUser:self.user];
-    [self.mapView removeAnnotations:self.mapView.annotations];
     
     if(index == 0) {
         NSLog(@"Add Picture Moment");
         [vc setContentType:kTAGMOMENTPICTURE];
-    } else if(index == 1) {
-        NSLog(@"Add Audio Moment");
-        [vc setContentType:kTAGMOMENTAUDIO];
-    } else if(index == 2) {
-        NSLog(@"Add Text Moment");
-        [vc setContentType:kTAGMOMENTTEXT];
+        [mapView removeAnnotations:mapView.annotations]; //!
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
-    [self.navigationController pushViewController:vc animated:YES];
+    if(index == 1) {
+        NSLog(@"Add Audio Moment");
+        [vc setContentType:kTAGMOMENTAUDIO];
+        [mapView removeAnnotations:mapView.annotations]; //!
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if(index == 2) {
+        NSLog(@"Add Text Moment");
+        [vc setContentType:kTAGMOMENTTEXT];
+        [mapView removeAnnotations:mapView.annotations]; //!
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    if(index == 3) {
+        NSLog(@"Add Video Moment");
+        [vc setContentType:kTAGMOMENTVIDEO];
+        [mapView removeAnnotations:mapView.annotations]; //!
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - MapView methods
@@ -383,15 +401,15 @@
     [self.mapView setRegion:region animated:YES];
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+- (void)mapView:(MKMapView *)map annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     MomentAnnotation *annotation = view.annotation;
     Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", annotation.moment.user, annotation.moment.ID]];
     
-    MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
-    [vc setMoment:moment];
+    MomentDetailedSecondViewController *child = [[MomentDetailedSecondViewController alloc] initWithStyle:UITableViewStylePlain];
+    [child setTargetMoment:moment];
     [mapView removeAnnotations:mapView.annotations]; //!
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:child animated:YES];
 }
 
 @end

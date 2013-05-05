@@ -1,10 +1,13 @@
-//
-//  SignInViewController.m
-//  MyM
-//
-//  Created by Steven Zilberberg on 3/4/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * SignInViewController.h
+ * Fist view displayed to the user. Login page for the rest of the app
+ *
+ */
 
 #import "SignInViewController.h"
 #import "NewUserViewController.h"
@@ -34,8 +37,12 @@
 
 @implementation SignInViewController
 
+
 float initialTouchPoint;
 bool startInsideAboutImageView;
+/* >>>>>>>>>>>>>>>>>>>>> touchesBegan:
+ Even to handle the about view touches
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint contentTouchPoint = [[touches anyObject] locationInView:self.aboutImageView];
@@ -47,11 +54,16 @@ bool startInsideAboutImageView;
     }
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> touchesMoved:
+ Even to handle the about view touches
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (startInsideAboutImageView) {
         CGPoint pointInView = [[touches anyObject] locationInView:self.view];
         float yTarget = pointInView.y - initialTouchPoint;
+        
+        //Ensure the maximum and the minimum size won't go over what it is expected
         if(yTarget < SCREEN_HEIGHT - self.aboutView.frame.size.height)
             yTarget = SCREEN_HEIGHT - self.aboutView.frame.size.height;
         else if( yTarget > SCREEN_HEIGHT - self.aboutImageView.frame.size.height)
@@ -75,9 +87,14 @@ bool startInsideAboutImageView;
     [self aboutViewFinalPosition:touches];
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> aboutViewFinalPosition:
+ Even to handle the about view touches
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (void)aboutViewFinalPosition:(NSSet *)touches
 {
     NSString *iconImage = nil;
+    
+    // If the final position is not fully open or fully closed, it will forace a animation to the closest out of those two states
     if (startInsideAboutImageView) {
         CGPoint endTouchPoint = [[touches anyObject] locationInView:self.view];
         float yTarget = endTouchPoint.y - initialTouchPoint;
@@ -98,6 +115,9 @@ bool startInsideAboutImageView;
     }
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> newUserCreated:
+ Event called when a new account is created by the NewUserViewController
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (void)newUserCreated
 {
     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
@@ -143,6 +163,8 @@ bool startInsideAboutImageView;
         self.view.userInteractionEnabled = NO;
         self.signInButton.enabled = NO;
         [self.signInActivityIndicator startAnimating];
+        
+        //Prepare JSON Dictionary
         NSDictionary *jsonDictionary = @{ @"username" : self.txtUsername.text, @"password" : self.txtPassword.text};
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -167,7 +189,7 @@ bool startInsideAboutImageView;
                                                        hideAfter:BANNER_DEFAULT_TIME];
                             NSLog(@"You are just missing the security Code");
                         }
-                    } else {
+                    } else { //User or password is wrong
                         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                        title:@"Username and/or Password is wrong"
                                              linedBackground:AJLinedBackgroundTypeDisabled
@@ -175,7 +197,7 @@ bool startInsideAboutImageView;
                         self.txtPassword.text = @"";
                         NSLog(@"username and/or password wrong");
                     }
-                } else {
+                } else { //Server Error
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                    title:@"Could not connect to the server"
                                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -193,6 +215,9 @@ bool startInsideAboutImageView;
     
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> viewWillDisappear:
+ Clear all the AJNotifications
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (void)viewWillDisappear:(BOOL)animated
 {
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];

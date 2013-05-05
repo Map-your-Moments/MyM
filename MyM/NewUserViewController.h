@@ -1,10 +1,13 @@
-//
-//  NewUserViewController.h
-//  MyM
-//
-//  Created by Marcelo Mazzotti on 25/3/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * NewUserViewController.h
+ * 
+ *
+ */
 
 #import <UIKit/UIKit.h>
 #import "AmazonClientManager.h"
