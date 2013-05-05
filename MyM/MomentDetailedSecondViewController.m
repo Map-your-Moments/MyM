@@ -10,12 +10,16 @@
  */
 
 #import "MomentDetailedSecondViewController.h"
-#import "MomentContentViewController.h"
+#import "AJNotificationView.h"
 
 #define MOMENT_CONTENTVIEW_X        20
 #define MOMENT_CONTENTVIEW_Y        90
 #define MOMENT_CONTENTVIEW_WIDTH    280
 #define MOMENT_CONTENTVIEW_HEIGHT   180
+#define BANNER_DEFAULT_TIME         2
+
+#define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
+#define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
 
 @interface MomentDetailedSecondViewController ()
 {
@@ -75,7 +79,7 @@
     
     NSString *momentTagString = [NSString stringWithFormat:@"Tags: %d", [momentTags count]];
     
-    sections = [[NSArray alloc] initWithObjects:@"Moment Title", @"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", @"Content", nil];
+    sections = [[NSArray alloc] initWithObjects:@"Moment Title", @"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", nil];
     NSLog(@"Number of Tags: %d", [momentTags count]);
     momentDataArray = [[NSArray alloc] initWithObjects:[targetMoment title], momentTagString , dateString, [targetMoment user], contentTypeString, @"Click to View Moment", nil];
     
@@ -96,15 +100,16 @@
             [momentText setFont:[UIFont fontWithName:@"Arial" size:24]];
             NSString *dataString = [NSString stringWithUTF8String:[rawContent bytes]];
             [momentText setText:dataString];
-            self.tableView.tableFooterView = momentText;
+            [momentText setEditable:NO];
+            self.tableView.tableHeaderView = momentText;
             break;
         }
         case kTAGMOMENTPICTURE:
         {
             UIImage *picture = [UIImage imageWithData:rawContent];
             UIImageView *momentImage = [[UIImageView alloc] initWithImage:picture];
-            [momentImage setFrame:CGRectMake(0, 0, picture.size.width/3, picture.size.height/3)];
-            self.tableView.tableFooterView = momentImage;
+            [momentImage setFrame:CGRectMake(0, 0, screenWidth, picture.size.height/8)];
+            self.tableView.tableHeaderView = momentImage;
             break;
         }
         case kTAGMOMENTAUDIO:
@@ -122,11 +127,12 @@
             //Initiate movieplayer and movieplayerview. First for thumbnail and second for what plays it
             moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:appFile]];
             moviePlayerView = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:appFile]];
+            moviePlayer.shouldAutoplay = NO;
             
             //create thumbnail
             UIImage *thumbnail = [moviePlayer thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
             UIImageView *momentImage = [[UIImageView alloc] initWithImage:thumbnail];
-            [momentImage setFrame:CGRectMake(0, 0, thumbnail.size.width/2, thumbnail.size.height/2)];
+            [momentImage setFrame:CGRectMake(0, 0, thumbnail.size.height/3, thumbnail.size.height/3)];
             
             //add tap to play gesture to image
             [momentImage setUserInteractionEnabled:YES];
@@ -135,7 +141,7 @@
             [tapPlayMovie setNumberOfTouchesRequired:1];
             [momentImage addGestureRecognizer:tapPlayMovie];
             
-            self.tableView.tableFooterView = momentImage;
+            self.tableView.tableHeaderView = momentImage;
             
             break;
         }
@@ -171,7 +177,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if(section != 5)
+        return 1;
+    else
+        return 0;
 }
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -194,7 +203,8 @@
             cellData = [momentDataArray objectAtIndex:0];
             break;
         case 1:
-            cellData = [momentDataArray objectAtIndex:1];
+            cell.autoresizesSubviews = YES;
+            cellData = [self createTagString];
             break;
         case 2:
             cellData = [momentDataArray objectAtIndex:2];
@@ -218,18 +228,30 @@
     return cell;
 }
 
+-(NSString*)createTagString
+{
+    NSString *output = @"";
+    for(int c = 0; c < [momentTags count]; c++)
+    {
+        if(c != 0 && c != [momentTags count])
+            output = [output stringByAppendingString:@", "];
+        NSString *stringTag = (NSString*)[momentTags objectAtIndex:c];
+        output = [output stringByAppendingString:stringTag];
+    }
+    return output;
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-/*    if([indexPath section] != 5)
+    if([indexPath section] != 2)
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     else
     {
-        [self viewContent];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }*/
+    }
 }
 
 @end

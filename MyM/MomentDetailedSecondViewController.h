@@ -20,4 +20,6 @@
 -(void)playMovie;
 -(void)setContentFooter:(int)contentType;
 
+-(NSString*)createTagString;
+
 @end

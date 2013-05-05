@@ -188,7 +188,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 -(void)share
 {
     NSString *title = [[self.captionTextField text]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@","];
+    NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@" "];
     NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     
     NSData *momentContent = nil;
