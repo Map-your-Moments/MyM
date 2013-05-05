@@ -78,6 +78,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [tapHideKeyboard setNumberOfTouchesRequired:1];
     [self.view addGestureRecognizer:tapHideKeyboard];
     
+    [self nillObjects];
+    
     //Setup navigation view with title and submit button
     [self setTitle:@"Create Moment"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStyleDone target:self action:@selector(share)];
@@ -203,7 +205,6 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         {
             if([momentImage tag] == MOMENT_IMAGEVIEW_HASCONTENT)
                 momentContent = UIImageJPEGRepresentation(momentImage.image, 0.25);
-            NSLog(@"Size: %@", [momentContent bytes]);
             break;
         }
         case kTAGMOMENTAUDIO:
@@ -274,7 +275,6 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         
         [momentImage setUserInteractionEnabled:YES];
         [momentImage addGestureRecognizer:[self createTapGestureForContent]];
-        
         hasContentSet = YES;
     }
     else if(contentType == kTAGMOMENTVIDEO)

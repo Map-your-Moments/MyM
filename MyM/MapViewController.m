@@ -13,8 +13,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SearchBarTableViewController.h"
 #import "MomentCreateViewController.h"
-#import "MomentDetailViewController.h"
 #import "UserAccountViewController.h"
+#import "MomentDetailedSecondViewController.h"
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -406,10 +406,10 @@
     MomentAnnotation *annotation = view.annotation;
     Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", annotation.moment.user, annotation.moment.ID]];
     
-    MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
-    [vc setMoment:moment];
-    [map removeAnnotations:mapView.annotations]; //!
-    [self.navigationController pushViewController:vc animated:YES];
+    MomentDetailedSecondViewController *child = [[MomentDetailedSecondViewController alloc] initWithStyle:UITableViewStylePlain];
+    [child setTargetMoment:moment];
+    [mapView removeAnnotations:mapView.annotations]; //!
+    [self.navigationController pushViewController:child animated:YES];
 }
 
 @end

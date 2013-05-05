@@ -7,6 +7,7 @@
 //
 
 #import "MomentDetailedSecondViewController.h"
+#import "MomentContentViewController.h"
 
 @interface MomentDetailedSecondViewController ()
 {
@@ -31,8 +32,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.navigationController setNavigationBarHidden:NO];
     
     momentContent = [targetMoment content];
     NSString *contentTypeString;
@@ -62,6 +61,14 @@
     
     sections = [[NSArray alloc] initWithObjects:@"Moment Title", @"Date Created", @"Moment Created By", @"Moment Type", @"Content", nil];
     momentDataArray = [[NSArray alloc] initWithObjects:[targetMoment title], dateString, [targetMoment user], contentTypeString, @"Click to See Moment", nil];
+}
+
+-(void)viewContent
+{
+    NSLog(@"View Content");
+    MomentContentViewController *child = [[MomentContentViewController alloc] init];
+    [child setMomentContent:momentContent];
+    [self.navigationController pushViewController:child animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,51 +118,15 @@
         case 3:
             cellData = [momentDataArray objectAtIndex:3];
             break;
+        case 4:
+            cellData = [momentDataArray objectAtIndex:4];
+            break;
     }
     
     cell.textLabel.text = cellData;
     
     return cell;
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 
@@ -165,7 +136,8 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     else
     {
-        
+        [self viewContent];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 
