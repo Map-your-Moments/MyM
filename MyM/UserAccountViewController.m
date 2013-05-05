@@ -1,10 +1,21 @@
-//
-//  UserAccountViewController.m
-//  MyM
-//
-//  Created by Steven Zilberberg on 4/21/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * UserAccountViewController.m
+ * Display for a user's account information. The table view includes the friend's username and profile pic, password,
+ * and email each in their respective cell. At the bottom of the view is a delete account button
+ * to permanently delete the current user's account. If a user clicks on the password field an alert displays
+ * asking for their current password. If they input their password correctly, then the user is given another
+ * alert view to input and confirm their new password, which then updates in the database. This is the same 
+ * for clicking on the  email field. If the user wishes to fully delete their account they can press the 
+ * delete account button and go through a confirmation alert to delete their account. If the deletion is successful, 
+ * they are returned to the sign in view. The number of friends a user has is displayed in the last cell of the table
+ * view. If that cell is clicked the view changes to the user's friends list.
+ *
+ */
 
 #import "UserAccountViewController.h"
 #import "SearchBarTableViewController.h"
@@ -29,6 +40,8 @@
 
 @implementation UserAccountViewController
 
+//Sets the navigation bar to be visible, sets the title of the view
+//and changes the name of the back button to "Back"
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -36,6 +49,7 @@
     [self.navigationItem setTitle:@"Settings"];
 }
 
+//Loads the view and initializes the section headers and the DeleteUser button
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,6 +59,8 @@
     self.sectionHeaders = [[NSArray alloc] initWithObjects:@"Username", @"Password", @"Email", @"Friends", nil];
 }
 
+//safety measure against bug that is caused by the view changing
+//when an AJNotification is being displayed
 - (void)viewDidDisappear:(BOOL)animated
 {
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];
@@ -52,21 +68,29 @@
 
 #pragma mark - Table view data source
 
+// Return the number of sections.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [self.sectionHeaders count];
 }
 
+//Displays the header title of the sections
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return [self.sectionHeaders objectAtIndex:section];
 }
 
+// Return the number of rows in the section.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
 }
 
+//Sets what to display in each cell of the table view
+//The first cell displays the users's username and profile pic
+//The second cell displays the user's password in a secured view
+//The third cell displays the user's email
+//The fourth cell displays the user's friend count
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"CellIdentifier";
@@ -143,6 +167,12 @@
 }
 
 #pragma mark - Table view delegate
+
+//Determines what action to take when a cell of the table is selected.
+//The first cell of the table cannot be selected.
+//If the second cell is selected the user is prompted for a password change
+//If the third cell is selected the user is prompted for an email change
+//If the fourth cell is selected the friends list viewcontroller appears
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch([indexPath section])
@@ -150,8 +180,6 @@
         case 0:
         {
             NSLog(@"Touched Username");
-            //UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Saved or New" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Saved Image", @"Take Picture", nil];
-            //[actionSheet showInView:self.view];
             break;
         }
         case 1:
@@ -199,6 +227,9 @@
 }
 
 #pragma mark UIAlertView Delegate
+
+//Determines what action to take for each button index of an alert
+//depending on the alert tag
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if([alertView tag] == kUIAlertSettingsConfirmChangePassword)
@@ -430,6 +461,8 @@
     }
 }
 
+//Creates the display button for deleting the user account and sets
+//it as a footer for the tableView
 - (void)createDeleteUserButton
 {
     // create a UIButton (Delete Account button)
@@ -451,12 +484,14 @@
     self.tableView.tableFooterView = footerView;
 }
 
+//when the delete user button is pressed, a delete user alert is called
 - (void)deleteUserButton
 {
     NSLog(@"Delete Account");
     [self deleteUserAlert:self];
 }
 
+//displays a delete user alert for confirming the account deletion
 - (IBAction)deleteUserAlert:(id)sender
 {
     UIAlertView *alert = [[UIAlertView alloc]
@@ -469,6 +504,9 @@
     [alert show];
 }
 
+//Sends a JSON request to delete the user on the server
+//If the user is successfully deleted then we return
+//to the sign in view controller
 - (void)deleteUserAccount
 {
     NSString *user = [_user token];
