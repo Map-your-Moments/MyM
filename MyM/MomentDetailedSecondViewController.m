@@ -135,6 +135,8 @@
             [tapPlayMovie setNumberOfTouchesRequired:1];
             [momentImage addGestureRecognizer:tapPlayMovie];
             
+            self.tableView.tableFooterView = momentImage;
+            
             break;
         }
         default:
