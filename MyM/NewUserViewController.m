@@ -63,6 +63,7 @@
 {
     [super viewDidLoad];
     self.createNewUserButton = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(createNewUserButtonPress)];
+    self.navigationItem.title = @"Registering";
     self.navigationItem.rightBarButtonItem = self.createNewUserButton;
 }
 
