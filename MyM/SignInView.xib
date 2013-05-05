@@ -78,7 +78,7 @@
 						<string key="NSFrame">{{85, 20}, {150, 150}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="379530803"/>
+						<reference key="NSNextKeyView" ref="329066481"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -350,13 +350,11 @@
 										<bool key="IBUIUsesAttributedText">YES</bool>
 										<object class="NSAttributedString" key="IBUIAttributedText">
 											<string type="base64-UTF8" key="NSString">TXlNIGlzIGEgc29jaWFsIHRyYXZlbCBibG9nZ2luZyBhcHBsaWNhdGlvbi4gVXNlcnMgYXJlIGFibGUg
-dG8gcmVjb3JkIHBpY3R1cmVzLCB2aWRlb3MsIHNvdW5kcywgYW5kIHRleHQgYWJvdXQgZGlmZmVyZW50
-IHRoaW5ncyB0aGV5IGVuY291bnRlciBpbiB0aGVpciB0cmF2ZWxzLiBXaGF0IHNlcGFyYXRlcyB0aGlz
-IGZyb20gb3RoZXIgYmxvZ2dpbmcgYXBwbGljYXRpb25zIGlzIHRoYXQgdGhlICJwaW5zIiBhcmVuJ3Qg
-b3JnYW5pemVkIGNocm9ub2xvZ2ljYWxseSBidXQgcmF0aGVyIGFyZSBkaXNwbGF5ZWQgaW4gdGhlaXIg
-ZW50aXJldHkgYmFzZWQgb24gdGhlaXIgbG9jYXRpb24gb2Ygd2hlcmUgdGhlIHVzZXIgd2FzIGF0IHRo
-ZSB0aW1lIG9mIHRoZWlyIHBvc3QuIFRoaXMgYmxvZ2dpbmcgdG9vbCBpc24ndCBhYm91dCB0cmFja2lu
-ZyB5b3VyIHRpbWUsIGl0cyBhYm91dCBjYXB0dXJpbmcgeW91ciBtb21lbnRzIGJlY2F1c2UgaW4gdGhl
+dG8gY3JlYXRlIHBpY3R1cmUsIHZpZGVvLCBhbmQgdGV4dCBtb21lbnRzIGFib3V0IGRpZmZlcmVudCB0
+aGluZ3MgdGhleSBlbmNvdW50ZXIgaW4gdGhlaXIgdHJhdmVscy4gV2hhdCBzZXBhcmF0ZXMgdGhpcyBm
+cm9tIG90aGVyIGJsb2dnaW5nIGFwcGxpY2F0aW9ucyBpcyB0aGF0IHRoZSAicGlucyIgYXJlbid0IG9y
+Z2FuaXplZCBjaHJvbm9sb2dpY2FsbHkgYnV0IHJhdGhlciBzcGVjaWFsbHkgb24gYSBtYXAuIFRoaXMg
+YmxvZ2dpbmcgdG9vbCBpcyBhYm91dCBjYXB0dXJpbmcgeW91ciBtb21lbnRzIGJlY2F1c2UgaW4gdGhl
 IGVuZCwgaXQncyBhbGwgYWJvdXQgZWFjaCBtb21lbnQgd2Ugc2hhcmUgdGhhdCBtYWtlcyB0aGUgZGlm
 ZmVyZW5jZS4KCkRldmVsb3BlcnM6CkFkYW0gQ3VtaXNrZXk6CiAgICAgYWRhbS5jdW1pc2tleUBnbWFp
 bC5jb20KRGF2aWQgSGFuZDoKICAgICBoYW5kZDFAdGNuai5lZHUKSnVzdGluIFdhZ25lcjoKICAgICB3
@@ -437,7 +435,7 @@ aGljb25zA</string>
 												</dictionary>
 											</array>
 											<object class="NSMutableData" key="NSAttributeInfo">
-												<bytes key="NS.bytes">pgQACwEBAoQCAxcBPQQ</bytes>
+												<bytes key="NS.bytes">rgMACwEBAoQCAxcBPQQ</bytes>
 											</object>
 										</object>
 										<bool key="IBUIEditable">NO</bool>
@@ -501,6 +499,7 @@ aGljb25zA</string>
 						<string key="NSFrame">{{186, 133}, {49, 27}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="379530803"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
