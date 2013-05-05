@@ -51,6 +51,9 @@
     [self.usernameTextField becomeFirstResponder];
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> viewWillDisappear:
+ Clear all the AJNotifications
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 -(void)viewWillDisappear:(BOOL)animated
 {
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];
@@ -110,13 +113,14 @@
                                    hideAfter:BANNER_DEFAULT_TIME];
         [self.confirmEmailTextField becomeFirstResponder];
         NSLog(@"Email and ConfirmEmail are not equal");
-    } else {
+    } else { //We still need to check if the username is not under use
         [self navigationItem].rightBarButtonItem = self.activityIndicatorButton;
         [self.activityIndicator startAnimating];
         [self.view endEditing:YES];
         self.navigationItem.hidesBackButton = YES;
         self.view.userInteractionEnabled = NO;
         
+        //Prepare JSON Dictionary
         NSDictionary *jsonDictionary = @{ @"user": @{ @"username" : self.usernameTextField.text, @"password" : self.passwordTextField.text, @"email" : self.emailTextField.text, @"name" : self.fullNameTextField.text} };
         
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -128,12 +132,12 @@
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
-                if (self.jsonNewUser) {
+                if (self.jsonNewUser) { // Account was created
                     if ([self.jsonNewUser[@"created"] boolValue]) {
                         [self.navigationController popToRootViewControllerAnimated:YES];
                         [self.delegate newUserCreated];
                         NSLog(@"Your account was created successfully");
-                    } else {
+                    } else { // Username already exists
                         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                        title:@"Username already exists"
                                              linedBackground:AJLinedBackgroundTypeDisabled
@@ -141,7 +145,7 @@
                         [self.usernameTextField becomeFirstResponder];
                         NSLog(@"Username already exists");
                     }
-                } else {
+                } else { //Could connect to the server
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                    title:@"Could not connect to the server"
                                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -178,6 +182,9 @@
     return NO;
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> createS3FolderForUser:
+ Create a New S3 folder the new User
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (void)createS3FolderForUser
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
