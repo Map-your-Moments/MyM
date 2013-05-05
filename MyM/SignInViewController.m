@@ -13,7 +13,7 @@
 #import "UtilityClass.h"
 #import "AJNotificationView.h"
 
-#define BANNER_DEFAULT_TIME 3
+#define BANNER_DEFAULT_TIME 2
 #define SCREEN_HEIGHT [[UIScreen mainScreen] applicationFrame].size.height
 
 @interface SignInViewController() <NewUserDelegate>
@@ -151,7 +151,7 @@ bool startInsideAboutImageView;
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
             });
             self.jsonLogin = [UtilityClass SendJSON:jsonDictionary toAddress:@"http://54.225.76.23:3000/login/"];
-            self.userPicture = self.jsonLogin ? [UtilityClass requestGravatar:[UtilityClass getGravatarURL:self.jsonLogin[@"email"]]] : nil;
+            self.userPicture = self.jsonLogin ? [GravitarUtilityClass requestGravatar:[GravitarUtilityClass getGravatarURL:self.jsonLogin[@"email"]]] : nil;
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 if (self.jsonLogin) { //Check if the query resulted in a match

@@ -57,87 +57,20 @@
     return moment;
 }
 
-/* Add a moment to the dataController
-   This method will need to eventually support 
-   adding to aws as well
- */
--(void)addMomentToMomentsWithMoment:(Moment *)moment
+/* Add a moment */
+- (void)addMomentToMomentsWithMoment:(Moment *)moment
 {
     [self.moments addObject:moment];
-    
-    NSData *momentData = [NSKeyedArchiver archivedDataWithRootObject:moment];
-    NSString *key = [NSString stringWithFormat:@"%@/%@", moment.user, moment.ID];
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        });
-        
-        @try{
-            S3PutObjectRequest *request = [[S3PutObjectRequest alloc] initWithKey:key
-                                                                         inBucket:kS3BUCKETNAME];
-            request.data = momentData;
-            S3PutObjectResponse *response = [[AmazonClientManager amazonS3Client] putObject:request];
-            if(response.error != nil)
-                NSLog(@"Error: %@", response.error);
-        }
-        @catch (AmazonClientException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            NSLog(@"Exception: %@", exception);
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        });
-    });
 }
 
-/* Remove the moment at the selected index
-   This moment is used to remove a moment.
-            *** Caution!!! ***
-   This method should not be used if you 
-   just want to remove the moment locally,
-   as it will remove it from the server as
-   well.
- */
--(void)removeMomentAtIndex:(NSUInteger)index
+/* Remove a moment */
+- (void)removeMomentAtIndex:(NSUInteger)index
 {
     [self.moments removeObjectAtIndex:index];
-    
-    Moment *moment = [self.moments objectAtIndex:index];
-    NSString *key = [NSString stringWithFormat:@"%@/%@", moment.user, moment.ID];
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        });
-        
-        @try{
-            S3DeleteObjectRequest *request = [[S3DeleteObjectRequest alloc] init];
-            [request setKey:key];
-            S3DeleteObjectResponse *response = [[AmazonClientManager amazonS3Client] deleteObject:request];
-            if(response.error != nil)
-                NSLog(@"Error: %@", response.error);
-        }
-        @catch (AmazonClientException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-            NSLog(@"Exception: %@", exception);
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        });
-    });
 }
 
+
 /* Remove all moments in the dataController
-   Leave this without aws support, so that it can clear the local data
  */
 -(void)removeAllMoments
 {

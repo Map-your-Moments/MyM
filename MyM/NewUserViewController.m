@@ -11,7 +11,7 @@
 
 #import "AJNotificationView.h"
 
-#define BANNER_DEFAULT_TIME 3
+#define BANNER_DEFAULT_TIME 2
 
 @interface NewUserViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -58,9 +58,6 @@
     [super viewDidLoad];
     self.createNewUserButton = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(createNewUserButtonPress)];
     self.navigationItem.rightBarButtonItem = self.createNewUserButton;
-    
-    UITapGestureRecognizer *tapDismiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTap)];
-    [self.view addGestureRecognizer:tapDismiss];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> createNewUserButtonPress
@@ -84,7 +81,7 @@
         NSLog(@"FullName is empty");
     } else if ([self.passwordTextField.text length] < 8) { //Check if passwordTextField is too short
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
-                                       title:@"Password is too short, at least 8 characters"
+                                       title:@"Password must be at least 8 characters"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
         [self.passwordTextField becomeFirstResponder];
@@ -130,7 +127,6 @@
 
                 if (self.jsonNewUser) {
                     if ([self.jsonNewUser[@"created"] boolValue]) {
-                        [self createS3FolderForUser];
                         [self.navigationController popToRootViewControllerAnimated:YES];
                         [self.delegate newUserCreated];
                         NSLog(@"Your account was created successfully");
@@ -159,6 +155,9 @@
     }
 }
 
+/* >>>>>>>>>>>>>>>>>>>>> textFieldShouldReturn:
+ Logic for NEXT and DONE keys
+ >>>>>>>>>>>>>>>>>>>>>>>> */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSInteger nextTag = textField.tag + 1;
@@ -199,11 +198,6 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         });
     });
-}
-
-- (void)backgroundTap
-{
-    [self.view endEditing:YES];
 }
 
 @end
