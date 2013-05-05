@@ -40,7 +40,7 @@
 {
     self = [super init];
     
-    if(self == nil) {        
+    if(self) {
         content = [[decoder decodeObjectForKey:@"content"]copy];
         tags = [[decoder decodeObjectForKey:@"tags"]copy];
         
