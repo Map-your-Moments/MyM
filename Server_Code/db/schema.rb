@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130423174331) do
+ActiveRecord::Schema.define(:version => 20130430163120) do
 
   create_table "api_keys", :force => true do |t|
     t.string   "access_token"
@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(:version => 20130423174331) do
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.string   "status",     :default => "Pending"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.string   "type",       :default => "PendingFriendship"
   end
 
   create_table "user_sessions", :force => true do |t|
