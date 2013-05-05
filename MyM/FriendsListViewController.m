@@ -19,6 +19,9 @@
 #define TAG_DELETE 2
 #define TAG_ADD 3
 
+#define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
+#define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
+
 static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentifier = @"kSearchBarTableViewControllerDefaultTableViewCellIdentifier";
 
 @interface FriendsListViewController ()
@@ -79,7 +82,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 {
     [super viewDidLoad];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 416)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-42)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
