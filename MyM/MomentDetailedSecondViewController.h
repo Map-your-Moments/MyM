@@ -10,12 +10,19 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import "Moment.h"
 
 @interface MomentDetailedSecondViewController : UITableViewController
 
+@property (strong, nonatomic) NSString *currentUser;
 @property (strong, nonatomic) Moment *targetMoment;
 
--(void)viewContent;
+-(void)playMovie;
+-(void)setContentFooter:(int)contentType;
+
+-(NSString*)createTagString;
+
+-(void)deleteMoment;
 
 @end

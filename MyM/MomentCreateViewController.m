@@ -117,10 +117,10 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 {
     if(momentText == nil)
     {
-        UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
+        //UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
         momentText = [[UITextView alloc]initWithFrame:CGRectMake(MOMENT_CONTENTVIEW_X, MOMENT_CONTENTVIEW_Y, 280, 180)];
         [momentText setTag:kTAGMOMENTTEXT];
-        [momentText setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+        [momentText setBackgroundColor:[UIColor colorWithRed:242 green:242 blue:128 alpha:1.0]];
         [momentText setFont:[UIFont fontWithName:@"Arial" size:24]];
         [self.view addSubview:momentText];
     }
@@ -188,7 +188,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 -(void)share
 {
     NSString *title = [[self.captionTextField text]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@","];
+    NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@" "];
     NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     
     NSData *momentContent = nil;
@@ -231,7 +231,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     if(hasContentSet == YES && title != nil && [title length] != 0)
     {
         Content *content = [[Content alloc] initWithContent:momentContent withType:self.contentType andTags:tags];
-        Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:content andDate:currentDate andCoords:currentLocation andComments:nil];
+        NSData *contentData = [NSKeyedArchiver archivedDataWithRootObject:content];
+        Moment *newMoment = [[Moment alloc] initWithTitle:title andUser:currentUser.username andContent:contentData andDate:currentDate andCoords:currentLocation andComments:nil];
         [S3UtilityClass addMomentToS3:newMoment];
         [self.navigationController popViewControllerAnimated:YES];
     }
