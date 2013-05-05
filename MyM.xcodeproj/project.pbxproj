@@ -104,7 +104,10 @@
 		669568B817345A1B00F4B8AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 669568B717345A1A00F4B8AF /* Reachability.m */; };
 		669568BA17345A3300F4B8AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 669568B917345A3300F4B8AF /* SystemConfiguration.framework */; };
 		66EC8A7E17247DE800CE6E8A /* MomentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EC8A7C1724777B00CE6E8A /* MomentAnnotation.m */; };
+		694843DE173589230051B6BF /* MomentContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694843DD173589230051B6BF /* MomentContentViewController.m */; };
 		69502F7716E47B4200E4B936 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69502F7616E47B4200E4B936 /* SignInViewController.m */; };
+		69502F7916E47B5500E4B936 /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69502F7816E47B5500E4B936 /* SignInView.xib */; };
+		69DB6E9717356F1B000270E5 /* MomentDetailedSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69DB6E9617356F1B000270E5 /* MomentDetailedSecondViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,8 +242,13 @@
 		66EC8A7C1724777B00CE6E8A /* MomentAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentAnnotation.m; sourceTree = "<group>"; };
 		69482CEF1724660600D38756 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		69482CF01724660600D38756 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
+		694843DC173589230051B6BF /* MomentContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentContentViewController.h; sourceTree = "<group>"; };
+		694843DD173589230051B6BF /* MomentContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentContentViewController.m; sourceTree = "<group>"; };
 		69502F7516E47B4200E4B936 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		69502F7616E47B4200E4B936 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		69502F7816E47B5500E4B936 /* SignInView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInView.xib; sourceTree = "<group>"; };
+		69DB6E9517356F1B000270E5 /* MomentDetailedSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentDetailedSecondViewController.h; sourceTree = "<group>"; };
+		69DB6E9617356F1B000270E5 /* MomentDetailedSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentDetailedSecondViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +383,10 @@
 				5563C29D1736DEA400993982 /* MapViewController.xib */,
 				5563C29E1736DEA400993982 /* NewUserView.xib */,
 				5563C29F1736DEA400993982 /* SignInView.xib */,
+				55EC87261714CE0C00C1C52F /* NewUserView.xib */,
+				55EC87221714CE0C00C1C52F /* MomentCreateView.xib */,
+				69502F7816E47B5500E4B936 /* SignInView.xib */,
+				664FCBD117075B65007A0C36 /* MapViewController.xib */,
 			);
 			name = View;
 			path = /Users/jwagner/Desktop/MyMrepo/MyM_FriendsList/MyM;
@@ -464,6 +476,10 @@
 				55EC87201714CE0C00C1C52F /* FriendsListViewController.m */,
 				55EC87241714CE0C00C1C52F /* MomentCreateViewController.h */,
 				55EC87251714CE0C00C1C52F /* MomentCreateViewController.m */,
+				69DB6E9517356F1B000270E5 /* MomentDetailedSecondViewController.h */,
+				69DB6E9617356F1B000270E5 /* MomentDetailedSecondViewController.m */,
+				694843DC173589230051B6BF /* MomentContentViewController.h */,
+				694843DD173589230051B6BF /* MomentContentViewController.m */,
 				55EC87271714CE0C00C1C52F /* NewUserViewController.h */,
 				55EC87281714CE0C00C1C52F /* NewUserViewController.m */,
 				69502F7516E47B4200E4B936 /* SignInViewController.h */,
@@ -562,6 +578,9 @@
 				54469F40170CFA1800F88DE3 /* Notepad.png in Resources */,
 				54469F41170CFA1800F88DE3 /* Notepad@2x.png in Resources */,
 				66272811171BB0BB00C58148 /* ic_action_location_on_me.png in Resources */,
+				55408F511720AF9C00AEBA60 /* glyphicons_000_glass.png in Resources */,
+				55408F521720AF9C00AEBA60 /* glyphicons_001_leaf.png in Resources */,
+				55408F531720AF9C00AEBA60 /* glyphicons_002_dog.png in Resources */,
 				55408F541720AF9C00AEBA60 /* glyphicons_003_user.png in Resources */,
 				55408FC91720AF9C00AEBA60 /* glyphicons_120_message_full.png in Resources */,
 				554090141720AF9C00AEBA60 /* glyphicons_195_circle_info.png in Resources */,
@@ -642,6 +661,8 @@
 				55DC058C1736DC3B005613A5 /* MomentDetailedSecondViewController.m in Sources */,
 				55DC058F1736DCC5005613A5 /* MomentCreateViewController.m in Sources */,
 				55DC05921736DDB2005613A5 /* MomentContentViewController.m in Sources */,
+				69DB6E9717356F1B000270E5 /* MomentDetailedSecondViewController.m in Sources */,
+				694843DE173589230051B6BF /* MomentContentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
