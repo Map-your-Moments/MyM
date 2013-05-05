@@ -58,14 +58,14 @@
             [momentText setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
             [momentText setFont:[UIFont fontWithName:@"Arial" size:24]];
             NSString *dataString = nil;
-            @try
+            /*@try
             {
                 dataString = [NSString stringWithUTF8String:[rawContent bytes]];
             }
             @catch(NSException *ex)
             {
                 NSLog(@"%@",ex.description);
-            }
+            }*/
             [momentText setText:dataString];
             [self.view addSubview:momentText];
             break;

@@ -156,7 +156,7 @@
     UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
     UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
     UIImage *picImage = [UIImage imageNamed:@"Camera.png"];
-    UIImage *micImage = [UIImage imageNamed:@"Microphone.png"];
+    UIImage *vidImage = [UIImage imageNamed:@"Video.png"];
     UIImage *noteImage = [UIImage imageNamed:@"Notepad.png"];
     
     AwesomeMenuItem *starMenuItem1 = [[AwesomeMenuItem alloc] initWithImage:storyMenuItemImage
@@ -165,7 +165,7 @@
                                                     highlightedContentImage:nil];
     AwesomeMenuItem *starMenuItem2 = [[AwesomeMenuItem alloc] initWithImage:storyMenuItemImage
                                                            highlightedImage:storyMenuItemImagePressed
-                                                               ContentImage:micImage
+                                                               ContentImage:vidImage
                                                     highlightedContentImage:nil];
     AwesomeMenuItem *starMenuItem3 = [[AwesomeMenuItem alloc] initWithImage:storyMenuItemImage
                                                            highlightedImage:storyMenuItemImagePressed
@@ -279,8 +279,8 @@
     }
     
     if(index == 1) {
-        NSLog(@"Add Audio Moment");
-        [vc setContentType:kTAGMOMENTAUDIO];
+        NSLog(@"Add Video Moment");
+        [vc setContentType:kTAGMOMENTVIDEO];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -288,13 +288,6 @@
     if(index == 2) {
         NSLog(@"Add Text Moment");
         [vc setContentType:kTAGMOMENTTEXT];
-        [mapView removeAnnotations:mapView.annotations]; //!
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    
-    if(index == 3) {
-        NSLog(@"Add Video Moment");
-        [vc setContentType:kTAGMOMENTVIDEO];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -406,7 +399,7 @@
     MomentAnnotation *annotation = view.annotation;
     Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", annotation.moment.user, annotation.moment.ID]];
     
-    MomentDetailedSecondViewController *child = [[MomentDetailedSecondViewController alloc] initWithStyle:UITableViewStylePlain];
+    MomentDetailedSecondViewController *child = [[MomentDetailedSecondViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [child setTargetMoment:moment];
     [mapView removeAnnotations:mapView.annotations]; //!
     [self.navigationController pushViewController:child animated:YES];

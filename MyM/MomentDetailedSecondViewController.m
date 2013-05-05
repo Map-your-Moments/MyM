@@ -12,11 +12,21 @@
 #import "MomentDetailedSecondViewController.h"
 #import "MomentContentViewController.h"
 
+#define MOMENT_CONTENTVIEW_X        20
+#define MOMENT_CONTENTVIEW_Y        90
+#define MOMENT_CONTENTVIEW_WIDTH    280
+#define MOMENT_CONTENTVIEW_HEIGHT   180
+
 @interface MomentDetailedSecondViewController ()
 {
     Content *momentContent;
     NSArray *sections;
     NSArray *momentDataArray;
+    
+    NSMutableArray *momentTags;
+    
+    MPMoviePlayerViewController *moviePlayerView;
+    MPMoviePlayerController *moviePlayer;
 }
 @end
 
@@ -36,7 +46,8 @@
 {
     [super viewDidLoad];
     
-    momentContent = [targetMoment content];
+    momentContent = [NSKeyedUnarchiver unarchiveObjectWithData:targetMoment.content];
+    momentTags = (NSMutableArray*)[momentContent tags];
     NSString *contentTypeString;
     
     switch([momentContent contentType])
@@ -62,16 +73,84 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormatter stringFromDate:[targetMoment date]];
     
-    sections = [[NSArray alloc] initWithObjects:@"Moment Title", @"Date Created", @"Moment Created By", @"Moment Type", @"Content", nil];
-    momentDataArray = [[NSArray alloc] initWithObjects:[targetMoment title], dateString, [targetMoment user], contentTypeString, @"Click to See Moment", nil];
+    NSString *momentTagString = [NSString stringWithFormat:@"Tags: %d", [momentTags count]];
+    
+    sections = [[NSArray alloc] initWithObjects:@"Moment Title", @"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", @"Content", nil];
+    NSLog(@"Number of Tags: %d", [momentTags count]);
+    momentDataArray = [[NSArray alloc] initWithObjects:[targetMoment title], momentTagString , dateString, [targetMoment user], contentTypeString, @"Click to View Moment", nil];
+    
+    [self setContentFooter:[momentContent contentType]];
 }
 
--(void)viewContent
+-(void)setContentFooter:(int)contentType
 {
-    NSLog(@"View Content");
-    MomentContentViewController *child = [[MomentContentViewController alloc] init];
-    [child setMomentContent:momentContent];
-    [self.navigationController pushViewController:child animated:YES];
+    NSData *rawContent = [momentContent content];
+    switch(contentType)
+    {
+        case kTAGMOMENTTEXT:
+        {
+            UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
+            UITextView *momentText = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, 280, 180)];
+            [momentText setTag:kTAGMOMENTTEXT];
+            [momentText setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+            [momentText setFont:[UIFont fontWithName:@"Arial" size:24]];
+            NSString *dataString = [NSString stringWithUTF8String:[rawContent bytes]];
+            [momentText setText:dataString];
+            self.tableView.tableFooterView = momentText;
+            break;
+        }
+        case kTAGMOMENTPICTURE:
+        {
+            UIImage *picture = [UIImage imageWithData:rawContent];
+            UIImageView *momentImage = [[UIImageView alloc] initWithImage:picture];
+            [momentImage setFrame:CGRectMake(0, 0, picture.size.width/3, picture.size.height/3)];
+            self.tableView.tableFooterView = momentImage;
+            break;
+        }
+        case kTAGMOMENTAUDIO:
+        {
+            break;
+        }
+        case kTAGMOMENTVIDEO:
+        {
+            //Save NSData to URL locally
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"MyFile.m4v"];
+            [rawContent writeToFile:appFile atomically:YES];
+            
+            //Initiate movieplayer and movieplayerview. First for thumbnail and second for what plays it
+            moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:appFile]];
+            moviePlayerView = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:appFile]];
+            
+            //create thumbnail
+            UIImage *thumbnail = [moviePlayer thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+            UIImageView *momentImage = [[UIImageView alloc] initWithImage:thumbnail];
+            [momentImage setFrame:CGRectMake(0, 0, thumbnail.size.width/2, thumbnail.size.height/2)];
+            
+            //add tap to play gesture to image
+            [momentImage setUserInteractionEnabled:YES];
+            UITapGestureRecognizer *tapPlayMovie = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playMovie)];
+            [tapPlayMovie setNumberOfTapsRequired:1];
+            [tapPlayMovie setNumberOfTouchesRequired:1];
+            [momentImage addGestureRecognizer:tapPlayMovie];
+            
+            break;
+        }
+        default:
+        {
+            NSLog(@"Error");
+            break;
+        }
+    }
+}
+
+-(void)playMovie
+{
+    [self presentMoviePlayerViewControllerAnimated:moviePlayerView];
+    
+    moviePlayerView.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    [moviePlayerView.moviePlayer play];
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,6 +203,12 @@
         case 4:
             cellData = [momentDataArray objectAtIndex:4];
             break;
+        case 5:
+            //cellData = [momentDataArray objectAtIndex:5];
+            break;
+        default:
+            NSLog(@"ERROR");
+            break;
     }
     
     cell.textLabel.text = cellData;
@@ -135,13 +220,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([indexPath section] != 4)
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+/*    if([indexPath section] != 5)
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     else
     {
         [self viewContent];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
+    }*/
 }
 
 @end
