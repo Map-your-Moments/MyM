@@ -13,7 +13,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SearchBarTableViewController.h"
 #import "MomentCreateViewController.h"
-#import "MomentDetailViewController.h"
 #import "UserAccountViewController.h"
 #import "MomentDetailedSecondViewController.h"
 
@@ -295,17 +294,6 @@
     if(index == 3) {
         NSLog(@"Add Video Moment");
         [vc setContentType:kTAGMOMENTVIDEO];
-        [mapView removeAnnotations:mapView.annotations]; //!
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    
-    if(idx == 3) {
-        NSLog(@"Add Video Moment");
-        MomentCreateViewController *vc = [[MomentCreateViewController alloc] initWithNibName:@"MomentCreateView" bundle:nil];
-        [vc setContentType:kTAGMOMENTVIDEO];
-        [vc setCurrentLocation:currentLocation];
-        [vc setDataController:dataController];
-        [vc setCurrentUser:user];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }

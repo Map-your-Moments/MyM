@@ -7,7 +7,6 @@
 //
 
 #import "MomentAnnotation.h"
-#import "MomentDetailViewController.h"
 
 @implementation MomentAnnotation
 @synthesize moment, title, subtitle, coordinate;
