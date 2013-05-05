@@ -1,5 +1,7 @@
 class MomentsController < ApplicationController
-  before_filter :restrict_access
+  #note: controller deprecated - was easier and faster to send and receive moments directly from S3
+  before_filter :restrict_access #before any action, ensure the user has access
+  #edits a users metadata regarding current location
   def edit
     @user = current_user 
     if(@user)
@@ -12,6 +14,7 @@ class MomentsController < ApplicationController
       render json: {error: 'No User Found'}
     end
   end
+  #destroys a users current access
   def destroy
     session[:user_id]=nil
     render json: {logged_out: true}

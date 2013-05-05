@@ -1,23 +1,23 @@
 ServerCode::Application.routes.draw do
 
-  resources :friendships
-  post '/' => 'users#index', :defaults => {:format => 'json'}
-  resources :users # , :defaults => {:format => 'json'} 
-  get 'logout' => 'user_sessions#destroy', :as => 'logout'
-  get 'login' => 'user_sessions#new', :as => 'login'
-  post 'login' => 'user_sessions#create'
-  post 'mym' => 'moments#edit', :as => 'mym'
-  get 'mym' => 'users#show', :as => 'mym'
-  get 'confirm_friendship' => 'friendships#create'
-  post 'edit_user' => 'users#update', :defaults => {:format => 'json'}
-  post 'delete_user' => 'users#destroy', :defaults => {:format => 'json'}
-  post 'createfriend' => 'friendships#new', :defaults => {:format => 'json'}
-  post 'friends' => 'friendships#show', :defaults => {:format => 'json'}
-  post 'deletefriend' => 'friendships#destroy', :defaults => {:format => 'json'}
-  post 'get_user' => 'users#show', :defaults => {:format => 'json'}
-  post 'get_all_users' => 'users#index', :defaults => {:format => 'json'}
-  resources :user_sessions, :except => [:index, :edit]
-  root :to => 'users#index'
+  resources :friendships #define the use of the friendsips MVC
+  post '/' => 'users#index', :defaults => {:format => 'json'} #direct the root '/' to users index method
+  resources :users #define the use of the users MVC
+  get 'logout' => 'user_sessions#destroy', :as => 'logout' #destroy the users session on logout
+  get 'login' => 'user_sessions#new', :as => 'login' #begin making new session for login
+  post 'login' => 'user_sessions#create' #create new user session on successful login
+  post 'mym' => 'moments#edit', :as => 'mym' #allow a post for the user [DEPRECATED]
+  get 'mym' => 'users#show', :as => 'mym' #show the user's latest moment [DEPRECATED]
+  get 'confirm_friendship' => 'friendships#create' #create a friendship through confirmation link
+  post 'edit_user' => 'users#update', :defaults => {:format => 'json'} #edit the password or email of a user
+  post 'delete_user' => 'users#destroy', :defaults => {:format => 'json'} #delete a user and all friendships
+  post 'createfriend' => 'friendships#new', :defaults => {:format => 'json'} #invite another user to be friends
+  post 'friends' => 'friendships#show', :defaults => {:format => 'json'} #show all of a user's friends
+  post 'deletefriend' => 'friendships#destroy', :defaults => {:format => 'json'} #delete a friendship
+  post 'get_user' => 'users#show', :defaults => {:format => 'json'} #returns the email for a given user
+  post 'get_all_users' => 'users#index', :defaults => {:format => 'json'} #returns all users in an array
+  resources :user_sessions, :except => [:index, :edit] #define the use of the user_sessions MVC
+  root :to => 'users#index' #direct the root for the web server to the index method
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
