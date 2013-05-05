@@ -1,10 +1,13 @@
-//
-//  MomentContentViewController.m
-//  MyM
-//
-//  Created by Steven Zilberberg on 5/4/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * MomentContentViewController.m
+ * This view controller displays the content for a moment.
+ *
+ */
 
 #import "MomentContentViewController.h"
 #import "Constants.h"

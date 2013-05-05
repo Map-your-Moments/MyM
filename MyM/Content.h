@@ -1,20 +1,19 @@
-//
-//  Content.h
-//  MyM
-//
-//  Created by Adam on 3/6/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * Content.h
+ * 
+ *
+ */
 
 #import <Foundation/Foundation.h>
 #import "Constants.h"
 
 @interface Content : NSObject <NSCoding, NSCopying>
 
-//@property (nonatomic) UIImage *picture;
-//@property (nonatomic) NSString *text;
-//@property (nonatomic) id sound;
-//@property (nonatomic) id video;
 @property (nonatomic) int contentType;
 @property (nonatomic) NSData *content;
 

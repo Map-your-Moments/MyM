@@ -1,8 +1,14 @@
-//
-//  FKRDefaultSearchBarTableViewController.m
-//  TableViewSearchBar
-//
-
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * SearchBarTableViewController.m
+ * View for the friends list's search bar. Sets the search bar to be hidden when the view loads.
+ * Has a method for scrolling the view to the search bar when the section index icon is selected.
+ *
+ */
 
 #import "SearchBarTableViewController.h"
 
@@ -10,6 +16,7 @@
 
 #pragma mark - Initializer
 
+//Initializes the view with the title "Friends"
 - (id)initWithSectionIndexes:(BOOL)showSectionIndexes
 {
     if ((self = [super initWithSectionIndexes:showSectionIndexes])) {
@@ -19,6 +26,8 @@
     return self;
 }
 
+//loads the search bar display and adds a + button to the right side of the
+//navigation bar for adding friends
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -40,6 +49,7 @@
     self.navigationItem.rightBarButtonItem = addButton;
 }
 
+//moves the table view up to display the search bar
 - (void)scrollTableViewToSearchBarAnimated:(BOOL)animated
 {
     [self.tableView scrollRectToVisible:self.searchBar.frame animated:animated];

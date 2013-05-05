@@ -1,10 +1,12 @@
-//
-//  GravitarUtilityClass.m
-//  MyM
-//
-//  Created by Adam on 5/3/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * GravitarUtilityClass.m
+ * Helper class which defines functions to retrieve gravitar profile images from a user's email
+ */
 
 #import "GravitarUtilityClass.h"
 #import "NSString+MD5.h"
@@ -13,6 +15,7 @@
 
 @implementation GravitarUtilityClass
 
+//Returns the gravitar data for a user's profile picture based on the username
 + (UIImage *)gravitarImageForUser:(NSString *)user
 {
     NSString *email = [FriendUtilityClass getEmailFromUsername:user];
@@ -21,6 +24,7 @@
     return [UIImage imageWithData:gravitarData];
 }
 
+//Requests the URL for a profile picture by providing the account's email address
 + (NSURL*) getGravatarURL:(NSString*) emailAddress
 {
 	NSString *curatedEmail = [[emailAddress stringByTrimmingCharactersInSet:
@@ -32,6 +36,7 @@
 	return [NSURL URLWithString:gravatarEndPoint];
 }
 
+//Requests the profile picture from gravatar with the specified URL
 + (NSData *) requestGravatar:(NSURL*) gravatarURL
 {
 	NSError *error;

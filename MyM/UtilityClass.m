@@ -1,19 +1,19 @@
-//
-//  UtilityClass.m
-//  MyM
-//
-//  Created by Marcelo Mazzotti on 18/4/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * UtilityClass.m
+ * Helper class which defines functions to send requests to the server and to resize images.
+ */
 
 #import "UtilityClass.h"
 #import "NSString+MD5.h"
 
 @implementation UtilityClass
 
-
-
-
+//Sends a request to the specified address and returns a JSON String response
 + (NSDictionary *)SendJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address
 {
     NSData *postData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:kNilOptions error:nil];
@@ -35,6 +35,7 @@
     return jsonresponse;
 }
 
+//Sends a request to the specified address and returns an array of JSON strings as a response
 + (NSArray *)GetFriendsJSON:(NSDictionary *)jsonDictionary toAddress:(NSString *)address
 {
     NSData *postData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:kNilOptions error:nil];
@@ -56,8 +57,8 @@
     return jsonresponse;
 }
 
+//Resizes a UIImage
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    //UIGraphicsBeginImageContext(newSize);
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();

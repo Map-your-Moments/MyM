@@ -82,6 +82,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.mapView removeAnnotations:self.mapView.annotations];
 }
 
@@ -321,14 +322,14 @@
 
 - (void)loadAnnotations
 {
-    for(int i = 0; i < [dataController countOfMoments]; i++) {
-        Moment *moment = [dataController objectInMomentsAtIndex:i];
+    for(int i = 0; i < [self.dataController countOfMoments]; i++) {
+        Moment *moment = [self.dataController objectInMomentsAtIndex:i];
 
         MomentAnnotation *pin = [[MomentAnnotation alloc] initWithMoment:moment
                                                                    title:moment.title
                                                                 subtitle:moment.user
                                                               coordinate:moment.coords];
-        [mapView addAnnotation:pin];
+        [self.mapView addAnnotation:pin];
     }
 }
 
@@ -373,7 +374,7 @@
 
 - (NSArray *)getPinColorsForEachUser
 {
-    NSArray *friends = [NSArray arrayWithArray:[FriendUtilityClass getFriends:[user token]]];
+    NSArray *friends = [NSArray arrayWithArray:[FriendUtilityClass getFriends:[self.user token]]];
     
     NSMutableArray *colors = [[NSMutableArray alloc] initWithCapacity:[friends count]];
     
@@ -400,15 +401,10 @@
     [self.mapView setRegion:region animated:YES];
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+- (void)mapView:(MKMapView *)map annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     MomentAnnotation *annotation = view.annotation;
     Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", annotation.moment.user, annotation.moment.ID]];
-    
-    /*MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
-    [vc setMoment:moment];
-    [mapView removeAnnotations:mapView.annotations]; //!
-    [self.navigationController pushViewController:vc animated:YES];*/
     
     MomentDetailedSecondViewController *child = [[MomentDetailedSecondViewController alloc] initWithStyle:UITableViewStylePlain];
     [child setTargetMoment:moment];

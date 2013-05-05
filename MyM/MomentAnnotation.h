@@ -1,10 +1,12 @@
-//
-//  MomentAnnotation.h
-//  MyM
-//
-//  Created by Adam on 4/21/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * MomentAnnotation.h
+ *
+ */
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>

@@ -1,10 +1,13 @@
-//
-//  MomentDetailedSecondViewController.m
-//  MyM
-//
-//  Created by Steven Zilberberg on 5/4/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * MomentDetailedSecondViewController.m
+ * This VC displays some more information about the moments and allows the user
+ * to view the content
+ */
 
 #import "MomentDetailedSecondViewController.h"
 #import "MomentContentViewController.h"
