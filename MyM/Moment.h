@@ -18,14 +18,14 @@
 
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *user;
-@property (nonatomic) Content *content;
+@property (nonatomic) NSData *content;
 @property (nonatomic) NSDate *date;
 @property (nonatomic) CLLocationCoordinate2D coords;
 @property (nonatomic) NSMutableArray *comments;
 @property (nonatomic) NSString *ID;
 @property (nonatomic) NSArray *tags;
 
-- (id)initWithTitle:(NSString *)theTitle andUser:(NSString *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments;
+- (id)initWithTitle:(NSString *)theTitle andUser:(NSString *)theUser andContent:(NSData *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments;
 
 - (void)encodeWithCoder:(NSCoder *)coder;
 - (id)initWithCoder:(NSCoder *)decoder;

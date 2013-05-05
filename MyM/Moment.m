@@ -15,7 +15,7 @@
 @synthesize title, user, content, date, coords, comments, ID;
 
 /* Main constructor for the Moment class */
-- (id)initWithTitle:(NSString *)theTitle andUser:(NSString *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments
+- (id)initWithTitle:(NSString *)theTitle andUser:(NSString *)theUser andContent:(NSData *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments
 {
     title    = theTitle;
     user     = theUser;
