@@ -50,6 +50,9 @@
 {
     [super viewDidLoad];
     
+    if([[targetMoment user] isEqualToString:self.currentUser])
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete Moment" style:UIBarButtonItemStyleDone target:self action:@selector(deleteMoment)];
+    
     momentContent = [NSKeyedUnarchiver unarchiveObjectWithData:targetMoment.content];
     momentTags = (NSMutableArray*)[momentContent tags];
     NSString *contentTypeString;
@@ -93,10 +96,10 @@
     {
         case kTAGMOMENTTEXT:
         {
-            UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
+            //UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
             UITextView *momentText = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, 280, 180)];
             [momentText setTag:kTAGMOMENTTEXT];
-            [momentText setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+            [momentText setBackgroundColor:[UIColor colorWithRed:242 green:242 blue:128 alpha:1.0]];//[UIColor colorWithPatternImage:backgroundImage]];
             [momentText setFont:[UIFont fontWithName:@"Arial" size:24]];
             NSString *dataString = [NSString stringWithUTF8String:[rawContent bytes]];
             [momentText setText:dataString];
@@ -130,9 +133,10 @@
             moviePlayer.shouldAutoplay = NO;
             
             //create thumbnail
-            UIImage *thumbnail = [moviePlayer thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+            UIImage *thumbnail = [UIImage imageNamed:@"playButton.png"];//[moviePlayer thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+            
             UIImageView *momentImage = [[UIImageView alloc] initWithImage:thumbnail];
-            [momentImage setFrame:CGRectMake(0, 0, thumbnail.size.height/3, thumbnail.size.height/3)];
+            [momentImage setFrame:CGRectMake(0, 0, 100, 100)];
             
             //add tap to play gesture to image
             [momentImage setUserInteractionEnabled:YES];
@@ -165,6 +169,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)deleteMoment
+{
+    
 }
 
 #pragma mark - Table view data source

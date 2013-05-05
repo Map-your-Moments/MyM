@@ -117,10 +117,10 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 {
     if(momentText == nil)
     {
-        UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
+        //UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
         momentText = [[UITextView alloc]initWithFrame:CGRectMake(MOMENT_CONTENTVIEW_X, MOMENT_CONTENTVIEW_Y, 280, 180)];
         [momentText setTag:kTAGMOMENTTEXT];
-        [momentText setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+        [momentText setBackgroundColor:[UIColor colorWithRed:242 green:242 blue:128 alpha:1.0]];
         [momentText setFont:[UIFont fontWithName:@"Arial" size:24]];
         [self.view addSubview:momentText];
     }

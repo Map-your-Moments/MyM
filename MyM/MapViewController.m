@@ -396,13 +396,28 @@
 
 - (void)mapView:(MKMapView *)map annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    MomentAnnotation *annotation = view.annotation;
-    Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", annotation.moment.user, annotation.moment.ID]];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
     
-    MomentDetailedSecondViewController *child = [[MomentDetailedSecondViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    [child setTargetMoment:moment];
-    [mapView removeAnnotations:mapView.annotations]; //!
-    [self.navigationController pushViewController:child animated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        });
+    
+        MomentAnnotation *annotation = view.annotation;
+        Moment *moment = [S3UtilityClass getMomentWithKey:[NSString stringWithFormat:@"%@/%@", annotation.moment.user, annotation.moment.ID]];
+    
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [self loadAnnotations];
+            
+            MomentDetailedSecondViewController *child = [[MomentDetailedSecondViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [child setTargetMoment:moment];
+            [child setCurrentUser:[user username]];
+            [mapView removeAnnotations:mapView.annotations]; //!
+            [self.navigationController pushViewController:child animated:YES];
+        });
+        
+    });
 }
 
 @end

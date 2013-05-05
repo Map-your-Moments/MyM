@@ -15,11 +15,14 @@
 
 @interface MomentDetailedSecondViewController : UITableViewController
 
+@property (strong, nonatomic) NSString *currentUser;
 @property (strong, nonatomic) Moment *targetMoment;
 
 -(void)playMovie;
 -(void)setContentFooter:(int)contentType;
 
 -(NSString*)createTagString;
+
+-(void)deleteMoment;
 
 @end
