@@ -52,6 +52,10 @@
 		554090B11720AF9C00AEBA60 /* glyphicons_352_nameplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 55408F0D1720AF9B00AEBA60 /* glyphicons_352_nameplate.png */; };
 		554090F71720C00300AEBA60 /* LoginTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 554090F51720C00300AEBA60 /* LoginTop.png */; };
 		554090F81720C00300AEBA60 /* LoginBot.png in Resources */ = {isa = PBXBuildFile; fileRef = 554090F61720C00300AEBA60 /* LoginBot.png */; };
+		5563C2A01736DEA400993982 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5563C29D1736DEA400993982 /* MapViewController.xib */; };
+		5563C2A11736DEA400993982 /* NewUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5563C29E1736DEA400993982 /* NewUserView.xib */; };
+		5563C2A21736DEA400993982 /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5563C29F1736DEA400993982 /* SignInView.xib */; };
+		5563C2A41736DEBC00993982 /* MomentCreateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5563C2A31736DEBC00993982 /* MomentCreateView.xib */; };
 		55975B3A1720430C00DDFCCB /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55975B391720430C00DDFCCB /* AJNotificationView.m */; };
 		5599F3FD17305E7800921489 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 5599F3FC17305E7800921489 /* NSString+MD5.m */; };
 		559DDFD5172CA04100FA75C9 /* AboutMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DDFD4172CA04100FA75C9 /* AboutMenu@2x.png */; };
@@ -115,8 +119,6 @@
 		544B534B1730B7C300FAD964 /* delete~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete~iphone@2x.png"; sourceTree = "<group>"; };
 		5465DD791729B69D0099A727 /* UtilityClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilityClass.h; sourceTree = "<group>"; };
 		5465DD7A1729B69E0099A727 /* UtilityClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilityClass.m; sourceTree = "<group>"; };
-		546E9E2B1735C0B3000A1CAF /* MapCreateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapCreateViewController.xib; sourceTree = "<group>"; };
-		546E9E2D1735C0B4000A1CAF /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		54719A28171E08EF00BC3BF5 /* SearchBarTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBarTableViewController.h; sourceTree = "<group>"; };
 		54719A29171E08EF00BC3BF5 /* SearchBarTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBarTableViewController.m; sourceTree = "<group>"; };
 		547E2BE3172741AB007A0394 /* Power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Power.png; sourceTree = "<group>"; };
@@ -156,6 +158,10 @@
 		55408F0D1720AF9B00AEBA60 /* glyphicons_352_nameplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glyphicons_352_nameplate.png; sourceTree = "<group>"; };
 		554090F51720C00300AEBA60 /* LoginTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginTop.png; path = ../LoginTop.png; sourceTree = "<group>"; };
 		554090F61720C00300AEBA60 /* LoginBot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LoginBot.png; path = ../LoginBot.png; sourceTree = "<group>"; };
+		5563C29D1736DEA400993982 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapViewController.xib; path = MyM/MapViewController.xib; sourceTree = SOURCE_ROOT; };
+		5563C29E1736DEA400993982 /* NewUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewUserView.xib; path = MyM/NewUserView.xib; sourceTree = SOURCE_ROOT; };
+		5563C29F1736DEA400993982 /* SignInView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignInView.xib; path = MyM/SignInView.xib; sourceTree = SOURCE_ROOT; };
+		5563C2A31736DEBC00993982 /* MomentCreateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MomentCreateView.xib; path = MyM/MomentCreateView.xib; sourceTree = SOURCE_ROOT; };
 		55975B381720430C00DDFCCB /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJNotificationView.h; sourceTree = "<group>"; };
 		55975B391720430C00DDFCCB /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJNotificationView.m; sourceTree = "<group>"; };
 		5599F3FB17305E7800921489 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
@@ -365,8 +371,10 @@
 		55EC871A1714CD9600C1C52F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				546E9E2B1735C0B3000A1CAF /* MapCreateViewController.xib */,
-				546E9E2D1735C0B4000A1CAF /* InfoView.xib */,
+				5563C2A31736DEBC00993982 /* MomentCreateView.xib */,
+				5563C29D1736DEA400993982 /* MapViewController.xib */,
+				5563C29E1736DEA400993982 /* NewUserView.xib */,
+				5563C29F1736DEA400993982 /* SignInView.xib */,
 			);
 			name = View;
 			path = /Users/jwagner/Desktop/MyMrepo/MyM_FriendsList/MyM;
@@ -589,6 +597,10 @@
 				549D18DB1730726600EF13BA /* Camera@2x.png in Resources */,
 				544B534C1730B7C300FAD964 /* delete~iphone.png in Resources */,
 				544B534D1730B7C300FAD964 /* delete~iphone@2x.png in Resources */,
+				5563C2A01736DEA400993982 /* MapViewController.xib in Resources */,
+				5563C2A11736DEA400993982 /* NewUserView.xib in Resources */,
+				5563C2A21736DEA400993982 /* SignInView.xib in Resources */,
+				5563C2A41736DEBC00993982 /* MomentCreateView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
