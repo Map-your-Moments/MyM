@@ -408,10 +408,7 @@
     
     MomentDetailViewController *vc = [[MomentDetailViewController alloc] init];
     [vc setMoment:moment];
-<<<<<<< HEAD
     [map removeAnnotations:mapView.annotations]; //!
-=======
->>>>>>> 90c63e5a059cfbc28a6fb395a403dc3c3606651a
     [self.navigationController pushViewController:vc animated:YES];
 }
 
