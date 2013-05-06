@@ -384,7 +384,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             }
             else
             {
-                NSLog(@"Http request for friends list failed.");
+                //NSLog(@"Http request for friends list failed.");
                 [AJNotificationView showNoticeInView:self.tableView type:AJNotificationTypeRed
                                                title:@"Could not retrieve your friends list"
                                      linedBackground:AJLinedBackgroundTypeDisabled
@@ -421,7 +421,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 //calls for an addFriendByEmail alert to be displayed
 - (void)addFriendByEmailButton
 {
-    NSLog(@"Add a Friend");
+    //NSLog(@"Add a Friend");
     [self addFriendByEmailAlert:self];
 }
 
@@ -494,7 +494,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     {
                         if([self.jsonAddFriend[@"created"] boolValue])
                         {
-                            NSLog(@"Friend request sent.");
+                            //NSLog(@"Friend request sent.");
+                            [self.tableView scrollRectToVisible:self.searchBar.frame animated:YES];
                             [AJNotificationView showNoticeInView:self.tableView type:AJNotificationTypeGreen
                                                            title:@"Friend request email successfully sent"
                                                  linedBackground:AJLinedBackgroundTypeDisabled
@@ -502,7 +503,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                         }
                         else
                         {
-                            NSLog(@"Friend request failed to send.");
+                            //NSLog(@"Friend request failed to send.");
+                            [self.tableView scrollRectToVisible:self.searchBar.frame animated:YES];
                             [AJNotificationView showNoticeInView:self.tableView type:AJNotificationTypeRed
                                                            title:@"Failed to send friend request"
                                                  linedBackground:AJLinedBackgroundTypeDisabled
@@ -511,7 +513,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                     }
                     else
                     {
-                        NSLog(@"Friend does not exist.");
+                        //NSLog(@"Friend does not exist.");
+                        [self.tableView scrollRectToVisible:self.searchBar.frame animated:YES];
                         [AJNotificationView showNoticeInView:self.tableView type:AJNotificationTypeRed
                                                        title:@"User does not exist"
                                              linedBackground:AJLinedBackgroundTypeDisabled
@@ -520,7 +523,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 }
                 else
                 {
-                    NSLog(@"Already friends with this person.");
+                    //NSLog(@"Already friends with this person.");
+                    [self.tableView scrollRectToVisible:self.searchBar.frame animated:YES];
                     [AJNotificationView showNoticeInView:self.tableView type:AJNotificationTypeRed
                                                    title:@"You are already friends with this person"
                                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -529,7 +533,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             }
             else if(!self.jsonAddFriend)
             {
-                NSLog(@"Http request failed.");
+                //NSLog(@"Http request failed.");
                 [AJNotificationView showNoticeInView:self.tableView type:AJNotificationTypeRed
                                                title:@"Server request failed"
                                      linedBackground:AJLinedBackgroundTypeDisabled
@@ -546,7 +550,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 //index of the button that was clicked
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString* detailString = _textField.text;
-    NSLog(@"Email is: %@", detailString); //Put it on the debugger
+    //NSLog(@"Email is: %@", detailString); //Put it on the debugger
     if (alertView.tag == TAG_ADD_EMAIL && ([_textField.text length] <= 0 || buttonIndex == 0)){
         _textField.text = NULL;
         return; //If cancel or 0 length string the string doesn't matter

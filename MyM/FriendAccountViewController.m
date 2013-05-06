@@ -211,7 +211,7 @@
 //when the delete friend button is pressed, a delete friend alert is called
 - (void)deleteFriendButton
 {
-    NSLog(@"Delete Account");
+    //NSLog(@"Delete Account");
     [self deleteFriendAlert:self];
 }
 
@@ -248,12 +248,12 @@
             {
                 if([self.jsonDeleteFriend[@"deleted"] boolValue])
                 {
-                    NSLog(@"%@ successfully removed from friends list.", _email);
+                    //NSLog(@"%@ successfully removed from friends list.", _email);
                     [self.navigationController popViewControllerAnimated:YES];
                 }
                 else
                 {
-                    NSLog(@"%@ could not be removed from your friends list. Try again.", _email);
+                    //NSLog(@"%@ could not be removed from your friends list. Try again.", _email);
                     NSString *title = _email;
                     title = [title stringByAppendingString:@" could not be removed from your friends list"];
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
@@ -264,7 +264,7 @@
             }
             else
             {
-                NSLog(@"Http request failed.");
+                //NSLog(@"Http request failed.");
                 [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                title:@"Server request failed"
                                      linedBackground:AJLinedBackgroundTypeDisabled

@@ -208,7 +208,7 @@
 #pragma mark - Animation methods for subviews
 - (void)showNavbox
 {
-    NSLog(@"Show Navbox");
+    //NSLog(@"Show Navbox");
     if(!self.navboxIsVisible) {
         [UIView animateWithDuration:.2
                               delay:0
@@ -224,7 +224,7 @@
 
 - (void)hideNavbox
 {
-    NSLog(@"Hide Navbox");
+    //NSLog(@"Hide Navbox");
     if(self.navboxIsVisible) {
         [UIView animateWithDuration:.2
                               delay:0
@@ -272,21 +272,21 @@
     [vc setCurrentUser:self.user];
     
     if(index == 0) {
-        NSLog(@"Add Picture Moment");
+        //NSLog(@"Add Picture Moment");
         [vc setContentType:kTAGMOMENTPICTURE];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
     
     if(index == 1) {
-        NSLog(@"Add Video Moment");
+        //NSLog(@"Add Video Moment");
         [vc setContentType:kTAGMOMENTVIDEO];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];
     }
     
     if(index == 2) {
-        NSLog(@"Add Text Moment");
+        //NSLog(@"Add Text Moment");
         [vc setContentType:kTAGMOMENTTEXT];
         [mapView removeAnnotations:mapView.annotations]; //!
         [self.navigationController pushViewController:vc animated:YES];

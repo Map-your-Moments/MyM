@@ -83,7 +83,7 @@
     NSString *momentTagString = [NSString stringWithFormat:@"Tags: %d", [momentTags count]];
     
     sections = [[NSArray alloc] initWithObjects:@"Moment Title", @"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", nil];
-    NSLog(@"Number of Tags: %d", [momentTags count]);
+    //NSLog(@"Number of Tags: %d", [momentTags count]);
     momentDataArray = [[NSArray alloc] initWithObjects:[targetMoment title], momentTagString , dateString, [targetMoment user], contentTypeString, @"Click to View Moment", nil];
     
     [self setContentFooter:[momentContent contentType]];
@@ -151,7 +151,7 @@
         }
         default:
         {
-            NSLog(@"Error");
+            //NSLog(@"Error");
             break;
         }
     }
@@ -228,7 +228,7 @@
             //cellData = [momentDataArray objectAtIndex:5];
             break;
         default:
-            NSLog(@"ERROR");
+            //NSLog(@"ERROR");
             break;
     }
     
