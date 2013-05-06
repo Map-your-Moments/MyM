@@ -15,7 +15,8 @@
 
 @implementation NSString(MD5)
 
-- (NSString*)MD5
+//Simple method that calculated the MD5 for a string
+- (NSString *)MD5
 {
     // Create pointer to the string as UTF8
     const char *ptr = [self UTF8String];
