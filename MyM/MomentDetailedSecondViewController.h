@@ -15,14 +15,18 @@
 
 @interface MomentDetailedSecondViewController : UITableViewController <UIActionSheetDelegate>
 
+//Public variables
 @property (strong, nonatomic) NSString *currentUser;
 @property (strong, nonatomic) Moment *targetMoment;
 
+//Basic functions of detailedView
 -(void)playMovie;
 -(void)setContentFooter:(int)contentType;
 
+//Creates string of tags
 -(NSString*)createTagString;
 
+//Deletes selected moment
 -(void)deleteMoment;
 
 @end
