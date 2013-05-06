@@ -12,6 +12,7 @@
 #import "MomentDetailedSecondViewController.h"
 #import "AJNotificationView.h"
 #import "S3UtilityClass.h"
+#import "Constants.h"
 
 #define MOMENT_CONTENTVIEW_X        20
 #define MOMENT_CONTENTVIEW_Y        90
@@ -53,8 +54,9 @@
 {
     [super viewDidLoad];
     
-    if([[targetMoment user] isEqualToString:self.currentUser])
+    if([[targetMoment user] isEqualToString:self.currentUser]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete Moment" style:UIBarButtonItemStyleDone target:self action:@selector(deleteMoment)];
+    }
     
     momentContent = [NSKeyedUnarchiver unarchiveObjectWithData:targetMoment.content];
     momentTags = (NSMutableArray*)[momentContent tags];
@@ -88,7 +90,7 @@
     NSString *momentTagString = [NSString stringWithFormat:@"Tags: %d", [momentTags count]];
     
     sections = [[NSArray alloc] initWithObjects:@"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", nil];
-    NSLog(@"Number of Tags: %d", [momentTags count]);
+    //NSLog(@"Number of Tags: %d", [momentTags count]);
     momentDataArray = [[NSArray alloc] initWithObjects:momentTagString , dateString, [targetMoment user], contentTypeString, @"Click to View Moment", nil];
     
     [self setContentFooter:[momentContent contentType]];
@@ -279,5 +281,6 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 
 @end

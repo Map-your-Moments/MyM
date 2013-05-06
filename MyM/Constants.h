@@ -39,7 +39,8 @@ enum{
     kUIAlertSettingsVerifyPassword,
     kUIAlertSettingsVerifyEmail,
     kUIAlertDeleteAccount,
-    kUIAlertConfirmDeleteAccount
+    kUIAlertConfirmDeleteAccount,
+    kUIAlertDeleteMoment
 }kUIAlertSetting;
 
 enum{
