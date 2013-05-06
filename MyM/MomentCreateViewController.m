@@ -24,24 +24,22 @@
 #define MOMENT_IMAGEVIEW_MISSINGCONTENT     1
 #define MOMENT_IMAGEVIEW_HASCONTENT         2
 
-//Hiding keyboard on textfields doesn't work...
-
 @interface MomentCreateViewController ()
 {
-    bool hasContentSet;
+    bool hasContentSet;         //Content is set
     
-    UITextView *momentText;
+    UITextView *momentText;         //Moment vieweres
     UIImageView *momentImage;
     
-    MPMoviePlayerViewController *moviePlayer;
-    AVAudioRecorder *recorder;
+    MPMoviePlayerViewController *moviePlayer;       //movie player
+    AVAudioRecorder *recorder;                      //sound recorder
 
-    UIView *recorderView;
+    UIView *recorderView;               //Recorder stop view
     
-    NSURL *takenVideoURL;
+    NSURL *takenVideoURL;           //Urls for files fo taken media
     NSURL *takenAudioURL;
     
-    UIButton *playButton;
+    UIButton *playButton;               //Play button for video
 }
 
 @end
@@ -54,10 +52,11 @@
 @synthesize currentLocation;
 @synthesize currentUser;
 
-NSString *kStillImages = @"public.image";
+NSString *kStillImages = @"public.image";               //String constants
 NSString *kVideoCamera = @"public.movie";
 NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 
+//Initilizer
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -67,6 +66,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     return self;
 }
 
+//Set up gesture for hiding keyboard, nulls objects and detects moment type
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -90,6 +90,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [self detectMomentType];
 }
 
+//presents content styles for each type of moment
 -(void)detectMomentType
 {
     if(momentImage == nil)
@@ -113,6 +114,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     }
 }
 
+//Creates Text input for text moment
 -(void)presentText
 {
     if(momentText == nil)
@@ -126,6 +128,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     }
 }
 
+//Presents an image controller for still images
 -(void)presentImage
 {
     if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -142,6 +145,8 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [self presentViewController:pickerController animated:YES completion:NULL];
 }
 
+//Presents an image controller for audio
+//Puts a recognizer for stopping audio
 -(void)presentAudio
 {
     recorderView = [[UIView alloc]initWithFrame:CGRectMake(135, 214, 75, 75)];
@@ -168,6 +173,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     //NSLog(@"*Recording*");
 }
 
+//Presents an image controller for videos
 -(void)presentVideo
 {
     if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -185,14 +191,18 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [self presentViewController:pickerController animated:YES completion:NULL];
 }
 
+//Shares moments by assembling data and getting it ready to pass to S3
 -(void)share
 {
+    //Gets string data
     NSString *title = [[self.captionTextField text]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSMutableArray *tags = (NSMutableArray*)[[self.tagTextField text] componentsSeparatedByString:@" "];
     NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     
+    //Sets up moment rawData
     NSData *momentContent = nil;
     
+    //Depending on content type, content with be converted into raw data for transfer
     switch (contentType)
     {
         case kTAGMOMENTTEXT:
@@ -222,13 +232,14 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
             break;
         }
     }
+    //If no content set, display error
     if(!hasContentSet)
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                        title:@"Content is Missing"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
     
-    //NSLog(@"Moment Text: %d\nMoment Image: %d",[momentText tag], [momentImage tag]);
+    //If content is set, load data to class instances and upload to S3
     if(hasContentSet == YES && title != nil && [title length] != 0)
     {
         Content *content = [[Content alloc] initWithContent:momentContent withType:self.contentType andTags:tags];
@@ -246,6 +257,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     }
 }
 
+//If user cancels get content from image picker, setup a way to reinitilize image selector
 #pragma mark UIImagePickerController Delegate
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
@@ -264,20 +276,29 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+//If media is selected
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    //If picture is is selected, put picture into view
+    //make a tap gesture to select a new picture
+    
+    //Otherwise, if video is selected, make a thumbnail
+    //and also make a tap gesutre to slecect a new video
     if(contentType == kTAGMOMENTPICTURE)
     {
         //NSLog(@"Picture Selected");
         if(momentImage != nil)
             [momentImage removeFromSuperview];
         
+        //sets picture
         UIImage *selectedPicture = [info valueForKey:UIImagePickerControllerOriginalImage];
         momentImage = [[UIImageView alloc] initWithImage:selectedPicture];
         [momentImage setTag:MOMENT_IMAGEVIEW_HASCONTENT];
         [momentImage setFrame:CGRectMake(MOMENT_CONTENTVIEW_X+10, MOMENT_CONTENTVIEW_Y+20, selectedPicture.size.width/9, selectedPicture.size.height/9)];
         [self.view addSubview:momentImage];
         
+        
+        //creates tap gesture
         [momentImage setUserInteractionEnabled:YES];
         [momentImage addGestureRecognizer:[self createTapGestureForContent]];
         hasContentSet = YES;
@@ -288,22 +309,25 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
         if(momentImage != nil)
             [momentImage removeFromSuperview];
         
+        //get videourl
         takenVideoURL = [info valueForKey:UIImagePickerControllerMediaURL];
         
+        //gets player for thumbnail
         MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:takenVideoURL];
         [player setShouldAutoplay:NO];
     
+        //Set thumbnail
         UIImage *thumbnail = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
-        
         momentImage = [[UIImageView alloc] initWithImage:thumbnail];
         [momentImage setTag:MOMENT_IMAGEVIEW_HASCONTENT];
         [momentImage setFrame:CGRectMake(MOMENT_CONTENTVIEW_X+10, MOMENT_CONTENTVIEW_Y+50, thumbnail.size.width/2, thumbnail.size.height/2)];
         
-        
+        //Get gesture
         [momentImage setUserInteractionEnabled:YES];
         [momentImage addGestureRecognizer:[self createTapGestureForContent]];
         [self.view addSubview:momentImage];
         
+        //set play button
         playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [playButton setFrame:CGRectMake(MOMENT_CONTENTVIEW_X, MOMENT_CONTENTVIEW_Y, 100, 45)];
         [playButton setTitle:@"Play Video" forState:UIControlStateNormal];
@@ -319,6 +343,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 #pragma mark AVAudioRecorder Delegate
 -(void)stopRecording
 {
+    //Stops recording
     [recorderView removeFromSuperview];
     [recorder stop];
 }
@@ -331,6 +356,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 -(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
     //NSLog(@"*Recorder Stopped");
+    //Sets play button for audio
     playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [playButton setFrame:CGRectMake(MOMENT_CONTENTVIEW_X, MOMENT_CONTENTVIEW_Y, 100, 45)];
     [playButton setTitle:@"Play Record" forState:UIControlStateNormal];
@@ -340,6 +366,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 }
 
 #pragma mark AVAudioPlayer Delegate
+//Sets play button to play recorded media
 -(void)playMedia
 {
     if(contentType == kTAGMOMENTAUDIO)
@@ -377,6 +404,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 }
 
 #pragma mark Helper Functions
+//creates gesture to detect content type
 -(UITapGestureRecognizer*)createTapGestureForContent
 {
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(detectMomentType)];
@@ -386,6 +414,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     return tapGesture;
 }
 
+//Nills all objects
 -(void)nillObjects
 {
     momentText = nil;
@@ -397,6 +426,18 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     takenVideoURL = nil;
 }
 
+-(IBAction)goToNext
+{
+    [self.captionTextField resignFirstResponder];
+    [self.tagTextField becomeFirstResponder];
+}
+
+-(IBAction)hideTagField
+{
+    [self.tagTextField resignFirstResponder];
+}
+
+//Method to hide keyboard
 -(void)hideKeyboard
 {
     [self.captionTextField resignFirstResponder];

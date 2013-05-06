@@ -14,26 +14,29 @@
 #import "S3UtilityClass.h"
 #import "Constants.h"
 
+//Standard content view variables
 #define MOMENT_CONTENTVIEW_X        20
 #define MOMENT_CONTENTVIEW_Y        90
 #define MOMENT_CONTENTVIEW_WIDTH    280
 #define MOMENT_CONTENTVIEW_HEIGHT   180
 #define BANNER_DEFAULT_TIME         2
 
+//Action Sheet Tag
 #define kTagActionSheetDeleteMoment 1
 
+//Screeen height
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
 
 @interface MomentDetailedSecondViewController ()
 {
-    Content *momentContent;
-    NSArray *sections;
-    NSArray *momentDataArray;
+    Content *momentContent;         //Holds Content
+    NSArray *sections;              //Moment Display Section Headers
+    NSArray *momentDataArray;       //Data for each section
     
-    NSMutableArray *momentTags;
+    NSMutableArray *momentTags;     //Tags of each moment
     
-    MPMoviePlayerViewController *moviePlayerView;
+    MPMoviePlayerViewController *moviePlayerView;       //Movie players, two, one for thumbnails, another for actually playing
     MPMoviePlayerController *moviePlayer;
 }
 @end
@@ -41,6 +44,7 @@
 @implementation MomentDetailedSecondViewController
 @synthesize targetMoment;
 
+//Initilization of class
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -50,18 +54,22 @@
     return self;
 }
 
+//Sets up view for needed data and content depending on content type
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    //Creates delete button if user selects own moment
     if([[targetMoment user] isEqualToString:self.currentUser])
         [self createDeleteMomentButton];
-    //        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete Moment" style:UIBarButtonItemStyleDone target:self action:@selector(deleteMoment)];
     
+    //unarchives data
     momentContent = [NSKeyedUnarchiver unarchiveObjectWithData:targetMoment.content];
     momentTags = (NSMutableArray*)[momentContent tags];
     NSString *contentTypeString;
     
+    //detemines content type
     switch([momentContent contentType])
     {
         case kTAGMOMENTTEXT:
@@ -81,6 +89,7 @@
             break;
     }
     
+    //setup moment data and content from unarchived data
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormatter stringFromDate:[targetMoment date]];
@@ -92,14 +101,15 @@
         momentTagString = @"No Tags";
     
     sections = [[NSArray alloc] initWithObjects:@"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", nil];
-    //NSLog(@"Number of Tags: %d", [momentTags count]);
     momentDataArray = [[NSArray alloc] initWithObjects:momentTagString , dateString, [targetMoment user], contentTypeString, @"Click to View Moment", nil];
     
+    //Puts content in view
     [self setContentFooter:[momentContent contentType]];
 }
 
 -(void)setContentFooter:(int)contentType
 {
+    //Decrypts and sets data into a viewable fashion depending on type
     NSData *rawContent = [momentContent content];
     switch(contentType)
     {
@@ -108,7 +118,7 @@
             //UIImage *backgroundImage = [UIImage imageNamed:@"notepad_background.png"];
             UITextView *momentText = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, 280, 180)];
             [momentText setTag:kTAGMOMENTTEXT];
-            [momentText setBackgroundColor:[UIColor colorWithRed:242 green:242 blue:128 alpha:1.0]];//[UIColor colorWithPatternImage:backgroundImage]];
+            [momentText setBackgroundColor:[UIColor colorWithRed:242 green:242 blue:128 alpha:1.0]];
             [momentText setFont:[UIFont fontWithName:@"Arial" size:24]];
             NSString *dataString = [NSString stringWithUTF8String:[rawContent bytes]];
             [momentText setText:dataString];
@@ -166,6 +176,7 @@
     }
 }
 
+//Plays movie
 -(void)playMovie
 {
     [self presentMoviePlayerViewControllerAnimated:moviePlayerView];
@@ -174,12 +185,14 @@
     [moviePlayerView.moviePlayer play];
 }
 
+//If running low on memeny
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+//If user switches view while notification is still visable
 - (void)viewDidDisappear:(BOOL)animated
 {
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];
@@ -206,6 +219,7 @@
     return [sections objectAtIndex:section];
 }
 
+//Puts data into each part of table
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellID = @"Cell Identification";
@@ -245,6 +259,7 @@
     return cell;
 }
 
+//creats a CSV style string
 -(NSString*)createTagString
 {
     NSString *output = @"";
@@ -267,12 +282,14 @@
 
 #pragma mark - Delete moment
 
+//sets to delete moment
 -(void)deleteMoment
 {
     [S3UtilityClass removeMomentFromS3:targetMoment];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+//Creates delete button
 - (void)createDeleteMomentButton
 {
     // create a UIButton (Delete Moment button)
@@ -294,11 +311,13 @@
     self.tableView.tableFooterView = footerView;
 }
 
+//Deletes moment
 - (void)deleteMomentButton
 {
     [self deleteMomentAlert:self];
 }
 
+//Delete Confirmation
 - (IBAction)deleteMomentAlert:(id)sender
 {
     UIAlertView *alert = [[UIAlertView alloc]
@@ -311,6 +330,7 @@
     [alert show];
 }
 
+//Confirmation
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(alertView.tag == kUIAlertDeleteMoment && buttonIndex == 0)
     {
