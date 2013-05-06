@@ -151,13 +151,13 @@ bool startInsideAboutImageView;
                                        title:@"Username is empty"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
-        NSLog(@"Username is empty");
+        //NSLog(@"Username is empty");
     } else if ([self.txtPassword.text length] == 0) { //Check if txtPassword is empty
         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                        title:@"Password is empty"
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
-        NSLog(@"Password is empty");
+        //NSLog(@"Password is empty");
     } else {
         [self.signInButton setTitle:@"" forState:UIControlStateDisabled];
         self.view.userInteractionEnabled = NO;
@@ -180,14 +180,14 @@ bool startInsideAboutImageView;
                     if ([self.jsonLogin[@"logged_in"] boolValue]) {
                         if (!self.jsonLogin[@"valid_email"]) { //Check if the user already validated his email
                             [self logIn];
-                            NSLog(@"You are in");
+                            //NSLog(@"You are in");
                         } else { //User still needs to validate his email
                             self.txtPassword.text = @"";
                             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeOrange
                                                            title:@"Please verify your email address"
                                                  linedBackground:AJLinedBackgroundTypeDisabled
                                                        hideAfter:BANNER_DEFAULT_TIME];
-                            NSLog(@"You are just missing the security Code");
+                            //NSLog(@"You are just missing the security Code");
                         }
                     } else { //User or password is wrong
                         [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
@@ -195,14 +195,14 @@ bool startInsideAboutImageView;
                                              linedBackground:AJLinedBackgroundTypeDisabled
                                                    hideAfter:BANNER_DEFAULT_TIME];
                         self.txtPassword.text = @"";
-                        NSLog(@"username and/or password wrong");
+                        //NSLog(@"username and/or password wrong");
                     }
                 } else { //Server Error
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                    title:@"Could not connect to the server"
                                          linedBackground:AJLinedBackgroundTypeDisabled
                                                hideAfter:BANNER_DEFAULT_TIME];
-                    NSLog(@"Could not connect to the server");
+                    //NSLog(@"Could not connect to the server");
                 }
                 
                 self.view.userInteractionEnabled = YES;

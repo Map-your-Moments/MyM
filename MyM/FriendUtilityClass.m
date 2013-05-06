@@ -27,7 +27,7 @@
         friends = [[NSArray alloc ] initWithArray: jsonGetFriends];
     }
     else {
-        NSLog(@"Http request for friends list failed.");
+        //NSLog(@"Http request for friends list failed.");
     }
     
     return friends;
@@ -44,7 +44,7 @@
         email = [response valueForKey:@"email"];
     }
     else {
-        NSLog(@"HTTP request for email failed");
+        //NSLog(@"HTTP request for email failed");
     }
     
     return email;

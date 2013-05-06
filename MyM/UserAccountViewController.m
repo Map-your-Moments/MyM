@@ -179,12 +179,12 @@
     {
         case 0:
         {
-            NSLog(@"Touched Username");
+            //NSLog(@"Touched Username");
             break;
         }
         case 1:
         {
-            NSLog(@"Touched Password");
+            //NSLog(@"Touched Password");
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Password" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
             [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
@@ -195,7 +195,7 @@
         }
         case 2:
         {
-            NSLog(@"Touched Email");
+            //NSLog(@"Touched Email");
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change Email" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
             [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
@@ -206,7 +206,7 @@
         }
         case 3:
         {
-            NSLog(@"Touched Friends");
+            //NSLog(@"Touched Friends");
             
             SearchBarTableViewController *vc = [[SearchBarTableViewController alloc] initWithSectionIndexes:YES];
             [vc setUser:_user];
@@ -487,7 +487,7 @@
 //when the delete user button is pressed, a delete user alert is called
 - (void)deleteUserButton
 {
-    NSLog(@"Delete Account");
+    //NSLog(@"Delete Account");
     [self deleteUserAlert:self];
 }
 
@@ -524,7 +524,7 @@
             {
                 if([self.jsonDeleteAccount[@"deleted"] boolValue])
                 {
-                    NSLog(@"Account deleted.");
+                    //NSLog(@"Account deleted.");
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
                                                    title:@"Account successfully deleted"
                                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -533,7 +533,7 @@
                 }
                 else
                 {
-                    NSLog(@"Failed to delete account.");
+                    //NSLog(@"Failed to delete account.");
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                    title:@"Failed to delete account"
                                          linedBackground:AJLinedBackgroundTypeDisabled
@@ -544,7 +544,7 @@
             }
             else
             {
-                NSLog(@"Server request failed.");
+                //NSLog(@"Server request failed.");
                 [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                title:@"Server request failed"
                                      linedBackground:AJLinedBackgroundTypeDisabled

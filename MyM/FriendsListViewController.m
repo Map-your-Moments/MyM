@@ -397,7 +397,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             {
                 if([self.jsonDeleteFriend[@"deleted"] boolValue])
                 {
-                    NSLog(@"%@ successfully removed from friends list.", _deleteEmail);
+                    //NSLog(@"%@ successfully removed from friends list.", _deleteEmail);
+                    [self.tableView scrollRectToVisible:self.searchBar.frame animated:YES];
                     [self loadFriends];
                     [self.searchDisplayController setActive:NO animated:YES];
                     NSString *title = _deleteEmail;
@@ -409,7 +410,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
                 }
                 else
                 {
-                    NSLog(@"%@ could not be removed from your friends list. Try again.", _deleteEmail);
+                    //NSLog(@"%@ could not be removed from your friends list. Try again.", _deleteEmail);
+                    [self.tableView scrollRectToVisible:self.searchBar.frame animated:YES];
                     NSString *title = _deleteEmail;
                     title = [title stringByAppendingString:@" could not be removed from your friends list"];
                     [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
@@ -420,7 +422,8 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             }
             else
             {
-                NSLog(@"Http request failed.");
+                //NSLog(@"Http request failed.");
+                [self.tableView scrollRectToVisible:self.searchBar.frame animated:YES];
                 [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                title:@"Server request failed"
                                      linedBackground:AJLinedBackgroundTypeDisabled
@@ -506,7 +509,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
             }
             else
             {
-                NSLog(@"Http request for friends list failed.");
+                //NSLog(@"Http request for friends list failed.");
                 [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed
                                                title:@"Could not retrieve your friends list"
                                      linedBackground:AJLinedBackgroundTypeDisabled
@@ -543,7 +546,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 //generates an addfriendalert action
 - (void)addFriendButton
 {
-    NSLog(@"Add a Friend");
+    //NSLog(@"Add a Friend");
     [self addFriendAlert:self];
 }
 
@@ -562,7 +565,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 //depending on the alert tag
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString* detailString = _textField.text;
-    NSLog(@"Email is: %@", detailString); //Put it on the debugger
+    //NSLog(@"Email is: %@", detailString); //Put it on the debugger
     if(alertView.tag == TAG_DELETE && buttonIndex == 0)
     {
         return;

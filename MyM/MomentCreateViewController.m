@@ -165,7 +165,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     [recorder prepareToRecord];
     [recorder record];
     
-    NSLog(@"*Recording*");
+    //NSLog(@"*Recording*");
 }
 
 -(void)presentVideo
@@ -227,7 +227,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
                              linedBackground:AJLinedBackgroundTypeDisabled
                                    hideAfter:BANNER_DEFAULT_TIME];
     
-    NSLog(@"Moment Text: %d\nMoment Image: %d",[momentText tag], [momentImage tag]);
+    //NSLog(@"Moment Text: %d\nMoment Image: %d",[momentText tag], [momentImage tag]);
     if(hasContentSet == YES && title != nil && [title length] != 0)
     {
         Content *content = [[Content alloc] initWithContent:momentContent withType:self.contentType andTags:tags];
@@ -248,7 +248,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 #pragma mark UIImagePickerController Delegate
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    NSLog(@"No Picture Selected");
+    //NSLog(@"No Picture Selected");
     if(momentImage == nil)
     {
         hasContentSet = NO;
@@ -267,7 +267,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 {
     if(contentType == kTAGMOMENTPICTURE)
     {
-        NSLog(@"Picture Selected");
+        //NSLog(@"Picture Selected");
         if(momentImage != nil)
             [momentImage removeFromSuperview];
         
@@ -283,7 +283,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     }
     else if(contentType == kTAGMOMENTVIDEO)
     {
-        NSLog(@"Video Selected");
+        //NSLog(@"Video Selected");
         if(momentImage != nil)
             [momentImage removeFromSuperview];
         
@@ -324,12 +324,12 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 
 -(void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error
 {
-    NSLog(@"ERROR");
+    //NSLog(@"ERROR");
 }
 
 -(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
-    NSLog(@"*Recorder Stopped");
+    //NSLog(@"*Recorder Stopped");
     playButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [playButton setFrame:CGRectMake(MOMENT_CONTENTVIEW_X, MOMENT_CONTENTVIEW_Y, 100, 45)];
     [playButton setTitle:@"Play Record" forState:UIControlStateNormal];
@@ -343,7 +343,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 {
     if(contentType == kTAGMOMENTAUDIO)
     {
-        NSLog(@"*Playing Sound*");
+        //NSLog(@"*Playing Sound*");
         NSURL *fileURL = [NSURL URLWithString:[[NSBundle mainBundle] pathForResource:@"TestAudio" ofType:@"mp4"]];
         AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
         [player setVolume:1.0];
@@ -363,7 +363,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
-    NSLog(@"Player Stopped");
+    //NSLog(@"Player Stopped");
 }
 
 #pragma mark UIAlertView Delegate
