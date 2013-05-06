@@ -1,18 +1,21 @@
-//
-//  FriendUtilityClass.h
-//  MyM
-//
-//  Created by Justin Wagner on 4/30/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * FriendUtilityClass.h
+ * Helper class which defines functions to do server requests to get a list of a user's friends
+ * and get an email address based on a user's username
+ */
 
 #import <Foundation/Foundation.h>
 
 @interface FriendUtilityClass : NSObject
 
 @property(nonatomic, copy) NSArray *friends;
-@property (nonatomic) NSArray *jsonGetFriends;
 
-- (NSArray *)getFriends:(NSString *)token;
++ (NSArray *)getFriends:(NSString *)token;
++ (NSString *)getEmailFromUsername:(NSString *)username;
 
 @end

@@ -11,18 +11,21 @@
 
 #import "MomentDataController.h"
 #import "S3UtilityClass.h"
-
-@protocol mapProtocol
--(void)setDataController:(MomentDataController *)dataController;
-@end
-
+#import "FriendUtilityClass.h"
+#import "GravitarUtilityClass.h"
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "AwesomeMenu.h"
 #import "Moment.h"
+#import "MomentAnnotation.h"
 #import "Constants.h"
+#import "MomentDataController.h"
+#import "S3UtilityClass.h"
+#import "Reachability.h"
 
-@class MomentDataController;
+@protocol mapProtocol
+-(void)setDataController:(MomentDataController *)dataController;
+@end
 
 @interface MapViewController : UIViewController <AwesomeMenuDelegate, MKMapViewDelegate, MKAnnotation>
 

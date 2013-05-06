@@ -1,10 +1,12 @@
-//
-//  AppDelegate.m
-//  MyM
-//
-//  Created by Marcelo Mazzotti on 11/2/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * AppDelegate.m
+ *
+ */
 
 #import "AppDelegate.h"
 #import "SignInViewController.h"
@@ -23,16 +25,14 @@
 
     SignInViewController *vc = [[SignInViewController alloc] init];
     
-    //MomentCreateViewController *child = [[MomentCreateViewController alloc]initWithNibName:@"MomentCreateView" bundle:nil];
-    //[child setContentType:kTAGMOMENTPICTURE];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = navController;
-    
 
     self.window.backgroundColor = [UIColor whiteColor];
 
     [self.window makeKeyAndVisible];
     
+    //makes Navigation Bar have MyM blue color
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:29.0/256.0 green:125.0/256.0 blue:225.0/256.0 alpha:1.0]];
     
     return YES;
@@ -74,7 +74,7 @@
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
              // Replace this implementation with code to handle the error appropriately.
              // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            //NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         } 
     }
@@ -146,7 +146,7 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        //NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    
     

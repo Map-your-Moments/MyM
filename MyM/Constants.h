@@ -1,14 +1,17 @@
-//
-//  Constants.h
-//  MyM
-//
-//  Created by Steven Zilberberg on 3/30/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * Constants.h
+ * 
+ *
+ */
 
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXPORT NSString *const kS3BUCKETNAME;
+extern NSString *const kS3BUCKETNAME;
 
 enum{
     kTAGMOMENTTEXT = 1,
@@ -31,10 +34,18 @@ enum{
 
 enum{
     kUIAlertSettingsStandard,
-    kUIAlertSettingsConfirmChange,
-    kUIAlertSettingsVerifyChange,
-    kUIAlertDeleteAccount
+    kUIAlertSettingsConfirmChangePassword,
+    kUIAlertSettingsConfirmChangeEmail,
+    kUIAlertSettingsVerifyPassword,
+    kUIAlertSettingsVerifyEmail,
+    kUIAlertDeleteAccount,
+    kUIAlertConfirmDeleteAccount,
+    kUIAlertDeleteMoment
 }kUIAlertSetting;
+
+enum{
+    kUIAlertViewMomentNoCamera = -999
+}kUIAlertViewMoment;
 
 @interface Constants : NSObject
 

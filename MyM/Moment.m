@@ -1,10 +1,13 @@
-//
-//  Moment.m
-//  MyM
-//
-//  Created by Adam on 3/6/13.
-//  Copyright (c) 2013 MyM Co. All rights reserved.
-//
+/*
+ * MyM: Map Your Moments "A Digital Travelogue"
+ *
+ * Developed using iOS and AWS for CSC Special Topics: Cloud Computing, Spring 2013 by
+ * Adam Cumiskey, Dave Hand, Tim Honeywell, Marcelo Mazzotti, Justin Wagner, and Steven Zilberberg
+ *
+ * Moment.m
+ * Class for a moment
+ *
+ */
 
 #import "Moment.h"
 
@@ -12,7 +15,7 @@
 @synthesize title, user, content, date, coords, comments, ID;
 
 /* Main constructor for the Moment class */
-- (id)initWithTitle:(NSString *)theTitle andUser:(NSString *)theUser andContent:(Content *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments andID:(NSString *)theID
+- (id)initWithTitle:(NSString *)theTitle andUser:(NSString *)theUser andContent:(NSData *)theContent andDate:(NSDate *)theDate andCoords:(CLLocationCoordinate2D)theCoords andComments:(NSMutableArray *)theComments
 {
     title    = theTitle;
     user     = theUser;
@@ -20,7 +23,7 @@
     date     = theDate;
     coords   = theCoords;
     comments = theComments;
-    ID       = theID;
+    ID = [NSString stringWithFormat:@"%f_%f_%@_%@_%f", coords.latitude, coords.longitude, title, user, date.timeIntervalSince1970];
     
     return self;
 }
@@ -74,8 +77,7 @@
                                                       andContent:self.content
                                                          andDate:self.date
                                                        andCoords:self.coords
-                                                     andComments:self.comments
-                                                           andID:self.ID];
+                                                     andComments:self.comments];
     return moment;
                  
 }
