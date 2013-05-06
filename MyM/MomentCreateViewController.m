@@ -192,6 +192,7 @@ NSString *kMomemtAudio_temp = @"MomemtAudio_temp";
     NSDate *currentDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     
     NSData *momentContent = nil;
+    
     switch (contentType)
     {
         case kTAGMOMENTTEXT:
