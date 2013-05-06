@@ -65,6 +65,8 @@
     self.createNewUserButton = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(createNewUserButtonPress)];
     self.navigationItem.title = @"Registering";
     self.navigationItem.rightBarButtonItem = self.createNewUserButton;
+    UITapGestureRecognizer *tapDismiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTap)];
+    [self.view addGestureRecognizer:tapDismiss];
 }
 
 /* >>>>>>>>>>>>>>>>>>>>> createNewUserButtonPress
@@ -209,6 +211,14 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         });
     });
+}
+
+/* >>>>>>>>>>>>>>>>>>>>> backgroundTap:
+ Backgroun Tap to close the keyboard
+ >>>>>>>>>>>>>>>>>>>>>>>> */
+- (void)backgroundTap
+{
+    [self.view endEditing:YES];
 }
 
 @end
