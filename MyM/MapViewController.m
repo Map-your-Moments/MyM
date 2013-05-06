@@ -360,7 +360,7 @@
     
     pin.canShowCallout = YES;
     pin.animatesDrop = YES; //!
-    pin.pinColor = MKPinAnnotationColorGreen;
+    pin.pinColor = MKPinAnnotationColorPurple;
     
     return pin;
 }

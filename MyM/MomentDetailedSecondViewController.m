@@ -212,6 +212,8 @@
     if(cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     NSString *cellData;
     switch([indexPath section])
     {

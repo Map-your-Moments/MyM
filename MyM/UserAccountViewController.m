@@ -104,7 +104,6 @@
         case 0:
         {
             cell.textLabel.text = [_user username];
-            [cell setUserInteractionEnabled:NO];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
             if([_user profileImage])
