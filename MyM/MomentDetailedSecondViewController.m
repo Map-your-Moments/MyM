@@ -11,12 +11,15 @@
 
 #import "MomentDetailedSecondViewController.h"
 #import "AJNotificationView.h"
+#import "S3UtilityClass.h"
 
 #define MOMENT_CONTENTVIEW_X        20
 #define MOMENT_CONTENTVIEW_Y        90
 #define MOMENT_CONTENTVIEW_WIDTH    280
 #define MOMENT_CONTENTVIEW_HEIGHT   180
 #define BANNER_DEFAULT_TIME         2
+
+#define kTagActionSheetDeleteMoment 1
 
 #define screenWidth [[UIScreen mainScreen] applicationFrame].size.width
 #define screenHeight [[UIScreen mainScreen] applicationFrame].size.height
@@ -80,11 +83,13 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString = [dateFormatter stringFromDate:[targetMoment date]];
     
+    [self setTitle:[targetMoment title]];
+    
     NSString *momentTagString = [NSString stringWithFormat:@"Tags: %d", [momentTags count]];
     
-    sections = [[NSArray alloc] initWithObjects:@"Moment Title", @"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", nil];
+    sections = [[NSArray alloc] initWithObjects:@"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", nil];
     NSLog(@"Number of Tags: %d", [momentTags count]);
-    momentDataArray = [[NSArray alloc] initWithObjects:[targetMoment title], momentTagString , dateString, [targetMoment user], contentTypeString, @"Click to View Moment", nil];
+    momentDataArray = [[NSArray alloc] initWithObjects:momentTagString , dateString, [targetMoment user], contentTypeString, @"Click to View Moment", nil];
     
     [self setContentFooter:[momentContent contentType]];
 }
@@ -173,7 +178,32 @@
 
 -(void)deleteMoment
 {
-    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Are you sure you want to delete %@?", [targetMoment title]] delegate:self cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes" otherButtonTitles:nil];
+    [actionSheet setTag:kTagActionSheetDeleteMoment];
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark UIActionSheet Delegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([actionSheet tag] == kTagActionSheetDeleteMoment)
+    {
+        if(buttonIndex == [actionSheet destructiveButtonIndex])
+        {
+            /*
+                I NEED THIS CODE TO RUN
+             
+             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed title:@"Your moment is being deleted" hideAfter:BANNER_DEFAULT_TIME];
+             [S3UtilityClass removeMomentFromS3:targetMoment];
+             [self.navigationController popViewControllerAnimated:YES];
+             */
+        }
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
 }
 
 #pragma mark - Table view data source
@@ -209,11 +239,11 @@
     switch([indexPath section])
     {
         case 0:
-            cellData = [momentDataArray objectAtIndex:0];
-            break;
-        case 1:
             cell.autoresizesSubviews = YES;
             cellData = [self createTagString];
+            break;
+        case 1:
+            cellData = [momentDataArray objectAtIndex:1];
             break;
         case 2:
             cellData = [momentDataArray objectAtIndex:2];
@@ -222,10 +252,7 @@
             cellData = [momentDataArray objectAtIndex:3];
             break;
         case 4:
-            cellData = [momentDataArray objectAtIndex:4];
-            break;
-        case 5:
-            //cellData = [momentDataArray objectAtIndex:5];
+            //cellData = [momentDataArray objectAtIndex:4];
             break;
         default:
             NSLog(@"ERROR");
@@ -255,12 +282,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if([indexPath section] != 2)
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    else
-    {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
 }
 
 @end

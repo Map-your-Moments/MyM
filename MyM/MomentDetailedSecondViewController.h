@@ -13,7 +13,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "Moment.h"
 
-@interface MomentDetailedSecondViewController : UITableViewController
+@interface MomentDetailedSecondViewController : UITableViewController <UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSString *currentUser;
 @property (strong, nonatomic) Moment *targetMoment;
