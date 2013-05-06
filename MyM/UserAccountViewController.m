@@ -9,9 +9,9 @@
  * and email each in their respective cell. At the bottom of the view is a delete account button
  * to permanently delete the current user's account. If a user clicks on the password field an alert displays
  * asking for their current password. If they input their password correctly, then the user is given another
- * alert view to input and confirm their new password, which then updates in the database. This is the same 
- * for clicking on the  email field. If the user wishes to fully delete their account they can press the 
- * delete account button and go through a confirmation alert to delete their account. If the deletion is successful, 
+ * alert view to input and confirm their new password, which then updates in the database. This is the same
+ * for clicking on the  email field. If the user wishes to fully delete their account they can press the
+ * delete account button and go through a confirmation alert to delete their account. If the deletion is successful,
  * they are returned to the sign in view. The number of friends a user has is displayed in the last cell of the table
  * view. If that cell is clicked the view changes to the user's friends list.
  *
@@ -437,27 +437,41 @@
             }
         }
     }
-}
-
-#pragma mark UIActionSheet
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == kSAVEDBUTTONINDEX)
+    else if([alertView tag] == kUIAlertConfirmDeleteAccount)
     {
-        UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
-        //There is a warning here. I am not sure why but disregard
-        [pickerController setDelegate:self];
-        [pickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        [self presentViewController:pickerController animated:YES completion:NULL];
+        if(buttonIndex != [alertView cancelButtonIndex])
+        {
+            NSString *passwordEntered = [[alertView textFieldAtIndex:0] text];
+            if(passwordEntered == nil)
+                return;
+            if(![passwordEntered isEqualToString:[_user password]])
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Account" message:@"Password entered was incorrect" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+                [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
+                [alert setTag:kUIAlertConfirmDeleteAccount];
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:@"Deleting Account"
+                                      message:@"Are you sure you want to permanently delete your account?"
+                                      delegate:self
+                                      cancelButtonTitle:@"Cancel"
+                                      otherButtonTitles:@"Confirm", nil];
+                alert.tag = kUIAlertDeleteAccount;
+                [alert show];
+            }
+            
+        }
     }
-    else if(buttonIndex == kTAKEMEDIA)
+    else if([alertView tag] == kUIAlertDeleteAccount)
     {
-        UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
-        //There is a warning here. I am not sure why but disregard
-        [pickerController setDelegate:self];
-        [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:pickerController animated:YES completion:NULL];
-        
+        if(buttonIndex != [alertView cancelButtonIndex])
+        {
+            [self deleteUserAccount];
+        }
     }
 }
 
@@ -494,13 +508,10 @@
 //displays a delete user alert for confirming the account deletion
 - (IBAction)deleteUserAlert:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Deleting Account"
-                          message:@"Are you sure you want to permanently delete your account?"
-                          delegate:self
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:@"Confirm", nil];
-    alert.tag = kUIAlertDeleteAccount;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Account" message:@"Confirm Current Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+    [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+    [[alert textFieldAtIndex:0] setSecureTextEntry:YES];
+    [alert setTag:kUIAlertConfirmDeleteAccount];
     [alert show];
 }
 
@@ -525,10 +536,7 @@
                 if([self.jsonDeleteAccount[@"deleted"] boolValue])
                 {
                     //NSLog(@"Account deleted.");
-                    [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeGreen
-                                                   title:@"Account successfully deleted"
-                                         linedBackground:AJLinedBackgroundTypeDisabled
-                                               hideAfter:BANNER_DEFAULT_TIME];
+                    [AJNotificationView hideCurrentNotificationViewAndClearQueue];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }
                 else
