@@ -38,6 +38,7 @@
 		549E1DC017301B54009751A8 /* ios-linen_darkblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 549E1DBE17301B54009751A8 /* ios-linen_darkblue.png */; };
 		549E1DC317301B8E009751A8 /* DefaultProfilePic.png in Resources */ = {isa = PBXBuildFile; fileRef = 549E1DC117301B8D009751A8 /* DefaultProfilePic.png */; };
 		549E1DC417301B8E009751A8 /* DefaultProfilePic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 549E1DC217301B8E009751A8 /* DefaultProfilePic@2x.png */; };
+		54D9BBCB173744FB00A8F218 /* MomentDetailedSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC058B1736DC3B005613A5 /* MomentDetailedSecondViewController.m */; };
 		54EA4AC317348991001CA522 /* AddFriendSearchBarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EA4AC0173488BF001CA522 /* AddFriendSearchBarTableViewController.m */; };
 		54EA4AC417348995001CA522 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EA4AC2173488C0001CA522 /* AddFriendViewController.m */; };
 		54EA4AC71734B1E4001CA522 /* FriendAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54EA4AC61734B125001CA522 /* FriendAccountViewController.m */; };
@@ -102,7 +103,6 @@
 		669568B817345A1B00F4B8AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 669568B717345A1A00F4B8AF /* Reachability.m */; };
 		669568BA17345A3300F4B8AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 669568B917345A3300F4B8AF /* SystemConfiguration.framework */; };
 		66EC8A7E17247DE800CE6E8A /* MomentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EC8A7C1724777B00CE6E8A /* MomentAnnotation.m */; };
-		692CF3001736D942009B1645 /* MomentDetailedSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 692CF2F81736D88A009B1645 /* MomentDetailedSecondViewController.m */; };
 		692CF3061736DBCE009B1645 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CF3021736DBCE009B1645 /* MapViewController.xib */; };
 		692CF3071736DBCE009B1645 /* NewUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CF3031736DBCE009B1645 /* NewUserView.xib */; };
 		692CF3081736DBCE009B1645 /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CF3041736DBCE009B1645 /* SignInView.xib */; };
@@ -238,8 +238,6 @@
 		669568B917345A3300F4B8AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		66EC8A7B1724777A00CE6E8A /* MomentAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentAnnotation.h; sourceTree = "<group>"; };
 		66EC8A7C1724777B00CE6E8A /* MomentAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentAnnotation.m; sourceTree = "<group>"; };
-		692CF2F71736D88A009B1645 /* MomentDetailedSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentDetailedSecondViewController.h; sourceTree = "<group>"; };
-		692CF2F81736D88A009B1645 /* MomentDetailedSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentDetailedSecondViewController.m; sourceTree = "<group>"; };
 		692CF3021736DBCE009B1645 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapViewController.xib; path = MyM/MapViewController.xib; sourceTree = SOURCE_ROOT; };
 		692CF3031736DBCE009B1645 /* NewUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewUserView.xib; path = MyM/NewUserView.xib; sourceTree = SOURCE_ROOT; };
 		692CF3041736DBCE009B1645 /* SignInView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignInView.xib; path = MyM/SignInView.xib; sourceTree = SOURCE_ROOT; };
@@ -248,8 +246,6 @@
 		69482CF01724660600D38756 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
 		69502F7516E47B4200E4B936 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		69502F7616E47B4200E4B936 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
-		69DB6E9517356F1B000270E5 /* MomentDetailedSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentDetailedSecondViewController.h; sourceTree = "<group>"; };
-		69DB6E9617356F1B000270E5 /* MomentDetailedSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentDetailedSecondViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -473,12 +469,8 @@
 				54719A29171E08EF00BC3BF5 /* SearchBarTableViewController.m */,
 				55EC871F1714CE0C00C1C52F /* FriendsListViewController.h */,
 				55EC87201714CE0C00C1C52F /* FriendsListViewController.m */,
-				692CF2F71736D88A009B1645 /* MomentDetailedSecondViewController.h */,
-				692CF2F81736D88A009B1645 /* MomentDetailedSecondViewController.m */,
 				55EC87241714CE0C00C1C52F /* MomentCreateViewController.h */,
 				55EC87251714CE0C00C1C52F /* MomentCreateViewController.m */,
-				69DB6E9517356F1B000270E5 /* MomentDetailedSecondViewController.h */,
-				69DB6E9617356F1B000270E5 /* MomentDetailedSecondViewController.m */,
 				55EC87271714CE0C00C1C52F /* NewUserViewController.h */,
 				55EC87281714CE0C00C1C52F /* NewUserViewController.m */,
 				69502F7516E47B4200E4B936 /* SignInViewController.h */,
@@ -630,7 +622,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				692CF3001736D942009B1645 /* MomentDetailedSecondViewController.m in Sources */,
+				55DC058F1736DCC5005613A5 /* MomentCreateViewController.m in Sources */,
+				54D9BBCB173744FB00A8F218 /* MomentDetailedSecondViewController.m in Sources */,
 				54EA4AC417348995001CA522 /* AddFriendViewController.m in Sources */,
 				54EA4AC317348991001CA522 /* AddFriendSearchBarTableViewController.m in Sources */,
 				54EA4AC71734B1E4001CA522 /* FriendAccountViewController.m in Sources */,
@@ -659,7 +652,6 @@
 				549D18D317305EB300EF13BA /* FriendUtilityClass.m in Sources */,
 				669568B21734315800F4B8AF /* GravitarUtilityClass.m in Sources */,
 				669568B817345A1B00F4B8AF /* Reachability.m in Sources */,
-				55DC058F1736DCC5005613A5 /* MomentCreateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

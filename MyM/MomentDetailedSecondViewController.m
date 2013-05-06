@@ -12,6 +12,7 @@
 #import "MomentDetailedSecondViewController.h"
 #import "AJNotificationView.h"
 #import "S3UtilityClass.h"
+#import "Constants.h"
 
 #define MOMENT_CONTENTVIEW_X        20
 #define MOMENT_CONTENTVIEW_Y        90
@@ -54,7 +55,8 @@
     [super viewDidLoad];
     
     if([[targetMoment user] isEqualToString:self.currentUser])
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete Moment" style:UIBarButtonItemStyleDone target:self action:@selector(deleteMoment)];
+        [self createDeleteMomentButton];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete Moment" style:UIBarButtonItemStyleDone target:self action:@selector(deleteMoment)];
     
     momentContent = [NSKeyedUnarchiver unarchiveObjectWithData:targetMoment.content];
     momentTags = (NSMutableArray*)[momentContent tags];
@@ -176,31 +178,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)deleteMoment
-{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Are you sure you want to delete %@?", [targetMoment title]] delegate:self cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes" otherButtonTitles:nil];
-    [actionSheet setTag:kTagActionSheetDeleteMoment];
-    [actionSheet showInView:self.view];
-}
-
-#pragma mark UIActionSheet Delegate
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if([actionSheet tag] == kTagActionSheetDeleteMoment)
-    {
-        if(buttonIndex == [actionSheet destructiveButtonIndex])
-        {
-            /*
-                I NEED THIS CODE TO RUN
-             
-             [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed title:@"Your moment is being deleted" hideAfter:BANNER_DEFAULT_TIME];
-             [S3UtilityClass removeMomentFromS3:targetMoment];
-             [self.navigationController popViewControllerAnimated:YES];
-             */
-        }
-    }
-}
-
 - (void)viewDidDisappear:(BOOL)animated
 {
     [AJNotificationView hideCurrentNotificationViewAndClearQueue];
@@ -282,6 +259,62 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - Delete moment
+
+-(void)deleteMoment
+{
+    [S3UtilityClass removeMomentFromS3:targetMoment];
+}
+
+- (void)createDeleteMomentButton
+{
+    // create a UIButton (Delete Moment button)
+    UIImage *deleteImage = [UIImage imageNamed:@"delete~iphone.png"];
+    UIButton *btnDelete = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnDelete.frame = CGRectMake(-10, 25, self.view.bounds.size.width - 20, 40);
+    btnDelete.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    btnDelete.titleLabel.shadowColor = [UIColor lightGrayColor];
+    btnDelete.titleLabel.shadowOffset = CGSizeMake(0, -1);
+    [btnDelete setTitle:@"Delete Moment" forState:UIControlStateNormal];
+    [btnDelete setBackgroundImage:[deleteImage resizableImageWithCapInsets:UIEdgeInsetsMake(20, 5, 5 ,5)] forState:UIControlStateNormal];
+    [btnDelete setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnDelete addTarget:self action:@selector(deleteMomentButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    //create a footer view on the bottom of the tabeview
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 280, 100)];
+    [footerView addSubview:btnDelete];
+    
+    self.tableView.tableFooterView = footerView;
+}
+
+- (void)deleteMomentButton
+{
+    [self deleteMomentAlert:self];
+}
+
+- (IBAction)deleteMomentAlert:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Deleting Moment"
+                          message:@"Are you sure you want to permanently delete this moment?"
+                          delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:@"Confirm", nil];
+    alert.tag = kUIAlertDeleteMoment;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(alertView.tag == kUIAlertDeleteMoment && buttonIndex == 0)
+    {
+        return;
+    }
+    if(alertView.tag == kUIAlertDeleteMoment && buttonIndex == 1)
+    {
+        [self deleteMoment];
+    }
 }
 
 @end
