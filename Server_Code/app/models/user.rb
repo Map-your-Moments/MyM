@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
    has_many :friendships
    has_many :confirmed_friendships
    has_many :pending_friendships
-
    has_many :friends, :through => :confirmed_friendships #friendships are only through confirmed friends
    has_one :api_key #each user has one api key
    attr_accessible :username , :password , :latitude , :longitude , :email , :message , :name #attributes for a user
