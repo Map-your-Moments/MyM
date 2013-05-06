@@ -108,6 +108,7 @@
 		692CF3081736DBCE009B1645 /* SignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CF3041736DBCE009B1645 /* SignInView.xib */; };
 		692CF30A1736DBEC009B1645 /* MomentCreateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CF3091736DBEC009B1645 /* MomentCreateView.xib */; };
 		69502F7716E47B4200E4B936 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69502F7616E47B4200E4B936 /* SignInViewController.m */; };
+		696B3D0B17376CC200E0354B /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 696B3D0A17376CC200E0354B /* playButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -246,6 +247,7 @@
 		69482CF01724660600D38756 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
 		69502F7516E47B4200E4B936 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		69502F7616E47B4200E4B936 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		696B3D0A17376CC200E0354B /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,6 +422,7 @@
 				547E2BED17274C8A007A0394 /* Group@2x.png */,
 				547E2BEE17274C8A007A0394 /* Power@2x.png */,
 				547E2BEA1727425E007A0394 /* Cogwheels.png */,
+				696B3D0A17376CC200E0354B /* playButton.png */,
 				547E2BE8172741EF007A0394 /* Group.png */,
 				547E2BE3172741AB007A0394 /* Power.png */,
 				548F53921725C30600D4CD25 /* bg-addbutton-highlighted.png */,
@@ -612,6 +615,7 @@
 				692CF3071736DBCE009B1645 /* NewUserView.xib in Resources */,
 				692CF3081736DBCE009B1645 /* SignInView.xib in Resources */,
 				692CF30A1736DBEC009B1645 /* MomentCreateView.xib in Resources */,
+				696B3D0B17376CC200E0354B /* playButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
