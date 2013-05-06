@@ -111,7 +111,7 @@
         {
             UIImage *picture = [UIImage imageWithData:rawContent];
             UIImageView *momentImage = [[UIImageView alloc] initWithImage:picture];
-            [momentImage setFrame:CGRectMake(0, 0, screenWidth, picture.size.height/8)];
+            [momentImage setFrame:CGRectMake(0, 0, 360, 410)];
             self.tableView.tableHeaderView = momentImage;
             break;
         }
