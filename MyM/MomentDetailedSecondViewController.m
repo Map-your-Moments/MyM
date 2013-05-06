@@ -90,7 +90,7 @@
     NSString *momentTagString = [NSString stringWithFormat:@"Tags: %d", [momentTags count]];
     
     sections = [[NSArray alloc] initWithObjects:@"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", nil];
-    NSLog(@"Number of Tags: %d", [momentTags count]);
+    //NSLog(@"Number of Tags: %d", [momentTags count]);
     momentDataArray = [[NSArray alloc] initWithObjects:momentTagString , dateString, [targetMoment user], contentTypeString, @"Click to View Moment", nil];
     
     [self setContentFooter:[momentContent contentType]];
