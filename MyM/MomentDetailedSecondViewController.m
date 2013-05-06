@@ -190,13 +190,9 @@
     {
         if(buttonIndex == [actionSheet destructiveButtonIndex])
         {
-            /*
-                I NEED THIS CODE TO RUN
-             
              [AJNotificationView showNoticeInView:self.view type:AJNotificationTypeRed title:@"Your moment is being deleted" hideAfter:BANNER_DEFAULT_TIME];
              [S3UtilityClass removeMomentFromS3:targetMoment];
              [self.navigationController popViewControllerAnimated:YES];
-             */
         }
     }
 }

@@ -59,15 +59,12 @@
         });
         
         @try{
-            S3DeleteObjectRequest *request = [[S3DeleteObjectRequest alloc] init];
-            [request setKey:key];
-            S3DeleteObjectResponse *response = [[AmazonClientManager amazonS3Client] deleteObject:request];
+            S3DeleteObjectResponse *response = [[AmazonClientManager amazonS3Client] deleteObjectWithKey:key
+                                        withBucket:kS3BUCKETNAME];
             if(response.error != nil)
                 NSLog(@"Error: %@", response.error);
         }
         @catch (AmazonClientException *exception) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:exception.message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
             NSLog(@"Exception: %@", exception);
         }
         

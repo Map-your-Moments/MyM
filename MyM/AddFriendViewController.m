@@ -549,7 +549,7 @@ static NSString * const kSearchBarTableViewControllerDefaultTableViewCellIdentif
 //Determines the action to take depending upon the alert's tag and the
 //index of the button that was clicked
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString* detailString = _textField.text;
+    //NSString* detailString = _textField.text;
     //NSLog(@"Email is: %@", detailString); //Put it on the debugger
     if (alertView.tag == TAG_ADD_EMAIL && ([_textField.text length] <= 0 || buttonIndex == 0)){
         _textField.text = NULL;
