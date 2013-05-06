@@ -88,6 +88,8 @@
     [self setTitle:[targetMoment title]];
     
     NSString *momentTagString = [NSString stringWithFormat:@"Tags: %d", [momentTags count]];
+    if([momentTags count] == 0)
+        momentTagString = @"No Tags";
     
     sections = [[NSArray alloc] initWithObjects:@"Moment Tags", @"Date Created", @"Moment Created By", @"Moment Type", nil];
     //NSLog(@"Number of Tags: %d", [momentTags count]);
