@@ -20,7 +20,7 @@ static AmazonS3Client *amazonS3Client = nil;
 + (AmazonDynamoDBClient *)amazonDynamoDBClient
 {
     if (!amazonDynamoDBClient) {
-        amazonDynamoDBClient = [[AmazonDynamoDBClient alloc] initWithCredentials:[[AmazonCredentials alloc] initWithAccessKey:@"AKIAJGZ2TYRH2WUAA2EQ" withSecretKey:@"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"]];
+        amazonDynamoDBClient = [[AmazonDynamoDBClient alloc] initWithCredentials:[[AmazonCredentials alloc] initWithAccessKey:@"" withSecretKey:@""]];
     }
     
     return amazonDynamoDBClient;
@@ -29,7 +29,7 @@ static AmazonS3Client *amazonS3Client = nil;
 + (AmazonSESClient *)amazonSESClient
 {
     if (!amazonSESClient) {
-        amazonSESClient = [[AmazonSESClient alloc] initWithAccessKey:@"AKIAIVPDVY3IKVZWZOIA" withSecretKey:@"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"];
+        amazonSESClient = [[AmazonSESClient alloc] initWithAccessKey:@"" withSecretKey:@""];
     }
     
     return amazonSESClient;
@@ -39,8 +39,8 @@ static AmazonS3Client *amazonS3Client = nil;
 {
     if (!amazonS3Client) {
         amazonS3Client = [[AmazonS3Client alloc] initWithCredentials:[[AmazonCredentials alloc]
-                                                                initWithAccessKey:@"AKIAIJ2XEGCE5J2EWSTQ"
-                                                                    withSecretKey:@"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"]];
+                                                                initWithAccessKey:@""
+                                                                    withSecretKey:@""]];
     }
     
     return amazonS3Client;
